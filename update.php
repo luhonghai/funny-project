@@ -25,7 +25,6 @@ if (strcasecmp($gEvent, 'push') == 0) {
     $data = json_decode(file_get_contents('php://input'),true);
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
         $command = 'cd '.$config['basedir'].';git pull origin master 2>&1';
-        echo 'Execute command: '.$command;
         $handle = popen($command, 'r');
         while ($line = fread($handle, 100)){
             echo $line;
