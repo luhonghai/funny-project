@@ -21,8 +21,12 @@ function parseRequestHeaders() {
 $headers = parseRequestHeaders();
 $gEvent = $headers['X-Github-Event'];
 if (strcasecmp($gEvent, 'push') == 0) {
-    echo 'Detect push event';
+    echo 'Detect push event.';
+    $data = json_decode(file_get_contents('php://input'),true);
+    if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
+        echo 'Force pull';
+    }
 } else if (strcasecmp($gEvent, 'ping') == 0) {
-    echo 'Detect ping event';
+    echo 'Detect ping event.';
 }
 ?>
