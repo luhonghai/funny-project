@@ -26,7 +26,13 @@ if (strcasecmp($gEvent, 'push') == 0) {
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
         echo ' Force pull.';
         $command = 'cd '.$config['basedir'].';git pull origin master;';
-        exec($command);
+        while (@ ob_end_flush()); // end all output buffers if any
+        $proc = popen($command, 'r');
+        while (!feof($proc))
+        {
+            echo fread($proc, 4096);
+            @ flush();
+        }
     }
 } else if (strcasecmp($gEvent, 'ping') == 0) {
     echo 'Detect ping event.';
