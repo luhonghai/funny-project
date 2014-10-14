@@ -33,8 +33,7 @@ RewriteRule ^top$ top.php
 </IfModule>
 <IfModule mod_security.c> 
    # Turn off mod_security filtering. 
-   SecFilterEngine Off 
-
+   SecFilterEngine Off
    # The below probably isn't needed, 
    # but better safe than sorry. 
    SecFilterScanPOST Off 

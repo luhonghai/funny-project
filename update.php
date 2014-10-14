@@ -20,9 +20,9 @@ function parseRequestHeaders() {
 
 $headers = parseRequestHeaders();
 $gEvent = $headers['X-Github-Event'];
-if (strcasecmp($gEvent, 'push')) {
+if (strcasecmp($gEvent, 'push') == 0) {
     echo 'Detect push event';
-} else if (strcasecmp($gEvent, 'ping')) {
+} else if (strcasecmp($gEvent, 'ping') == 0) {
     echo 'Detect ping event';
 }
 ?>
