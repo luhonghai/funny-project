@@ -21,12 +21,15 @@ function parseRequestHeaders() {
 $headers = parseRequestHeaders();
 $gEvent = $headers['X-Github-Event'];
 if (strcasecmp($gEvent, 'push') == 0) {
-    echo 'Detect push event.';
+    echo 'Detect push event.<br/>';
     $data = json_decode(file_get_contents('php://input'),true);
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
-        echo 'Force pull.';
-        exec('cd '.$config['basedir'].';git pull origin master', $output);
-        echo implode("\n", $output);
+        echo 'Force pull.<br/>';
+        $lines = array();
+        exec('cd '.$config['basedir'].';git pull origin master', $lines);
+        foreach($lines as $i) {
+            echo $i.'<br/>';
+        }
     }
 } else if (strcasecmp($gEvent, 'ping') == 0) {
     echo 'Detect ping event.';
