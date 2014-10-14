@@ -33,7 +33,8 @@ else
 	$pagingstart = "0";
 }
 
-$show = cleanit($_REQUEST['show']);
+$show = cleanit(isset($_REQUEST['show']) ? $_REQUEST['show'] : "");
+$gridsql = "";
 if($show == "thumbs")
 {
 	$gridsql = "AND A.youtube_key='' AND A.fod_key=''";	

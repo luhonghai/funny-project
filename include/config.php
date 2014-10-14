@@ -142,7 +142,7 @@ for ($i=0; $i<count($lang); $i++)
 {
 	STemplate::assign('lang'.$i, $lang[$i]);
 }
-if($sban != "1")
+if(isset($sban)&& $sban != "1")
 {
 	$bquery = "SELECT count(*) as total from bans_ips WHERE ip='".mysql_real_escape_string($_SERVER['REMOTE_ADDR'])."'";
 	$bresult = $conn->execute($bquery);
