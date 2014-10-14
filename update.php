@@ -25,14 +25,12 @@ if (strcasecmp($gEvent, 'push') == 0) {
     $data = json_decode(file_get_contents('php://input'),true);
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
         echo ' Force pull.';
-        $command = 'cd '.$config['basedir'].';git pull origin master;';
-        while (@ ob_end_flush()); // end all output buffers if any
-        $proc = popen($command, 'r');
-        while (!feof($proc))
-        {
-            echo fread($proc, 4096);
-            @ flush();
+        $command = 'cd '.$config['basedir'].';git pull origin master 2>&1';
+        $handle = popen($command, 'r');
+        while ($line = fread($handle, 100)){
+            echo $line;
         }
+        pclose($handle);
     }
 } else if (strcasecmp($gEvent, 'ping') == 0) {
     echo 'Detect ping event.';
