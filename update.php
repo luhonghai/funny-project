@@ -24,7 +24,9 @@ if (strcasecmp($gEvent, 'push') == 0) {
     echo 'Detect push event.';
     $data = json_decode(file_get_contents('php://input'),true);
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
-        echo 'Force pull';
+        echo 'Force pull.';
+        exec('cd '.$config['basedir'].';git pull origin master', $output);
+        echo implode("\n", $output);
     }
 } else if (strcasecmp($gEvent, 'ping') == 0) {
     echo 'Detect ping event.';
