@@ -1,4 +1,4 @@
 .idea/
 temporary/
-pdata/
+pdata/**.png
 images/membersprofilepic/

@@ -6,10 +6,10 @@ $config['basedir']     =  '/vol/hll/fun';
 $config['baseurl']     =  'http://services.c-mg.vn/fun';
 
 $DBTYPE = 'mysql';
-$DBHOST = '127.0.0.1:3306';
-$DBUSER = 'admin';
-$DBPASSWORD = 'admincmg@3f';
-$DBNAME = 'fun';
+$DBHOST = 'cmgmysql.ctjztcxdxqlx.us-east-1.rds.amazonaws.com';
+$DBUSER = 'admincmg';
+$DBPASSWORD = 'W3lcom3123';
+$DBNAME = 'testing';
 
 $default_language = "en"; //You can choose en, fr, de, es, pt, ru or tr
 // End Configuration

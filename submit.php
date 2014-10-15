@@ -258,7 +258,7 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 												$query = "UPDATE members SET points=points+$points_gag WHERE USERID='".mysql_real_escape_string($SID)."'";
 												$executequery=$conn->execute($query);
 											}
-					
+
 											header("Location:$config[baseurl]/gag/".$pid."?new=1");exit;
 										}
 									}
