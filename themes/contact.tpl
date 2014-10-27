@@ -5,7 +5,7 @@
 {/if}
 <div id="main" class="middle">
     <div id="content-holder">
-        <div class="scriptolution-soft-box static" >
+        <div class="b9gcs-soft-box static" >
             <div class="content contact-container contact-wrapper">
                 <form id="cntctfrm" class="modal" action="{$baseurl}/contact" name="cntctfrm" method="POST">
                     <h3>{$lang205}</h3>

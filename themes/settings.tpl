@@ -321,6 +321,7 @@
                         <div class="language">
                             <select name="language">
                                 <option value="">{$lang64}</option>
+								<option  value="ar" {if $p.mylang eq "ar"}selected{/if}>العربية</option>
                                 <option  value="en" {if $p.mylang eq "en"}selected{/if}>english</option>
                                 <option  value="fr" {if $p.mylang eq "fr"}selected{/if}>fran&#xE7;ais</option>
                                 <option  value="de" {if $p.mylang eq "de"}selected{/if}>deutsch</option>

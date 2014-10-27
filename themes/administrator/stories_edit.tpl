@@ -45,6 +45,14 @@
                                                 <table cellspacing="0" class="form-list">
                                                 <tbody>
                                                     <tr class="hidden">
+                                                        <td class="label"><label for="name">Gag </label></td>
+                                                        <td class="value">
+                                                        	<img src="{$purl}/t/l-{$story.pic}"/>
+                                                        </td>
+                                                        <td class="scope-label"></td>
+                                                            <td><small></small></td>
+                                                    </tr>
+													<tr class="hidden">
                                                         <td class="label"><label for="name">Gag ID </label></td>
                                                         <td class="value">
                                                         	{$story.PID}
@@ -89,7 +97,22 @@
                                                         <td class="scope-label">[SOURCE OF THE GAG]</td>
                                                             <td><small></small></td>
                                                     </tr>
-                                                    <tr class="hidden">
+                                                    
+													<tr class="hidden">
+                                                        <td class="label"><label for="name">Channel </label></td>
+                                                        <td class="value">
+                                                        	<select name="CID" id="CID">
+															<option value="">{$lang270}</option>
+															{section name=i loop=$c}                  
+															<option value="{$c[i].CID}" {if $c[i].CID eq $story.CID}selected{/if}>{$c[i].cname}</option>
+															{/section}
+															</select>                        
+                                                        </td>
+                                                        <td class="scope-label">[CLOSEST CHANNEL TO THE POST]</td>
+                                                            <td><small></small></td>
+                                                    </tr>
+													
+													<tr class="hidden">
                                                         <td class="label"><label for="nsfw">UnSafe For Work? </label></td>
                                                         <td class="value">
                                                         	<select name="nsfw" id="nsfw">
@@ -116,14 +139,26 @@
                                                         <td class="scope-label">[NUMBER OF TIMES LIKE WAS CLICKED]</td>
                                                             <td><small></small></td>
                                                     </tr>
-                                                    <tr class="hidden">
+													<tr class="hidden">
+                                                        <td class="label"><label for="phase">The Gag Phase </label></td>
+                                                        <td class="value">
+                                                        	<select name="phase" id="phase">
+                                                            <option value="2" {if $story.phase eq 2}selected{/if}>Hot</option>
+                                                            <option value="1" {if $story.phase eq 1}selected{/if}>Trending</option>
+                                                            <option value="0" {if $story.phase eq 0}selected{/if}>Vote</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="scope-label">[CHOOSE IN WHICH PAGE YOU WANT THIS GAG TO APPEAR]</td>
+                                                        <td><small></small></td>
+                                                    </tr>
+                                                    <!--<tr class="hidden">
                                                         <td class="label"><label for="unfavclicks">Dislike Count </label></td>
                                                         <td class="value">
                                                         	<input id="unfavclicks" name="unfavclicks" value="{$story.unfavclicks}" class=" required-entry required-entry input-text" type="text"/>
                                                         </td>
                                                         <td class="scope-label">[NUMBER OF TIMES DISLIKE WAS CLICKED]</td>
                                                             <td><small></small></td>
-                                                    </tr>
+                                                    </tr>-->
                                                     <tr class="hidden">
                                                         <td class="label"><label for="status">Active </label></td>
                                                         <td class="value">
@@ -150,49 +185,6 @@
                                                         </td>
                                                         <td class="scope-label"></td>
                                                             <td><small></small></td>
-                                                    </tr>
-                                                    <tr class="hidden">
-                                                        <td class="label"><label for="feat">Featured </label></td>
-                                                        <td class="value">
-                                                        	<select name="feat" id="feat">
-                                                            <option value="1" {if $story.feat eq 1}selected{/if}>Yes</option>
-                                                            <option value="0" {if $story.feat eq 0}selected{/if}>No</option>
-                                                            </select>
-                                                        </td>
-                                                        <td class="scope-label">[FEATURED GAGS SHOW UP ON THE FEATURED BAR ON THE HOMEPAGE]</td>
-                                                        <td><small></small></td>
-                                                    </tr>
-                                                    <tr class="hidden">
-                                                        <td class="label"><label for="phase">Section </label></td>
-                                                        <td class="value">
-                                                        	<select name="phase" id="phase">
-                                                            <option value="2" {if $story.phase eq 2}selected{/if}>Hot</option>
-                                                            <option value="1" {if $story.phase eq 1}selected{/if}>Trending</option>
-                                                            <option value="0" {if $story.phase eq 0}selected{/if}>Vote</option>
-                                                            </select>
-                                                        </td>
-                                                        <td class="scope-label">[SECTION THE GAG SHOWS UP IN]</td>
-                                                        <td><small></small></td>
-                                                    </tr>
-                                                    <tr class="hidden">
-                                                        <td class="label"><label for="name">Photo/Video </label></td>
-                                                        <td class="value" colspan="3">
-                                                        	<center>
-                                                            {if $story.pic ne ""}
-                                                            <a href="{$baseurl}/random"><img src="{$purl}/t/l-{$story.pic}" alt="{$story.story|stripslashes}"/></a>
-                                                            {else}
-                                                                {if $story.youtube_key != ""}
-                                                                <center>
-                                                                {insert name=return_youtube value=a assign=youtube youtube=$story.youtube_key}{$youtube}
-                                                                </center>
-                                                                {else}
-                                                                <center>
-                                                                {insert name=return_fod value=a assign=fod fod=$story.fod_key}{$fod}
-                                                                </center>
-                                                                {/if}
-                                                            {/if}
-                                                            </center>
-                                                        </td>
                                                     </tr>
                                                 </tbody>
                                                 </table>

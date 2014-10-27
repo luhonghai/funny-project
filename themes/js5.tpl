@@ -12,22 +12,22 @@ $(".keyboard-instruction").addClass("hide");
 });
 $('.report').click(function(){
 $('#report_entry_id').val($(this).attr('entryId'));	
-$('#repost_link').val('{/literal}{$baseurl}{literal}/gag/' + $(this).attr('entryId'));	
+$('#repost_link').val('{/literal}{$baseurl}{$postfolder}{literal}' + $(this).attr('entryId'));	
 $('#overlay-shadow').removeClass('hide');
 $('#overlay-container').removeClass('hide');
-$('#scriptolution-soft-report').removeClass('hide');
+$('#b9gcs-soft-report').removeClass('hide');
 });
 $('.close-btn').click(function(){
 $('#overlay-shadow').addClass('hide');
 $('#overlay-container').addClass('hide');
-$('#scriptolution-soft-report').addClass('hide');
+$('#b9gcs-soft-report').addClass('hide');
 });
 $('#report-submit').click(function(){
 var e=0;
 if($('input[name="report-reason"]:checked').val()){
 if($('input[name="report-reason"]:checked').val()==4){
 var x=$('#repost_link').val();
-if(! (x.match('{/literal}{$baseurl}{literal}/gag/'))){ 
+if(! (x.match('{/literal}{$baseurl}{$postfolder}{literal}'))){ 
 $('#repost_link').addClass('failed');
 e=1;
 }else{
@@ -55,7 +55,7 @@ data:'number='+n+'&repost_link='+x+'&pid=' + pid,
 success:function(e){
 $('#overlay-shadow').addClass('hide');
 $('#overlay-container').addClass('hide');
-$('#scriptolution-soft-report').addClass('hide');
+$('#b9gcs-soft-report').addClass('hide');
 }
 });
 }

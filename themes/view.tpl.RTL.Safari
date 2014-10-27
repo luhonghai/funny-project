@@ -1,0 +1,282 @@
+{if $p.nsfw eq "1" AND $smarty.session.FILTER eq "1"}
+	<div>
+        <div class="post-next-prev">
+            {if $prev != ""}
+            <a id="prev_post" class="prev-post" href="{$baseurl}/gag/{$prev}/{$prevstory|makeseo}.html" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Previous', 1]);"></a>
+            {else}
+            <a id="prev_post" class="prev-post" href="{$baseurl}/random" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Previous', 1]);"></a>
+            {/if}
+            {if $next ne ""}
+            <a id="next_post" class="next-post" href="{$baseurl}/gag/{$next}/{$nextstory|makeseo}.html" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Next', 1]);"></a>
+            {else}
+            <a id="next_post" class="next-post" href="{$baseurl}/random" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Next', 1]);"></a>
+            {/if}
+        </div>
+    </div>
+    <div id="main" class="middle">
+        <div id="content-holder">
+            <div id="content-holder">
+                <div id="content" class="nsfw">
+                    <div class="content">
+                        <img src="{$baseurl}/images/nsfw.jpg" alt="NSFW" />
+                    </div>
+                    <div class="info">
+                        <h1>{$lang154}</h1>
+                        <p>{$lang155}</p>
+                        <div class="message-box alt">
+                            <div class="inline-message">
+                            	<p><a href="{$baseurl}/safe?m={$eurl}">{$lang156} &raquo;</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer" class="middle">
+{elseif $p.nsfw eq "1" AND $smarty.session.USERID eq ""}
+	<div>
+        <div class="post-next-prev">
+            {if $prev != ""}
+            <a id="prev_post" class="prev-post" href="{$baseurl}/gag/{$prev}/{$prevstory|makeseo}.html" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Previous', 1]);"></a>
+            {else}
+            <a id="prev_post" class="prev-post" href="{$baseurl}/random" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Previous', 1]);"></a>
+            {/if}
+            {if $next ne ""}
+            <a id="next_post" class="next-post" href="{$baseurl}/gag/{$next}/{$nextstory|makeseo}.html" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Next', 1]);"></a>
+            {else}
+            <a id="next_post" class="next-post" href="{$baseurl}/random" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Next', 1]);"></a>
+            {/if}
+        </div>
+    </div>
+    <div id="main" class="middle">
+        <div id="content-holder">
+            <div id="content-holder">
+                <div id="content" class="nsfw">
+                    <div class="content">
+                        <img src="{$baseurl}/images/nsfw.jpg" alt="NSFW" />
+                    </div>
+                    <div class="info">
+                        <h1>{$lang154}</h1>
+                        <p>{$lang155}</p>
+                        <div class="message-box alt">
+                            <div class="inline-message">
+                            	<p><a href="{$baseurl}/safe?m={$eurl}">{$lang156} &raquo;</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer" class="middle">
+{else}
+    <div id="main">
+        <div id="content-holder">
+            <div class="post-info-pad">
+                <h1>{$p.story|stripslashes}</h1>
+                <p>
+                    <a href="{$baseurl}/user/{$p.username|stripslashes}">{$p.username|stripslashes}</a>
+                    <span class="seperator">|</span>
+                    {$p.time_added|date_format} {$p.time_added|date_format:"%I:%M %p"}
+                    <span class="comment"><fb:comments-count href="{$baseurl}/gag/{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}"></fb:comments-count></span>
+                    <span class="loved"><span id="love_count" votes="{$p.favclicks}" >{$p.favclicks}</span></span>
+                    {if $owner eq "1"}
+                    <span class="seperator">|</span>
+                    <a href="{$baseurl}/deletepost.php?pid={$p.PID}" class="delete" onclick="return confirm('{$lang147}');">{$lang145}</a>	
+                    {/if}										
+                </p>
+                <ul class="actions">
+                	<li>{if $smarty.session.USERID ne ""}{insert name=get_fav_status value=var assign=isfav PID=$p.PID}<a id="post_view_love" rel="{$p.PID}" class="love {if $isfav eq "1"}current{/if}" href="javascript:void(0);">{$lang144}</a>{else}<a class="love" href="{$baseurl}/login">{$lang144}</a>{/if}</li>
+                </ul>            
+            </div>
+        
+            <div id="post-control-bar" class="spread-bar-wrap">
+                <div class="spread-bar">
+                    <div class="twitter-btn"><a href="https://twitter.com/share" class="twitter-share-button" data-text="{$p.story}" data-url="{$baseurl}/gag/{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}" data-count="horizontal" data-via="">&nbsp;</a> </div>
+                    <div class="facebook-share-btn"><a class="facebook-share-button" name="fb_share" type="button_count" share_url="{$baseurl}/gag/{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}?ref=fb-share"></a> </div>
+                    <div class="facebook-btn"><iframe frameborder="0" scrolling="no" src="{$baseurl}/fblike.php?gagid={$p.PID}&gagstory={$p.story|makeseo}" width="90px"></iframe></div>
+                    {insert name=get_short_url value=a assign=tto PID=$p.PID short=$p.short}
+                    {if $short_urls eq "1"}
+                    <div class="google-btn"><g:plusone size="medium" href="{$tto}"></g:plusone> </div>
+                    {else}
+                    <div class="google-btn"><g:plusone size="medium" href="{$baseurl}/gag/{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}"></g:plusone> </div>
+                    {/if}
+                    <div class="stumbleupon-btn"><su:badge layout="1" location="{$baseurl}/gag/{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}?ref=stumbleupon"></su:badge> {literal}<script type="text/javascript"> (function() { var li = document.createElement('script'); li.type = 'text/javascript'; li.async = true;  li.src = 'https://platform.stumbleupon.com/1/widgets.js';  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(li, s);  })(); </script>{/literal}</div>
+					<div class="pinterest-btn"><a href="http://pinterest.com/pin/create/button/?url={$baseurl}/gag/{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}&media={$purl}/t/l-{$p.pic}" class="pin-it-button" count-layout="horizontal">Pin It</a></div>
+                </div>
+                <div class="post-next-prev">
+                	{if $prev != ""}
+                	<a id="prev_post" class="prev-post" href="{$baseurl}/gag/{$prev}/{$prevstory|makeseo}.html" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Previous', 1]);"></a>
+                    {else}
+                    <a id="prev_post" class="prev-post" href="{$baseurl}/random" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Previous', 1]);"></a>
+                    {/if}
+                    {if $next ne ""}
+                	<a id="next_post" class="next-post" href="{$baseurl}/gag/{$next}/{$nextstory|makeseo}.html" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Next', 1]);"></a>
+                    {else}
+                    <a id="next_post" class="next-post" href="{$baseurl}/random" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Next', 1]);"></a>
+                    {/if}
+                </div>
+            </div>
+            <div id="content">
+                <div class="post-container">
+                    <div class="img-wrap">
+                        {if $p.pic ne ""}
+                        <a href="{$baseurl}/random"><img src="{$purl}/t/l-{$p.pic}" alt="{$p.story|stripslashes}"/></a>
+                        {else}
+                        	{if $p.youtube_key != ""}
+                            <center>
+                            {insert name=return_youtube value=a assign=youtube youtube=$p.youtube_key}{$youtube}
+                            </center>
+                            {elseif $p.fod_key != ""}
+                            <center>
+                            {insert name=return_fod value=a assign=fod fod=$p.fod_key}{$fod}
+                            </center>
+							{elseif $p.vfy_key != ""}
+                            <center>
+                            {insert name=return_vfy value=a assign=vfy vfy=$p.vfy_key}{$vfy}
+                            </center>
+							{elseif $p.vmo_key != ""}
+                            <center>
+                            {insert name=return_vmo value=a assign=vmo vmo=$p.vmo_key}{$vmo}
+                            </center>
+							{else}
+							<center>
+							{$lang143}
+							</center>
+                            {/if}
+                        {/if}
+                    </div>
+                </div>            
+				{if $displaywm eq "0"}
+				<div class="watermark-clear"></div>
+				{/if}
+                <div class="comment-section">
+                    <h3 class="title" id="comments">{$lang143}</h3>
+                    <span class="report-and-source">
+                    <p>
+                        {if $fixenabled eq "1"}<a class="fix" href="{$baseurl}/fix/{$p.PID}">{$lang142}</a>{/if}
+                        {if $owner ne "1"}<span id="report-item-separator">|</span><a id="report-item-link" class="report report-item" entryId="{$p.PID}" href="javascript:void(0);">{$lang146}</a>{/if}
+                        <span id="report-item-separator">|</span>{if $p.source eq ""}{$lang141}{else}{$p.source|stripslashes}{/if}
+                    </p>
+                    </span>
+                    <div style="margin-left:10px">
+                    	<iframe frameborder="0" scrolling="auto" src="{$baseurl}/fbcomment.php?gagid={$p.PID}&gagstory={$p.story|makeseo}" width="720px" height="450px"></iframe>
+                    </div>
+                    <div id="fb-root"></div>                
+                </div>
+            	<br/>
+            <!-- Recommended Gags under post
+                <div class="post-may-like">
+                    <div id="entries-content" class="grid">  
+                    	{section name=i loop=$r}                  
+                        <ul id="grid-col-{if $smarty.section.i.iteration GT 3}2{else}1{/if}" class="col-{if $smarty.section.i.iteration GT 3}{math equation="x - 3" x=$smarty.section.i.iteration}{else}{$smarty.section.i.iteration}{/if}">
+                            <li class=" ">
+                                <a href="{$baseurl}/gag/{$r[i].PID}" class="jump_stop">
+                                    <div style="" class="thimage">
+                                        {if $r[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}<img src="{$baseurl}/images/nsfw_thumb.jpg" alt="{$r[i].story|stripslashes}" />{else}<img src="{$purl}/t/s-{$r[i].pic}" alt="{$r[i].story|stripslashes}" />{/if}
+                                    </div>
+                                </a>
+                                <h1>{$r[i].story|stripslashes|truncate:20:"...":true}</h1>
+                                <h4><a href="{$baseurl}/user/{$r[i].username|stripslashes}">{$r[i].username|stripslashes|truncate:20:"...":true}</a></h4>
+                            </li>
+                        </ul>
+                        {/section}
+                    </div>
+                </div>
+			-->	
+            </div>
+        </div>
+    </div>
+    	
+		
+<div class="side-bar">
+    {include file='right2.tpl'}
+	
+<div id="moving-boxes">
+<!-- Ads Num. 1
+            <div class="s-300" >            
+            	{insert name=get_advertisement AID=1}
+            </div>        
+-->
+	
+<div id="post-gag-stay" class="_badge-sticky-elements" data-y="60">
+    <div class="popular-block">
+	<h3>Recommended</h3>
+	<ol>
+	{section name=i loop=$r}                  
+	<a class="wrap" href="{$baseurl}/gag/{$r[i].PID}/{if $SEO eq "1"}{$r[i].story|makeseo}.html{/if}"  onclick="GAG.GA.track('RelatedContent', 'Clicked-Post-Sidebar', 'Position-1', 1)"  >
+		<li>
+            {if $r[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}<img src="{$baseurl}/images/nsfw_thumb.jpg" alt="{$r[i].story|stripslashes}" />{else}<img src="{$purl}/t/s-{$r[i].pic}" alt="{$r[i].story|stripslashes}" />{/if}
+			<h4>{$r[i].story|stripslashes|truncate:20:"...":true}</h4>
+			<h4><a href="{$baseurl}/user/{$r[i].username|stripslashes}">{$r[i].username|stripslashes|truncate:20:"...":true}</a></h4>
+			<p class="meta"><span class="comment"><fb:comments-count href="{$baseurl}/gag/{$r[i].PID}/{if $SEO eq "1"}{$r[i].story|makeseo}.html{/if}"></fb:comments-count></span><span class="loved">{$r[i].favclicks}</span>
+			</p>
+		</li>
+	</a>
+	{/section}
+	</ol>
+	</div>
+</div>
+
+
+</div>
+	
+
+</div>
+
+	{literal}
+    <script type="text/javascript">
+    var adloca=$('#moving-boxes').offset().top; 
+     $(window).scroll(function () { 
+        var curloca=$(window).scrollTop();
+        if(curloca>adloca){
+            $('#moving-boxes').css('position','fixed');
+            $('#moving-boxes').css('top','55px');
+            $('#moving-boxes').css('z-index','0');
+        };
+        if(curloca <= adloca){
+            $('#moving-boxes').css('position','static');
+            $('#moving-boxes').css('top','!important');
+            $('#moving-boxes').css('z-index','!important');
+        };
+        });    
+    </script>
+    <script type="text/javascript">
+    $('#post_view_love').click(function(){
+        if( $('#post_view_love').hasClass('current')){
+            $('#post_view_love').removeClass('current');
+        likedeg(-1);
+        }else{
+            likedeg(1);
+        $('#post_view_love').addClass('current');
+        }
+        });
+    function likedeg(x){
+        jQuery.ajax({
+            type:'POST',
+            url:'{/literal}{$baseurl}{literal}'+ '/likedeg.php',
+            data:'art='+x+'&pid=' +  '{/literal}{$p.PID}{literal}' ,
+            success:function(e){
+                $('#love_count').html(e);
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+         var barloc=$('#post-control-bar').offset().top; 
+         $(window).scroll(function () {
+              var curloc=$(window).scrollTop();
+              if(curloc>barloc){
+        $('#post-control-bar').addClass('topbarfixed');
+              }else{
+                $('#post-control-bar').removeClass('topbarfixed'); 
+                 }
+         });
+    </script>
+    {/literal}
+</div>
+<div id="footer" class="">
+{/if}

@@ -1,39 +1,81 @@
+{if $topgags GT 0}
+<div class="feature-bar">
+<ul>
+{section name=f loop=$topgags}
+        <a href="{$baseurl}{$postfolder}{$topgags[f].PID}/{if $SEO eq "1"}{$topgags[f].story|makeseo}.html{/if}">
+        <img src="{$purl}/t/s-{$topgags[f].pic}" alt="{$topgags[f].story|stripslashes}">
+        <span class="title">{$topgags[f].story}</span>
+        </a>
+{/section}
+</ul>
+</div>
+{/if}
 <div id="main">
-    <div id="content-holder">
-        <div class="post-info-pad">
-            <h1>{$lang253}</h1>
+    <div id="content-holder">        
+        <div class="main-filter ">
+            <ul class="content-type">
+                <li> <a {if $period eq "day"}class="current"{else}class=""{/if} href="{$baseurl}/top/day"><strong>{$lang279}</strong></a></li>
+                <li> <a {if $period eq "week"}class="current"{else}class=""{/if} href="{$baseurl}/top/week"><strong>{$lang280}</strong></a></li>
+                <li> <a {if $period eq "month"}class="current"{else}class=""{/if} href="{$baseurl}/top/month"><strong>{$lang281}</strong></a></li>                
+                <li> <a {if $period eq "all"}class="current"{else}class=""{/if} href="{$baseurl}/top/all"><strong>{$lang282}</strong></a></li>                
+            </ul>
+            {if $safemode eq "1"}
+			{if $smarty.session.USERID ne ""}
+                {if $smarty.session.FILTER eq "1"}
+                <a class="safe-mode-switcher on" href="{$baseurl}/safe?m={$eurl}">&nbsp;</a>
+                {else}
+                <a class="safe-mode-switcher off" href="{$baseurl}/safe?m={$eurl}&o=1">&nbsp;</a>
+                {/if}
+            {else}
+            	<a class="safe-mode-switcher on" href="{$baseurl}/login">&nbsp;</a>
+            {/if}
+			{/if}
         </div>
-        <div id="content">
-        	<div id="entries-content" class="list">
-                {section name=i loop=$posts}
-                <div style="margin-bottom: 15px; background: none repeat scroll 0% 0% rgb(248, 248, 248); border-radius: 5px 5px 5px 5px; padding: 15px; text-shadow: 0pt 1px rgb(255, 255, 255);">
-                	{insert name=get_member_profilepicture assign=profilepicture value=var USERID=$posts[i].USERID}
-                	<img src="{$membersprofilepicurl}/thumbs/{$profilepicture}?{$smarty.now}" style="border: 2px solid rgb(187, 187, 187); float: left; margin-right: 10px;width:80px;height:50px;">
-                    <div style="margin: 0pt 15px 0pt 60px;">
-                    	<a href="{$baseurl}/user/{$posts[i].username|stripslashes}" style="font-size: 16px; font-weight: bold; padding-bottom: 5px; margin-bottom: 6px; border-bottom: 1px solid rgb(242, 242, 242); display: block;">{$posts[i].username|stripslashes}</a>
-                    	<a href="{$baseurl}/user/{$posts[i].username|stripslashes}" style="font-size: 12px; color: rgb(68, 68, 68);">{$lang255}: {insert name=get_rank value=var assign=urank pg=$page ite=$smarty.section.i.iteration}{$urank}&nbsp;&nbsp;<span style="color: rgb(238, 238, 238);">|</span>&nbsp;&nbsp;{$lang257}: {insert name=get_posts_counts value=var assign=totpo USERID=$posts[i].USERID}{$totpo}&nbsp;&nbsp;<span style="color: rgb(238, 238, 238);">|</span>&nbsp;&nbsp;{$lang254}: {$posts[i].youviewed}<span style="color: rgb(238, 238, 238);">|</span>&nbsp;&nbsp;{$lang256}: {$posts[i].points}</a>
-                    </div>
-                	<div class="clear"></div>
+        <div id="content" listPage="hot">            
+            <div id="use-tips">
+                <div id="view-info" class="list-tips">
+                    <div id="shortcut-event-label" style="display:none">{$lang171}</div>
+                    <span><b>{$lang169}</b>: {$lang170}</span>
+                    <a href="#keyboard" class="keyboard_link">{$lang168}</a>                    
                 </div>
-     			{/section}
-            </div>            
-
-            <br/>
+            </div>
+            <div id="entries-content" class="list">
+                <ul id="entries-content-ul" class="col-1">
+                    {section name=i loop=$posts}
+                    {include file="posts_bit.tpl"}
+                    {/section}                    
+                </ul>
+            </div>	
+            <div id="lastPostsLoader"></div>                
+ 			{literal}
+                <script type="text/javascript">
+				$(document).ready(function(){
+					$(window).scroll(function(){
+					if (document.documentElement.scrollTop)
+					{ var  curloc = document.documentElement.scrollTop; }
+					else
+					{ var curloc=$(window).scrollTop(); }
+					if(curloc>$(window).height()){$('#backtotop').slideDown();}else{$('#backtotop').slideUp();};
+					});
+					});
+				</script>
+			{/literal}
             <div id="paging-buttons" class="paging-buttons">
             	{if $tpp ne ""}
-                <a href="{$baseurl}/top?page={$tpp}" class="previous">&laquo; {$lang166}</a>
+                <a href="{$baseurl}/top/{if $period eq "all"}all{elseif $period eq "month"}month{elseif $period eq "week"}week{else}day{/if}?page={$tpp}" class="previous">&laquo; {$lang166}</a>
                 {else}
                 <a href="#" onclick="return false;" class="previous disabled">&laquo; {$lang166}</a>
                 {/if}
                 {if $tnp ne ""}
-                <a href="{$baseurl}/top?page={$tnp}" class="older">{$lang167} &raquo;</a>
+                <a href="{$baseurl}/top/{if $period eq "all"}all{elseif $period eq "month"}month{elseif $period eq "week"}week{else}day{/if}?page={$tnp}" class="older">{$lang167} &raquo;</a>
                 {else}
                 <a href="#" onclick="return false;" class="older disabled">{$lang167} &raquo;</a>
                 {/if}
-            </div>
+            </div>		
         </div>
     </div>
 </div>
+{include file='vote_js.tpl'}
 {include file='right.tpl'}
 {literal}
 <script type="text/javascript">
@@ -43,7 +85,7 @@ var adloca=$('#moving-boxes').offset().top;
     if(curloca>adloca){
         $('#moving-boxes').css('position','fixed');
         $('#moving-boxes').css('top','55px');
-        $('#moving-boxes').css('z-index','200');
+        $('#moving-boxes').css('z-index','0');
     };
     if(curloca <= adloca){
         $('#moving-boxes').css('position','static');

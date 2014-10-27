@@ -1,14 +1,28 @@
-<script type="text/javascript" src="{$baseurl}/js/scroll.jquery.js"></script>
+{if $topgags GT 0}
+<div class="feature-bar">
+<ul>
+{section name=f loop=$topgags}
+        <a href="{$baseurl}{$postfolder}{$topgags[f].PID}/{if $SEO eq "1"}{$topgags[f].story|makeseo}.html{/if}">
+        <img src="{$purl}/t/s-{$topgags[f].pic}" alt="{$topgags[f].story|stripslashes}">
+        <span class="title">{$topgags[f].story}</span>
+        </a>
+{/section}
+</ul>
+</div>
+{/if}
 <div id="main">
     <div id="content-holder">        
         <div class="main-filter ">
             <ul class="content-type">
                 <li> <a class="current" href="{$baseurl}/hot"><strong>{$lang172}</strong></a></li>
-                <li> <a class="" href="{$baseurl}/trending"><strong>{$lang173}</strong></a></li>
+                {if $trendingenabled eq "1"}<li> <a class="" href="{$baseurl}/trending"><strong>{$lang173}</strong></a></li>{/if}
                 <li> <a class="" href="{$baseurl}/vote"><strong>{$lang174}</strong></a></li>                
             </ul>
-            <a id="changeview" class="view_thumbs" href="{$baseurl}/hot?show=thumbs">{$lang258}</a>
-            {if $smarty.session.USERID ne ""}
+			{if $thumbs eq "1"}
+			<a id="changeview" class="view_thumbs" href="{$baseurl}/hot?view=thumbs" title="Toggle Views">{$lang258}</a>
+			{/if}
+            {if $safemode eq "1"}
+			{if $smarty.session.USERID ne ""}
                 {if $smarty.session.FILTER eq "1"}
                 <a class="safe-mode-switcher on" href="{$baseurl}/safe?m={$eurl}">&nbsp;</a>
                 {else}
@@ -17,6 +31,7 @@
             {else}
             	<a class="safe-mode-switcher on" href="{$baseurl}/login">&nbsp;</a>
             {/if}
+			{/if}
         </div>
         <div id="content" listPage="hot">            
             <div id="use-tips">
@@ -32,31 +47,79 @@
                     {include file="posts_bit.tpl"}
                     {/section}                    
                 </ul>
-                <div id="lastPostsLoader"><img src="{$imageurl}/loading.gif" /></div>
-                {literal}
-                <script type="text/javascript">
-				var tpage = 1;
-				$(function(){
-					$('#entries-content-ul').scrollPagination({
-						'contentPage': '{/literal}{$baseurl}/{literal}indexmore.php',
-						'contentData': {page:function() {return tpage}},
-						'scrollTarget': $(window),
-						'heightOffset': 10,
-						'beforeLoad': function(){
-							$('#lastPostsLoader').fadeIn();	
-							tpage = tpage+1;
-						},
-						'afterLoad': function(elementsLoaded){
-							 $('#lastPostsLoader').fadeOut();
-							 var i = 0;
-							 $(elementsLoaded).fadeIn();
-						 	$('#backtotop').show();
-						}
-					});
-				});
-				</script>
-                {/literal}  
             </div>	
+            <div id="lastPostsLoader"></div>                
+			{if $AUTOSCROLL eq "1"}
+			<div id="load_image" style="background:url(images/load.gif) center no-repeat; width:%100; height:50px;"> </div>
+			{literal}
+                <script type="text/javascript">
+				var ajaxstart=1;
+				$(document).ready(function(){
+					var tpage = 2;
+					function lastAddedLiveFunc()
+					{
+						$('div#lastPostsLoader').html('');
+						$.get("{/literal}{$baseurl}{literal}/hotjson.php?page="+tpage, function(data){
+							if (data != "") {
+								$(".col-1").append(data);
+								$('#load_image').css('display','none');
+								ajaxstart=1;
+							}else{
+							ajaxstart=2;
+							}
+							$('div#lastPostsLoader').empty();
+						});
+					};
+					$(window).scroll(function(){
+					if (document.documentElement.scrollTop)
+					{ var  curloc = document.documentElement.scrollTop; }
+					else
+					{ var curloc=$(window).scrollTop(); }
+					if  ((curloc+document.documentElement.clientHeight+1)>=($(document).height()) && ajaxstart==1 ) {
+					 lastAddedLiveFunc();
+					 $('#load_image').css('display','block');
+					 ajaxstart=0;	
+					 tpage = tpage+1;
+					};
+					if(curloc>$(window).height()){$('#backtotop').slideDown();}else{$('#backtotop').slideUp();};
+					});
+					});
+				</script>
+			{/literal}
+			{else}
+ 			{literal}
+                <script type="text/javascript">
+				$(document).ready(function(){
+					$(window).scroll(function(){
+					if (document.documentElement.scrollTop)
+					{ var  curloc = document.documentElement.scrollTop; }
+					else
+					{ var curloc=$(window).scrollTop(); }
+					var wintop = $(window).scrollTop(), docheight = $(document).height(), winheight = $(window).height();
+					var  scrolltrigger = 0.95;
+				 
+					if  ((wintop/(docheight-winheight)) > scrolltrigger) {
+					 lastAddedLiveFunc();
+					 tpage = tpage+1;
+					};
+					if(curloc>$(window).height()){$('#backtotop').slideDown();}else{$('#backtotop').slideUp();};
+					});
+					});
+				</script>
+			{/literal}
+            <div id="paging-buttons" class="paging-buttons">
+            	{if $tpp ne ""}
+                <a href="{$baseurl}/hot?page={$tpp}" class="previous">&laquo; {$lang166}</a>
+                {else}
+                <a href="#" onclick="return false;" class="previous disabled">&laquo; {$lang166}</a>
+                {/if}
+                {if $tnp ne ""}
+                <a href="{$baseurl}/hot?page={$tnp}" class="older">{$lang167} &raquo;</a>
+                {else}
+                <a href="#" onclick="return false;" class="older disabled">{$lang167} &raquo;</a>
+                {/if}
+            </div>		
+			{/if}	
         </div>
     </div>
 </div>
@@ -70,7 +133,7 @@ var adloca=$('#moving-boxes').offset().top;
     if(curloca>adloca){
         $('#moving-boxes').css('position','fixed');
         $('#moving-boxes').css('top','55px');
-        $('#moving-boxes').css('z-index','200');
+        $('#moving-boxes').css('z-index','0');
     };
     if(curloca <= adloca){
         $('#moving-boxes').css('position','static');

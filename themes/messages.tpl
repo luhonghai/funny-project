@@ -3,7 +3,7 @@
         <div class="profile-pad">
             <div class="profile-image">
                 <a href="{$baseurl}/user/{$p.username|stripslashes}">
-                {insert name=get_member_profilepicture assign=profilepicture value=var USERID=$smarty.session.USERID}
+                {insert name=get_member_profilepicture assign=profilepicture value=var USERID=$p.USERID}
                 <img src="{$membersprofilepicurl}/{$profilepicture}?{$smarty.now}" alt="{$p.username|stripslashes}" />
                 </a>
             </div>
@@ -18,7 +18,7 @@
         <div class="main-filter with-topping">
             <ul class="content-type">            
                 <li><a href="{$baseurl}/user/{$p.username|stripslashes}"><strong>{$lang192}</strong> ({$tl})</a></li>
-                <li><a href="{$baseurl}/user/{$p.username|stripslashes}/likes"><strong>{$lang193}</strong> ({$tf})</a></li>            
+                <li><a href="{$baseurl}/user/{$p.username|stripslashes}/likes"><strong>{$lang193}</strong> ({$posts|@count})</a></li>            
                 <li><a class="current" href="{$baseurl}/user/{$p.username|stripslashes}/messages"><strong>{$lang194}</strong> (<fb:comments-count href="{$baseurl}/user/{$p.username|stripslashes}/messages"></fb:comments-count>)</a></li>
             </ul>
         </div>

@@ -5,17 +5,19 @@
 {/if}
 <div id="main">
     <div id="content-holder">
-        <div id="scriptolution-soft-post" class="scriptolution-soft-box static">
+        <div id="b9gcs-soft-post" class="b9gcs-soft-box static">
         
             <div class="head">
                 <ul class="switch">
                 	<li class="tab_photo current"><a class="photo" href="{$baseurl}/submit">{$lang100}</a></li>
+					{if $vupload eq "1"}
                 	<li class="tab_video "><a class="video" href="{$baseurl}/submit?t=v">{$lang101}</a></li>
+					{/if}
                 </ul>
             </div>
         
             <div class="content form_photo">
-                <form id="form-scriptolution-soft-post-image" class="modal" action="{$baseurl}/submit{if $smarty.request.file eq "1"}?file=1{/if}" enctype="multipart/form-data" method="post">
+                <form id="form-b9gcs-soft-post-image" class="modal" action="{$baseurl}/submit{if $smarty.request.file eq "1"}?file=1{/if}" enctype="multipart/form-data" method="post">
                     <input type="hidden" name="type" value="Photo"/>
                     <input id="post_type" type="hidden" name="post_type" value="Photo"/>
                     <h3>{$lang102}</h3>
@@ -43,6 +45,18 @@
                             <p class="info" style="visibility:hidden">{$lang112}</p>
                         </label>
                     </div>
+					<div class="field">
+                        <label>
+                            <h4>{$lang269}</h4>
+							<select name="CID" id="CID">
+                            <option value="">{$lang270}</option>
+							{section name=i loop=$c}                  
+                            <option value="{$c[i].CID}">{$c[i].cname}</option>
+							{/section}
+                            </select>                        
+							<p class="info" style="visibility:hidden">{$lang271}</p>
+                        </label>
+                    </div>
                     <div class="field">
                         <label>
                             <h4>{$lang113}<span>({$lang114})</span></h4>
@@ -58,10 +72,12 @@
                         </label>                    
                     </div>
                     <hr />
+					{if $safemode eq "1"}
                     <div class="field checkbox">
                     	<label for="submit-nsfw">
                     	<input id="submit-nsfw" type="checkbox" class="checkbox" name="nsfw" value="1" />{$lang117}</label>
-                    </div>                
+                    </div>
+					{/if}
                 </form>
             </div>
         
@@ -87,7 +103,7 @@
             	})
             });
             $('#ekle').click(function(){
-            	$('#form-scriptolution-soft-post-image').submit();
+            	$('#form-b9gcs-soft-post-image').submit();
             });
             </script>
             {/literal}

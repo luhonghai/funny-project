@@ -134,8 +134,8 @@ $('#rand-but').click();
         
         if((curloc > (b[k]+c[k] - ach)) || curloc < b[0]){
         
-        $('.scriptolution-stop').css('position','static');
-        $('.scriptolution-stop').css('top','!important');
+        $('.b9gcs-stop').css('position','static');
+        $('.b9gcs-stop').css('top','!important');
         
         
             }else{

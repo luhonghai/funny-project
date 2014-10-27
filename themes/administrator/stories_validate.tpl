@@ -115,12 +115,7 @@
 	    	    	    		<tbody>
                                 	{section name=i loop=$results}
                                     <tr id="" >
-                                        <td class=" a-right ">
-                                        <center>
-                                        {$results[i].PID}{if $results[i].pic ne ""}<br />
-                                        <img src="{$purl}/t/s-{$results[i].pic}" />{/if}
-                                        </center>
-                                        </td>
+                                        <td class=" a-right ">{$results[i].PID}</td>
                                         <td class=" ">{$results[i].story|stripslashes|truncate:300:"...":true}</td>
                                         <td class=" "><a href="{$adminurl}/bans_ip_add.php?add={$results[i].pip}" target="_blank">{$results[i].pip}</a></td>
                                         <td class=" ">{$results[i].mod_yes}</td>

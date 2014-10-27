@@ -1,0 +1,3 @@
+RewriteEngine on 
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?ultimate.best9gagclonescript.com [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ http://ultimate.best9gagclonescript.com/images/hotlink.$1 [NC,R,L]

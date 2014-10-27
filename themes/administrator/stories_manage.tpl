@@ -98,12 +98,7 @@
 	    	    	    		<tbody>
                                 	{section name=i loop=$results}
                                     <tr id="" >
-                                        <td class=" a-right ">
-                                        <center>
-                                        {$results[i].PID}{if $results[i].pic ne ""}<br />
-                                        <img src="{$purl}/t/s-{$results[i].pic}" />{/if}
-                                        </center>
-                                        </td>
+                                        <td class=" a-right ">{$results[i].PID}</td>
                                         <td class=" ">{$results[i].story|stripslashes|truncate:300:"...":true}</td>
                                         <td class=" ">{$results[i].username|stripslashes|truncate:20:"...":true}</td>
                                         <td class=" ">{$results[i].time_added|date_format:"%b %e, %Y"}</td>

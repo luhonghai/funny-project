@@ -4,6 +4,7 @@ $config = array();
 // Begin Configuration
 $config['basedir']     =  '/vol/hll/fun';
 $config['baseurl']     =  'http://services.c-mg.vn/fun';
+$config['domain']     =  'trollvd.com';
 
 $DBTYPE = 'mysql';
 $DBHOST = 'cmgmysql.ctjztcxdxqlx.us-east-1.rds.amazonaws.com';
@@ -72,7 +73,11 @@ $theme = $config['theme'];
 STemplate::setTplDir($config['basedir']."/themes");
 if ($_REQUEST['language'] != "")
 {
-	if ($_REQUEST['language'] == "en")
+	if ($_REQUEST['language'] == "ar")
+	{
+		$_SESSION['language'] = "ar";
+	}
+	elseif ($_REQUEST['language'] == "en")
 	{
 		$_SESSION['language'] = "en";
 	}
@@ -106,7 +111,11 @@ if ($_SESSION['language'] == "")
 	$_SESSION['language'] = $default_language;
 }
 
-if ($_SESSION['language'] == "en")
+if ($_SESSION['language'] == "ar")
+{
+	include("lang/ar.php");
+}
+elseif ($_SESSION['language'] == "en")
 {
 	include("lang/en.php");
 }
@@ -142,7 +151,7 @@ for ($i=0; $i<count($lang); $i++)
 {
 	STemplate::assign('lang'.$i, $lang[$i]);
 }
-if(isset($sban)&& $sban != "1")
+if($sban != "1")
 {
 	$bquery = "SELECT count(*) as total from bans_ips WHERE ip='".mysql_real_escape_string($_SERVER['REMOTE_ADDR'])."'";
 	$bresult = $conn->execute($bquery);
@@ -271,7 +280,19 @@ if($config['enable_fc'] == "1")
 					$_SESSION['VERIFIED']=$result->fields['verified'];
 					$_SESSION['FILTER']=$result->fields['filter'];
 					$_SESSION['FB']="1";			
-					header("Location:$config[baseurl]/");exit;
+					$redirect = $_SESSION['location'];
+					if($redirect == "")
+					{
+						if ( $config[regredirect] == 1)
+						{header("Location:$config[baseurl]/index.php".$addlang);exit;}
+						else
+						{header("Location:$config[baseurl]/settings".$addlang);exit;}
+					}
+					else
+					{
+						header("Location:".$config[baseurl].$redirect);exit;
+					}
+					$_SESSION['location'] = "";
 				}
 			}
 			else

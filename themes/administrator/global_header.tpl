@@ -70,9 +70,16 @@
                             <li  class="   last level1"> <a href="stories_reported.php"   class=""><span>Reported Gags</span></a></li>
                         </ul>
                     </li>
+					<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "6"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Channels</span></a>
+                    	<ul >
+                            <li  class="   level1"> <a href="ch_manage.php"   class=""><span>Channels</span></a></li>
+                            <li  class="   last level1"> <a href="ch_create.php"   class=""><span>Create Channels</span></a></li>
+                        </ul>
+                    </li>
                     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "7"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Members</span></a>
                     	<ul >
-                            <li  class="   last level1"> <a href="members_manage.php"   class=""><span>Manage Members</span></a></li>
+						    <li  class="   level1">  <a href="members_manage.php"   class=""><span>Manage Members</span></a></li>
+                            <li  class="   last level1"> <a href="members_newsletter.php"   class=""><span>Newsletter</span></a></li>
                         </ul>
                     </li>
                     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "11"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Advertisements</span></a>
@@ -93,8 +100,11 @@
                             <li  class="   last level1"> <a href="admins_create.php"   class=""><span>Create Administrator</span></a></li>
                         </ul>
                     </li>
+					<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "13"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>SiteMap</span></a>
+                    	<ul >
+                            <li  class="   level1"> <a href="sitemap.php"   class=""><span>Create Sitemap</span></a></li>
+                        </ul>
+                    </li>
                 </ul>
 			</div>
         </div>
-		
-        {php}global $config; echo @file_get_contents("http://www.scriptolution.com/updates/9gcs/index.php?v=".$config['ver']); {/php}

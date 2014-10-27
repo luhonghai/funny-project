@@ -5,7 +5,7 @@
 {/if}
 <div id="main">
     <div id="content-holder">
-        <div id="scriptolution-soft-post" class="scriptolution-soft-box static">
+        <div id="b9gcs-soft-post" class="b9gcs-soft-box static">
             <div class="content form_photo">
                 <form id="forma" class="modal" name="forma" action="#" enctype="multipart/form-data" method="post">
                     <h3>{$p.story|stripslashes} [Fixed]</h3>

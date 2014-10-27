@@ -10,10 +10,10 @@ var character = String.fromCharCode(code);
 var classes=$('.entry-item').length;
 if($('#header_searchbar').css('display')!='none'){
 character=0;}
-if(character =='J' || character =='j'){
+if(character =='J' || character =='j' || character =='39'){
 window.location.href=$('#next_post').attr('href');
 }
-if(character =='K' || character =='k'){
+if(character =='K' || character =='k' || character =='37'){
 window.location.href=$('#prev_post').attr('href');
 }
 if(character=='L' || character=='l'){

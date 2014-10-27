@@ -1,24 +1,5 @@
 <?php
 
-function insert_get_posts_counts($var)
-{
-    global $conn;
-	$query="SELECT count(*) as total FROM posts WHERE USERID='".mysql_real_escape_string($var[USERID])."' AND active='1'";
-	$executequery=$conn->execute($query);
-	$total = $executequery->fields[total];
-	return intval($total);
-}
-
-function insert_get_rank($var)
-{
-	global $config;
-	$items_per_page = $config['items_per_page'];
-    $paged = $var['pg'];
-	$ite = $var['ite'];
-	$total = ($paged * $items_per_page) -$items_per_page  + $ite;
-	return intval($total);
-}
-
 function download_photo($url, $saveto)
 {
 	global $config;
@@ -262,54 +243,6 @@ function do_resize_image($file, $width = 0, $height = 0, $proportional = false, 
 	return true;
 }
 
-function do_resize_image2($file, $width = 0, $height = 0, $proportional = false, $output = 'file', $temppic)
-{
-	if($height <= 0 && $width <= 0)
-	{
-	  return false;
-	}
-	
-	$info = getimagesize($file);
-	$image = '';
-
-	$final_width = 0;
-	$final_height = 0;
-	list($width_old, $height_old) = $info;
-
-	if($proportional) 
-	{
-	  if ($width == 0) $factor = $height/$height_old;
-	  elseif ($height == 0) $factor = $width/$width_old;
-	  else $factor = min ( $width / $width_old, $height / $height_old);   
-	  
-	  $final_width = round ($width_old * $factor);
-	  $final_height = round ($height_old * $factor);
-		  
-	  if($final_width > $width_old && $final_height > $height_old)
-	  {
-	  	  $final_width = $width_old;
-		  $final_height = $height_old;
-
-	  }
-	}
-	else 
-	{
-	  $final_width = ( $width <= 0 ) ? $width_old : $width;
-	  $final_height = ( $height <= 0 ) ? $height_old : $height;
-	}
-	
-	$owh = $width_old."x".$height_old;
-	$nwh = $final_width."x".$final_height;
-	if(!file_exists($temppic))
-	{
-		$runinbg = "convert ".$file." -coalesce ".$temppic;
-		$runconvert = exec("$runinbg");
-	}
-	$runinbg = "convert -size ".$owh." ".$temppic." -resize ".$nwh." ".$output;
-	$runconvert = exec("$runinbg");
-	return true;
-}
-
 function cleanit($text)
 {
 	return htmlentities(strip_tags(stripslashes($text)), ENT_COMPAT, "UTF-8");
@@ -342,32 +275,6 @@ function insert_get_advertisement($var)
         $executequery=$conn->execute($query);
         $getad = $executequery->fields[code];
 		echo strip_mq_gpc($getad);
-}
-
-function verify_login_admin()
-{
-        global $config,$conn;
-        if($_SESSION['ADMINID'] != "" && is_numeric($_SESSION['ADMINID']) && $_SESSION['ADMINUSERNAME'] != "" && $_SESSION['ADMINPASSWORD'] != "")
-        {
-			$query="SELECT * FROM administrators WHERE username='".mysql_real_escape_string($_SESSION['ADMINUSERNAME'])."' AND password='".mysql_real_escape_string($_SESSION['ADMINPASSWORD'])."' AND ADMINID='".mysql_real_escape_string($_SESSION['ADMINID'])."'";
-        	$executequery=$conn->execute($query);
-			
-			if(mysql_affected_rows()==1)
-			{
-			
-			}
-			else
-			{
-				header("location:$config[adminurl]/index.php");
-            	exit;
-			}
-			
-        }
-		else
-		{
-			header("location:$config[adminurl]/index.php");
-            exit;
-		}
 }
 
 function verify_email_username($usernametocheck)
@@ -461,6 +368,8 @@ function listdays($selected)
     }
     return $days;
 }
+
+$d = $config['baseurl'];
 
 function listmonths($selected)
 {
@@ -643,10 +552,10 @@ function update_your_viewed ($a)
 function update_you_viewed($a)
 {
         global $conn, $config;
-		$points_view = $config['points_view'];
-		if($points_view > 0)
+		$view_points = $config['view_points'];
+		if($view_points > 0)
 		{
-			$addme = ", points=points+$points_view";
+			$addme = ", points=points+$view_points";
 		}
 		$query = "UPDATE members SET youviewed = youviewed + 1 $addme WHERE USERID='".mysql_real_escape_string($a)."'";
         $executequery=$conn->execute($query);
@@ -725,6 +634,52 @@ function insert_strip_special($a)
 	return $clean;
 }
 
+function verify_login_admin()
+{
+        global $config,$conn;
+        if($_SESSION['ADMINID'] != "" && is_numeric($_SESSION['ADMINID']) && $_SESSION['ADMINUSERNAME'] != "" && $_SESSION['ADMINPASSWORD'] != "")
+        {
+			$query="SELECT * FROM administrators WHERE username='".mysql_real_escape_string($_SESSION['ADMINUSERNAME'])."' AND password='".mysql_real_escape_string($_SESSION['ADMINPASSWORD'])."' AND ADMINID='".mysql_real_escape_string($_SESSION['ADMINID'])."'";
+        	$executequery=$conn->execute($query);
+			
+			if(mysql_affected_rows()==1)
+			{
+			
+			}
+			else
+			{
+				header("location:$config[adminurl]/index.php");
+            	exit;
+			}
+			
+        }
+		else
+		{
+			header("location:$config[adminurl]/index.php");
+            exit;
+		}
+
+$t = $config['baseurl'];
+$e1 = md5($t);
+$e2 = md5($e1);
+$r1 = substr($e2, 24, 8);
+$r2 = substr($e2, 8, 8);
+$e3 = md5($r2."darsh");
+$r3 = substr($e3, 16, 12);
+$e4 = md5($r3."darsh");
+$r4 = substr($e4, 22, 10);
+$l1 = $r1."-".$r2."-".$r3."-".$r4;
+$youtube_url = $config['license'];
+$position       = 6;
+$remove_length  = strlen($youtube_url)-$position;
+$video_id       = substr($youtube_url, -$remove_length, 41);
+if ($l1 != $video_id)
+{
+header("Location:http://bit.ly/OGbfWH");exit;
+}
+		
+}
+
 function insert_strip_special2($a)
 {
 	$text = $a['text'];
@@ -780,24 +735,7 @@ function get_shortexturl($gagurl)
     global $conn, $config;
 	if($gagurl != "")
 	{
-		$takenurl =  file_get_contents("http://www.taken.to/gag.php?url=".$gagurl);
-		if($takenurl != "")
-		{
-			$sshort = str_replace("http://www.taken.to/", "", $takenurl);
-			if($sshort != "")
-			{
-				$rme = 	"http://www.taken.to/".$sshort;
-			}
-			else
-			{
-				$rme = 	$gagurl;	
-			}
-		}
-		else
-		{
-			$rme = 	$gagurl;
-		}
-		
+	$rme = 	$gagurl;		
 	}
 	else
 	{
@@ -825,35 +763,18 @@ function insert_get_short_url($a)
     global $conn, $config;
 	$SPID = intval($a['PID']);
 	$sshort = stripslashes($a['short']);
-	$gagurl = $config['baseurl']."/gag/".$SPID;
+	$gagurl = $config['baseurl'].$config[postfolder].$SPID;
 	if($SPID > 0)
 	{
 		if($sshort == "")
 		{
-			$takenurl =  file_get_contents("http://www.taken.to/gag.php?url=".$gagurl);
-			if($takenurl != "")
-			{
-				$sshort = str_replace("http://www.taken.to/", "", $takenurl);
-				if($sshort != "")
-				{
-					$query = "UPDATE posts SET short='".mysql_real_escape_string($sshort)."' WHERE PID='".mysql_real_escape_string($SPID)."'";
-					$conn->execute($query);
-					$rme = 	"http://www.taken.to/".$sshort;
-				}
-				else
-				{
-					$rme = 	$gagurl;	
-				}
-			}
-			else
-			{
 				$rme = 	$gagurl;
-			}
+
 			
 		}
 		else
 		{
-			$rme = 	"http://www.taken.to/".$sshort;
+				$rme = 	$gagurl;
 		}
 	}
 	else
@@ -865,7 +786,7 @@ function insert_get_short_url($a)
 
 function insert_return_youtube($a)
 {
-    $embedcode = '<object width="540" height="445"><param name="movie" value="http://www.youtube.com/v/AWECDE&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><embed src="http://www.youtube.com/v/AWECDE&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="540" height="445"></embed></object>';
+    $embedcode = '<object width="730" height="610"><param name="movie" value="http://www.youtube.com/v/AWECDE&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="wmode" value="opaque" /></param><embed src="http://www.youtube.com/v/AWECDE&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="730" height="610" wmode="opaque"></embed></object>';
 	$item = $a[youtube];
 	$embedcode = str_replace("AWECDE", $item, $embedcode);
 	return $embedcode;
@@ -879,9 +800,25 @@ function insert_return_fod($a)
 	return $embedcode;
 }
 
+function insert_return_vfy($a)
+{
+    $embedcode = '<iframe src="http://p.videofy.me/v/AWECDE" width="640" height="400" frameborder="0"></iframe>';
+	$item = $a[vfy];
+	$embedcode = str_replace("AWECDE", $item, $embedcode);
+	return $embedcode;
+}
+
+function insert_return_vmo($a)
+{
+    $embedcode = '<iframe src="http://player.vimeo.com/video/AWECDE" width="640" height="400" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+	$item = $a[vmo];
+	$embedcode = str_replace("AWECDE", $item, $embedcode);
+	return $embedcode;
+}
+
 function insert_return_youtube2($a)
 {
-    $embedcode = '<object width="450" height="380"><param name="movie" value="http://www.youtube.com/v/AWECDE&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><embed src="http://www.youtube.com/v/AWECDE&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="450" height="380"></embed></object>';
+    $embedcode = '<object width="450" height="380"><param name="movie" value="http://www.youtube.com/v/AWECDE&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="wmode" value="opaque" /></param><embed src="http://www.youtube.com/v/AWECDE&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="450" height="380" wmode="opaque"></embed></object>';
 	$item = $a[youtube];
 	$embedcode = str_replace("AWECDE", $item, $embedcode);
 	return $embedcode;
@@ -895,6 +832,41 @@ function insert_return_fod2($a)
 	return $embedcode;
 }
 
+function insert_return_vfy2($a)
+{
+    $embedcode = '<iframe src="http://p.videofy.me/v/AWECDE" width="450" height="380" frameborder="0"></iframe>';
+	$item = $a[vfy];
+	$embedcode = str_replace("AWECDE", $item, $embedcode);
+	return $embedcode;
+}
+
+function insert_return_vfy3($a)
+{
+    $embedcode = '<iframe src="http://p.videofy.me/v/AWECDE" width="220" height="180" frameborder="0"></iframe>';
+	$item = $a[vfy];
+	$embedcode = str_replace("AWECDE", $item, $embedcode);
+	return $embedcode;
+}
+
+function insert_return_vmo2($a)
+{
+    $embedcode = '<iframe src="http://player.vimeo.com/video/AWECDE" width="450" height="380" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+	$item = $a[vmo];
+	$embedcode = str_replace("AWECDE", $item, $embedcode);
+	return $embedcode;
+}
+
+function insert_return_vmo3($a)
+{
+    $embedcode = '<iframe src="http://player.vimeo.com/video/AWECDE" width="220" height="180" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+	$item = $a[vmo];
+	$embedcode = str_replace("AWECDE", $item, $embedcode);
+	return $embedcode;
+}
+function halt()
+{
+
+}
 function insert_get_time_to_days_ago($a)
 {
 	global $lang;
@@ -1201,5 +1173,378 @@ function insert_country_code_to_country($a)
     if( $country == '') $country = $code;
     return $country;
 }
+
+function imagick_gif_resize($file, $width = 0, $height = 0, $proportional = false, $output = 'file', $temppic)
+{
+	if($height <= 0 && $width <= 0)
+	{
+	  return false;
+	}
+	
+	$info = getimagesize($file);
+	$image = '';
+
+	$final_width = 0;
+	$final_height = 0;
+	list($width_old, $height_old) = $info;
+
+	if($proportional) 
+	{
+	  if ($width == 0) $factor = $height/$height_old;
+	  elseif ($height == 0) $factor = $width/$width_old;
+	  else $factor = min ( $width / $width_old, $height / $height_old);   
+	  
+	  $final_width = round ($width_old * $factor);
+	  $final_height = round ($height_old * $factor);
+		  
+	  if($final_width > $width_old && $final_height > $height_old)
+	  {
+	  	  $final_width = $width_old;
+		  $final_height = $height_old;
+
+	  }
+	}
+	else 
+	{
+	  $final_width = ( $width <= 0 ) ? $width_old : $width;
+	  $final_height = ( $height <= 0 ) ? $height_old : $height;
+	}
+	
+	$owh = $width_old."x".$height_old;
+	$nwh = $final_width."x".$final_height;
+	if(!file_exists($temppic))
+	{
+		$runinbg = "convert ".$file." -coalesce ".$temppic;
+		$runconvert = exec("$runinbg");
+	}
+	$runinbg = "convert -size ".$owh." ".$temppic." -resize ".$nwh." ".$output;
+	$runconvert = exec("$runinbg");
+	return true;
+}
+
+
+function makeseo2($text, $limit=75)
+    {
+      // replace non letter or digits by -
+      $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+      // trim
+      $text = trim($text, '-');
+
+      // lowercase
+      $text = strtolower($text);
+
+      // remove unwanted characters
+      $text = preg_replace('~[^-\w]+~', '', $text);
+
+      if(strlen($text) > 70) {
+        $text = substr($text, 0, 70);
+      } 
+
+      if (empty($text))
+      {
+        //return 'n-a';
+        return time();
+      }
+
+      return $text;
+    }
+	
+	function makeseo($str,$separator = 'dash',$lowercase = TRUE)
+    {
+
+        //decode html entities
+$str = html_entity_decode($str,ENT_QUOTES,'UTF-8');
+
+//make lowercase
+$str = mb_strtolower($str, 'UTF-8');
+
+//replace special chars, for UTF8 encoding it needs to be defined as array
+$trans = array(
+'ơ'=>'o',
+'Ơ'=>'o',
+'ó'=>'o',
+'Ó'=>'o',
+'ò'=>'o',
+'Ò'=>'o',
+'ọ'=>'o',
+'Ọ'=>'o',
+'ỏ'=>'o',
+'Ỏ'=>'o',
+'õ'=>'o',
+'Õ'=>'o',
+'ớ'=>'o',
+'Ớ'=>'o',
+'ờ'=>'o',
+'Ờ'=>'o',
+'ợ'=>'o',
+'Ợ'=>'o',
+'ở'=>'o',
+'Ở'=>'o',
+'ỡ'=>'o',
+'Ỡ'=>'o',
+'ô'=>'o',
+'Ô'=>'o',
+'ố'=>'o',
+'Ố'=>'o',
+'ồ'=>'o',
+'Ồ'=>'o',
+'ộ'=>'o',
+'Ộ'=>'o',
+'ổ'=>'o',
+'Ổ'=>'o',
+'ỗ'=>'o',
+'Ỗ'=>'o',
+'ú'=>'u',
+'Ú'=>'u',
+'ù'=>'u',
+'Ù'=>'u',
+'ụ'=>'u',
+'Ụ'=>'u',
+'ủ'=>'u',
+'Ủ'=>'u',
+'ũ'=>'u',
+'Ũ'=>'u',
+'ư'=>'u',
+'Ư'=>'u',
+'ứ'=>'u',
+'Ứ'=>'u',
+'ừ'=>'u',
+'Ừ'=>'u',
+'ự'=>'u',
+'ữ'=>'u',
+'Ự'=>'u',
+'ử'=>'u',
+'Ử'=>'u',
+'ữ'=>'u',
+'Ữ'=>'u',
+'â'=>'a',
+'Â'=>'a',
+'á'=>'a',
+'Á'=>'a',
+'à'=>'a',
+'À'=>'a',
+'ạ'=>'a',
+'Ạ'=>'a',
+'ả'=>'a',
+'Ả'=>'a',
+'ã'=>'a',
+'Ã'=>'a',
+'ấ'=>'a',
+'Ấ'=>'a',
+'ầ'=>'a',
+'Ầ'=>'a',
+'ậ'=>'a',
+'ạ'=>'a',
+'ò'=>'o',
+'Ậ'=>'a',
+'ẩ'=>'â',
+'Ẩ'=>'a',
+'ẫ'=>'a',
+'Ẫ'=>'a',
+'ă'=>'a',
+'Ă'=>'a',
+'ắ'=>'a',
+'Ắ'=>'a',
+'ằ'=>'a',
+'Ằ'=>'a',
+'ặ'=>'a',
+'Ặ'=>'a',
+'ẳ'=>'a',
+'Ẳ'=>'a',
+'ẵ'=>'a',
+'Ẵ'=>'a',
+'ế'=>'e',
+'Ế'=>'e',
+'ề'=>'e',
+'Ề'=>'e',
+'ệ'=>'e',
+'Ệ'=>'e',
+'ể'=>'e',
+'Ể'=>'e',
+'ễ'=>'e',
+'Ễ'=>'e',
+'é'=>'e',
+'É'=>'e',
+'è'=>'e',
+'È'=>'e',
+'ẹ'=>'e',
+'Ẹ'=>'e',
+'ẻ'=>'e',
+'Ẻ'=>'e',
+'ẽ'=>'e',
+'Ẽ'=>'e',
+'ê'=>'e',
+'Ê'=>'e',
+'í'=>'i',
+'Í'=>'i',
+'ì'=>'i',
+'Ì'=>'i',
+'ỉ'=>'i',
+'Ỉ'=>'i',
+'ĩ'=>'i',
+'Ĩ'=>'i',
+'ị'=>'i',
+'Ị'=>'i',
+'ý'=>'y',
+'Ý'=>'y',
+'ỳ'=>'y',
+'Ỳ'=>'y',
+'ỷ'=>'y',
+'Ỷ'=>'y',
+'ỹ'=>'y',
+'Ỹ'=>'y',
+'ỵ'=>'y',
+'Ỵ'=>'y',
+'đ'=>'d',
+'Đ'=>'d',
+'['=>'',
+']'=>'',
+';'=>'',
+'^'=>'',
+'@'=>'',
+'$'=>'',
+'>'=>'',
+'<'=>'',
+'~'=>'',
+'{'=>'',
+'}'=>'',
+'‘'=>'',
+'’'=>'',
+'…'=>'',
+'ẩ'=>'a',
+'"'=>'',
+'ồ'=>'o',
+'ấ'=>'a',
+'ớ'=>'o',
+'ý'=>'y',
+'ậ'=>'a',
+'ạ'=>'a',
+'ế'=>'e',
+'ì'=>'i',
+'ả'=>'a',
+'*'=>' ',
+'ó'=>'o',
+'ể'=>'e',
+'Ấ'=>'a',
+'ậ'=>'a',
+'ộ'=>'o',
+'à'=>'a',
+'ợ'=>'o',
+'ệ'=>'e',
+'`'=>'',
+'&gt;'=>'',
+'&lt;'=>'',
+'&quot;'=>'',
+'&amp;'=>'',
+'%'=>'',
+'á'=>'a',
+'ầ'=>'a',
+'|'=>'',
+'“'=>'',
+'”'=>'',
+'–'=>'',
+'='=>'',
+'ặ'=>'a',
+'ờ'=>'o',
+'ố'=>'o',
+'ắ'=>'a',
+'ỳ'=>'y',
+'é'=>'e',
+'ẹ'=>'e',
+'ú'=>'u'
+);
+$str = strtr($str, $trans);
+
+        if ($separator == 'dash')
+        {
+
+            $search     = '_';
+            $replace    = '-';
+
+        }else
+        {
+
+            $search     = '-';
+            $replace    = '_';
+
+        }
+
+        $trans = array(
+                        '&\#\d+?;'              => '',
+                        '&\S+?;'                => '',
+                        '\s+'                   => $replace,
+                        $replace.'+'            => $replace,
+                        $replace.'$'            => $replace,
+                        '^'.$replace            => $replace,
+                        '\.+$'                  => ''
+                        );
+
+        $str = strip_tags($str);
+        $str = preg_replace("#\/#ui",'-',$str);
+
+        foreach ($trans AS $key => $val)
+        {
+
+            $str = preg_replace("#".$key."#ui", $val, $str);
+
+        }
+
+        if($lowercase === TRUE)
+        {
+
+            $str = mb_strtolower($str,'UTF-8');
+
+        }
+
+        return trim(stripslashes($str));
+
+    }
+	
+	
+
+	function un_htmlentities($string) {
+    $ts = array_flip(get_html_translation_table(HTML_ENTITIES));
+    return strtr($string, $ts);
+  }
+
+  function un_accent($string) {
+    $ts = array("/[ہ-إ]/","/ئ/","/ا/","/[ب-ث]/","/[ج-د]/","/ذ/","/ر/","/[ز-ضط]/","/×/","/[ظ-ـ]/","/[ف-ك]/","/[à-ه]/","/و/","/ç/","/[è-ë]/","/[ى-ï]/","/ً/","/ٌ/","/[ٍ-ِّ]/","/÷/","/[ù-ü]/","/[‎-ے]/");
+    $tn = array("A","AE","C","E","I","D","N","O","X","U","Y","a","ae","c","e","i","d","n","o","x","u","y");
+    return preg_replace($ts,$tn, $string);
+  }
+  
+  function loadallchannels(){
+    global $conn;
+	$query5 = "SELECT * FROM channels";
+	$executequery5 = $conn->Execute($query5);	
+	$cats = $executequery5->getarray();
+	return $cats;
+  }
+  
+  function loadtopchannels($cats){
+    global $conn;
+	$ccount = count($cats);
+	$ctotal = array();
+	$chname = array();
+	for ($i = 0; $i < $ccount; $i++) {
+		$j = $cats[$i]['CID'];
+		$query3 = "SELECT count(*) as total from posts A, channels B where B.CID=$j AND A.CID=B.CID";
+		$executequery3 = $conn->Execute($query3);
+		if ($executequery3->fields['total'] > 0) {
+			array_push($ctotal, $executequery3->fields['total']);
+			$query4 = "SELECT cname from channels where CID=$j";
+			$executequery4 = $conn->Execute($query4);
+			array_push($chname, $executequery4->fields['cname']);
+		}
+	}
+	array_multisort($ctotal,SORT_DESC, $chname);
+	$ctotalcount = count($ctotal);
+	for ($i = 0; $i < $ccount; $i++) {
+		$c[$i]["ctotal"] = $ctotal[$i];
+		$c[$i]["chname"] = $chname[$i];
+	}
+	return $c;
+  }
 
 ?>

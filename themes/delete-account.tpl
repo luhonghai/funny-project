@@ -5,7 +5,7 @@
 {/if}
 <div id="main" class="middle">
     <div id="content-holder">    
-        <div id="scriptolution-soft-forgotpassword"  class="scriptolution-soft-box static" >
+        <div id="b9gcs-soft-forgotpassword"  class="b9gcs-soft-box static" >
             <div class="content">
                 <form id="del_account" name="delete_account_form" class="modal" action="#" method="post">
                     <h3>{$lang78}</h3>

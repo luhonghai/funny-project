@@ -1,15 +1,15 @@
 <?php
 /**************************************************************************************************
 | 9Gag Clone Script
-| http://www.9gagclonescript.com
-| webmaster@9gagclonescript.com
+| http://www.best9gagclonescript.com
+| support@best9gagclonescript.com
 |
 |**************************************************************************************************
 |
 | By using this software you agree that you have read and acknowledged our End-User License 
-| Agreement available at http://www.9gagclonescript.com/eula.html and to be bound by it.
+| 
 |
-| Copyright (c) 9GagCloneScript.com. All rights reserved.
+| Copyright (c) best9gagclonescript.com. All rights reserved.
 |**************************************************************************************************/
 
 include("include/config.php");
@@ -205,6 +205,13 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 	$results=$conn->execute($query);
 	$p = $results->getrows();
 	STemplate::assign('p',$p[0]);
+	
+	if ($config['channels'] == 1)
+	{
+	$cats = loadallchannels();
+	STemplate::assign('allchannels',$cats);
+
+	}
 }
 else
 {

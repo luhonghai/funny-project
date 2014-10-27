@@ -1,15 +1,15 @@
 <?php
 /**************************************************************************************************
 | 9Gag Clone Script
-| http://www.9gagclonescript.com
-| webmaster@9gagclonescript.com
+| http://www.best9gagclonescript.com
+| support@best9gagclonescript.com
 |
 |**************************************************************************************************
 |
 | By using this software you agree that you have read and acknowledged our End-User License 
-| Agreement available at http://www.9gagclonescript.com/eula.html and to be bound by it.
+| 
 |
-| Copyright (c) 9GagCloneScript.com. All rights reserved.
+| Copyright (c) best9gagclonescript.com. All rights reserved.
 |**************************************************************************************************/
 
 include("../include/config.php");
@@ -31,7 +31,7 @@ if($_POST['submitform'] == "1")
 {
 	if($PID > 0)
 	{
-		$arr = array("USERID", "story", "tags", "source", "nsfw", "favclicks", "unfavclicks", "active", "feat", "phase");
+		$arr = array("USERID", "story", "tags", "source", "CID", "nsfw", "phase", "favclicks", "unfavclicks", "active");
 		foreach ($arr as $value)
 		{
 			$sql = "update posts set $value='".mysql_real_escape_string($_POST[$value])."' where PID='".mysql_real_escape_string($PID)."'";
@@ -44,6 +44,11 @@ if($_POST['submitform'] == "1")
 
 if($PID > 0)
 {
+	$queryc = "SELECT * FROM channels";
+	$executequeryc = $conn->execute($queryc);
+	$c =  $executequeryc->getarray();
+	STemplate::assign('c',$c);
+	
 	$query = $conn->execute("select * from posts where PID='".mysql_real_escape_string($PID)."' limit 1");
 	$story = $query->getrows();
 	Stemplate::assign('story', $story[0]);

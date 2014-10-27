@@ -18,7 +18,7 @@
         <div class="main-filter with-topping">
             <ul class="content-type">            
                 <li><a href="{$baseurl}/user/{$p.username|stripslashes}"><strong>{$lang192}</strong> ({$tl})</a></li>
-                <li><a class="current"  href="{$baseurl}/user/{$p.username|stripslashes}/likes"><strong>{$lang193}</strong> ({$posts|@count})</a></li>            
+                <li><a class="current"  href="{$baseurl}/user/{$p.username|stripslashes}/likes"><strong>{$lang193}</strong> ({$totallikes})</a></li>            
                 <li><a class="" href="{$baseurl}/user/{$p.username|stripslashes}/messages"><strong>{$lang194}</strong> (<fb:comments-count href="{$baseurl}/user/{$p.username|stripslashes}/messages"></fb:comments-count>)</a></li>
             </ul>
         	{if $smarty.session.USERID ne ""}
@@ -44,6 +44,18 @@
                     {/section}                    
                 </ul>
             </div>
+			<div id="paging-buttons" class="paging-buttons">
+            	{if $tpp ne ""}
+                <a href="{$baseurl}/user/{$p.username|stripslashes}/likes?page={$tpp}" class="previous">&laquo; {$lang166}</a>
+                {else}
+                <a href="#" onclick="return false;" class="previous disabled">&laquo; {$lang166}</a>
+                {/if}
+                {if $tnp ne ""}
+                <a href="{$baseurl}/user/{$p.username|stripslashes}/likes?page={$tnp}" class="older">{$lang167} &raquo;</a>
+                {else}
+                <a href="#" onclick="return false;" class="older disabled">{$lang167} &raquo;</a>
+                {/if}
+            </div>	
         </div>
     </div>
 </div>

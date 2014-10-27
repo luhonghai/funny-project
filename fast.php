@@ -1,15 +1,15 @@
 <?php
 /**************************************************************************************************
 | 9Gag Clone Script
-| http://www.9gagclonescript.com
-| webmaster@9gagclonescript.com
+| http://www.best9gagclonescript.com
+| support@best9gagclonescript.com
 |
 |**************************************************************************************************
 |
 | By using this software you agree that you have read and acknowledged our End-User License 
-| Agreement available at http://www.9gagclonescript.com/eula.html and to be bound by it.
+| 
 |
-| Copyright (c) 9GagCloneScript.com. All rights reserved.
+| Copyright (c) best9gagclonescript.com. All rights reserved.
 |**************************************************************************************************/
 
 include("include/config.php");
@@ -33,14 +33,18 @@ if($PID > 0)
 		update_you_viewed($SID);
 	}
 	
-	$query="SELECT PID FROM posts WHERE PID!='".mysql_real_escape_string($pid)."' AND PID>'".mysql_real_escape_string($pid)."' AND active='1' order by PID asc limit 1";
+	$query="SELECT PID, story FROM posts WHERE PID!='".mysql_real_escape_string($pid)."' AND PID>'".mysql_real_escape_string($pid)."' AND active='1' order by PID asc limit 1";
 	$executequery=$conn->execute($query);
 	$next = $executequery->fields['PID'];
+	$nextstory = $executequery->fields['story'];
 	STemplate::assign('next',$next);
-	$query="SELECT PID FROM posts WHERE PID!='".mysql_real_escape_string($pid)."' AND PID<'".mysql_real_escape_string($pid)."' AND active='1' order by PID desc limit 1";
+	STemplate::assign('nextstory',$nextstory);
+	$query="SELECT PID, story FROM posts WHERE PID!='".mysql_real_escape_string($pid)."' AND PID<'".mysql_real_escape_string($pid)."' AND active='1' order by PID desc limit 1";
 	$executequery=$conn->execute($query);
 	$prev = $executequery->fields['PID'];
+	$prevstory = $executequery->fields['story'];
 	STemplate::assign('prev',$prev);
+	STemplate::assign('prevstory',$prevstory);
 }
 
 //TEMPLATES BEGIN

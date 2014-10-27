@@ -1,15 +1,15 @@
 <?php
 /**************************************************************************************************
 | 9Gag Clone Script
-| http://www.9gagclonescript.com
-| webmaster@9gagclonescript.com
+| http://www.best9gagclonescript.com
+| support@best9gagclonescript.com
 |
 |**************************************************************************************************
 |
 | By using this software you agree that you have read and acknowledged our End-User License 
-| Agreement available at http://www.9gagclonescript.com/eula.html and to be bound by it.
+| 
 |
-| Copyright (c) 9GagCloneScript.com. All rights reserved.
+| Copyright (c) best9gagclonescript.com. All rights reserved.
 |**************************************************************************************************/
 
 include("include/config.php");
@@ -39,7 +39,7 @@ if($csrf == "1" && $email!= "")
 				$from = $config['site_email'];
 				$subject = $lang['38'];
 				$sendmailbody = $lang['39'].",<br><br>";
-				$sendmailbody .= $lang['40']." $pwd<br><br>";
+				$sendmailbody .= $lang['40']." '$pwd' - without quotations <br><br>";
 				$sendmailbody .= stripslashes($lang['41']).stripslashes($lang['42'])."<a href='".$config['baseurl']."/login'>".stripslashes($lang['43'])."</a><br><br>";
 				$sendmailbody .= $lang['32'].",<br>".stripslashes($sendername);
 				mailme($sendto,$sendername,$from,$subject,$sendmailbody,$bcc="");
@@ -60,7 +60,7 @@ if($csrf == "1" && $email!= "")
 				$subject = $lang['33'];
 				$sendmailbody = stripslashes($un).",<br><br>";
 				$sendmailbody .= $lang['34']."<br>";
-				$sendmailbody .= $lang['35']." $pwd <br><br>";
+				$sendmailbody .= $lang['35']." '$pwd'' - without quotations <br><br>";
 				$sendmailbody .= $lang['32'].",<br>".stripslashes($sendername);
 				mailme($sendto,$sendername,$from,$subject,$sendmailbody,$bcc="");
 				// Send E-Mail End

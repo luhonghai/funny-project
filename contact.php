@@ -1,15 +1,15 @@
 <?php
 /**************************************************************************************************
 | 9Gag Clone Script
-| http://www.9gagclonescript.com
-| webmaster@9gagclonescript.com
+| http://www.best9gagclonescript.com
+| support@best9gagclonescript.com
 |
 |**************************************************************************************************
 |
 | By using this software you agree that you have read and acknowledged our End-User License 
-| Agreement available at http://www.9gagclonescript.com/eula.html and to be bound by it.
+| 
 |
-| Copyright (c) 9GagCloneScript.com. All rights reserved.
+| Copyright (c) best9gagclonescript.com. All rights reserved.
 |**************************************************************************************************/
 
 include("include/config.php");
@@ -65,7 +65,7 @@ if($_REQUEST['msgsub'] == "1")
 	else
 	{
 		// Send E-Mail Begin
-		$sendto = $config['contact_email'];
+		$sendto = $config['site_email'];
 		$sendername = $config['site_name'];
 		$from = $config['site_email'];
 		$sub = $lang['249'];
@@ -94,6 +94,17 @@ if($_REQUEST['msgsub'] == "1")
 $templateselect = "contact.tpl";
 $pagetitle = $lang['205'];
 STemplate::assign('pagetitle',$pagetitle);
+
+if ($config['channels'] == 1)
+{
+$cats = loadallchannels();
+STemplate::assign('allchannels',$cats);
+
+$c = loadtopchannels($cats);
+STemplate::assign('c',$c);
+}
+
+$_SESSION['location'] = "/contact/";
 
 //TEMPLATES BEGIN
 STemplate::assign('error',$error);

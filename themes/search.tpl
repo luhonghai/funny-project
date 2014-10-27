@@ -16,14 +16,20 @@
             <div id="entries-content" class="grid">
             	{section name=i loop=$posts}
                 <ul id="grid-col-1" class="col-{if $smarty.section.i.iteration GT 9}{math equation="x - 9" x=$smarty.section.i.iteration}{elseif $smarty.section.i.iteration GT 6}{math equation="x - 6" x=$smarty.section.i.iteration}{elseif $smarty.section.i.iteration GT 3}{math equation="x - 3" x=$smarty.section.i.iteration}{else}{$smarty.section.i.iteration}{/if}">
-                    <li class=" ">
-                        <a href="{$baseurl}/gag/{$posts[i].PID}" class="jump_stop">
+                   <li class=" ">
+                        <a href="{$baseurl}{$postfolder}{$posts[i].PID}/" class="jump_stop">
                             <div style="" class="thimage">
                             	{if $posts[i].youtube_key ne ""}
-                                <img src="{$baseurl}/images/youtube.jpg" alt="{$posts[i].story|stripslashes}" />
+                                <img src="http://img.youtube.com/vi/{$posts[i].youtube_key}/0.jpg" alt="{$posts[i].story|stripslashes}" style="max-width:215px" />
                                 {elseif $posts[i].fod_key ne ""}
-                                <img src="{$baseurl}/images/fod.jpg" alt="{$posts[i].story|stripslashes}" />
-                                {else}
+                                <img src="http://www.funnyordie.com/media/{$posts[i].fod_key}/thumbnail/large.jpg" alt="{$posts[i].story|stripslashes}" style="max-width:215px" />
+                                {elseif $posts[i].vfy_key != ""}
+								 <img src="{$baseurl}/images/9gag-logo-large.png" alt="{$posts[i].story|stripslashes}" />
+								{elseif $posts[i].vmo_key != ""}
+								<img src="{$baseurl}/images/9gag-logo-large.png" alt="{$posts[i].story|stripslashes}" />
+								{elseif $posts[i].txt != ""}
+								 <font size="3" color="black"><br><br><br>{$posts[i].story|stripslashes}</font>
+								{else}
                             	{if $posts[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}<img src="{$baseurl}/images/nsfw_thumb.jpg" alt="{$posts[i].story|stripslashes}" />{else}<img src="{$purl}/t/s-{$posts[i].pic}" alt="{$posts[i].story|stripslashes}" />{/if}
                                 {/if}
                             </div>

@@ -164,6 +164,16 @@
                                 
                                 
     						</li>
+							<li >
+        						<a href="members_newsletter.php" id="isoft_group_1" name="group_1" title="General Settings" class="tab-item-link ">
+                                    <span>
+                                        <span class="changed" title=""></span>
+                                        <span class="error" title=""></span>
+                                        Newsletter
+                                    </span>
+        						</a>
+                                <div id="isoft_group_1_content" style="display:none;"></div>
+    						</li>
     
 						</ul>
                         

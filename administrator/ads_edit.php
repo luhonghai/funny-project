@@ -1,15 +1,15 @@
 <?php
 /**************************************************************************************************
 | 9Gag Clone Script
-| http://www.9gagclonescript.com
-| webmaster@9gagclonescript.com
+| http://www.best9gagclonescript.com
+| support@best9gagclonescript.com
 |
 |**************************************************************************************************
 |
 | By using this software you agree that you have read and acknowledged our End-User License 
-| Agreement available at http://www.9gagclonescript.com/eula.html and to be bound by it.
+| 
 |
-| Copyright (c) 9GagCloneScript.com. All rights reserved.
+| Copyright (c) best9gagclonescript.com. All rights reserved.
 |**************************************************************************************************/
 
 include("../include/config.php");
@@ -21,7 +21,7 @@ $AID = intval($_REQUEST[AID]);
 if($_POST['submitform'] == "1")
 {
 	$details = $_POST[details];
-	$code = $_POST[code];
+	$adcode = $_POST[code];
 	$active = intval($_POST[active]);
 	
 	if($AID > 0)
@@ -30,13 +30,13 @@ if($_POST['submitform'] == "1")
 		{
 			$error = "Error: Please enter a description.";
 		}
-		elseif($code == "")
+		elseif($adcode == "")
 		{
 			$error = "Error: Please enter your advertisement code.";
 		}
 		else
 		{
-			$sql = "UPDATE advertisements set description='".mysql_real_escape_string($details)."', code='".mysql_real_escape_string($code)."', active='".mysql_real_escape_string($active)."' WHERE AID='".mysql_real_escape_string($AID)."'";
+			$sql = "UPDATE advertisements set description='".mysql_real_escape_string($details)."', code='".mysql_real_escape_string($adcode)."', active='".mysql_real_escape_string($active)."' WHERE AID='".mysql_real_escape_string($AID)."'";
 			$conn->execute($sql);
 			$message = "Advertisement Successfully Edited.";
 			Stemplate::assign('message',$message);

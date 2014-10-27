@@ -120,13 +120,8 @@
 	    	    	    		<tbody>
                                 	{section name=i loop=$results}
                                     <tr id="" >
-                                        <td class=" a-right ">
-                                        <center>
-                                        {$results[i].PID}{if $results[i].pic ne ""}<br />
-                                        <img src="{$purl}/t/s-{$results[i].pic}" />{/if}
-                                        </center>
-                                        </td>
-                                        <td class=" ">{$results[i].story|stripslashes|truncate:300:"...":true} (<b>{if $results[i].reason eq "1"}{$lang208}{elseif $results[i].reason eq "2"}{$lang209}{elseif $results[i].reason eq "3"}{$lang210}{elseif $results[i].reason eq "4"}{$lang211}{/if}</b>)</td>
+                                        <td class=" a-right ">{$results[i].PID}</td>
+                                        <td class=" ">{$results[i].story|stripslashes|truncate:300:"...":true}</td>
                                         <td class=" "><a href="{$adminurl}/bans_ip_add.php?add={$results[i].pip}" target="_blank">{$results[i].pip}</a></td>
                                         <td class=" ">{$results[i].time|date_format:"%b %e, %Y"}</td>
                                         <td class=" ">

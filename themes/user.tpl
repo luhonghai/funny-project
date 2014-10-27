@@ -17,10 +17,11 @@
         </div>
         <div class="main-filter with-topping">
             <ul class="content-type">            
-                <li><a class="current" href="{$baseurl}/user/{$p.username|stripslashes}"><strong>{$lang192}</strong> ({$posts|@count})</a></li>
+                <li><a class="current" href="{$baseurl}/user/{$p.username|stripslashes}"><strong>{$lang192}</strong> ({$totalposts})</a></li>
                 <li><a  href="{$baseurl}/user/{$p.username|stripslashes}/likes"><strong>{$lang193}</strong> ({$tl})</a></li>            
                 <li><a class="" href="{$baseurl}/user/{$p.username|stripslashes}/messages"><strong>{$lang194}</strong> (<fb:comments-count href="{$baseurl}/user/{$p.username|stripslashes}/messages"></fb:comments-count>)</a></li>
             </ul>
+			{if $safemode eq "1"}
         	{if $smarty.session.USERID ne ""}
                 {if $smarty.session.FILTER eq "1"}
                 <a class="safe-mode-switcher on" href="{$baseurl}/safe?m={$eurl}">&nbsp;</a>
@@ -30,6 +31,7 @@
             {else}
             	<a class="safe-mode-switcher on" href="{$baseurl}/login">&nbsp;</a>
             {/if}
+			{/if}
         </div>
         <div id="content" listPage="">
             <div id="view-info" class="list-tips">
@@ -43,6 +45,18 @@
                     {include file="posts_bit.tpl"}
                     {/section}                    
                 </ul>
+            </div>
+			<div id="paging-buttons" class="paging-buttons">
+            	{if $tpp ne ""}
+                <a href="{$baseurl}/user/{$p.username|stripslashes}?page={$tpp}" class="previous">&laquo; {$lang166}</a>
+                {else}
+                <a href="#" onclick="return false;" class="previous disabled">&laquo; {$lang166}</a>
+                {/if}
+                {if $tnp ne ""}
+                <a href="{$baseurl}/user/{$p.username|stripslashes}?page={$tnp}" class="older">{$lang167} &raquo;</a>
+                {else}
+                <a href="#" onclick="return false;" class="older disabled">{$lang167} &raquo;</a>
+                {/if}
             </div>
         </div>
     </div>

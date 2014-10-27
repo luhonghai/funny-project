@@ -1,15 +1,15 @@
 <?php
 /**************************************************************************************************
 | 9Gag Clone Script
-| http://www.9gagclonescript.com
-| webmaster@9gagclonescript.com
+| http://www.best9gagclonescript.com
+| support@best9gagclonescript.com
 |
 |**************************************************************************************************
 |
 | By using this software you agree that you have read and acknowledged our End-User License 
-| Agreement available at http://www.9gagclonescript.com/eula.html and to be bound by it.
+| 
 |
-| Copyright (c) 9GagCloneScript.com. All rights reserved.
+| Copyright (c) best9gagclonescript.com. All rights reserved.
 |**************************************************************************************************/
 $lskip = "1";
 include("include/config.php");
@@ -52,7 +52,19 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			$query="UPDATE members SET username='".mysql_real_escape_string($user_username)."', password='".mysql_real_escape_string($pw)."', pwd='".mysql_real_escape_string($password)."' WHERE USERID='".mysql_real_escape_string($SID)."'";
 			$result=$conn->execute($query);
 			$_SESSION['USERNAME']=$user_username;
-			header("Location:$config[baseurl]/settings");exit;
+					$redirect = $_SESSION['location'];
+					if($redirect == "")
+					{
+						if ( $config[regredirect] == 1)
+						{header("Location:$config[baseurl]/index.php".$addlang);exit;}
+						else
+						{header("Location:$config[baseurl]/settings".$addlang);exit;}
+					}
+					else
+					{
+						header("Location:".$config[baseurl].$redirect);exit;
+					}
+					$_SESSION['location'] = "";
 		}
 	}
 }
