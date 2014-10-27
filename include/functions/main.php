@@ -658,26 +658,6 @@ function verify_login_admin()
 			header("location:$config[adminurl]/index.php");
             exit;
 		}
-
-$t = $config['baseurl'];
-$e1 = md5($t);
-$e2 = md5($e1);
-$r1 = substr($e2, 24, 8);
-$r2 = substr($e2, 8, 8);
-$e3 = md5($r2."darsh");
-$r3 = substr($e3, 16, 12);
-$e4 = md5($r3."darsh");
-$r4 = substr($e4, 22, 10);
-$l1 = $r1."-".$r2."-".$r3."-".$r4;
-$youtube_url = $config['license'];
-$position       = 6;
-$remove_length  = strlen($youtube_url)-$position;
-$video_id       = substr($youtube_url, -$remove_length, 41);
-if ($l1 != $video_id)
-{
-header("Location:http://bit.ly/OGbfWH");exit;
-}
-		
 }
 
 function insert_strip_special2($a)
