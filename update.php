@@ -24,7 +24,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
     echo 'Detect push event.';
     $data = json_decode(file_get_contents('php://input'),true);
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
-        $command = 'cd '.$config['basedir'].';git pull origin master 2>&1';
+        $command = 'cd '.$config['basedir'].';git reset HEAD --hard;git pull origin master 2>&1';
         $handle = popen($command, 'r');
         while ($line = fread($handle, 100)){
             echo $line;
