@@ -11,7 +11,7 @@ RewriteRule ^login$ login.php
 RewriteRule ^delete-account$ delete-account.php
 RewriteRule ^confirmemail$ confirmemail.php
 RewriteRule ^submit$ submit.php
-RewriteRule ^gag/([^/.]+)?/?(.*)$ view.php?pid=$1
+RewriteRule ^pictures/([^/.]+)?/?(.*)$ view.php?pid=$1
 RewriteRule ^safe$ safe.php
 RewriteRule ^hot$ hot.php
 RewriteRule ^thumbs$ thumbs.php
