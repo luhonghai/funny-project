@@ -14,7 +14,7 @@
 
 include("config.php");
 $mobileurl = $config['mobileurl'];
-STemplate::assign('mobileurl',$mobileurl);
+
 $maindir = $config['maindir'];
 include($config['maindir']."/include/config.php");
 
@@ -918,7 +918,9 @@ STemplate::assign('allchannels',$cats);
 $_SESSION['location'] = "/submit";
 
 //TEMPLATES BEGIN
+
 STemplate::setTplDir($config['mobiledir']."/themes");
+STemplate::assign('mobileurl',$mobileurl);
 STemplate::assign('menu',3);
 STemplate::assign('error',$error);
 STemplate::assign('message',$message);
