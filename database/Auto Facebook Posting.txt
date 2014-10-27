@@ -1,0 +1,23 @@
+1- You will need to activate this application in Facebook
+https://apps.facebook.com/rssgraffiti
+
+2- Click on "Add new Publishing Plan"
+Enter the name and click Create
+
+3- At sources Section click on "Add New"
+Then Enter the RSS feed URL
+Example : http://ultimate.best9gagclonescript.com/rss.php
+Click on Add Source
+
+4- Change these values
+Update Frequency to be : As soon as possible
+Maximum Posts Per Update : 33 posts
+Then click save
+
+5- At target section , click on Add new
+Choose Target : Choose your Page
+Publish on behalf of : Choose your page name (Recommended)
+
+Then click on save settings
+
+6- Turn the feeding ON but clicking on OFF button

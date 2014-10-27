@@ -1,0 +1,21 @@
+1- Create a new account here :
+http://twitterfeed.com/users/new
+
+2- Sign in using your new account and click on "create new feed"
+Enter "Feed name" and "Feed URL" should be like this
+Example : http://ultimate.best9gagclonescript.com/rss.php
+Then click on test RSS
+
+3- Click on advanced settings and change
+post up to "5" new update(s) at a time. 
+Then click on "Continue to step 2"
+
+4- Under "Available Services" click on twitter
+Then click on "Authenticate Twitter"
+Twitter website will ask you for username and password and your permission to let the app work.
+Agree and approve the app.
+
+5- You'll be redirected back to twittterfeed.com
+Choose "Authenticated Twitter Account" and click on "Create Service"
+
+6- Click on "All done" to activate the feed
