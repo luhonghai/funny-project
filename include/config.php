@@ -58,6 +58,18 @@ $config[$field] = $rsc->fields['value'];
 STemplate::assign($field, strip_mq_gpc($config[$field]));
 @$rsc->MoveNext();
 }}
+if($config['mobilemode'] == "1" && $config['m_url'] != "")
+{
+	if($mobile != "1")
+	{
+		include("mobile.php");
+		$mcheck = is_md();
+		if($mcheck != "")
+		{
+			header("Location: ".$config['m_url'].$_SERVER['REQUEST_URI']);exit;
+		}
+	}
+}
 STemplate::assign('baseurl',       $config['baseurl']);
 STemplate::assign('basedir',       $config['basedir']);
 STemplate::assign('adminurl',       $config['adminurl']);
@@ -250,7 +262,7 @@ if($config['enable_fc'] == "1")
 		$code = $_REQUEST['code'];
 		if($code != "")
 		{
-			$my_url = $config['baseurl']."/";
+			if($mobile == "1"){$my_url = $config['m_url']."/";}else{$my_url = $config['baseurl']."/";}
 			$token_url = "https://graph.facebook.com/oauth/access_token?"
 			. "client_id=" . $A . "&redirect_uri=" . urlencode($my_url)
 			. "&client_secret=" . $B . "&code=" . $code;

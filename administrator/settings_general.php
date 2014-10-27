@@ -18,7 +18,7 @@ verify_login_admin();
 
 if($_POST['submitform'] == "1")
 {
-	$arr = array("site_name", "contact_email", "site_email", "items_per_page", "quota", "mtrend", "approve_stories", "myes", "mno", "twitter", "TC", "TWITTER_APP_ID", "TWITTER_APP_SECRET", "FACEBOOK_APP_ID", "FACEBOOK_SECRET", "FACEBOOK_PROFILE", "FACEBOOK_ADMIN", "lwm", "twm" , "wmfont" , "fsize" , "AUTOSCROLL" , "displaywm", "thumbs", "safemode", "ganalytics", "vupload", "RSS", "fixenabled", "topgags", "trendingenabled", "voteforvisitor", "SEO", "SITEMAP", "truncate", "autoFBpost", "recommended", "channels", "rhome", "wmhieght", "blackr", "blackb", "blackg", "whiter", "whiteb", "whiteg", "regedirect", "index", "postfolder", "up_points", "view_points", "share1", "share2", "NSFWADS", "website_name", "topposts", "populargags" );
+	$arr = array("site_name", "contact_email", "site_email", "items_per_page", "quota", "mtrend", "approve_stories", "myes", "mno", "twitter", "TC", "TWITTER_APP_ID", "TWITTER_APP_SECRET", "FACEBOOK_APP_ID", "FACEBOOK_SECRET", "FACEBOOK_PROFILE", "FACEBOOK_ADMIN", "lwm", "twm" , "wmfont" , "fsize" , "AUTOSCROLL" , "displaywm", "thumbs", "safemode", "ganalytics", "vupload", "RSS", "fixenabled", "topgags", "trendingenabled", "voteforvisitor", "SEO", "SITEMAP", "truncate", "autoFBpost", "recommended", "channels", "rhome", "mobilemode", "m_url", "mobile_per_page", "wmhieght", "blackr", "blackb", "blackg", "whiter", "whiteb", "whiteg", "regedirect", "index", "postfolder", "up_points", "view_points", "share1", "share2", "NSFWADS", "website_name", "topposts", "populargags" );
 	foreach ($arr as $value)
 	{
 		$sql = "update config set value='".mysql_real_escape_string($_POST[$value])."' where setting='$value'";

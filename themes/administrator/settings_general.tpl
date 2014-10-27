@@ -600,7 +600,35 @@
                                                         <td class="scope-label">[ENABLE / DISABLE TOP POSTS PAGE]</td>
                                                         <td><small></small></td>
                                                     </tr>
-													
+													<tr class="hidden">
+	<td class="label"><label for="status">Enable Mobile Module </label></td>
+	<td class="value">
+		<select id="mobilemode" name="mobilemode" class=" required-entry required-entry select" type="select">
+		<option value="1" {if $mobilemode eq "1"}selected{/if}>Enabled</option>
+		<option value="0" {if $mobilemode eq "0"}selected{/if}>Disabled</option>
+		</select>
+	</td>
+	<td class="scope-label">[REDIRECT USERS ON MOBILE DEVICES AUTOMATICALLY TO MOBILE URL]</td>
+	<td><small></small></td>
+</tr>
+
+<tr class="hidden">
+	<td class="label"><label for="status">Mobile URL  </label></td>
+	<td class="value">
+		<input id="m_url" name="m_url" value="{$m_url}" class=" required-entry required-entry input-text" type="text"/>
+	</td>
+	<td class="scope-label">[YOUR MOBILE WEBSITE URL]</td>
+	<td><small></small></td>
+</tr>
+
+<tr class="hidden">
+	<td class="label"><label for="status">Num. posts/page in Mobile Module  </label></td>
+	<td class="value">
+		<input id="mobile_per_page" name="mobile_per_page" value="{$mobile_per_page}" class=" required-entry required-entry input-text" type="text"/>
+	</td>
+	<td class="scope-label">[YOUR MOBILE WEBSITE URL]</td>
+	<td><small></small></td>
+</tr>
                                                 </tbody>
                                                 </table>
                                             </div>
