@@ -14,6 +14,7 @@
 
 include("config.php");
 $mobileurl = $config['mobileurl'];
+STemplate::assign('mobileurl',$mobileurl);
 $maindir = $config['maindir'];
 include($config['maindir']."/include/config.php");
 
