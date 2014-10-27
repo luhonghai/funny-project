@@ -8,6 +8,7 @@ RewriteRule ^gag/([^/.]+)?/?(.*)$ view.php?pid=$1
 RewriteRule ^login$ login.php
 RewriteRule ^logout$ logout.php
 RewriteRule ^search$ search.php
+RewriteRule ^submit$ submit.php
 </IfModule>
 
 <IfModule mod_security.c> 
