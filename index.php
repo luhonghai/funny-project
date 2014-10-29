@@ -1,13 +1,12 @@
 <?php
-date_default_timezone_set('Asia/Bangkok');
 include("include/config.php");
 include("include/functions/import.php");
 $thebaseurl = $config['baseurl'];
 
-if ( $config[index] == 1)
-{header("Location:$config[baseurl]/trending".$addlang);exit;}
-elseif ( $config[index] == 2)
-{header("Location:$config[baseurl]/vote".$addlang);exit;}
+//if ( $config[index] == 1)
+//{header("Location:$config[baseurl]/trending".$addlang);exit;}
+//elseif ( $config[index] == 2)
+//{header("Location:$config[baseurl]/vote".$addlang);exit;}
 
 
 if($_SESSION['viewtype'] == "" && $_REQUEST['view'] == "")

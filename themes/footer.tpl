@@ -115,11 +115,6 @@
 </div>
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 <script type="text/javascript" src="{$baseurl}/fancybox/lib/jquery-1.9.1.min.js"></script>
-{if $showlike == 1}
-<div style="z-index:9998 ;overflow: hidden; width: 30px; height: 20px; position: absolute;-moz-opacity:0.0; -khtml-opacity: 0.0; opacity: 0.0 !important;" id="icontainerpage">
-	<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{$pageid}&amp;width=24&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=494974433924953" scrolling="no" frameborder="0" style="border:none;   position: absolute;margin-top: -34px;margin-left: -90px;" allowTransparency="true"  id="fbframepage" name="fbframepage"></iframe>
- </div>
-{/if}
 
 {if $viewpage eq "1"}
 {include file='js4.tpl'}

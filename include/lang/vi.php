@@ -1,4 +1,4 @@
-<?
+<?php
 $lang = array();
 
 $lang['0'] =  "Tạo tên đăng nhập và mật khẩu.";

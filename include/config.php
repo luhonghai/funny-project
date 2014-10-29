@@ -1,4 +1,5 @@
 ﻿<?php
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 if(!headers_sent()) { session_start(); }
 $config = array();
 
@@ -6,8 +7,8 @@ $config = array();
 $config['basedir']     =  '/Volumes/Data/OSX/luhonghai/Sites';   //Đường đẫn đến thư mục chứa mã nguồn
 $config['baseurl']     =  'http://dev.com';   //Liên kết đến thư mục chứa mã nguồn
 $config['domain']      =  'http://www.dev.com/';   //Domain của website
-$DBTYPE     = 'mysql';
-$DBHOST     = 'localhost';   //Tên máy chủ cơ sở dữ liệu
+$DBTYPE     = 'mysqli';
+$DBHOST     = 'localhost:3306';   //Tên máy chủ cơ sở dữ liệu
 $DBUSER     = 'luhonghai';   //Tên đăng nhập cơ sở dữ liệu
 $DBPASSWORD = 'hurricane';   //Mật khẩu kết nối cơ sở dữ liệu
 $DBNAME     = 'trollvd';   //Tên cơ sở dữ liệu
@@ -61,9 +62,9 @@ function strip_mq_gpc($arg)
     }
 }
 
-
 $conn = &ADONewConnection($DBTYPE);
 $conn->PConnect($DBHOST, $DBUSER, $DBPASSWORD, $DBNAME);
+$conn->SetCharSet('utf8');
 @mysql_query("SET NAMES 'UTF8'");
 $sql = "SELECT * from config";
 $rsc = $conn->Execute($sql);

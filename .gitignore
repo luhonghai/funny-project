@@ -1,5 +1,9 @@
 .idea/
 temporary/
+temporary/*
 images/avatar/
+images/avatar/*
+pdata/
+pdata/*
 .DS_Store
 error_log
