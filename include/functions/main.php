@@ -632,7 +632,6 @@ function update_you_viewed($a)
 		$query = "UPDATE members SET youviewed = youviewed + 10 $addme WHERE USERID='".mysql_real_escape_string($a)."'";
         $executequery=$conn->execute($query);
 }
-//$l = $config['license'];
 
 function session_verification()
 {
@@ -656,31 +655,6 @@ function insert_get_static($var)
 		$returnme = strip_mq_gpc($returnme);
 		echo "$returnme";
 }
-
-function script_status($var1,$var2)
-{
-$t = $var1;
-$e0 = md5($t."qwerty");
-$e1 = substr($e0, -32, 8);
-$r1 = substr($e1, -3);
-$e2 = md5($e1."qwerty");
-$r2 = substr($e2, -32, 8);
-$e3 = md5($e2."qwerty");
-$r3 = substr($e3, -32, 8);
-$e4 = md5($e3."qwerty");
-$r4 = substr($e4, -32, 8);
-$l1 = $r1."-".$r2."-".$r3."-".$r4;
-$youtube_url = $var2;
-$position       = 5;
-$remove_length  = strlen($youtube_url)-$position;
-$video_id       = substr($youtube_url, -$remove_length, 35);
-/*if ($l1 != $video_id)
-{
-halt();
-}*/
-}
-
-script_status($u,$l);
 
 function verify_login_admin()
 {
@@ -706,25 +680,6 @@ function verify_login_admin()
 			header("location:$config[adminurl]/index.php");
             exit;
 		}
-$t = $config['baseurl'];
-$e0 = md5($t."qwerty");
-$e1 = substr($e0, -32, 8);
-$r1 = substr($e1, -3);
-$e2 = md5($e1."qwerty");
-$r2 = substr($e2, -32, 8);
-$e3 = md5($e2."qwerty");
-$r3 = substr($e3, -32, 8);
-$e4 = md5($e3."qwerty");
-$r4 = substr($e4, -32, 8);
-$l1 = $r1."-".$r2."-".$r3."-".$r4;
-//$youtube_url = $config['license'];
-$position       = 5;
-$remove_length  = strlen($youtube_url)-$position;
-$video_id       = substr($youtube_url, -$remove_length, 35);
-//if ($l1 != $video_id)
-//{
-//header("Location:http://tinyurl.com/lr4ovnu");exit;
-//}
 }
 
 function insert_return_youtube($a)
