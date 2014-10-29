@@ -1,4 +1,4 @@
 .idea/
 temporary/
-pdata/**.png
-images/membersprofilepic/
+images/avatar/
+.DS_Store
