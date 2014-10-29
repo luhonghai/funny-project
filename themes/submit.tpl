@@ -13,6 +13,9 @@
 					{if $vupload eq "1"}
                 	<li class="tab_video "><a class="video" href="{$baseurl}/submit?t=v">{$lang101}</a></li>
 					{/if}
+					{if $tupload eq "1"}
+			<li class="tab_text "><a class="text" href="{$baseurl}/submit?t=t">{$lang289}</a></li>
+					{/if}
                 </ul>
             </div>
         
@@ -59,18 +62,31 @@
                     </div>
                     <div class="field">
                         <label>
-                            <h4>{$lang113}<span>({$lang114})</span></h4>
+                            <h4>{$lang113}<span> ({$lang114})</span></h4>
                             <input id="photo_tag_input" type="text" class="text tag_input tipped" name="tags" value="" placeholder="tag 1, tag 2, tag 3, tag 4, tag 5"/>
                             <p class="info" style="visibility:hidden">{$lang118}</p>
                         </label>
                     </div>
                     <div class="field">
                         <label>
-                            <h4>{$lang115}<span>({$lang114})</span></h4>
+                            <h4>{$lang115}<span> ({$lang114})</span></h4>
                             <input type="text" class="text tipped" name="source" value="" maxlength="300"/>
                             <p class="info" style="visibility:hidden">{$lang116}</p>
-                        </label>                    
+                        </label>
                     </div>
+                {if $lwm eq "1"}
+                <div class="field">
+
+                    <h4>{$lang288}</h4>
+                    <input id="traitren" type="radio" name="watermark" value="1"><label style="display:inline;" for="traitren"> Trái Trên</label>
+                    <input id="phaitren" type="radio" name="watermark" value="2" style="margin-left:15px;"><label style="display:inline;" for="phaitren"> Ph&#7843;i Trên</label>
+                    <input id="giua" type="radio" name="watermark" value="3" style="margin-left:15px;"><label style="display:inline;" for="giua">Gi&#7919;a</label>
+                    <input id="traiduoi" type="radio" name="watermark" value="4" style="margin-left:15px;"><label style="display:inline;" for="traiduoi"> Trái D&#432;&#7899;i</label>
+                    <input id="phaiduoi" type="radio" name="watermark" value="5" style="margin-left:15px;" checked=""><label style="display:inline;" for="phaiduoi"> Ph&#7843;i d&#432;&#7899;i</label>
+
+                </div>
+
+                {/if}
                     <hr />
 					{if $safemode eq "1"}
                     <div class="field checkbox">
@@ -78,10 +94,9 @@
                     	<input id="submit-nsfw" type="checkbox" class="checkbox" name="nsfw" value="1" />{$lang117}</label>
                     </div>
 					{/if}
+
                 </form>
-            </div>
-        
-        
+            </div>       
             <div class="actions">
                 <ul class="buttons">
                     <li class="loading-btn" style="visibility:hidden"><a class="button loading"></a></li>

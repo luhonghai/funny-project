@@ -1,16 +1,4 @@
 <?php
-/**************************************************************************************************
-| 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) best9gagclonescript.com. All rights reserved.
-|**************************************************************************************************/
 
 include("include/config.php");
 include("include/functions/import.php");
@@ -52,15 +40,15 @@ else
 
 	$cname2 = cleanit($_REQUEST['cname']);
 	STemplate::assign('cname2',$cname2);
-	
+
 	$query1 = "select * from channels"; 
 	$results1=$conn->execute($query1);
 	$cnames = $results1->getrows();
-$cnamescount = count($cnames);
-for ($i = 0; $i < $cnamescount; $i++) {
-	if ( makeseo($cnames[$i]["cname"]) == $cname2)
-	{$CID = $cnames[$i]["CID"];}
-}
+	$cnamescount = count($cnames);
+	for ($i = 0; $i < $cnamescount; $i++) {
+		if ( makeseo($cnames[$i]["cname"]) == $cname2)
+		{$CID = $cnames[$i]["CID"];}
+	}
 	
 	$queryc = "select CID, cname from channels where CID='".mysql_real_escape_string($CID)."'"; 
 	$resultsc=$conn->execute($queryc);
@@ -104,10 +92,23 @@ if ($totalvideos > 0)
 
 if ($config['rhome'] == 1)
 {
-$queryr = "SELECT A.*, B.username FROM posts A, members B WHERE A.USERID=B.USERID AND A.PID!='".mysql_real_escape_string($pid)."' AND A.active='1' AND A.youtube_key='' AND A.fod_key='' AND A.vfy_key='' AND A.vmo_key='' ORDER BY rand() desc limit 3";
+$queryr = "SELECT A.*, B.username FROM posts A, members B WHERE A.USERID=B.USERID AND A.PID!='".mysql_real_escape_string($pid)."' AND A.active='1' ORDER BY rand() desc limit 3";
 $executequeryr = $conn->execute($queryr);
 $r =  $executequeryr->getarray();
 STemplate::assign('r',$r);
+	$purlArray = array();
+	foreach ($r as $value) {
+	if (strpos($value['date_added'], '2013') !== false) {
+		$purl1 = $config['baseurl'].'/pdata';
+	} else {
+		$patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
+		$replace = array ('\1\2/\3/\4', '$\1 =');
+		$date1 = preg_replace($patterns, $replace, $value['date_added']);
+		$purl1 = $config['baseurl'].'/pdata'.'/'.$date1;
+	}
+	array_push($purlArray, $purl1);
+	STemplate::assign('purlR', $purlArray);	
+	}
 }
 
 
@@ -147,11 +148,10 @@ if ($config['topgags'] > 0)
 	if ($config['topgags'] == 2){$ctime = $ctime * 7;}
 	if ($config['topgags'] == 3){$ctime = $ctime * 30;}
 	$utime = time() - $ctime;
-	$query3 = "SELECT * FROM posts WHERE time_added>='$utime' AND active='1' AND youtube_key='' AND fod_key='' AND vfy_key='' AND vmo_key='' AND nsfw='0' order by favclicks desc  limit 5"; 
+	$query3 = "SELECT * FROM posts WHERE time_added>='$utime' AND active='1' AND pic!='' AND nsfw='0' order by favclicks desc  limit 5";
 	$executequery3 = $conn->execute($query3);
 	$topgags = $executequery3->getrows();
-}	
-
+}
 
 if ($config['channels'] == 1)
 {
@@ -167,6 +167,19 @@ $_SESSION['location'] = "/channels/".$cname2."/?page=".$currentpage;
 //TEMPLATES BEGIN
 STemplate::assign('menu',5);
 STemplate::assign('posts',$posts);
+$purlArray = array();
+	foreach ($posts as $value) {
+	if (strpos($value['date_added'], '2013') !== false) {
+		$purl1 = $config['baseurl'].'/pdata';
+	} else {
+		$patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
+		$replace = array ('\1\2/\3/\4', '$\1 =');
+		$date1 = preg_replace($patterns, $replace, $value['date_added']);
+		$purl1 = $config['baseurl'].'/pdata'.'/'.$date1;
+	}
+	array_push($purlArray, $purl1);
+	STemplate::assign('purl', $purlArray);	
+	}
 STemplate::assign('topgags',$topgags);
 STemplate::display('header.tpl');
 STemplate::display($templateselect);

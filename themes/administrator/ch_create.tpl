@@ -3,26 +3,26 @@
 				<div class="columns ">
                 
 					<div class="side-col" id="page:left">
-    					<h3>Channels</h3>
+    					<h3>Kênh</h3>
 						
                         <ul id="isoft" class="tabs">
     						<li >
-        						<a href="ch_manage.php" id="isoft_group_1" name="group_1" title="Channels" class="tab-item-link ">
+        						<a href="ch_manage.php" id="isoft_group_1" name="group_1" title="Danh Sách Kênh" class="tab-item-link ">
                                     <span>
                                         <span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Browse Channels
+                                        Danh Sách Kênh
                                     </span>
         						</a>
                                 <div id="isoft_group_1_content" style="display:none;"></div>
     						</li>
                             
                             <li >
-                                <a href="ch_create.php" id="isoft_group_2" name="group_2" title="Create Channels" class="tab-item-link">
+                                <a href="ch_create.php" id="isoft_group_2" name="group_2" title="Tạo Kênh" class="tab-item-link">
                                 	<span>
                                     	<span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Create Channels
+                                        Tạo Kênh
                                     </span>
                                 </a>
                                 
@@ -46,7 +46,7 @@
                                 <div id="isoft_group_2_content" style="display:none;">
                                 	<div class="entry-edit">
                                         <div class="entry-edit-head">
-                                            <h4 class="icon-head head-edit-form fieldset-legend">Create Standard Ad</h4>
+                                            <h4 class="icon-head head-edit-form fieldset-legend">Tạo Kênh</h4>
                                             <div class="form-buttons">
 
                                             </div>
@@ -57,11 +57,11 @@
                                             	<table cellspacing="0" class="form-list">
                                                 <tbody>
                                                 	<tr class="hidden">
-                                                        <td class="label"><label for="name">Channel Name </label></td>
+                                                        <td class="label"><label for="name">Tên kênh </label></td>
                                                         <td class="value">
                                                         	<input id="cname" name="cname" value="{$smarty.request.cname|stripslashes}" class=" required-entry required-entry input-text" type="text"/>
                                                         </td>
-                                                        <td class="scope-label">[PLEASE ENTER NEW Channel NAME]</td>
+                                                        <td class="scope-label">[TÊN KÊNH MUỐN TẠO]</td>
                                                             <td><small></small></td>
                                                     </tr>
                                                 </tbody>
@@ -114,9 +114,9 @@
                             </div>
 
                             <div class="content-header">
-                               <h3 class="icon-head head-products">Channels - Create Standard Ad</h3>
+                               <h3 class="icon-head head-products">Kênh - Tạo Kênh</h3>
                                <p class="content-buttons form-buttons">
-                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable save" onclick="document.main_form.submit();" style=""><span>Submit</span></button>			
+                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable save" onclick="document.main_form.submit();" style=""><span>Xác Nhận</span></button>			
                                 </p>
                             </div>
                             

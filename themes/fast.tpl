@@ -25,9 +25,9 @@ display:none;
 <body id="page-post" style="margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% black;">
 <div id="fb-root"></div>
 {if $enable_fc eq "1"}
-{if $smarty.session.language eq "ar"}
+{if $smarty.session.language eq "vi"}
 {literal}
-<script src="http://connect.facebook.net/ar_AR/all.js"></script>
+<script src="http://connect.facebook.net/vi_VN/all.js"></script>
 <script>
   FB.init({appId: '{/literal}{$FACEBOOK_APP_ID}{literal}', status: true,
            cookie: true, xfbml: true});
@@ -66,7 +66,7 @@ if(character ==37){$('#load-prev').click();}
 <input id="fb-app-id" type="hidden" value="{$FACEBOOK_APP_ID}"></input>
 <div id="tmp-img" style="display:none"></div> 
 <div id="logo"><a href="{$baseurl}"></a></div>
-<div><a id="close" href="javascript:void(0);" style="text-decoration: none;">× Back to normal</a></div>
+<div><a id="close" href="javascript:void(0);" style="text-decoration: none;">× Quay lại</a></div>
 <div class="left">
 	<a id="load-prev" class="fast-flip prev-post" href="javascript:void(0);"></a>
 </div>
@@ -106,7 +106,7 @@ if(character ==37){$('#load-prev').click();}
     	<fb:comments colorscheme="dark" width="380" num_posts="5" href="{$baseurl}{$postfolder}{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}"></fb:comments>
     </div>
 </div>
-<div class="hint">Tip: Use your keyboard left and right arrow keys to navigate!</div>
+<div class="hint">Mẹo: Dùng phím điều hướng trái và phải để xem nhanh hình ảnh!</div>
 {literal}
 <script type="text/javascript">
 $.cookie('history',0);

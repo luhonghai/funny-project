@@ -1,16 +1,4 @@
 <?php
-/**************************************************************************************************
-| 9Gag Clone Script
-| http://www.9gag-clone-script.com
-| support@9gag-clone-script.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) 9gag-clone-script.com. All rights reserved.
-|**************************************************************************************************/
 
 require_once('twitteroauth/twitteroauth.php');
 include("include/config.php");

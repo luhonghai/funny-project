@@ -1,5 +1,0 @@
-1- Download .htaccess.txt file from /pdata/ folder.
-2- Modify the values the domain name to your domain name - Around line 3 :
-RewriteCond %{HTTP_REFERER} !^http://(www\\.)?yoursite\\.com [NC]
-3- Upload .htaccess.txt file again to the server.
-4- Remove .txt from the file name so that it will be only .htaccess

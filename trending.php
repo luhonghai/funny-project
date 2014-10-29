@@ -1,16 +1,4 @@
 <?php
-/**************************************************************************************************
-| 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) best9gagclonescript.com. All rights reserved.
-|**************************************************************************************************/
 
 include("include/config.php");
 include("include/functions/import.php");
@@ -86,10 +74,23 @@ if ($totalvideos > 0)
 	
 if ($config['rhome'] == 1)
 {
-$queryr = "SELECT A.*, B.username FROM posts A, members B WHERE A.USERID=B.USERID AND A.PID!='".mysql_real_escape_string($pid)."' AND A.active='1' AND A.youtube_key='' AND A.fod_key='' AND A.vfy_key='' AND A.vmo_key='' ORDER BY rand() desc limit 3";
+$queryr = "SELECT A.*, B.username FROM posts A, members B WHERE A.USERID=B.USERID AND A.PID!='".mysql_real_escape_string($pid)."' AND A.active='1' ORDER BY rand() desc limit 3";
 $executequeryr = $conn->execute($queryr);
 $r =  $executequeryr->getarray();
 STemplate::assign('r',$r);
+	$purlArray = array();
+	foreach ($r as $value) {
+	if (strpos($value['date_added'], '2013') !== false) {
+		$purl1 = $config['baseurl'].'/pdata';
+	} else {
+		$patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
+		$replace = array ('\1\2/\3/\4', '$\1 =');
+		$date1 = preg_replace($patterns, $replace, $value['date_added']);
+		$purl1 = $config['baseurl'].'/pdata'.'/'.$date1;
+	}
+	array_push($purlArray, $purl1);
+	STemplate::assign('purlR', $purlArray);	
+	}
 }
 	
 	$beginning=$pagingstart+1;
@@ -127,6 +128,19 @@ STemplate::assign('r',$r);
 $eurl = base64_encode("/trending?page=".$currentpage);
 STemplate::assign('eurl',$eurl);
 STemplate::assign('posts',$posts);
+	$purlArray = array();
+	foreach ($posts as $value) {
+	if (strpos($value['date_added'], '2013') !== false) {
+		$purl1 = $config['baseurl'].'/pdata';
+	} else {
+		$patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
+		$replace = array ('\1\2/\3/\4', '$\1 =');
+		$date1 = preg_replace($patterns, $replace, $value['date_added']);
+		$purl1 = $config['baseurl'].'/pdata'.'/'.$date1;
+	}
+	array_push($purlArray, $purl1);
+	STemplate::assign('purl', $purlArray);	
+	}
 $templateselect = "trending.tpl";
 
 if ($_SESSION['viewtype'] == "list")
@@ -137,14 +151,14 @@ if ($_SESSION['viewtype'] == "list")
 	{
 	$templateselect = "ttrending.tpl";
 	}
-	
+
 if ($config['topgags'] > 0)
 {
 	$ctime = 24 * 60 * 60;
 	if ($config['topgags'] == 2){$ctime = $ctime * 7;}
 	if ($config['topgags'] == 3){$ctime = $ctime * 30;}
 	$utime = time() - $ctime;
-	$query3 = "SELECT * FROM posts WHERE time_added>='$utime' AND active='1' AND youtube_key='' AND fod_key='' AND vfy_key='' AND vmo_key='' AND nsfw='0' order by favclicks desc  limit 5"; 
+	$query3 = "SELECT * FROM posts WHERE time_added>='$utime' AND active='1' AND pic!='' AND nsfw='0' order by favclicks desc  limit 5";
 	$executequery3 = $conn->execute($query3);
 	$topgags = $executequery3->getrows();
 }
@@ -162,10 +176,11 @@ $_SESSION['location'] = "/trending?page=".$currentpage;
 
 //TEMPLATES BEGIN
 STemplate::assign('pagetitle', $lang['173']);
-STemplate::assign('menu',1);
+STemplate::assign('menu',2);
 STemplate::assign('topgags',$topgags);
 STemplate::display('header.tpl');
 STemplate::display($templateselect);
 STemplate::display('footer.tpl');
 //TEMPLATES END
 ?>
+<script src="/shoutcloud/ShoutCloud.js"></script> 

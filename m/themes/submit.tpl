@@ -9,13 +9,8 @@
                         <input id="sitebar_search_header" type="text" class="search search_input" name="query" tabindex="1" placeholder="{$lang189}"/>
                     </form>
         </div>
-		<a href='{$mobileurl}/submit' class='submit'>submit</a>
     </div>
-    <div class="post-leaderboard-ads">
-    	<center>
-    	{insert name=get_advertisement AID=1}
-        </center>
-    </div>
+
 {if $error ne ""}
 <p class="form-message error">{$error}</p>
 {elseif $message ne ""}
@@ -77,14 +72,14 @@
                     </div>
                     <div class="field">
                         <label>
-                            <h4>{$lang113}<span>({$lang114})</span></h4>
+                            <h4>{$lang113}<span> ({$lang114})</span></h4>
                             <input id="photo_tag_input" type="text" class="text tag_input tipped" name="tags" value="" placeholder="tag 1, tag 2, tag 3, tag 4, tag 5"/>
                             <p class="info" style="visibility:hidden">{$lang118}</p>
                         </label>
                     </div>
                     <div class="field">
                         <label>
-                            <h4>{$lang115}<span>({$lang114})</span></h4>
+                            <h4>{$lang115}<span> ({$lang114})</span></h4>
                             <input type="text" class="text tipped" name="source" value="" maxlength="300"/>
                             <p class="info" style="visibility:hidden">{$lang116}</p>
                         </label>                    
@@ -132,9 +127,15 @@
 	<div id='nav'>
         <ul>
             <div class='tip-border'></div>
-            <li><a href="{$mobileurl}/">{$lang172}</a></li>
+            <li><a href="{$mobileurl}/hot">{$lang172}</a></li>
             <li><a href="{$mobileurl}/trending">{$lang173}</a></li>
             <li><a href="{$mobileurl}/vote">{$lang174}</a></li>
+			{if $smarty.session.USERID ne ""}
+			<li><a href="{$mobileurl}/submit" class='submit'>{$lang199}</a></li>
+			<li><a href={$mobileurl}/logout>{$lang198}</a></li>
+			{else}  
+			<li><a href="{$mobileurl}/login">{$lang197}</a></li>
+			{/if}
         </ul>
     </div>
     

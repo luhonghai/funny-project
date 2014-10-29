@@ -1,15 +1,15 @@
 <?php
 /**************************************************************************************************
 | 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
+| http://www.9gagclonescript.com
+| webmaster@9gagclonescript.com
 |
 |**************************************************************************************************
 |
 | By using this software you agree that you have read and acknowledged our End-User License 
-| 
+| Agreement available at http://www.9gagclonescript.com/eula.html and to be bound by it.
 |
-| Copyright (c) best9gagclonescript.com. All rights reserved.
+| Copyright (c) 9GagCloneScript.com. All rights reserved.
 |**************************************************************************************************/
 
 include("include/config.php");
@@ -22,14 +22,17 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 	if($_POST['subform'] == "1")
 	{
 		$fname = cleanit($_REQUEST['fname']);	
+		$birthday = cleanit($_REQUEST['birthday']);	
+		$gender = cleanit($_REQUEST['gender']);	
+		$relationship = cleanit($_REQUEST['relationship']);	
 		$user_email = cleanit($_REQUEST['email']);	
 		$country = cleanit($_REQUEST['country']);	
-		$mylang = cleanit($_REQUEST['language']);
 		$details = cleanit($_REQUEST['details']);
 		$website = cleanit($_REQUEST['website']);
 		$pass = cleanit($_REQUEST['new_password']);
 		$pass2 = cleanit($_REQUEST['new_password_repeat']);
 		$news = intval(cleanit($_REQUEST['news']));
+		$showfb = intval(cleanit($_REQUEST['showfb']));
 		$color1 = cleanit($_REQUEST['profile_color']);
 		$color2 = cleanit($_REQUEST['link_color']);
 		$remove_avatar = intval(cleanit($_REQUEST['remove_avatar']));
@@ -89,16 +92,6 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 				{
 					unlink($del1);
 				}
-				$del2=$config['membersprofilepicdir']."/thumbs/".$delpp;
-				if(file_exists($del2))
-				{
-					unlink($del2);
-				}
-				$del3=$config['membersprofilepicdir']."/o/".$delpp;
-				if(file_exists($del3))
-				{
-					unlink($del3);
-				}
 				$query = "UPDATE members SET profilepicture='' WHERE USERID='".mysql_real_escape_string($SID)."' limit 1";
 				$conn->execute($query);
 			}
@@ -106,7 +99,7 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 		
 		if($error == "")
 		{			
-			$query="UPDATE members SET fullname='".mysql_real_escape_string($fname)."',email='".mysql_real_escape_string($user_email)."',country='".mysql_real_escape_string($country)."' $addme , description='".mysql_real_escape_string($details)."', website='".mysql_real_escape_string($website)."', news='".mysql_real_escape_string($news)."', color1='".mysql_real_escape_string($color1)."', color2='".mysql_real_escape_string($color2)."', mylang='".mysql_real_escape_string($mylang)."' WHERE USERID='".mysql_real_escape_string($SID)."' AND status='1'";
+			$query="UPDATE members SET fullname='".mysql_real_escape_string($fname)."', email='".mysql_real_escape_string($user_email)."', description='".mysql_real_escape_string($details)."', website='".mysql_real_escape_string($website)."', birthday='".mysql_real_escape_string($birthday)."', gender='".mysql_real_escape_string($gender)."', news='".mysql_real_escape_string($news)."', relationship='".mysql_real_escape_string($relationship)."', showfb='".mysql_real_escape_string($showfb)."' WHERE USERID='".mysql_real_escape_string($SID)."' AND status='1'";
 			$result=$conn->execute($query);
 			$pid = $SID;
 			$gstop = "1";
@@ -145,23 +138,79 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 				}
 				if($error == "")
 				{
-					$myvideoimgnew=$config['membersprofilepicdir']."/o/".$thepp;
+					$myvideoimgnew=$config['membersprofilepicdir']."/".$thepp;
 					if(file_exists($myvideoimgnew))
 					{
 						unlink($myvideoimgnew);
 					}
 					move_uploaded_file($gphoto, $myvideoimgnew);
 					$myvideoimgnew2=$config['membersprofilepicdir']."/".$thepp;
-					do_resize_image($myvideoimgnew, "480", "300", false, $myvideoimgnew2);
-					$myvideoimgnew3=$config['membersprofilepicdir']."/thumbs/".$thepp;
-					do_resize_image($myvideoimgnew, "200", "125", false, $myvideoimgnew3);
-					if(file_exists($config['membersprofilepicdir']."/o/".$thepp))
+					do_resize_image($myvideoimgnew, "160", "160", false, $myvideoimgnew2);
+					if(file_exists($config['membersprofilepicdir']."/".$thepp))
 					{
 						$query = "UPDATE members SET profilepicture='$thepp' WHERE USERID='".mysql_real_escape_string($SID)."'";
 						$conn->execute($query);
+   
+                                              }
+		unlink($myvideoimgnew);
+				}
+			}
+			$cstop = "1";
+			$coverphoto = $_FILES['coverphoto']['tmp_name'];
+			if($coverphoto != "")
+			{
+				$ext = substr(strrchr($_FILES['coverphoto']['name'], '.'), 1);
+				$ext2 = strtolower($ext);
+				if($ext2 == "jpeg" || $ext2 == "jpg" || $ext2 == "gif" || $ext2 == "png")
+				{
+					$theimageinfo = getimagesize($coverphoto);
+					if($theimageinfo[2] != 1 && $theimageinfo[2] != 2 && $theimageinfo[2] != 3)
+					{
+						$cstop = "1";
+					}
+					else
+					{
+						$cstop = "0";	
 					}
 				}
 			}
+			
+			if($cstop == "0")
+			{
+				$thepp = $pid;
+				if($theimageinfo[2] == 1)
+				{
+					$thepp .= ".gif";
+				}
+				elseif($theimageinfo[2] == 2)
+				{
+					$thepp .= ".jpg";
+				}
+				elseif($theimageinfo[2] == 3)
+				{
+					$thepp .= ".png";
+				}
+				if($error == "")
+				{
+					$myvideoimgnew=$config['membersprofilepicdir']."/cover/".$thepp;
+					if(file_exists($myvideoimgnew))
+					{
+						unlink($myvideoimgnew);
+					}
+					move_uploaded_file($coverphoto, $myvideoimgnew);
+					//$myvideoimgnew2=$config['membersprofilepicdir']."/cover/".$thepp;
+					//do_resize_image($myvideoimgnew, "995", "995", false, $myvideoimgnew2);
+					//$myvideoimgnew3=$config['membersprofilepicdir']."/thumbs/".$thepp;
+					//do_resize_image($myvideoimgnew, "125", "125", false, $myvideoimgnew3);
+					if(file_exists($config['membersprofilepicdir']."/cover/".$thepp))
+					{
+						$query = "UPDATE members SET coverpicture='$thepp' WHERE USERID='".addslashes($SID)."'";
+						$conn->Execute($query);
+					}
+					//unlink($myvideoimgnew);
+				}
+			}
+
 			if($user_email != $_SESSION['EMAIL'])
 			{
 				$query = "UPDATE members SET verified='0' WHERE USERID='".mysql_real_escape_string($SID)."' limit 1";
@@ -226,3 +275,4 @@ STemplate::display('settings.tpl');
 STemplate::display('footer.tpl');
 //TEMPLATES END
 ?>
+<script src="/shoutcloud/ShoutCloud.js"></script> 

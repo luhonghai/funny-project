@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="{$baseurl}/favicon.gif" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta content="width=device-width; initial-scale=1.0;" name="viewport" />
-    <link rel="stylesheet" href="{$baseurl}/css/connect_{$lang255}.css" media="screen,projection" type="text/css" />
+    <link rel="stylesheet" href="{$baseurl}/css/connect.css" media="screen,projection" type="text/css" />
 </head>
 
 <body id="page-signup">

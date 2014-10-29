@@ -1,7 +1,7 @@
 html{
 -webkit-text-size-adjust:none}
 body{
-background-color:#F6f6f6;color:#222;font-family:Helvetica,sans-serif;font-size:14px;margin:0;padding:0;border:none}
+background-color:#F6f6f6;color:#999;font-family:Helvetica,sans-serif;font-size:14px;margin:0;padding:0;border:none}
 a:link,a:visited{
 color:#fff;text-decoration:none}
 h3{
@@ -21,7 +21,7 @@ font-weight:bold;text-shadow:0px 1px 1px #eee}
 #header h1.hooppps{
 margin:0}
 #header h1.hooppps a{
-height:41px;width:140px;display:block;background:url(../images/logo.png) no-repeat;margin:1px 10px}
+height:41px;width:140px;display:block;background:url(../images/logo.png) no-repeat 0 6px;margin:1px 1px 1px 1px}
 #header a.nav:link,#header a.nav:visited{
 background-color:#444;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;-o-border-radius:5px;box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-o-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-moz-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-webkit-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;font-size:12px;font-weight:bold;padding:8px 12px;position:absolute;right:10px;text-shadow:0 -1px rgba(0,0,0,0.4);top:8px}
 #nav{
@@ -93,9 +93,9 @@ color:#00a5f0}
 .post-leaderboard-ads{
 padding-top:10px;background-color:#000}
 #header a.lang:link,#header a.lang:visited{
-background-color:#444;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;-o-border-radius:5px;box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-o-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-moz-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-webkit-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;font-size:12px;font-weight:bold;padding:8px 12px;position:absolute;right:120px;text-shadow:0 -1px rgba(0,0,0,0.4);top:8px}
+background-color:#444;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;-o-border-radius:5px;box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-o-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-moz-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-webkit-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;font-size:12px;font-weight:bold;padding:8px 12px;position:absolute;right:10px;text-shadow:0 -1px rgba(0,0,0,0.4);top:55px}
 #lang{
-display:none;width:100%;position:absolute;top:50px;opacity:0}
+display:none;width:100%;position:absolute;top:97px;opacity:0}
 #lang ul{
 margin:10px;background:#333;border:5px solid #333;border-radius:5px;-moz-border-radius:5px;-o-border-radius:5px;-webkit-border-radius:5px;position:relative;-webkit-box-shadow:0 0 0 1px #444,0 0 0 2px #000,0 2px 12px #000;-o-box-shadow:0 0 0 1px #444,0 0 0 2px #000,0 2px 12px #000;-moz-box-shadow:0 0 0 1px #444,0 0 0 2px #000,0 2px 12px #000;box-shadow:0 0 0 1px #444,0 0 0 2px #000,0 2px 12px #000;-webkit-padding-start:0px !important;opacity:0.95}
 #lang ul .tip-border{
@@ -108,6 +108,10 @@ border-bottom:none}
 border-top:none;margin-top:1px}
 #lang ul li a{
 color:#222;font-size:14px;font-weight:bold;display:block;background-color:#ddd;padding:16px 0;text-align:center;text-shadow:0 1px #fff}
+#header a.safeon:link,#header a.safeon:visited{
+background-color:#25991D;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;-o-border-radius:5px;box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-o-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-moz-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-webkit-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;font-size:12px;font-weight:bold;padding:8px 12px;position:absolute;right:60px;text-shadow:0 -1px rgba(0,0,0,0.4);top:55px}
+#header a.safeoff:link,#header a.safeoff:visited{
+background-color:#DE0B12;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;-o-border-radius:5px;box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-o-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-moz-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;-webkit-box-shadow:0 0 0 1px rgba(255,255,255,0.2) inset,0 0 0 1px #111;font-size:12px;font-weight:bold;padding:8px 12px;position:absolute;right:60px;text-shadow:0 -1px rgba(0,0,0,0.4);top:55px}
 .fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
 display: none !important;}
 #search_wrapper

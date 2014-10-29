@@ -8,7 +8,7 @@
         <div id="b9gcs-soft-post" class="b9gcs-soft-box static">
             <div class="content form_photo">
                 <form id="forma" class="modal" name="forma" action="#" enctype="multipart/form-data" method="post">
-                    <h3>{$p.story|stripslashes} [Fixed]</h3>
+                    <h3>{$p.story|stripslashes} [Đã sửa]</h3>
                     <h4>{$lang184} {$lang185}</h4>
                     <div class="post-container">
                         <div class="img-wrap">

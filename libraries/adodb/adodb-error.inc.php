@@ -1,6 +1,6 @@
 <?php
 /** 
- * @version V3.40 7 April 2003 (c) 2000-2003 John Lim (jlim@natsoft.com.my). All rights reserved.
+ * @version V5.18 3 Sep 2012  (c) 2000-2012 John Lim (jlim#natsoft.com). All rights reserved.
  * Released under both BSD license and Lesser GPL library license. 
  * Whenever there is any discrepancy between the two licenses, 
  * the BSD license will take precedence. 
@@ -10,6 +10,7 @@
  * The following code is adapted from the PEAR DB error handling code.
  * Portions (c)1997-2002 The PHP Group.
  */
+
 
 if (!defined("DB_ERROR")) define("DB_ERROR",-1);
 
@@ -40,49 +41,26 @@ if (!defined("DB_ERROR_SYNTAX")) {
 	define("DB_ERROR_EXTENSION_NOT_FOUND",-25);
 	define("DB_ERROR_NOSUCHDB",           -25);
 	define("DB_ERROR_ACCESS_VIOLATION",   -26);
+	define("DB_ERROR_DEADLOCK",           -27);
+	define("DB_ERROR_STATEMENT_TIMEOUT",  -28);
+	define("DB_ERROR_SERIALIZATION_FAILURE", -29);
 }
 
 function adodb_errormsg($value)
 {
-    static $ERRMSG;
-    if (!isset($ERRMSG)) {
-        $ERRMSG = array(
-            DB_ERROR                    => 'unknown error',
-            DB_ERROR_ALREADY_EXISTS     => 'already exists',
-            DB_ERROR_CANNOT_CREATE      => 'can not create',
-            DB_ERROR_CANNOT_DELETE      => 'can not delete',
-            DB_ERROR_CANNOT_DROP        => 'can not drop',
-            DB_ERROR_CONSTRAINT         => 'constraint violation',
-            DB_ERROR_DIVZERO            => 'division by zero',
-            DB_ERROR_INVALID            => 'invalid',
-            DB_ERROR_INVALID_DATE       => 'invalid date or time',
-            DB_ERROR_INVALID_NUMBER     => 'invalid number',
-            DB_ERROR_MISMATCH           => 'mismatch',
-            DB_ERROR_NODBSELECTED       => 'no database selected',
-            DB_ERROR_NOSUCHFIELD        => 'no such field',
-            DB_ERROR_NOSUCHTABLE        => 'no such table',
-            DB_ERROR_NOT_CAPABLE        => 'DB backend not capable',
-            DB_ERROR_NOT_FOUND          => 'not found',
-            DB_ERROR_NOT_LOCKED         => 'not locked',
-            DB_ERROR_SYNTAX             => 'syntax error',
-            DB_ERROR_UNSUPPORTED        => 'not supported',
-            DB_ERROR_VALUE_COUNT_ON_ROW => 'value count on row',
-            DB_ERROR_INVALID_DSN        => 'invalid DSN',
-            DB_ERROR_CONNECT_FAILED     => 'connect failed',
-            0	                       => 'no error', // DB_OK
-            DB_ERROR_NEED_MORE_DATA     => 'insufficient data supplied',
-            DB_ERROR_EXTENSION_NOT_FOUND=> 'extension not found',
-            DB_ERROR_NOSUCHDB           => 'no such database',
-            DB_ERROR_ACCESS_VIOLATION   => 'insufficient permissions'
-        );
-    }
+global $ADODB_LANG,$ADODB_LANG_ARRAY;
 
-    return isset($ERRMSG[$value]) ? $ERRMSG[$value] : $ERRMSG[DB_ERROR];
+	if (empty($ADODB_LANG)) $ADODB_LANG = 'en';
+	if (isset($ADODB_LANG_ARRAY['LANG']) && $ADODB_LANG_ARRAY['LANG'] == $ADODB_LANG) ;
+	else {
+		include_once(ADODB_DIR."/lang/adodb-$ADODB_LANG.inc.php");
+    }
+	return isset($ADODB_LANG_ARRAY[$value]) ? $ADODB_LANG_ARRAY[$value] : $ADODB_LANG_ARRAY[DB_ERROR];
 }
 
 function adodb_error($provider,$dbType,$errno)
 {
-	var_dump($errno);
+	//var_dump($errno);
 	if (is_numeric($errno) && $errno == 0) return 0;
 	switch($provider) { 
 	case 'mysql': $map = adodb_error_mysql(); break;
@@ -100,11 +78,13 @@ function adodb_error($provider,$dbType,$errno)
 	case 'informix': $map = adodb_error_ifx(); break;
 	
 	case 'postgres': return adodb_error_pg($errno); break;
+	
+	case 'sqlite': return $map = adodb_error_sqlite(); break;
 	default:
 		return DB_ERROR;
 	}	
-	print_r($map);
-	var_dump($errno);
+	//print_r($map);
+	//var_dump($errno);
 	if (isset($map[$errno])) return $map[$errno];
 	return DB_ERROR;
 }
@@ -113,17 +93,23 @@ function adodb_error($provider,$dbType,$errno)
 
 function adodb_error_pg($errormsg)
 {
+	if (is_numeric($errormsg)) return (integer) $errormsg;
+	// Postgres has no lock-wait timeout.  The best we could do would be to set a statement timeout.
     static $error_regexps = array(
-            '/(Table does not exist\.|Relation [\"\'].*[\"\'] does not exist|sequence does not exist|class ".+" not found)$/' => DB_ERROR_NOSUCHTABLE,
-            '/Relation [\"\'].*[\"\'] already exists|Cannot insert a duplicate key into (a )?unique index.*/'      => DB_ERROR_ALREADY_EXISTS,
-            '/divide by zero$/'                     => DB_ERROR_DIVZERO,
-            '/pg_atoi: error in .*: can\'t parse /' => DB_ERROR_INVALID_NUMBER,
-            '/ttribute [\"\'].*[\"\'] not found$|Relation [\"\'].*[\"\'] does not have attribute [\"\'].*[\"\']/' => DB_ERROR_NOSUCHFIELD,
-            '/parser: parse error at or near \"/'   => DB_ERROR_SYNTAX,
-            '/referential integrity violation/'     => DB_ERROR_CONSTRAINT
+            '/(Table does not exist\.|Relation [\"\'].*[\"\'] does not exist|sequence does not exist|class ".+" not found)$/i' => DB_ERROR_NOSUCHTABLE,
+            '/Relation [\"\'].*[\"\'] already exists|Cannot insert a duplicate key into (a )?unique index.*|duplicate key.*violates unique constraint/i'     => DB_ERROR_ALREADY_EXISTS,
+            '/database ".+" does not exist$/i'       => DB_ERROR_NOSUCHDB,
+            '/(divide|division) by zero$/i'          => DB_ERROR_DIVZERO,
+            '/pg_atoi: error in .*: can\'t parse /i' => DB_ERROR_INVALID_NUMBER,
+            '/ttribute [\"\'].*[\"\'] not found|Relation [\"\'].*[\"\'] does not have attribute [\"\'].*[\"\']/i' => DB_ERROR_NOSUCHFIELD,
+            '/(parser: parse|syntax) error at or near \"/i'   => DB_ERROR_SYNTAX,
+            '/referential integrity violation/i'     => DB_ERROR_CONSTRAINT,
+            '/deadlock detected$/i'                  => DB_ERROR_DEADLOCK,
+            '/canceling statement due to statement timeout$/i' => DB_ERROR_STATEMENT_TIMEOUT,
+            '/could not serialize access due to/i'   => DB_ERROR_SERIALIZATION_FAILURE
         );
-   
-    foreach ($error_regexps as $regexp => $code) {
+	reset($error_regexps);
+    while (list($regexp,$code) = each($error_regexps)) {
         if (preg_match($regexp, $errormsg)) {
             return $code;
         }
@@ -214,6 +200,7 @@ static $MAP = array(
 function adodb_error_oci8()
 {
 static $MAP = array(
+			 1 => DB_ERROR_ALREADY_EXISTS,
             900 => DB_ERROR_SYNTAX,
             904 => DB_ERROR_NOSUCHFIELD,
             923 => DB_ERROR_SYNTAX,
@@ -223,7 +210,7 @@ static $MAP = array(
             1722 => DB_ERROR_INVALID_NUMBER,
             2289 => DB_ERROR_NOSUCHTABLE,
             2291 => DB_ERROR_CONSTRAINT,
-            2449 => DB_ERROR_CONSTRAINT,
+            2449 => DB_ERROR_CONSTRAINT
         );
 	   
 	return $MAP;
@@ -239,6 +226,15 @@ static $MAP = array(
 	return $MAP;
 }
 
+function adodb_error_sqlite()
+{
+static $MAP = array(
+		  1 => DB_ERROR_SYNTAX
+       );
+	   
+	return $MAP;
+}
+
 function adodb_error_mysql()
 {
 static $MAP = array(
@@ -247,7 +243,9 @@ static $MAP = array(
            1006 => DB_ERROR_CANNOT_CREATE,
            1007 => DB_ERROR_ALREADY_EXISTS,
            1008 => DB_ERROR_CANNOT_DROP,
+		   1045 => DB_ERROR_ACCESS_VIOLATION,
            1046 => DB_ERROR_NODBSELECTED,
+		   1049 => DB_ERROR_NOSUCHDB,
            1050 => DB_ERROR_ALREADY_EXISTS,
            1051 => DB_ERROR_NOSUCHTABLE,
            1054 => DB_ERROR_NOSUCHFIELD,
@@ -257,6 +255,8 @@ static $MAP = array(
            1136 => DB_ERROR_VALUE_COUNT_ON_ROW,
            1146 => DB_ERROR_NOSUCHTABLE,
            1048 => DB_ERROR_CONSTRAINT,
+		    2002 => DB_ERROR_CONNECT_FAILED,
+			2005 => DB_ERROR_CONNECT_FAILED
        );
 	   
 	return $MAP;

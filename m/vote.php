@@ -1,26 +1,21 @@
 <?php
-/**************************************************************************************************
-| Mobile Module V 1.0
-| Best 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) best9gagclonescript.com. All rights reserved.
-|**************************************************************************************************/
 
 include("config.php");
 $mobileurl = $config['mobileurl'];
-include($config['maindir']."/include/config.php");
+include($config['basedir']."/include/config.php");
 STemplate::assign('mobileurl',$mobileurl);
 $mobile_per_page = $config[mobile_per_page];
 
-$page = intval($_REQUEST[page]);
+$check = $_REQUEST[check];
 
+if($check=="ok")
+{
+	echo "Xin Chào Hoàng Ngọc Cường";
+}
+else
+{
+	$page = intval($_REQUEST[page]);
+}
 if($page=="")
 {
 	$page = "1";
@@ -114,6 +109,8 @@ if ($totalvideos > 0)
 	}
 }
 
+$eurl = base64_encode("/vote?page=".$currentpage);
+STemplate::assign('eurl',$eurl);
 $templateselect = "vote.tpl";
 $pagetitle = $lang['174'];
 STemplate::assign('pagetitle',$pagetitle);
@@ -125,6 +122,19 @@ STemplate::assign('ending',$ending);
 STemplate::assign('pagelinks',$pagelinks);
 STemplate::assign('total',$total);
 STemplate::assign('posts',$posts);
+	$purlArray = array();
+	foreach ($posts as $value) {
+	if (strpos($value['date_added'], '2013') !== false) {
+		$purl1 = $config['baseurl'].'/pdata';
+	} else {
+		$patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
+		$replace = array ('\1\2/\3/\4', '$\1 =');
+		$date1 = preg_replace($patterns, $replace, $value['date_added']);
+		$purl1 = $config['baseurl'].'/pdata'.'/'.$date1;
+	}
+	array_push($purlArray, $purl1);
+	STemplate::assign('purl', $purlArray);	
+	}
 STemplate::display('header.tpl');
 STemplate::display($templateselect);
 STemplate::display('footer.tpl');

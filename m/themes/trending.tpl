@@ -9,47 +9,45 @@
                         <input id="sitebar_search_header" type="text" class="search search_input" name="query" tabindex="1" placeholder="{$lang189}"/>
                     </form>
         </div>
-		<a href='{$mobileurl}/submit' class='submit'>submit</a>
-    </div>
-    <div class="post-leaderboard-ads">
-    	<center>
-    	{insert name=get_advertisement AID=1}
-        </center>
+		{if $safemode eq "1"}
+		{if $smarty.session.USERID ne ""}
+            {if $smarty.session.FILTER eq "1"}
+            <a class="safeon" href="{$mobileurl}/safe?m={$eurl}">18+</a>
+            {else}
+            <a class="safeoff" href="{$mobileurl}/safe?m={$eurl}&o=1">18+</a>
+            {/if}
+        {else}
+        <a class="safeon" href="{$mobileurl}/login">18+</a>
+        {/if}
+		{/if}
     </div>
 
     <div id="content">
     
     	{section name=i loop=$posts}
-        <a href="{$mobileurl}{$postfolder}{$posts[i].PID}"> 
+        <a href="{$mobileurl}{$postfolder}{$posts[i].PID}">
             <h1>{$posts[i].story|stripslashes}</h1>
 		</a>
+	{if $posts[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
+        <a href="{$mobileurl}{$postfolder}{$posts[i].PID}"><img alt="{$posts[i].story|stripslashes}" src="{$baseurl}/images/nsfw.jpg" border="0" /></a>
+    {else}
 		{if $posts[i].pic ne ""}
-			<a href="{$mobileurl}{$postfolder}{$posts[i].PID}"> 
-				<img alt="{$posts[i].story|stripslashes}" src="{$purl}/t/{$posts[i].pic}" border="0" />
+			<a href="{$mobileurl}{$postfolder}{$posts[i].PID}">
+				<img alt="{$posts[i].story|stripslashes}" src="{$purl[i]}/t/{$posts[i].pic}" border="0" />
 			</a>
         {else}
             {if $posts[i].youtube_key != ""}
             <center>
             {insert name=return_youtube value=a assign=youtube youtube=$posts[i].youtube_key}{$youtube}
             </center>
-            {elseif $posts[i].fod_key != ""}
-            <center>
-            {insert name=return_fod value=a assign=fod fod=$posts[i].fod_key}{$fod}
-            </center>
-			{elseif $posts[i].vfy_key != ""}
-            <center>
-            {insert name=return_vfy value=a assign=vfy vfy=$posts[i].vfy_key}{$vfy}
-            </center>
-			{elseif $posts[i].vmo_key != ""}
-            <center>
-            {insert name=return_vmo value=a assign=vmo vmo=$posts[i].vmo_key}{$vmo}
-            </center>
+            {elseif $posts[i].contents != ""}{$posts[i].contents|strip_mq_gpc}
 			{else}
-			<center>
-			{$lang143}
-			</center>
+			<a href="{$mobileurl}{$postfolder}{$posts[i].PID}">
+				<img alt="{$posts[i].story|stripslashes}" src="{$imageurl}/error.jpg" border="0" />
+			</a>
             {/if}
         {/if}
+	{/if}
         <div class='stats-container'>
             <div class='stats-tooltip-border'></div>
             <div class='stats-tooltip'></div>
@@ -73,7 +71,7 @@
 				{/if}
 				<li class='fblike'><fb:like href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}?ref=fb" send="false" layout="button_count" width="90px" show_faces="false" font="" label="Post"></fb:like></li>
                 <li class='view'>
-                    <a class="badge-facebook-comments-toggler" entryId="{$posts[i].PID}" data-url="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" href="javascript:void(0);"><fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{if SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"></fb:comments-count> {$lang143}</a>
+                    <a class="badge-facebook-comments-toggler" entryId="{$posts[i].PID}" data-url="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" href="javascript:void(0);"><fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"></fb:comments-count> {$lang143}</a>
                 </li>
             </ul>
         </div>
@@ -100,9 +98,15 @@
     <div id='nav'>
         <ul>
             <div class='tip-border'></div>
-            <li><a href="{$mobileurl}/">{$lang172}</a></li>
+            <li><a href="{$mobileurl}/hot">{$lang172}</a></li>
             <li><a href="{$mobileurl}/trending">{$lang173}</a></li>
             <li><a href="{$mobileurl}/vote">{$lang174}</a></li>
+			{if $smarty.session.USERID ne ""}
+			<li><a href="{$mobileurl}/submit" class='submit'>{$lang199}</a></li>
+			<li><a href={$mobileurl}/logout>{$lang198}</a></li>
+			{else}  
+			<li><a href="{$mobileurl}/login">{$lang197}</a></li>
+			{/if}
         </ul>
     </div>
     

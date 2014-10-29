@@ -4,7 +4,8 @@
         <div class="info">
             <p>{insert name=get_static value=var sel=value ID=4}</p>
         </div>
-    </div>
+</div>
+  </div>
 </div>
 {include file='right.tpl'}
 {literal}
@@ -14,7 +15,7 @@ var adloca=$('#moving-boxes').offset().top;
     var curloca=$(window).scrollTop();
     if(curloca>adloca){
         $('#moving-boxes').css('position','fixed');
-        $('#moving-boxes').css('top','55px');
+        $('#moving-boxes').css('top','50px');
         $('#moving-boxes').css('z-index','200');
     };
     if(curloca <= adloca){

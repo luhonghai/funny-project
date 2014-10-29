@@ -1,16 +1,4 @@
 <?php
-/**************************************************************************************************
-| 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) best9gagclonescript.com. All rights reserved.
-|**************************************************************************************************/
 
 include("include/config.php");
 include("include/functions/import.php");
@@ -46,7 +34,7 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 			{
 				$nsfw = intval(cleanit($_REQUEST['nsfw']));
 				$tags = cleanit($_REQUEST['tags']);
-				$title = stripslashes($parray[0]['story'])."[Fixed]";
+				$title = stripslashes($parray[0]['story'])." [Đã sửa]";
 				$uploadedimage = $_FILES['image']['tmp_name'];
 				
 				if($uploadedimage == "")

@@ -3,32 +3,32 @@
 				<div class="columns ">
                 
 					<div class="side-col" id="page:left">
-    					<h3>IPs</h3>
+    					<h3>Cấm IP</h3>
 						
                         <ul id="isoft" class="tabs">
     						<li >
-        						<a href="bans_ip.php" id="isoft_group_1" name="group_1" title="IP Banning" class="tab-item-link ">
+        						<a href="bans_ip.php" id="isoft_group_1" name="group_1" title="IP Bị Cấm" class="tab-item-link ">
                                     <span>
                                         <span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        IP Banning
+                                        IP Bị Cấm
                                     </span>
         						</a>
 								<div id="isoft_group_1_content" style="display:none;"></div>
     						</li>
                             
                             <li >
-                                <a href="bans_ip_add.php" id="isoft_group_2" name="group_2" title="Add IP" class="tab-item-link">
+                                <a href="bans_ip_add.php" id="isoft_group_2" name="group_2" title="Thêm IP" class="tab-item-link">
                                 	<span>
                                     	<span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Add IP
+                                        Thêm IP
                                     </span>
                                 </a>
                                 <div id="isoft_group_2_content" style="display:none;">
                                 	<div class="entry-edit">
                                         <div class="entry-edit-head">
-                                            <h4 class="icon-head head-edit-form fieldset-legend">Add IP</h4>
+                                            <h4 class="icon-head head-edit-form fieldset-legend">Thêm IP</h4>
                                             <div class="form-buttons">
 
                                             </div>
@@ -39,11 +39,11 @@
                                                 <table cellspacing="0" class="form-list">
                                                 <tbody>
                                                     <tr class="hidden">
-                                                        <td class="label"><label for="name">IP </label></td>
+                                                        <td class="label"><label for="name">Địa chỉ IP </label></td>
                                                         <td class="value">
                                                         	<input id="add" name="add" value="{$smarty.request.add}" class=" required-entry required-entry input-text" type="text"/>
                                                         </td>
-                                                        <td class="scope-label">[IP YOU WANT TO BAN]</td>
+                                                        <td class="scope-label">[IP BẠN MUỐN CẤM]</td>
                                                             <td><small></small></td>
                                                     </tr>
                                                     
@@ -73,9 +73,9 @@
                             </div>
 
                             <div class="content-header">
-                               <h3 class="icon-head head-products">IPs - Add IP</h3>
+                               <h3 class="icon-head head-products">Cấm IP - Thêm IP</h3>
                                <p class="content-buttons form-buttons">
-                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable save" onclick="document.main_form.submit();" style=""><span>Submit</span></button>			
+                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable save" onclick="document.main_form.submit();" style=""><span>Xác Nhận</span></button>			
                                 </p>
                             </div>
                             

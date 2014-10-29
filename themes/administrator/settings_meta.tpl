@@ -3,32 +3,32 @@
 				<div class="columns ">
                 
 					<div class="side-col" id="page:left">
-    					<h3>Settings</h3>
+    					<h3>Cài Đặt</h3>
 						
                         <ul id="isoft" class="tabs">
     						<li >
-        						<a href="settings_general.php" id="isoft_group_1" name="group_1" title="General Settings" class="tab-item-link ">
+        						<a href="settings_general.php" id="isoft_group_1" name="group_1" title="Cài Đặt Chung" class="tab-item-link ">
                                     <span>
                                         <span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        General Settings
+                                        Cài Đặt Chung
                                     </span>
         						</a>
                                 <div id="isoft_group_1_content" style="display:none;"></div>
     						</li>
                             
                             <li >
-                                <a href="settings_meta.php" id="isoft_group_9" name="group_9" title="Meta Settings" class="tab-item-link">
+                                <a href="settings_meta.php" id="isoft_group_9" name="group_9" title="Cài Đặt Thẻ Meta" class="tab-item-link">
                                 	<span>
                                     	<span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Meta Settings
+                                        Cài Đặt Thẻ Meta
                                     </span>
                                 </a>
                                 <div id="isoft_group_9_content" style="display:none;">
                                 	<div class="entry-edit">
                                         <div class="entry-edit-head">
-                                            <h4 class="icon-head head-edit-form fieldset-legend">Meta Settings</h4>
+                                            <h4 class="icon-head head-edit-form fieldset-legend">Cài Đặt Thẻ Meta</h4>
                                             <div class="form-buttons">
 
                                             </div>
@@ -39,20 +39,20 @@
                                                 <table cellspacing="0" class="form-list">
                                                 <tbody>
                                                     <tr class="hidden">
-                                                        <td class="label"><label for="name">Meta Description </label></td>
+                                                        <td class="label"><label for="name">Mô Tả Thẻ Meta </label></td>
                                                         <td class="value">
                                                         	<textarea id="metadescription" name="metadescription" class=" textarea" type="textarea" >{$metadescription}</textarea>
                                                         </td>
-                                                        <td class="scope-label">[GLOBAL META DESCRIPTION TO USE]</td>
+                                                        <td class="scope-label">[MÔ TẢ CHUNG THẺ META]</td>
                                                             <td><small></small></td>
                                                     </tr>
                                                     
                                                     <tr class="hidden">
-                                                        <td class="label"><label for="status">Meta Keywords </label></td>
+                                                        <td class="label"><label for="status">Từ Khóa Thẻ Meta </label></td>
                                                         <td class="value">
                                                             <textarea id="metakeywords" name="metakeywords" class=" textarea" type="textarea" >{$metakeywords}</textarea>
                                                         </td>
-                                                        <td class="scope-label">[GLOBAL META KEYWORDS TO USE]</td>
+                                                        <td class="scope-label">[TỪ KHÓA CHUNG THẺ META]</td>
                                                         <td><small></small></td>
                                                     </tr>
                                                 </tbody>
@@ -64,11 +64,11 @@
                             </li>
                             
                             <li >
-                                <a href="settings_static.php" id="isoft_group_11" name="group_11" title="Static Pages" class="tab-item-link">
+                                <a href="settings_static.php" id="isoft_group_11" name="group_11" title="Trang Tĩnh" class="tab-item-link">
                                 	<span>
                                     	<span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Static Pages
+                                        Trang Tĩnh
                                     </span>
                                 </a>
                                 <div id="isoft_group_11_content" style="display:none;"></div>
@@ -91,9 +91,9 @@
                             </div>
 
                             <div class="content-header">
-                               <h3 class="icon-head head-products">Settings - Meta Settings</h3>
+                               <h3 class="icon-head head-products">Cài Đặt - Cài Đặt Thẻ Meta</h3>
                                <p class="content-buttons form-buttons">
-                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable save" onclick="document.main_form.submit();" style=""><span>Save Changes</span></button>			
+                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable save" onclick="document.main_form.submit();" style=""><span>Lưu Thay Đổi</span></button>			
                                 </p>
                             </div>
                             

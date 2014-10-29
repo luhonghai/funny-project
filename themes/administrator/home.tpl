@@ -6,21 +6,21 @@
             <div class="content-header">
                 <table cellspacing="0">
                     <tr>
-                        <td><h3 class="head-dashboard">Home</h3></td>
+                        <td><h3 class="head-dashboard">Trang Chủ</h3></td>
                     </tr>
                 </table>
             </div>
             
 			<div class="dashboard-container">
     			<p class="switcher">
-                	<label for="store_switcher">Website Statistics</label>
+                	<label for="store_switcher">Thống Kê Website</label>
 				</p>
                   
 				<table cellspacing="25" width="100%">
         		<tr>
             		<td>                                                
                         <div class="entry-edit">
-                    		<div class="entry-edit-head"><h4>Gag Statistics</h4></div>
+                    		<div class="entry-edit-head"><h4>Thống Kê Bài Đăng</h4></div>
                     		<fieldset class="np">
                                 <div class="grid np">
                                     <table cellspacing="0" style="border:0;" id="lastOrdersGrid_table">
@@ -28,25 +28,25 @@
                                         <col   width="100"  />
                                         <thead>
                                             <tr class="headings">
-                                                <th  class=" no-link"><span class="nobr">Summary</span></th>
-                                                <th  class=" no-link a-center last"><span class="nobr">Results</span></th>
+                                                <th  class=" no-link"><span class="nobr">Nội Dung</span></th>
+                                                <th  class=" no-link a-center last"><span class="nobr">Kết Quả</span></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                            	<td class=" ">Gags Awaiting Validation</td>
+                                            	<td class=" ">Bài Đăng Chờ Xác Nhận</td>
                                                 <td class=" a-center last">{insert name=get_total_v1}</td>
                                         	</tr>
                                             <tr>
-                                            	<td class=" ">Reported Gags</td>
+                                            	<td class=" ">Bài Đăng Bị Báo Lỗi</td>
                                                 <td class=" a-center last">{insert name=get_total_v2}</td>
                                         	</tr>
                                             <tr>
-                                            	<td class=" ">New Gags</td>
+                                            	<td class=" ">Bài Đăng Mới</td>
                                                 <td class=" a-center last">{insert name=get_total_v4}</td>
                                         	</tr>
                                             <tr>
-                                            	<td class=" ">Total Gags</td>
+                                            	<td class=" ">Tổng Số Bài Đăng</td>
                                                 <td class=" a-center last">{insert name=get_total_v5}</td>
                                         	</tr>
                                         </tbody>
@@ -59,7 +59,7 @@
                 <td>                                                
                         
                         <div class="entry-edit">
-                    		<div class="entry-edit-head"><h4>Advertisement Statistics</h4></div>
+                    		<div class="entry-edit-head"><h4>Thống Kê Quảng Cáo</h4></div>
                     		<fieldset class="np">
                                 <div class="grid np">
                                     <table cellspacing="0" style="border:0;" id="lastOrdersGrid_table">
@@ -67,13 +67,13 @@
                                         <col   width="100"  />
                                         <thead>
                                             <tr class="headings">
-                                                <th  class=" no-link"><span class="nobr">Summary</span></th>
-                                                <th  class=" no-link a-center last"><span class="nobr">Total Ads</span></th>
+                                                <th  class=" no-link"><span class="nobr">Nội Dung</span></th>
+                                                <th  class=" no-link a-center last"><span class="nobr">Kết Quả</span></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                            	<td class=" ">Standard Advertisements</td>
+                                            	<td class=" ">Tổng Số Quảng Cáo</td>
                                                 <td class=" a-center last">{insert name=get_total_com value=var table=advertisements}</td>
                                         	</tr>
                                         </tbody>
@@ -83,7 +83,7 @@
                 		</div>
                         
                         <div class="entry-edit">
-                    		<div class="entry-edit-head"><h4>Member Statistics</h4></div>
+                    		<div class="entry-edit-head"><h4>Thống Kê Thành Viên</h4></div>
                     		<fieldset class="np">
                                 <div class="grid np">
                                     <table cellspacing="0" style="border:0;" id="lastOrdersGrid_table">
@@ -91,13 +91,13 @@
                                         <col   width="100"  />
                                         <thead>
                                             <tr class="headings">
-                                                <th  class=" no-link"><span class="nobr">Summary</span></th>
-                                                <th  class=" no-link a-center last"><span class="nobr">Results</span></th>
+                                                <th  class=" no-link"><span class="nobr">Nội Dung</span></th>
+                                                <th  class=" no-link a-center last"><span class="nobr">Kết Quả</span></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                            	<td class=" ">Total Members</td>
+                                            	<td class=" ">Tổng Số Thành Viên</td>
                                                 <td class=" a-center last">{insert name=get_total_m3}</td>
                                         	</tr>
                                         </tbody>
@@ -110,7 +110,7 @@
             	<td>
                         
                         <div class="entry-edit">
-                    		<div class="entry-edit-head"><h4>Last 10 Members</h4></div>
+                    		<div class="entry-edit-head"><h4>10 Thành Viên Mới</h4></div>
                     		<fieldset class="np">
                                 <div class="grid np">
                                     <table cellspacing="0" style="border:0;" id="lastOrdersGrid_table">
@@ -118,8 +118,8 @@
                                         <col   />
                                         <thead>
                                             <tr class="headings">
-                                                <th  class=" no-link"><span class="nobr">Username</span></th>
-                                                <th  class=" no-link a-center last"><span class="nobr">E-Mail Address</span></th>
+                                                <th  class=" no-link"><span class="nobr">Tên Đăng Nhập</span></th>
+                                                <th  class=" no-link a-center last"><span class="nobr">Địa Chỉ E-Mail</span></th>
                                             </tr>
                                         </thead>
                                         <tbody>

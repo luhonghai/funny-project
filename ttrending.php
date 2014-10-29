@@ -1,16 +1,4 @@
 <?php
-/**************************************************************************************************
-| 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) best9gagclonescript.com. All rights reserved.
-|**************************************************************************************************/
 
 include("include/config.php");
 include("include/functions/import.php");
@@ -97,6 +85,19 @@ if ($totalvideos > 0)
 $eurl = base64_encode("/ttrending");
 STemplate::assign('eurl',$eurl);
 STemplate::assign('posts',$posts);
+$purlArray = array();
+	foreach ($posts as $value) {
+	if (strpos($value['date_added'], '2013') !== false) {
+		$purl1 = $config['baseurl'].'/pdata';
+	} else {
+		$patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
+		$replace = array ('\1\2/\3/\4', '$\1 =');
+		$date1 = preg_replace($patterns, $replace, $value['date_added']);
+		$purl1 = $config['baseurl'].'/pdata'.'/'.$date1;
+	}
+	array_push($purlArray, $purl1);
+	STemplate::assign('purl', $purlArray);	
+	}
 $templateselect = "ttrending.tpl";
 
 //TEMPLATES BEGIN

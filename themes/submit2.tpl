@@ -13,6 +13,9 @@
 					{if $vupload eq "1"}
                 	<li class="tab_video current"><a class="video" href="{$baseurl}/submit?t=v">{$lang101}</a></li>
 					{/if}
+					{if $tupload eq "1"}
+			<li class="tab_text "><a class="text" href="{$baseurl}/submit?t=t">{$lang289}</a></li>
+					{/if}
                 </ul>
             </div>
         
@@ -49,14 +52,14 @@
                     </div>
                     <div class="field">
                         <label>
-                            <h4>{$lang113}<span>({$lang114})</span></h4>
+                            <h4>{$lang113}<span> ({$lang114})</span></h4>
                             <input id="photo_tag_input" type="text" class="text tag_input tipped" name="tags" value="" placeholder="tag 1, tag 2, tag 3, tag 4, tag 5"/>
                             <p class="info" style="visibility:hidden">{$lang118}</p>
                         </label>
                     </div>
                     <div class="field">
                         <label>
-                            <h4>{$lang115}<span>({$lang114})</span></h4>
+                            <h4>{$lang115}<span> ({$lang114})</span></h4>
                             <input type="text" class="text tipped" name="source" value="" maxlength="300"/>
                             <p class="info" style="visibility:hidden">{$lang116}</p>
                         </label>                    

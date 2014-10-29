@@ -1,7 +1,7 @@
 <?php
 
 /**
-  V3.40 7 April 2003  (c) 2000-2003 John Lim (jlim@natsoft.com.my). All rights reserved.
+  V5.18 3 Sep 2012  (c) 2000-2012 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -10,23 +10,91 @@
  
 */
 
+/*
+In ADOdb, named quotes for MS SQL Server use ". From the MSSQL Docs:
+
+	Note Delimiters are for identifiers only. Delimiters cannot be used for keywords, 
+	whether or not they are marked as reserved in SQL Server.
+	
+	Quoted identifiers are delimited by double quotation marks ("):
+	SELECT * FROM "Blanks in Table Name"
+	
+	Bracketed identifiers are delimited by brackets ([ ]):
+	SELECT * FROM [Blanks In Table Name]
+	
+	Quoted identifiers are valid only when the QUOTED_IDENTIFIER option is set to ON. By default, 
+	the Microsoft OLE DB Provider for SQL Server and SQL Server ODBC driver set QUOTED_IDENTIFIER ON 
+	when they connect. 
+	
+	In Transact-SQL, the option can be set at various levels using SET QUOTED_IDENTIFIER, 
+	the quoted identifier option of sp_dboption, or the user options option of sp_configure.
+	
+	When SET ANSI_DEFAULTS is ON, SET QUOTED_IDENTIFIER is enabled.
+	
+	Syntax
+	
+		SET QUOTED_IDENTIFIER { ON | OFF }
+
+
+*/
+
+// security - hide paths
+if (!defined('ADODB_DIR')) die();
+
 class ADODB2_mssql extends ADODB_DataDict {
+	var $databaseType = 'mssql';
+	var $dropIndex = 'DROP INDEX %2$s.%1$s';
+	var $renameTable = "EXEC sp_rename '%s','%s'";
+	var $renameColumn = "EXEC sp_rename '%s.%s','%s'";
+
+	var $typeX = 'TEXT';  ## Alternatively, set it to VARCHAR(4000)
+	var $typeXL = 'TEXT';
+	
+	//var $alterCol = ' ALTER COLUMN ';
+	
+	function MetaType($t,$len=-1,$fieldobj=false)
+	{
+		if (is_object($t)) {
+			$fieldobj = $t;
+			$t = $fieldobj->type;
+			$len = $fieldobj->max_length;
+		}
+		
+		$len = -1; // mysql max_length is not accurate
+		switch (strtoupper($t)) {
+		case 'R':
+		case 'INT': 
+		case 'INTEGER': return  'I';
+		case 'BIT':
+		case 'TINYINT': return  'I1';
+		case 'SMALLINT': return 'I2';
+		case 'BIGINT':  return  'I8';
+		case 'SMALLDATETIME': return 'T';
+		case 'REAL':
+		case 'FLOAT': return 'F';
+		default: return parent::MetaType($t,$len,$fieldobj);
+		}
+	}
 	
 	function ActualType($meta)
 	{
 		switch(strtoupper($meta)) {
+
 		case 'C': return 'VARCHAR';
-		case 'X': return 'TEXT';
-		
+		case 'XL': return (isset($this)) ? $this->typeXL : 'TEXT';
+		case 'X': return (isset($this)) ? $this->typeX : 'TEXT'; ## could be varchar(8000), but we want compat with oracle
 		case 'C2': return 'NVARCHAR';
 		case 'X2': return 'NTEXT';
 		
 		case 'B': return 'IMAGE';
 			
 		case 'D': return 'DATETIME';
+		
+		case 'TS':
 		case 'T': return 'DATETIME';
 		case 'L': return 'BIT';
 		
+		case 'R':		
 		case 'I': return 'INT'; 
 		case 'I1': return 'TINYINT';
 		case 'I2': return 'SMALLINT';
@@ -42,22 +110,23 @@ class ADODB2_mssql extends ADODB_DataDict {
 	
 	
 	function AddColumnSQL($tabname, $flds)
-	{	
-		if ($this->schema) $tabname = $this->schema.'.'.$tabname;
+	{
+		$tabname = $this->TableName ($tabname);
 		$f = array();
 		list($lines,$pkey) = $this->_GenFields($flds);
 		$s = "ALTER TABLE $tabname $this->addCol";
 		foreach($lines as $v) {
 			$f[] = "\n $v";
 		}
-		$s .= implode(',',$f);
+		$s .= implode(', ',$f);
 		$sql[] = $s;
 		return $sql;
 	}
 	
+	/*
 	function AlterColumnSQL($tabname, $flds)
 	{
-		if ($this->schema) $tabname = $this->schema.'.'.$tabname;
+		$tabname = $this->TableName ($tabname);
 		$sql = array();
 		list($lines,$pkey) = $this->_GenFields($flds);
 		foreach($lines as $v) {
@@ -66,28 +135,31 @@ class ADODB2_mssql extends ADODB_DataDict {
 
 		return $sql;
 	}
+	*/
 	
 	function DropColumnSQL($tabname, $flds)
 	{
-		if ($this->schema) $tabname = $this->schema.'.'.$tabname;
-		if (!is_array($flds)) $flds = explode(',',$flds);
+		$tabname = $this->TableName ($tabname);
+		if (!is_array($flds))
+			$flds = explode(',',$flds);
 		$f = array();
-		$s = "ALTER TABLE $tabname";
+		$s = 'ALTER TABLE ' . $tabname;
 		foreach($flds as $v) {
-			$f[] = "\n$this->dropCol $v";
+			$f[] = "\n$this->dropCol ".$this->NameQuote($v);
 		}
-		$s .= implode(',',$f);
+		$s .= implode(', ',$f);
 		$sql[] = $s;
 		return $sql;
 	}
 	
 	// return string must begin with space
-	function _CreateSuffix($fname,$ftype,$fnotnull,$fdefault,$fautoinc,$fconstraint)
+	function _CreateSuffix($fname,&$ftype,$fnotnull,$fdefault,$fautoinc,$fconstraint,$funsigned)
 	{	
 		$suffix = '';
 		if (strlen($fdefault)) $suffix .= " DEFAULT $fdefault";
 		if ($fautoinc) $suffix .= ' IDENTITY(1,1)';
 		if ($fnotnull) $suffix .= ' NOT NULL';
+		else if ($suffix == '') $suffix .= ' NULL';
 		if ($fconstraint) $suffix .= ' '.$fconstraint;
 		return $suffix;
 	}
@@ -166,18 +238,47 @@ CREATE TABLE
 */
 	function _IndexSQL($idxname, $tabname, $flds, $idxoptions)
 	{
-		if (isset($idxoptions['REPLACE'])) $sql[] = "DROP INDEX $idxname";
-		if (isset($idxoptions['UNIQUE'])) $unique = ' UNIQUE';
-		else $unique = '';
-		if (is_array($flds)) $flds = implode(', ',$flds);
-		if (isset($idxoptions['CLUSTERED'])) $clustered = ' CLUSTERED';
-		else $clustered = '';
+		$sql = array();
 		
-		$s = "CREATE$unique$clustered INDEX $idxname ON $tabname ($flds)";
-		if (isset($idxoptions[$this->upperName])) $s .= $idxoptions[$this->upperName];
+		if ( isset($idxoptions['REPLACE']) || isset($idxoptions['DROP']) ) {
+			$sql[] = sprintf ($this->dropIndex, $idxname, $tabname);
+			if ( isset($idxoptions['DROP']) )
+				return $sql;
+		}
+		
+		if ( empty ($flds) ) {
+			return $sql;
+		}
+		
+		$unique = isset($idxoptions['UNIQUE']) ? ' UNIQUE' : '';
+		$clustered = isset($idxoptions['CLUSTERED']) ? ' CLUSTERED' : '';
+		
+		if ( is_array($flds) )
+			$flds = implode(', ',$flds);
+		$s = 'CREATE' . $unique . $clustered . ' INDEX ' . $idxname . ' ON ' . $tabname . ' (' . $flds . ')';
+		
+		if ( isset($idxoptions[$this->upperName]) )
+			$s .= $idxoptions[$this->upperName];
+		
+
 		$sql[] = $s;
 		
 		return $sql;
+	}
+	
+	
+	function _GetSize($ftype, $ty, $fsize, $fprec)
+	{
+		switch ($ftype) {
+		case 'INT':
+		case 'SMALLINT':
+		case 'TINYINT':
+		case 'BIGINT':
+			return $ftype;
+		}
+    	if ($ty == 'T') return $ftype;
+    	return parent::_GetSize($ftype, $ty, $fsize, $fprec);    
+
 	}
 }
 ?>

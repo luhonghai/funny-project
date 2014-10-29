@@ -1,22 +1,8 @@
 <?php
-/**************************************************************************************************
-| Mobile Module V 1.0
-| Best 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) best9gagclonescript.com. All rights reserved.
-|**************************************************************************************************/
-
 $mobile = "1";
-$config['maindir'] = '/vol/hll/fun';
-$config['mobiledir'] = '/vol/hll/fun/m';
-$config['mobileurl'] = 'http://services.c-mg.vn/fun/m';
+$config['basedir']   = '/var/www/html';
+$config['mobiledir'] = '/var/www/html/m';
+$config['mobileurl'] = 'http://m.phongkhamhoixuan.com';
 
 function insert_get_advertisement($var)
 {
@@ -26,6 +12,7 @@ function insert_get_advertisement($var)
         $getad = $executequery->fields[code];
 		echo strip_mq_gpc($getad);
 }
+
 function insert_get_fav_count($var)
 {
     global $conn;
@@ -34,6 +21,7 @@ function insert_get_fav_count($var)
 	$total = $executequery->fields[total];
 	return intval($total);
 }
+
 function cleanit($text)
 {
 	return htmlentities(strip_tags(stripslashes($text)), ENT_COMPAT, "UTF-8");
@@ -207,9 +195,8 @@ function imagick_gif_resize($file, $width = 0, $height = 0, $proportional = fals
 }
 
 function makeseo($str,$separator = 'dash',$lowercase = TRUE)
-    {
-
-        //decode html entities
+{
+//decode html entities
 $str = html_entity_decode($str,ENT_QUOTES,'UTF-8');
 
 //make lowercase
@@ -217,143 +204,143 @@ $str = mb_strtolower($str, 'UTF-8');
 
 //replace special chars, for UTF8 encoding it needs to be defined as array
 $trans = array(
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'�'=>'o',
-'O'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'o',
-'?'=>'u',
-'?'=>'u',
-'�'=>'u',
-'U'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'??'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'?'=>'u',
-'�'=>'a',
-'A'=>'a',
-'?'=>'a',
-'?'=>'a',
-'�'=>'a',
-'A'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'a?'=>'a',
-'o?'=>'o',
-'?'=>'a',
-'?'=>'�',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'a',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'�'=>'e',
-'E'=>'e',
-'�'=>'e',
-'E'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'?'=>'e',
-'�'=>'e',
-'E'=>'e',
-'?'=>'i',
-'?'=>'i',
-'?'=>'i',
-'?'=>'i',
-'?'=>'i',
-'?'=>'i',
-'?'=>'i',
-'?'=>'i',
-'?'=>'i',
-'?'=>'i',
-'?'=>'y',
-'?'=>'y',
-'?'=>'y',
-'?'=>'y',
-'?'=>'y',
-'?'=>'y',
-'?'=>'y',
-'?'=>'y',
-'?'=>'y',
-'?'=>'y',
-'?'=>'d',
-'?'=>'d',
+'ơ'=>'o',
+'Ơ'=>'o',
+'ó'=>'o',
+'Ó'=>'o',
+'ò'=>'o',
+'Ò'=>'o',
+'ọ'=>'o',
+'Ọ'=>'o',
+'ỏ'=>'o',
+'Ỏ'=>'o',
+'õ'=>'o',
+'Õ'=>'o',
+'ớ'=>'o',
+'Ớ'=>'o',
+'ờ'=>'o',
+'Ờ'=>'o',
+'ợ'=>'o',
+'Ợ'=>'o',
+'ở'=>'o',
+'Ở'=>'o',
+'ỡ'=>'o',
+'Ỡ'=>'o',
+'ô'=>'o',
+'Ô'=>'o',
+'ố'=>'o',
+'Ố'=>'o',
+'ồ'=>'o',
+'Ồ'=>'o',
+'ộ'=>'o',
+'Ộ'=>'o',
+'ổ'=>'o',
+'Ổ'=>'o',
+'ỗ'=>'o',
+'Ỗ'=>'o',
+'ú'=>'u',
+'Ú'=>'u',
+'ù'=>'u',
+'Ù'=>'u',
+'ụ'=>'u',
+'Ụ'=>'u',
+'ủ'=>'u',
+'Ủ'=>'u',
+'ũ'=>'u',
+'Ũ'=>'u',
+'ư'=>'u',
+'Ư'=>'u',
+'ứ'=>'u',
+'Ứ'=>'u',
+'ừ'=>'u',
+'Ừ'=>'u',
+'ự'=>'u',
+'ữ'=>'u',
+'Ự'=>'u',
+'ử'=>'u',
+'Ử'=>'u',
+'ữ'=>'u',
+'Ữ'=>'u',
+'â'=>'a',
+'Â'=>'a',
+'á'=>'a',
+'Á'=>'a',
+'à'=>'a',
+'À'=>'a',
+'ạ'=>'a',
+'Ạ'=>'a',
+'ả'=>'a',
+'Ả'=>'a',
+'ã'=>'a',
+'Ã'=>'a',
+'ấ'=>'a',
+'Ấ'=>'a',
+'ầ'=>'a',
+'Ầ'=>'a',
+'ậ'=>'a',
+'ạ'=>'a',
+'ò'=>'o',
+'Ậ'=>'a',
+'ẩ'=>'â',
+'Ẩ'=>'a',
+'ẫ'=>'a',
+'Ẫ'=>'a',
+'ă'=>'a',
+'Ă'=>'a',
+'ắ'=>'a',
+'Ắ'=>'a',
+'ằ'=>'a',
+'Ằ'=>'a',
+'ặ'=>'a',
+'Ặ'=>'a',
+'ẳ'=>'a',
+'Ẳ'=>'a',
+'ẵ'=>'a',
+'Ẵ'=>'a',
+'ế'=>'e',
+'Ế'=>'e',
+'ề'=>'e',
+'Ề'=>'e',
+'ệ'=>'e',
+'Ệ'=>'e',
+'ể'=>'e',
+'Ể'=>'e',
+'ễ'=>'e',
+'Ễ'=>'e',
+'é'=>'e',
+'É'=>'e',
+'è'=>'e',
+'È'=>'e',
+'ẹ'=>'e',
+'Ẹ'=>'e',
+'ẻ'=>'e',
+'Ẻ'=>'e',
+'ẽ'=>'e',
+'Ẽ'=>'e',
+'ê'=>'e',
+'Ê'=>'e',
+'í'=>'i',
+'Í'=>'i',
+'ì'=>'i',
+'Ì'=>'i',
+'ỉ'=>'i',
+'Ỉ'=>'i',
+'ĩ'=>'i',
+'Ĩ'=>'i',
+'ị'=>'i',
+'Ị'=>'i',
+'ý'=>'y',
+'Ý'=>'y',
+'ỳ'=>'y',
+'Ỳ'=>'y',
+'ỷ'=>'y',
+'Ỷ'=>'y',
+'ỹ'=>'y',
+'Ỹ'=>'y',
+'ỵ'=>'y',
+'Ỵ'=>'y',
+'đ'=>'d',
+'Đ'=>'d',
 '['=>'',
 ']'=>'',
 ';'=>'',
@@ -365,50 +352,50 @@ $trans = array(
 '~'=>'',
 '{'=>'',
 '}'=>'',
-'�'=>'',
-'�'=>'',
-'�'=>'',
-'?'=>'a',
+'‘'=>'',
+'’'=>'',
+'…'=>'',
+'ẩ'=>'a',
 '"'=>'',
-'�?'=>'o',
-'�?'=>'a',
-'??'=>'o',
-'y?'=>'y',
-'?'=>'a',
-'a?'=>'a',
-'�?'=>'e',
-'i?'=>'i',
-'a?'=>'a',
+'ồ'=>'o',
+'ấ'=>'a',
+'ớ'=>'o',
+'ý'=>'y',
+'ậ'=>'a',
+'ạ'=>'a',
+'ế'=>'e',
+'ì'=>'i',
+'ả'=>'a',
 '*'=>' ',
-'o?'=>'o',
-'�?'=>'e',
-'A?'=>'a',
-'�?'=>'a',
-'�?'=>'o',
-'a?'=>'a',
-'??'=>'o',
-'�?'=>'e',
+'ó'=>'o',
+'ể'=>'e',
+'Ấ'=>'a',
+'ậ'=>'a',
+'ộ'=>'o',
+'à'=>'a',
+'ợ'=>'o',
+'ệ'=>'e',
 '`'=>'',
 '&gt;'=>'',
 '&lt;'=>'',
 '&quot;'=>'',
 '&amp;'=>'',
 '%'=>'',
-'a?'=>'a',
-'�?'=>'a',
+'á'=>'a',
+'ầ'=>'a',
 '|'=>'',
-'�'=>'',
-'�'=>'',
-'�'=>'',
+'“'=>'',
+'”'=>'',
+'–'=>'',
 '='=>'',
-'??'=>'a',
-'??'=>'o',
-'�?'=>'o',
-'??'=>'a',
-'y?'=>'y',
-'e?'=>'e',
-'e?'=>'e',
-'u?'=>'u'
+'ặ'=>'a',
+'ờ'=>'o',
+'ố'=>'o',
+'ắ'=>'a',
+'ỳ'=>'y',
+'é'=>'e',
+'ẹ'=>'e',
+'ú'=>'u'
 );
 $str = strtr($str, $trans);
 
@@ -454,8 +441,7 @@ $str = strtr($str, $trans);
         }
 
         return trim(stripslashes($str));
-
-    }
+}
 	
 function download_photo($url, $saveto)
 {
@@ -502,27 +488,10 @@ function insert_return_youtube($a)
 	return $embedcode;
 }
 
-function insert_return_fod($a)
+function getYouTubeIdFromURL($url)
 {
-    $embedcode = '<iframe src="http://www.funnyordie.com/embed/AWECDE" width="100%" height="320" frameborder="0"></iframe>';
-	$item = $a[fod];
-	$embedcode = str_replace("AWECDE", $item, $embedcode);
-	return $embedcode;
-}
-
-function insert_return_vfy($a)
-{
-    $embedcode = '<iframe src="http://p.videofy.me/v/AWECDE" width="100%" height="320" frameborder="0"></iframe>';
-	$item = $a[vfy];
-	$embedcode = str_replace("AWECDE", $item, $embedcode);
-	return $embedcode;
-}
-
-function insert_return_vmo($a)
-{
-    $embedcode = '<iframe src="http://player.vimeo.com/video/AWECDE" width="100%" height="320" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-	$item = $a[vmo];
-	$embedcode = str_replace("AWECDE", $item, $embedcode);
-	return $embedcode;
+  $url_string = parse_url($url, PHP_URL_QUERY);
+  parse_str($url_string, $args);
+  return isset($args['v']) ? $args['v'] : false;
 }
 ?>

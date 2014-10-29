@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="{$lang254}" dir="{$lang255}">
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="{$lang254}" dir="LTR">
 <head>
 <title>{$pagetitle|stripslashes}</title>
 <link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta content="width=device-width; initial-scale=1.0;" name="viewport" />
-<link rel="stylesheet" href="{$baseurl}/css/connect_{$lang255}.css" media="screen,projection" type="text/css" />
+<link rel="stylesheet" href="{$baseurl}/css/connect.css" media="screen,projection" type="text/css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 
 <body id="page-signup">
 
 <div class="signup-wrapper">
-    <a class="signup-login-btn" href="{$baseurl}/login">{$lang10}<b>{$lang11}</b></a>
+    <a class="signup-login-btn" href="{$baseurl}/login">{$lang10} {$lang11}</a>
     <div class="header">
+        	<center><a href="http://www.phongkhamhoixuan.com"><img src="http:/www.phongkhamhoixuan.com/images/logo-large.png" /></center>
     	<a href="{$baseurl}"><h1>{$site_name}</h1></a>
     </div>
     <div class="content">
-        <div id="signup-desc" class="description">
-            <h2>{$lang12}</h2>
+    <div id="signup-desc" class="description">    
+            <h2>{$lang12} {$site_name}</h2>
             <h3>{$lang9}<br/>{$lang13}.</h3>
             <div class="spcl-button-wrap">
             	<a class="spcl-button facebook badge-facebook-connect" label="LoginFormFacebookButton" next="" href="https://www.facebook.com/dialog/permissions.request?app_id={$FACEBOOK_APP_ID}&display=page&next={$baseurl}/&response_type=code&fbconnect=1&perms=email,user_birthday,user_about_me">{$lang14}</a><br>

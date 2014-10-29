@@ -3,15 +3,15 @@
 				<div class="columns ">
                 
 					<div class="side-col" id="page:left">
-    					<h3>IPs</h3>
+    					<h3>Cấm IP</h3>
 						
                         <ul id="isoft" class="tabs">
     						<li >
-        						<a href="bans_ip.php" id="isoft_group_1" name="group_1" title="IP Banning" class="tab-item-link ">
+        						<a href="bans_ip.php" id="isoft_group_1" name="group_1" title="IP Bị Cấm" class="tab-item-link ">
                                     <span>
                                         <span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        IP Banning
+                                        IP Bị Cấm
                                     </span>
         						</a>
                                 
@@ -34,7 +34,7 @@
                                 <div id="isoft_group_1_content" style="display:none;">
                                 	<div class="entry-edit" style="width:350px">
                                         <div class="entry-edit-head">
-                                            <h4 class="icon-head head-edit-form fieldset-legend">IP Banning</h4>
+                                            <h4 class="icon-head head-edit-form fieldset-legend">IP Bị Cấm</h4>
                                             <div class="form-buttons">
 
                                             </div>
@@ -45,12 +45,12 @@
         				<table cellspacing="0" class="actions">
         				<tr>
                     		<td class="pager">
-                            	Showing {if $total gt 0}{$beginning} - {$ending} of {/if}{$total} IPs
+                            	Hiển thị {if $total gt 0}{$beginning} - {$ending} trên tổng số {/if}{$total} IP
                     		</td>
                 			<td class="export a-right"></td>
             				<td class="filter-actions a-right">
-                            	<button  id="id_ffba3971e132ae3d78c160244ea09b39" type="button" class="scalable " onclick="document.location.href='bans_ip.php'" style=""><span>Reset Filter</span></button>
-            					<button  id="id_56a0b03bf0b3be131176f3243cc289ff" type="button" class="scalable task" onclick="document.main_form.submit();" style=""><span>Search</span></button>        
+                            	<button  id="id_ffba3971e132ae3d78c160244ea09b39" type="button" class="scalable " onclick="document.location.href='bans_ip.php'" style=""><span>Reset Bộ Lọc</span></button>
+            					<button  id="id_56a0b03bf0b3be131176f3243cc289ff" type="button" class="scalable task" onclick="document.main_form.submit();" style=""><span>Tìm Kiếm</span></button>        
                             </td>
         				</tr>
     					</table>
@@ -63,7 +63,7 @@
 	    	    	        	<thead>
 	            	                <tr class="headings">
                                         <th ><span class="nobr"><a href="bans_ip.php?page={$currentpage}&sortby=ip&sorthow={if $sortby eq "ip"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&ip={$ip}{/if}" name="ips" class="{if $sortby eq "ip"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">IP</span></a></span></th>
-                                        <th  class=" no-link last"><span class="nobr">Action</span></th>
+                                        <th  class=" no-link last"><span class="nobr">Hành Động</span></th>
 	                	            </tr>
 	            	            	<tr class="filter">
                                         <th ><input type="text" name="ip" id="ip" value="{$ip|stripslashes}" class="input-text no-changes"/></th>
@@ -76,7 +76,7 @@
                                 	{section name=i loop=$results}
                                     <tr id="" >
                                         <td class=" a-right ">{$results[i].ip}</td>
-                                        <td class=" last"><a href="bans_ip.php?page={$currentpage}&sortby={$sortby}&sorthow={$sorthow}{if $search eq "1"}&ip={$ip}{/if}&delete=1&DIP={$results[i].ip}">Delete</a></td>
+                                        <td class=" last"><a href="bans_ip.php?page={$currentpage}&sortby={$sortby}&sorthow={$sorthow}{if $search eq "1"}&ip={$ip}{/if}&delete=1&DIP={$results[i].ip}">Xóa</a></td>
                                 	</tr>
                                     {/section}
                                     <tr>
@@ -121,11 +121,11 @@
     						</li>
                             
                             <li >
-                                <a href="bans_ip_add.php" id="isoft_group_2" name="group_2" title="Add IP" class="tab-item-link">
+                                <a href="bans_ip_add.php" id="isoft_group_2" name="group_2" title="Thêm IP" class="tab-item-link">
                                 	<span>
                                     	<span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Add IP
+                                        Thêm IP
                                     </span>
                                 </a>
                                 <div id="isoft_group_2_content" style="display:none;"></div>
@@ -148,7 +148,7 @@
                             </div>
 
                             <div class="content-header">
-                               <h3 class="icon-head head-products">IPs - IP Banning</h3>
+                               <h3 class="icon-head head-products">Cấm IP - IP Bị Cấm</h3>
                             </div>
                             
                             <form action="bans_ip.php" method="post" id="main_form" name="main_form" enctype="multipart/form-data">

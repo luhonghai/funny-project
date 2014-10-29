@@ -10,14 +10,23 @@ var character = String.fromCharCode(code);
 var classes=$('.entry-item').length;
 if($('#header_searchbar').css('display')!='none'){
 character=0;}
-if(character =='J' || character =='j' || character =='39'){
+if(character =='H' || character =='h'){
+$('.voteButton1').trigger('click');
+}
+if(character =='K' || character =='k'){
 window.location.href=$('#next_post').attr('href');
 }
-if(character =='K' || character =='k' || character =='37'){
+if(character =='J' || character =='j'){
 window.location.href=$('#prev_post').attr('href');
 }
-if(character=='L' || character=='l'){
-$('#post_view_love').trigger('click');
+if(character =='L' || character =='l'){
+$('.voteButton2').trigger('click');
+}
+if(character =='C' || character =='c'){
+window.location.href = "{/literal}{$baseurl}{$postfolder}{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}#comments{literal}";
+}
+if(character =='R' || character =='r'){
+window.location.href = "{/literal}{$baseurl}/random{literal}";
 }
 }
 </script>

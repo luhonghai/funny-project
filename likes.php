@@ -1,22 +1,10 @@
 <?php
-/**************************************************************************************************
-| 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) best9gagclonescript.com. All rights reserved.
-|**************************************************************************************************/
 
 include("include/config.php");
 include("include/functions/import.php");
 $thebaseurl = $config['baseurl'];
 
-$uname = cleanit($_REQUEST['uname']);
+$uid = cleanit($_REQUEST['uid']);
 
 $page = intval($_REQUEST['page']);
 
@@ -35,14 +23,15 @@ else
 	$pagingstart = "0";
 }
 
-if($uname != "")
+if($uid != "")
 {
-	STemplate::assign('uname',$uname);
-	$queryp = "select USERID, username, country, description, color1, color2, website from members where username='".mysql_real_escape_string($uname)."' AND status='1'"; 
+	STemplate::assign('uid',$uid);
+	$queryp = "select USERID, username, fullname, description, color1, website from members where userid='".mysql_real_escape_string($uid)."' AND status='1'"; 
 	$resultsp=$conn->execute($queryp);
 	$p = $resultsp->getrows();
 	STemplate::assign('p',$p[0]);
 	$USERID = intval($p[0]['USERID']);
+	$uname = $p[0]['username'];
 
 	if($USERID > 0)
 	{
@@ -55,7 +44,7 @@ if($uname != "")
 		$posts = $results->getrows();
 		STemplate::assign('posts',$posts);
 		STemplate::assign('totallikes',$totallikes);
-		STemplate::assign('pagetitle',$uname." ".$lang['193']);
+		STemplate::assign('pagetitle',$uname." - ".$lang['193']);
 		
 	$theprevpage=$currentpage-1;
 	$thenextpage=$currentpage+1;
@@ -74,7 +63,7 @@ if($uname != "")
 		}
 	}
 		
-		$eurl = base64_encode("/user/".$uname."/likes?page=".$page);
+		$eurl = base64_encode("/user/".$uid."/likes?page=".$page);
 		STemplate::assign('eurl',$eurl);
 		
 		$query = "select count(*) as total from posts where USERID='".mysql_real_escape_string($USERID)."' AND active='1' limit 1"; 
@@ -103,7 +92,7 @@ $c = loadtopchannels($cats);
 STemplate::assign('c',$c);
 }
 
-$_SESSION['location'] = "/user/".$uname."/likes?page=".$page;
+$_SESSION['location'] = "/user/".$uid."/likes?page=".$page;
 
 //TEMPLATES BEGIN
 STemplate::assign('message',$message);

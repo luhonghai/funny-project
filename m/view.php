@@ -1,23 +1,10 @@
 <?php
-/**************************************************************************************************
-| Mobile Module V 1.0
-| Best 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) best9gagclonescript.com. All rights reserved.
-|**************************************************************************************************/
 
 include("config.php");
 $mobileurl = $config['mobileurl'];
-include($config['maindir']."/include/config.php");
+include($config['basedir']."/include/config.php");
 STemplate::assign('mobileurl',$mobileurl);
-
+$postfolder = $config['postfolder'];
 $SID = $_SESSION['USERID'];
 $pid = intval(cleanit($_REQUEST['pid']));
 if($pid > 0)
@@ -33,8 +20,20 @@ $queryb = "SELECT count(*) as unfavorited FROM posts_unfavorited WHERE USERID=$S
 $executequeryb = $conn->Execute($queryb);
 $parray[0]['favorited'] = $executequerya->fields['favorited'];
 $parray[0]['unfavorited'] = $executequeryb->fields['unfavorited'];
-
-	STemplate::assign('p',$parray[0]);	
+	
+	$eurl = base64_encode($postfolder.$pid);
+	STemplate::assign('eurl',$eurl);
+	STemplate::assign('p',$parray[0]);
+	if (strpos($parray[0]['date_added'], '2013') !== false) {
+			$purl1 = $config['baseurl'].'/pdata';
+							
+		} else {
+			$patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
+			$replace = array ('\1\2/\3/\4', '$\1 =');
+			$date1 = preg_replace($patterns, $replace, $parray[0]['date_added']);
+			$purl1 = $config['baseurl'].'/pdata'.'/'.$date1;
+		}
+		STemplate::assign('purl', $purl1);	
 	$templateselect = "view.tpl";
 	$pagetitle = stripslashes($parray[0]['story']);
 	STemplate::assign('pagetitle',$pagetitle);

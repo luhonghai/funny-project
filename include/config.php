@@ -1,28 +1,27 @@
-<?
-$config = array();
+﻿<?php
+include("settings.php");
+//Tuần
+$date1 = date('Y-m-d', strtotime('Last Monday', time()));
+$date2 = date('Y-m-d', strtotime('Sunday', time()));
 
-// Begin Configuration
-$config['basedir']     =  '/vol/hll/fun';
-$config['baseurl']     =  'http://services.c-mg.vn/fun';
-$config['domain']     =  'trollvd.com';
+//Tháng
+$date3 = date('Y-m', time()).'-1';
+$date4 = date('Y-m-t', time());
 
-$DBTYPE = 'mysql';
-$DBHOST = 'cmgmysql.ctjztcxdxqlx.us-east-1.rds.amazonaws.com';
-$DBUSER = 'admincmg';
-$DBPASSWORD = 'W3lcom3123';
-$DBNAME = 'testing';
+$default_language = "vi"; //Bạn có thể chọn en
+// Kết thúc cấu hình
 
-$default_language = "en"; //You can choose en, fr, de, es, pt, ru or tr
-// End Configuration
+$config['allowhtml']=false; //--Cho phép nhap ma HTML vao thong diep ko ?
+
 
 session_start();
 
-$config['adminurl']      =  $config['baseurl'].'/administrator';
+$config['adminurl']      =  $config['baseurl'].'/admin';
 $config['cssurl']      =  $config['baseurl'].'/css';
 $config['imagedir']      =  $config['basedir'].'/images';
 $config['imageurl']      =  $config['baseurl'].'/images';
-$config['membersprofilepicdir']      =  $config['imagedir'].'/membersprofilepic';
-$config['membersprofilepicurl']      =  $config['imageurl'].'/membersprofilepic';
+$config['membersprofilepicdir']      =  $config['imagedir'].'/avatar';
+$config['membersprofilepicurl']      =  $config['imageurl'].'/avatar';
 $config['pdir'] = $config['basedir'].'/pdata';
 $config['purl'] = $config['baseurl'].'/pdata';
 require_once($config['basedir'].'/smarty/libs/Smarty.class.php');
@@ -39,7 +38,7 @@ function strip_mq_gpc($arg)
   	$arg = str_replace('"',"'",$arg);
   	$arg = stripslashes($arg);
     return $arg;
-  } 
+  }
   else
   {
     $arg = str_replace('"',"'",$arg);
@@ -66,7 +65,7 @@ if($config['mobilemode'] == "1" && $config['m_url'] != "")
 		$mcheck = is_md();
 		if($mcheck != "")
 		{
-			header("Location: ".$config['m_url'].$_SERVER['REQUEST_URI']);exit;
+			header("Location: ".$config['m_url']);exit;
 		}
 	}
 }
@@ -85,37 +84,13 @@ $theme = $config['theme'];
 STemplate::setTplDir($config['basedir']."/themes");
 if ($_REQUEST['language'] != "")
 {
-	if ($_REQUEST['language'] == "ar")
+	if ($_REQUEST['language'] == "vi")
 	{
-		$_SESSION['language'] = "ar";
+		$_SESSION['language'] = "vi";
 	}
 	elseif ($_REQUEST['language'] == "en")
 	{
 		$_SESSION['language'] = "en";
-	}
-	elseif ($_REQUEST['language'] == "fr")
-	{
-		$_SESSION['language'] = "fr";
-	}
-	elseif ($_REQUEST['language'] == "de")
-	{
-		$_SESSION['language'] = "de";
-	}
-	elseif ($_REQUEST['language'] == "es")
-	{
-		$_SESSION['language'] = "es";
-	}
-	elseif ($_REQUEST['language'] == "pt")
-	{
-		$_SESSION['language'] = "pt";
-	}
-	elseif ($_REQUEST['language'] == "ru")
-	{
-		$_SESSION['language'] = "ru";
-	}
-	elseif ($_REQUEST['language'] == "tr")
-	{
-		$_SESSION['language'] = "tr";
 	}
 }
 if ($_SESSION['language'] == "")
@@ -123,37 +98,13 @@ if ($_SESSION['language'] == "")
 	$_SESSION['language'] = $default_language;
 }
 
-if ($_SESSION['language'] == "ar")
+if ($_SESSION['language'] == "vi")
 {
-	include("lang/ar.php");
+	include("lang/vi.php");
 }
 elseif ($_SESSION['language'] == "en")
 {
 	include("lang/en.php");
-}
-elseif ($_SESSION['language'] == "fr")
-{
-	include("lang/fr.php");
-}
-elseif ($_SESSION['language'] == "de")
-{
-	include("lang/de.php");
-}
-elseif ($_SESSION['language'] == "es")
-{
-	include("lang/es.php");
-}
-elseif ($_SESSION['language'] == "pt")
-{
-	include("lang/pt.php");
-}
-elseif ($_SESSION['language'] == "ru")
-{
-	include("lang/ru.php");
-}
-elseif ($_SESSION['language'] == "tr")
-{
-	include("lang/tr.php");
 }
 else
 {
@@ -190,7 +141,7 @@ function destroy_slrememberme($username) {
         }
         setcookie ("slrememberme", "", time() - 3600);
 }
-if (!isset($_SESSION["USERNAME"]) && isset($_COOKIE['slrememberme'])) 
+if (!isset($_SESSION["USERNAME"]) && isset($_COOKIE['slrememberme']))
 {
         $sql="update members set remember_me_time=NULL and remember_me_key=NULL WHERE remember_me_time<'".date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")))."'";
         $conn->execute($sql);
@@ -208,7 +159,7 @@ if (!isset($_SESSION["USERNAME"]) && isset($_COOKIE['slrememberme']))
 				$error = $lang['225'];
 			}
     		if($error=="")
-			{				
+			{
 				SESSION_REGISTER("USERID");$_SESSION[USERID]=$rs->fields['USERID'];
 				SESSION_REGISTER("EMAIL");$_SESSION[EMAIL]=$rs->fields['email'];
 				SESSION_REGISTER("USERNAME");$_SESSION[USERNAME]=$rs->fields['username'];
@@ -222,7 +173,7 @@ if (!isset($_SESSION["USERNAME"]) && isset($_COOKIE['slrememberme']))
         	}
         }
 }
-function generateCode($length) 
+function generateCode($length)
 {
 	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";
     $code = "";
@@ -232,6 +183,116 @@ function generateCode($length)
     }
     return $code;
 }
+
+function smiley($text) {
+
+		$s2 = "<img src='".$config['baseurl']."/images/emo/"; //Path to images folder
+		$sm = "' />"; // Extension of the images (All images must be the same extension)
+		$array = array(
+			  ':))'=>$s2.'21.gif'.$sm
+			, ':-SS'=>$s2.'42.gif'.$sm
+			, ':-ss'=>$s2.'42.gif'.$sm,
+			 ':-Ss'=>$s2.'42.gif'.$sm
+			, ':-sS'=>$s2.'42.gif'.$sm
+			, '>:p'=>$s2.'47.gif'.$sm
+			, '>:P'=>$s2.'47.gif'.$sm
+                         , '114'=>$s2.'fight.gif'.$sm
+                         , '113'=>$s2.'78.gif'.$sm
+                         , '112'=>$s2.'high_five.gif'.$sm
+                        , '111'=>$s2.'55.gif'.$sm
+                        , '<):)'=>$s2.'48.gif'.$sm
+			, ':)]'=>$s2.'100.gif'.$sm
+			, '>:D<'=>$s2.'6.gif'.$sm
+			, '>:d<'=>$s2.'6.gif'.$sm
+			, '>:)'=>$s2.'19.gif'.$sm
+			, ':d'=>$s2.'4.gif'.$sm
+			, ':D'=>$s2.'4.gif'.$sm
+			, '=))'=>$s2.'24.gif'.$sm
+			, ';;)'=>$s2.'5.gif'.$sm
+			, '/:)'=>$s2.'23.gif'.$sm
+			, ':)'=>$s2.'1.gif'.$sm
+			, ':(('=>$s2.'20.gif'.$sm
+			, ':P'=>$s2.'10.gif'.$sm
+			, ':p'=>$s2.'10.gif'.$sm
+			, ':('=>$s2.'2.gif'.$sm
+			, ';))'=>$s2.'71.gif'.$sm
+			, ' ;) '=>$s2.'3.gif'.$sm
+			, ':-/'=>$s2.'7.gif'.$sm
+			, ':">'=>$s2.'9.gif'.$sm
+			, ':")'=>$s2.'9.gif'.$sm
+			, ':X'=>$s2.'8.gif'.$sm
+			, ':x'=>$s2.'8.gif'.$sm
+			, ':-*'=>$s2.'11.gif'.$sm
+			, '=(('=>$s2.'12.gif'.$sm
+			, ':-O'=>$s2.'13.gif'.$sm
+			, ':-o'=>$s2.'13.gif'.$sm
+			, 'X('=>$s2.'14.gif'.$sm
+			, 'x('=>$s2.'14.gif'.$sm
+			, ':>'=>$s2.'15.gif'.$sm
+			, 'B-)'=>$s2.'16.gif'.$sm
+			, 'b-)'=>$s2.'16.gif'.$sm
+			, '#:-s'=>$s2.'18.gif'.$sm
+			, '#:-S'=>$s2.'18.gif'.$sm
+			, ':-S'=>$s2.'17.gif'.$sm
+			, ':-s'=>$s2.'17.gif'.$sm
+			, 'O:-)'=>$s2.'25.gif'.$sm
+			, 'o:-)'=>$s2.'25.gif'.$sm
+			, ':-b'=>$s2.'26.gif'.$sm
+			, ':-B'=>$s2.'26.gif'.$sm
+			, '=;'=>$s2.'27.gif'.$sm
+			, ':-C'=>$s2.'27.gif'.$sm
+			, ':-c'=>$s2.'27.gif'.$sm
+			, ':-h'=>$s2.'103.gif'.$sm
+			, ':-H'=>$s2.'103.gif'.$sm
+			, ':-t'=>$s2.'104.gif'.$sm
+			, ':-T'=>$s2.'104.gif'.$sm
+			, '8->'=>$s2.'105.gif'.$sm
+			, 'i-)'=>$s2.'28.gif'.$sm
+			, 'I-)'=>$s2.'28.gif'.$sm
+			, '8-|'=>$s2.'29.gif'.$sm
+			, 'L-)'=>$s2.'30.gif'.$sm
+			, 'l-)'=>$s2.'30.gif'.$sm
+			, ':-&'=>$s2.'31.gif'.$sm
+			, ':-$'=>$s2.'32.gif'.$sm
+			, '[-('=>$s2.'33.gif'.$sm
+			, ':o)'=>$s2.'34.gif'.$sm
+			, ':O)'=>$s2.'34.gif'.$sm
+			, '8-}'=>$s2.'35.gif'.$sm
+			, '<:-P'=>$s2.'36.gif'.$sm
+			, '<:-p'=>$s2.'36.gif'.$sm
+			, '(:|'=>$s2.'37.gif'.$sm
+			, ':-?'=>$s2.'39.gif'.$sm
+			, '#-O'=>$s2.'40.gif'.$sm
+			, '#-o'=>$s2.'40.gif'.$sm
+			, '=d>'=>$s2.'41.gif'.$sm
+			, '=D>'=>$s2.'41.gif'.$sm
+			, ':-SS'=>$s2.'42.gif'.$sm
+			, ':-ss'=>$s2.'42.gif'.$sm
+			, ':-Ss'=>$s2.'42.gif'.$sm
+			, ':-sS'=>$s2.'42.gif'.$sm
+			, '@-)'=>$s2.'43.gif'.$sm
+			, ':^O'=>$s2.'44.gif'.$sm
+			, ':^o'=>$s2.'44.gif'.$sm
+			, ':-w'=>$s2.'45.gif'.$sm
+			, ':-W'=>$s2.'45.gif'.$sm
+			, ':-<'=>$s2.'46.gif'.$sm
+			, ':|'=>$s2.'22.gif'.$sm
+			, '=P~'=>$s2.'38.gif'.$sm
+			, ':v'=>$s2.'fb_pacman.png'.$sm
+			, '(Y)'=>$s2.'fb_thumb.png'.$sm
+			, '^_^'=>$s2.'fb_kiki.png'.$sm
+			, '<3'=>$s2.'fb_heart.png'.$sm
+			, ':3'=>$s2.'fb_curlylips.png'.$sm
+			, ':-j'=>$s2.'78.gif'.$sm
+			//To add a new emo just uncomment the next line:
+			// , 'TEXT SYMBOL HERE'=>$s2.'NAME.gif'.$sm
+			// Tip: NAME = the name of the image to replace the text. Enter the name without extension
+
+
+		);
+		return str_replace(array_keys($array), array_values($array), stripslashes($text));
+}
+
 if($config['enable_fc'] == "1")
 {
 	if($_SESSION['USERID'] == "")
@@ -242,7 +303,7 @@ if($config['enable_fc'] == "1")
 		define('FACEBOOK_SECRET', $B);
 		STemplate::assign('FACEBOOK_APP_ID',$A);
 		STemplate::assign('FACEBOOK_SECRET',$B);
-		
+
 		function get_facebook_cookie($app_id, $application_secret) {
 		  $args = array();
 		  parse_str(trim($_COOKIE['fbs_' . $app_id], '\\"'), $args);
@@ -258,7 +319,7 @@ if($config['enable_fc'] == "1")
 		  }
 		  return $args;
 		}
-		
+
 		$code = $_REQUEST['code'];
 		if($code != "")
 		{
@@ -269,17 +330,19 @@ if($config['enable_fc'] == "1")
 			$response = @file_get_contents($token_url);
 			$params = null;
 			parse_str($response, $params);
-			$graph_url = "https://graph.facebook.com/me?access_token=" 
+			$graph_url = "https://graph.facebook.com/me?access_token="
 			. $params['access_token'];
 			$user = json_decode(file_get_contents($graph_url));
 			$fname = htmlentities(strip_tags($user->name), ENT_COMPAT, "UTF-8");
 			$femail = htmlentities(strip_tags($user->email), ENT_COMPAT, "UTF-8");
-			
-			$query="SELECT USERID FROM members WHERE email='".mysql_real_escape_string($femail)."' limit 1";
+			$fid = htmlentities(strip_tags($user->id), ENT_COMPAT, "UTF-8");
+			$fusername = htmlentities(strip_tags($user->username), ENT_COMPAT, "UTF-8");
+
+			$query="SELECT USERID FROM members WHERE email='".mysql_real_escape_string($femail)."' OR username='".mysql_real_escape_string($fusername)."' limit 1";
 			$executequery=$conn->execute($query);
 			$FUID = intval($executequery->fields['USERID']);
 			if($FUID > 0)
-			{									
+			{
 				$query="SELECT USERID,email,username,verified, filter from members WHERE USERID='".mysql_real_escape_string($FUID)."' and status='1'";
 				$result=$conn->execute($query);
 				if($result->recordcount()>0)
@@ -291,7 +354,7 @@ if($config['enable_fc'] == "1")
 					$_SESSION['USERNAME']=$result->fields['username'];
 					$_SESSION['VERIFIED']=$result->fields['verified'];
 					$_SESSION['FILTER']=$result->fields['filter'];
-					$_SESSION['FB']="1";			
+					$_SESSION['FB']="1";
 					$redirect = $_SESSION['location'];
 					if($redirect == "")
 					{
@@ -310,32 +373,56 @@ if($config['enable_fc'] == "1")
 			else
 			{
 				$md5pass = md5(generateCode(5).time());
-				
-				if($fname != "" && $femail != "")
+
+				if($fusername != "")
 				{
-					$query="INSERT INTO members SET email='".mysql_real_escape_string($femail)."',username='', password='".mysql_real_escape_string($md5pass)."', addtime='".time()."', lastlogin='".time()."', ip='".$_SERVER['REMOTE_ADDR']."', lip='".$_SERVER['REMOTE_ADDR']."', verified='1'";
+					$query="INSERT INTO members SET email='".mysql_real_escape_string($femail)."', username='".mysql_real_escape_string($fusername)."', password='".mysql_real_escape_string($md5pass)."', fullname='".mysql_real_escape_string($fname)."', addtime='".time()."', lastlogin='".time()."', ip='".$_SERVER['REMOTE_ADDR']."', lip='".$_SERVER['REMOTE_ADDR']."', verified='1'";
 					$result=$conn->execute($query);
 					$userid = mysql_insert_id();
+					$profilepicture = $userid.".jpg";
+					$query="update members set profilepicture='".$profilepicture."' WHERE USERID='".mysql_real_escape_string($userid)."'";
+					$result=$conn->execute($query);
+					$img = file_get_contents('https://graph.facebook.com/'.$fid.'/picture?width=160&height=160');
+					$file = $config['membersprofilepicdir'].'/'.$userid.'.jpg';
+					file_put_contents($file, $img);
+
 					if($userid != "" && is_numeric($userid) && $userid > 0)
 					{
-						$query="SELECT USERID,email,verified, filter from members WHERE USERID='".mysql_real_escape_string($userid)."'";
+						$query="SELECT USERID,email,username,verified, filter from members WHERE USERID='".mysql_real_escape_string($userid)."'";
 						$result=$conn->execute($query);
-						
+
 						$SUSERID = $result->fields['USERID'];
 						$SEMAIL = $result->fields['email'];
+						$SUSERNAME = $result->fields['username'];
 						$SVERIFIED = $result->fields['verified'];
 						$SFILTER = $result->fields['filter'];
 						$_SESSION['USERID']=$SUSERID;
 						$_SESSION['EMAIL']=$SEMAIL;
+						$_SESSION['USERNAME']=$SUSERNAME;
 						$_SESSION['VERIFIED']=$SVERIFIED;
 						$_SESSION['FILTER']=$SFILTER;
-						$_SESSION['FB']="1";				
-						header("Location:$config[baseurl]/connect.php");exit;
+						$_SESSION['FB']="1";
+						$redirect = $_SESSION['location'];
+					if($redirect == "")
+					{
+						if ( $config[regredirect] == 1)
+						{header("Location:$config[baseurl]/index.php".$addlang);exit;}
+						else
+						{header("Location:$config[baseurl]/settings".$addlang);exit;}
+					}
+					else
+					{
+						header("Location:".$config[baseurl].$redirect);exit;
+					}
+					$_SESSION['location'] = "";
+
 					}
 				}
 			}
 		}
 	}
+
+	/*
 	function getCurrentPageUrl()
 	{
 		 static $pageURL = '';
@@ -347,9 +434,9 @@ if($config['enable_fc'] == "1")
 			  else $pageURL .= $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 		 }
 		 return $pageURL;
-	} 
+	}
 	if($_SESSION['USERNAME'] == "" && $_SESSION['FB'] == "1")
-	{	
+	{
 		$url = getCurrentPageUrl();
 		$myurl = $config['baseurl']."/connect.php";
 		$cssurl = $config['baseurl']."/css/connect.css";
@@ -357,7 +444,7 @@ if($config['enable_fc'] == "1")
 		{
 			header("Location:$config[baseurl]/connect.php");exit;
 		}
-	}
+	}*/
 }
 if($lskip != "1")
 {
@@ -369,4 +456,9 @@ if($lskip != "1")
 		}
 	}
 }
+
+$topquery = "SELECT * FROM members WHERE verified='1' AND username!='' order by posts desc limit 10";
+$executetopquery = $conn->Execute($topquery);
+$top = $executetopquery->getrows();
+STemplate::assign('top',$top);
 ?>

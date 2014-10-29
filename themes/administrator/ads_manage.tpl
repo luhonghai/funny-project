@@ -3,15 +3,15 @@
 				<div class="columns ">
                 
 					<div class="side-col" id="page:left">
-    					<h3>Advertisements</h3>
+    					<h3>Quảng Cáo</h3>
 						
                         <ul id="isoft" class="tabs">
     						<li >
-        						<a href="ads_manage.php" id="isoft_group_1" name="group_1" title="Standard Ads" class="tab-item-link ">
+        						<a href="ads_manage.php" id="isoft_group_1" name="group_1" title="Quảng Cáo" class="tab-item-link ">
                                     <span>
                                         <span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Standard Ads
+                                        Quảng Cáo
                                     </span>
         						</a>
                                 
@@ -35,7 +35,7 @@
                                 <div id="isoft_group_1_content" style="display:none;">
                                 	<div class="entry-edit">
                                         <div class="entry-edit-head">
-                                            <h4 class="icon-head head-edit-form fieldset-legend">Advertisements</h4>
+                                            <h4 class="icon-head head-edit-form fieldset-legend">Quảng Cáo</h4>
                                             <div class="form-buttons">
 
                                             </div>
@@ -46,12 +46,12 @@
         				<table cellspacing="0" class="actions">
         				<tr>
                     		<td class="pager">
-                            	Showing {if $total gt 0}{$beginning} - {$ending} of {/if}{$total} Advertisements
+                            	Hiển thị {if $total gt 0}{$beginning} - {$ending} trên tổng số {/if}{$total} Quảng Cáo
                     		</td>
                 			<td class="export a-right"></td>
             				<td class="filter-actions a-right">
-                            	<button  id="id_ffba3971e132ae3d78c160244ea09b39" type="button" class="scalable " onclick="document.location.href='ads_manage.php'" style=""><span>Reset Filter</span></button>
-            					<button  id="id_56a0b03bf0b3be131176f3243cc289ff" type="button" class="scalable task" onclick="document.main_form.submit();" style=""><span>Search</span></button>        
+                            	<button  id="id_ffba3971e132ae3d78c160244ea09b39" type="button" class="scalable " onclick="document.location.href='ads_manage.php'" style=""><span>Reset Bộ Lọc</span></button>
+            					<button  id="id_56a0b03bf0b3be131176f3243cc289ff" type="button" class="scalable task" onclick="document.main_form.submit();" style=""><span>Tìm Kiếm</span></button>        
                             </td>
         				</tr>
     					</table>
@@ -66,19 +66,19 @@
 	    	    	        	<thead>
 	            	                <tr class="headings">
                                         <th ><span class="nobr"><a href="ads_manage.php?page={$currentpage}&sortby=AID&sorthow={if $sortby eq "AID"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&details={$details}&active={$active}{/if}" name="id" class="{if $sortby eq "AID"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">ID</span></a></span></th>
-                                        <th ><span class="nobr"><a href="ads_manage.php?page={$currentpage}&sortby=details&sorthow={if $sortby eq "details"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&$toid={$toid}&details={$details}&active={$active}{/if}" name="details" class="{if $sortby eq "details"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Description</span></a></span></th>
-                                        <th ><span class="nobr"><a href="ads_manage.php?page={$currentpage}&sortby=active&sorthow={if $sortby eq "active"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&$toid={$toid}&details={$details}&active={$active}{/if}" name="active" class="{if $sortby eq "active"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Active</span></a></span></th>
-                                        <th  class=" no-link last"><span class="nobr">Action</span></th>
+                                        <th ><span class="nobr"><a href="ads_manage.php?page={$currentpage}&sortby=details&sorthow={if $sortby eq "details"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&$toid={$toid}&details={$details}&active={$active}{/if}" name="details" class="{if $sortby eq "details"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Mô Tả</span></a></span></th>
+                                        <th ><span class="nobr"><a href="ads_manage.php?page={$currentpage}&sortby=active&sorthow={if $sortby eq "active"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&$toid={$toid}&details={$details}&active={$active}{/if}" name="active" class="{if $sortby eq "active"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Kích Hoạt</span></a></span></th>
+                                        <th  class=" no-link last"><span class="nobr">Hành Động</span></th>
 	                	            </tr>
 	            	            	<tr class="filter">
                                         <th >
                                             <div class="range">
                                                 <div class="range-line">
-                                                    <span class="label">From:</span> 
+                                                    <span class="label">Từ: </span> 
                                                     <input type="text" name="fromid" id="fromid" value="{$fromid}" class="input-text no-changes"/>
                                                 </div>
                                                 <div class="range-line">
-                                                    <span class="label">To : </span>
+                                                    <span class="label">Tới: </span>
                                                     <input type="text" name="toid" id="toid" value="{$toid}" class="input-text no-changes"/>
                                                 </div>
                                             </div>
@@ -101,13 +101,13 @@
                                             <input type="hidden" name="asub" value="1" />
                                             <input type="hidden" name="aval" value="{$results[i].active}" />
                                             </form>
-                                        	<a href="javascript: document.a{$results[i].AID}.submit();">{if $results[i].active eq "1"}Yes{else}No{/if}</a>
+                                        	<a href="javascript: document.a{$results[i].AID}.submit();">{if $results[i].active eq "1"}Có{else}Không{/if}</a>
                                         </td>
                                         <td class=" last">
-                                        	<a href="ads_preview.php?AID={$results[i].AID}">Preview</a>&nbsp;|&nbsp;
-                                            <a href="ads_code.php?AID={$results[i].AID}">Get Code</a>&nbsp;|&nbsp;
-                                        	<a href="ads_edit.php?AID={$results[i].AID}">Edit</a>&nbsp;|&nbsp;
-                                            <a href="ads_manage.php?page={$currentpage}&sortby={$sortby}&sorthow={$sorthow}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&details={$details}&active={$active}{/if}&delete=1&AID={$results[i].AID}">Delete</a>
+                                        	<a href="ads_preview.php?AID={$results[i].AID}">Xem Trước</a>&nbsp;|&nbsp;
+                                            <a href="ads_code.php?AID={$results[i].AID}">Mã Chèn</a>&nbsp;|&nbsp;
+                                        	<a href="ads_edit.php?AID={$results[i].AID}">Sửa</a>&nbsp;|&nbsp;
+                                            <a href="ads_manage.php?page={$currentpage}&sortby={$sortby}&sorthow={$sorthow}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&details={$details}&active={$active}{/if}&delete=1&AID={$results[i].AID}">Xóa</a>
                                         </td>
                                 	</tr>
                                     {/section}
@@ -150,11 +150,11 @@
     						</li>
                             
                             <li >
-                                <a href="ads_create.php" id="isoft_group_2" name="group_2" title="Create Standard Ad" class="tab-item-link">
+                                <a href="ads_create.php" id="isoft_group_2" name="group_2" title="Tạo Quảng Cáo" class="tab-item-link">
                                 	<span>
                                     	<span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Create Standard Ad
+                                        Tạo Quảng Cáo
                                     </span>
                                 </a>
                                 <div id="isoft_group_2_content" style="display:none;"></div>
@@ -177,9 +177,9 @@
                             </div>
 
                             <div class="content-header">
-                               <h3 class="icon-head head-products">Advertisements - Standard Ads</h3>
+                               <h3 class="icon-head head-products">Quảng Cáo - Quảng Cáo</h3>
                                <p class="content-buttons form-buttons">
-                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable add" onclick="document.location.href='ads_create.php'" style=""><span>Create Standard Ad</span></button>			
+                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable add" onclick="document.location.href='ads_create.php'" style=""><span>Tạo Quảng Cáo</span></button>			
                                </p>
                             </div>
                             

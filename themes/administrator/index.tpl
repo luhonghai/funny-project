@@ -18,28 +18,28 @@
     <![endif]-->
 </head>
 <body id="page-login" onload="document.forms.loginForm.username.focus();">
-	<div class="header-top">
-    	<img src="{$adminurl}/images/logo.png" alt="Logo" class="logo"/>
-	</div>
     <div class="login-container">
         <div class="login-box">
             <form method="post" action="" id="loginForm">
 
                 <fieldset class="login-form">
-                    <h2>Log in to Admin Panel</h2>
+                    <h2>Đăng Nhập Quản Trị Viên</h2>
                     <div id="messages">
                     	{if $error ne ""}
                         <ul class="messages"><li class="error-msg"><ul><li>{$error}</li></ul></li></ul> 
                         {/if}                   
                     </div>
-                    <div class="input-box input-left"><label for="username">User Name:</label><input type="text" id="username" name="username" value="" class="required-entry input-text"/></div><br /><br /><br />
-                    <div class="input-box input-left"><label for="login">Password:</label><input type="password" id="password" name="password" class="required-entry input-text" value="" /></div>
+                    <div class="input-box input-left"><label for="username">Tên Đăng Nhập:</label><br/>
+                        <input type="text" id="username" name="username" value="" class="required-entry input-text"/></div>
+                    <div class="input-box input-right"><label for="login">Mật Khẩu:</label><br/>
+
+                        <input type="password" id="password" name="password" class="required-entry input-text" value="" /></div>
                     <div class="clear"></div>
                     <div class="form-buttons" style="margin-right:8px;">
-                        <a class="left" href="{$baseurl}">[ Back To 9Gag Clone Script ]</a>
-                        <input onclick="loginForm.submit()" type="submit" name="login" id="login" class="form-button" src="{$adminurl}/images/btn_login.gif" value="Login"/></div>
+                        <a class="left" href="{$baseurl}">[ Quay Lại {$site_name|stripslashes} ]</a>
+                        <input onclick="loginForm.submit()" type="submit" name="login" id="login" class="form-button" src="{$adminurl}/images/btn_login.gif" value="Đăng Nhập"/></div>
                 </fieldset>
-                <p class="legal">Copyright &copy; 2012 best9gagclonescript.com.</p>
+                <p class="legal">Powered by Gag Việt - Phiên Bản {$ver}.</p>
 				<input type="hidden" name="login" value="Login" />
             </form>
             <div class="bottom"></div>

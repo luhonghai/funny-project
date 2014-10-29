@@ -1,12 +1,11 @@
 	<div class="footer">
         <p class="bug-report">
-		<a href="http://www.best9gagclonescript.com" target="_blank" id="footer_bug_tracking">Powered by 9Gag Clone Script v{$ver}</a><br />
-            Copyright &copy; 2012 best9gagclonescript.com<br />
-            All Rights Reserved.
+    	<a id="footer_bug_tracking">Powered by Gag Việt - Phiên Bản {$ver}</a>
     	</p>
 
         <p class="legality">
-	    	
+            Copyright &copy; 2013 {$site_name|stripslashes}<br />
+            All Rights Reserved.
         </p>
         
 	</div>

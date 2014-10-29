@@ -1,14 +1,15 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On 
-RewriteBase /fun/m
-RewriteRule ^hot$ index.php
+RewriteBase /
+RewriteRule ^hot$ hot.php
 RewriteRule ^vote$ vote.php
 RewriteRule ^trending$ trending.php
-RewriteRule ^gag/([^/.]+)?/?(.*)$ view.php?pid=$1
+RewriteRule ^post/([^/.]+)?/?(.*)$ view.php?pid=$1
 RewriteRule ^login$ login.php
 RewriteRule ^logout$ logout.php
 RewriteRule ^search$ search.php
 RewriteRule ^submit$ submit.php
+RewriteRule ^safe$ safe.php
 </IfModule>
 
 <IfModule mod_security.c> 

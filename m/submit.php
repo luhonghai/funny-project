@@ -1,29 +1,14 @@
 <?php
-/**************************************************************************************************
-| 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) best9gagclonescript.com. All rights reserved.
-|**************************************************************************************************/
 
 include("config.php");
 $mobileurl = $config['mobileurl'];
-
-$maindir = $config['maindir'];
-include($config['maindir']."/include/config.php");
+include($config['basedir']."/include/config.php");
+STemplate::assign('mobileurl',$mobileurl);
 
 // The path to the font
-$wmfont = $maindir."/include/fonts/".$config['wmfont']; 
+$wmfont = $config['basedir']."/include/fonts/".$config['wmfont'];
 // The font size 
 $fsize = $config['fsize'];
-// The watermark hieght in pixels
-$wmhieght = $config['wmhieght'];
 // RGB values for watermark background and text colors
 $blackr = $config['blackr'];
 $blackb = $config['blackb'];
@@ -76,47 +61,18 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 					$error = $lang['95'];
 				}
 				
-				if((!strstr($url, 'youtube.com/watch?v=')) && (!strstr($url, 'funnyordie.com/videos/')) && (!strstr($url, 'videofy.me/')) && (!strstr($url, 'vimeo.com/')))
+				if((!strstr($url, 'youtube.com')))
 				{
 					$error = $lang['99'];
 				}
 				
 				if($error == "")
 				{
-					if(strstr($url, 'youtube.com/watch?v='))
+					if(strstr($url, 'youtube.com'))
 					{
 						$youtube_url = $url;
-						$position       = strpos($youtube_url, 'watch?v=')+8;
-						$remove_length  = strlen($youtube_url)-$position;
-						$video_id       = substr($youtube_url, -$remove_length, 11);
-						$addme = ", youtube_key='".mysql_real_escape_string($video_id)."'";
-					}
-					elseif(strstr($url, 'funnyordie.com/videos/'))
-					{
-						$fod_url = $url;
-						$position       = strpos($fod_url, 'funnyordie.com/videos/')+22;
-						$remove_length  = strlen($fod_url)-$position;
-						$video_id       = substr($fod_url, -$remove_length, 10);
-						$addme = ", fod_key='".mysql_real_escape_string($video_id)."'";
-					}
-					elseif(strstr($url, 'videofy.me/'))
-					{
-						$vfy_url = $url;
-						$position       = strpos($vfy_url, 'videofy.me/')+11;
-						$remove_length  = strlen($vfy_url)-$position;
-						$video_id       = substr($vfy_url, -$remove_length);
-						$position2       = strpos($video_id, '/')+1;
-						$remove_length2  = strlen($video_id)-$position2;
-						$video_id2       = substr($video_id, -$remove_length2);
-						$addme = ", vfy_key='".mysql_real_escape_string($video_id2)."'";
-					}
-					elseif(strstr($url, 'vimeo.com/'))
-					{
-						$vmo_url = $url;
-						$position       = strpos($vmo_url, 'vimeo.com/')+10;
-						$remove_length  = strlen($vmo_url)-$position;
-						$video_id       = substr($vmo_url, -$remove_length);
-						$addme = ", vmo_key='".mysql_real_escape_string($video_id)."'";
+						$youtube_id = getYouTubeIdFromURL($youtube_url);
+						$addme = ", youtube_key='".$youtube_id."'";
 					}
 					$approve_stories = $config['approve_stories'];
 					if($approve_stories == "1")
@@ -160,6 +116,11 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 		}
 		else
 		{
+			$dir = date('Y/m/d');
+			$config['pdir'] = $config['basedir'].'/pdata'.'/'.date('Y/m/d');
+			if (!file_exists($config['pdir'].'/t')) {
+				mkdir($config['pdir'].'/t', 0777, true);
+			}
 			$file = cleanit($_REQUEST['file']);
 			if($file == "1")
 			{
@@ -208,10 +169,12 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 								if($uploadedimage != "")
 								{
 									$thepp = $pid;
+									$thepp3 = $pid;
 									if($theimageinfo[2] == 1)
 									{
 										$thepp .= ".gif";
 										$thepp2 = ".gif";
+										$thepp3 .= ".jpg";
 									}
 									elseif($theimageinfo[2] == 2)
 									{
@@ -242,7 +205,18 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 										{
 										imagick_gif_resize($myvideoimgnew, "700", "0", true, $config['pdir']."/t/l-".$thepp, $config['pdir']."/t/z-".$thepp);
 										imagick_gif_resize($myvideoimgnew, "460", "0", true, $config['pdir']."/t/".$thepp, $config['pdir']."/t/z-".$thepp);
-										imagick_gif_resize($myvideoimgnew, "215", "0", true, $config['pdir']."/t/s-".$thepp, $config['pdir']."/t/z-".$thepp);
+										do_resize_image($myvideoimgnew, "215", "0", true, $config['pdir']."/t/s-".$thepp);
+										$gifurl = $config['imagedir']."/gif.png";
+										$gificon = imagecreatefrompng($gifurl);
+										$photo = imagecreatefromgif($config['pdir']."/t/".$thepp);
+										imagejpeg($photo, $config['pdir']."/t/".$thepp3, 90);
+										$photo1 = imagecreatefromjpeg($config['pdir']."/t/".$thepp3);
+										$wx = imagesx($photo1)/2 - imagesx($gificon)/2;
+										$wy = imagesy($photo1)/2 - imagesy($gificon)/2;
+										imagecopy($photo1, $gificon, $wx, $wy, 0, 0, imagesx($gificon), imagesy($gificon));
+										imagegif($photo1, $config['pdir']."/t/".$thepp, 90);
+										unlink($config['pdir']."/t/z-".$thepp);
+										unlink($config['pdir']."/t/".$thepp3);
 										}
 										if(file_exists($config['pdir']."/".$thepp))
 										{
@@ -264,107 +238,49 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 												{
 												if($config['twm'] == "1")
 													{
-$watermark = $config['imagedir']."/watermark.jpg";												
+$watermark = $config['imagedir']."/watermark.png";
 $img_width=imagesx($img);
 $img_height=imagesy($img);
-$watermark=imagecreatefromjpeg($watermark);  
-$watermark_width=imagesx($watermark);  
-$watermark_height=imagesy($watermark);  
-$image=imagecreatetruecolor($watermark_width, $watermark_height);  
-imagealphablending($image, false);
-// Create the canvas
-$canvas = imagecreate( $img_width, $wmhieght );  
-// Define the colours to use
-$black = imagecolorallocate( $canvas, $blackr, $blackb, $blackg );  
-$white = imagecolorallocate( $canvas, $whiter, $whiteb, $whiteg ); 
-// Create a rectangle and fill it white
-imagefilledrectangle( $canvas, 0, 0, $img_width, $wmhieght, $white );  
-// The text to use 
-$wmtext = $config['domain'].$config[postfolder].$pid."/"; 
-// Set the path to the image to watermark
-$input_image = $config['pdir']."/t/l-".$thepp; 
-// Calculate the size of the text 
-// If php has been setup without ttf support this will not work.
-$box = imagettfbbox( $fsize, 0, $wmfont, $wmtext );  
-$x = 10;  
-$y = ($wmhieght - ($box[1] - $box[7])) / 2;  
-$y -= $box[7];  
-// Add the text to the image
-imageTTFText( $canvas, $fsize, 0, $x, $y, $black, $wmfont, $wmtext );  
-// Adding the logo watermark
+$watermark=imagecreatefrompng($watermark);
+$watermark_width=imagesx($watermark);
+$watermark_height=imagesy($watermark);
+$image=imagecreatetruecolor($img_width, $img_height+$watermark_height);
+imagecopy($image, $img, 0, 0, 0, 0, $img_width, $img_height);
+$image_height=imagesy($image);
+$canvas = imagecreatetruecolor($img_width, $watermark_height);
+$black = imagecolorallocate($canvas, $blackr, $blackb, $blackg);
+$white = imagecolorallocate($canvas, $whiter, $whiteb, $whiteg);
+imagefilledrectangle($canvas, 0, 0, $img_width, $watermark_height, $white);
+$wmtext = $config['domain'].$config[postfolder].$pid."/";
+$box = imagettfbbox($fsize, 0, $wmfont, $wmtext);
+$x = 10;
+$y = ($watermark_height - ($box[1] - $box[7])) / 2;
+$y -= $box[7];
+imageTTFText($canvas, $fsize, 0, $x, $y, $black, $wmfont, $wmtext);
+imagecopy($image, $canvas, 0, $image_height-$watermark_height, 0, 0, $img_width, $watermark_height);
 if($config['lwm'] == "1"){
-$dest_x2=$img_width-$watermark_width-5;
-$dest_y2=$wmhieght-$watermark_height-5;
-imagecopy($canvas, $watermark, $dest_x2, $dest_y2, 0, 0, $watermark_width, $watermark_height);
+imagecopy($image, $watermark, $img_width-$watermark_width, $image_height-$watermark_height, 0, 0, $watermark_width, $watermark_height);
 }
-// Make white transparent
-//imagecolortransparent ( $canvas, $white );  
-// Save the text image as temp.png
-imagepng( $canvas, $config['basedir']."/temporary/".$pid."_wm_temp.png" );  
-// Cleanup the tempory image canvas.png
-ImageDestroy( $canvas );  
-
-// Create the canvas2
-$canvas2 = imagecreatetruecolor( $img_width, $img_height + $wmhieght );  
-// Define the colours to use
-$black = imagecolorallocate( $canvas2, $blackr, $blackb, $blackg );  
-$white = imagecolorallocate( $canvas2, $whiter, $whiteb, $whiteg ); 
-// Create a rectangle and fill it white
-imagefilledrectangle( $canvas2, 0, 0, $img_width, $img_height + $wmhieght, $white );  
-$dest_x3=0;
-$dest_y3=0;
-if($thepp2 == ".png")
-{
-	$input_image=imagecreatefrompng( $input_image );
-}
-else
-{
-	$input_image=imagecreatefromjpeg( $input_image );
-}
-imagealphablending($canvas2, false);
-imagecopy($canvas2, $input_image, $dest_x3, $dest_y3, 0, 0, $img_width, $img_height);
-imagepng( $canvas2, $config['basedir']."/temporary/".$pid."_temp.png" );  
-ImageDestroy( $canvas2 );  
-$input_image2 = $config['basedir']."/temporary/".$pid."_temp.png"; 
-
-// Read in the text watermark image
-$watermark2 = imagecreatefrompng( $config['basedir']."/temporary/".$pid."_wm_temp.png" );  
-// Returns the width of the given image resource  
-$watermark_width2 = imagesx( $watermark2 );
-//Returns the height of the given image resource    
-$watermark_height2 = imagesy( $watermark2 );    
-$image2 = imagecreatetruecolor( $watermark_width2, $watermark_height2 );    
-$image2 = imagecreatefrompng( $input_image2 );
-// Find the size of the original image and read it into an array      
-$size = getimagesize( $input_image2 );  
-// Set the positions of the watermark on the image
-$dest_x = 0;    
-$dest_y = $img_height;    
-imagecopymerge($image2, $watermark2, $dest_x, $dest_y, 0, 0, $watermark_width2, $watermark_height2, 100);   
-// Save the watermarked image as watermarked.jpg 
-imagejpeg( $image2, $config['pdir']."/t/l-".$thepp );
-// Clear the memory of the tempory image     
-imagedestroy( $image2 );    
-imagedestroy( $watermark2 );    
-// Delete the text watermark image
-unlink( $config['basedir']."/temporary/".$pid."_wm_temp.png");  
-unlink( $config['basedir']."/temporary/".$pid."_temp.png");  
+imagejpeg($image, $config['pdir']."/t/l-".$thepp);
+imagedestroy($image); 
 }
 elseif($config['lwm'] == "1")
 {	
 	$watermark = $config['imagedir']."/watermark.png";												
 	$img_width=imagesx($img);
 	$img_height=imagesy($img);
-	$watermark=imagecreatefrompng($watermark);  
-	$watermark_width=imagesx($watermark);  
-	$watermark_height=imagesy($watermark);  
-	$image=imagecreatetruecolor($watermark_width, $watermark_height);  
-	imagealphablending($image, false);
-	$dest_x=$img_width-$watermark_width-5;
-	$dest_y=$img_height-$watermark_height-5;
-	imagecopy($img, $watermark, $dest_x, $dest_y, 0, 0, $watermark_width, $watermark_height);
-	imagesavealpha($img, true);
-	imagejpeg($img, $config['pdir']."/t/l-".$thepp, 90);
+	$watermark=imagecreatefrompng($watermark);
+	$watermark_width=imagesx($watermark);
+	$watermark_height=imagesy($watermark);
+	$image=imagecreatetruecolor($img_width, $img_height+$watermark_height);
+	$white = imagecolorallocate($image, $whiter, $whiteb, $whiteg);
+	imagecopy($image, $img, 0, 0, 0, 0, $img_width, $img_height);
+	$image_width=imagesx($image);
+	$image_height=imagesy($image);
+	imagefilledrectangle($image, 0, $image_height, $image_width, $image_height - $watermark_height, $white);
+	imagecopy($image, $watermark, $image_width-$watermark_width, $image_height-$watermark_height, 0, 0, $watermark_width, $watermark_height);
+	imagesavealpha($image, true);
+	imagejpeg($image, $config['pdir']."/t/l-".$thepp, 90);
 }
 												
 												if($thepp2 == ".png")
@@ -384,105 +300,49 @@ elseif($config['lwm'] == "1")
 												{		
 												if($config['twm'] == "1")
 													{
-$watermark = $config['imagedir']."/watermark.jpg";												
+$watermark = $config['imagedir']."/watermark.png";
 $img_width=imagesx($img);
 $img_height=imagesy($img);
-$watermark=imagecreatefromjpeg($watermark);  
-$watermark_width=imagesx($watermark);  
-$watermark_height=imagesy($watermark);  
-$image=imagecreatetruecolor($watermark_width, $watermark_height);  
-imagealphablending($image, false);
-// Create the canvas
-$canvas = imagecreate( $img_width, $wmhieght );  
-// Define the colours to use
-$black = imagecolorallocate( $canvas, $blackr, $blackb, $blackg );  
-$white = imagecolorallocate( $canvas, $whiter, $whiteb, $whiteg ); 
-// Create a rectangle and fill it white
-imagefilledrectangle( $canvas, 0, 0, $img_width, $wmhieght, $white );  
-// Set the path to the image to watermark
-$input_image = $config['pdir']."/t/".$thepp; 
-// Calculate the size of the text 
-// If php has been setup without ttf support this will not work.
-$box = imagettfbbox( $fsize, 0, $wmfont, $wmtext );  
-$x = 10;  
-$y = ($wmhieght - ($box[1] - $box[7])) / 2;  
-$y -= $box[7];  
-// Add the text to the image
-imageTTFText( $canvas, $fsize, 0, $x, $y, $black, $wmfont, $wmtext );  
-// Adding the logo watermark
+$watermark=imagecreatefrompng($watermark);
+$watermark_width=imagesx($watermark);
+$watermark_height=imagesy($watermark);
+$image=imagecreatetruecolor($img_width, $img_height+$watermark_height);
+imagecopy($image, $img, 0, 0, 0, 0, $img_width, $img_height);
+$image_height=imagesy($image);
+$canvas = imagecreatetruecolor($img_width, $watermark_height);
+$black = imagecolorallocate( $canvas, $blackr, $blackb, $blackg );
+$white = imagecolorallocate( $canvas, $whiter, $whiteb, $whiteg );
+imagefilledrectangle($canvas, 0, 0, $img_width, $watermark_height, $white);
+$wmtext = $config['domain'].$config[postfolder].$pid."/";
+$box = imagettfbbox($fsize, 0, $wmfont, $wmtext);
+$x = 10;
+$y = ($watermark_height - ($box[1] - $box[7])) / 2;
+$y -= $box[7];
+imageTTFText($canvas, $fsize, 0, $x, $y, $black, $wmfont, $wmtext);
+imagecopy($image, $canvas, 0, $image_height-$watermark_height, 0, 0, $img_width, $watermark_height);
 if($config['lwm'] == "1"){
-$dest_x2=$img_width-$watermark_width-5;
-$dest_y2=$wmhieght-$watermark_height-5;
-imagecopy($canvas, $watermark, $dest_x2, $dest_y2, 0, 0, $watermark_width, $watermark_height);
+imagecopy($image, $watermark, $img_width-$watermark_width, $image_height-$watermark_height, 0, 0, $watermark_width, $watermark_height);
 }
-// Make white transparent
-//imagecolortransparent ( $canvas, $white );  
-// Save the text image as temp.png
-imagepng( $canvas, $config['basedir']."/temporary/".$pid."_wm_temp.png" );  
-// Cleanup the tempory image canvas.png
-ImageDestroy( $canvas );  
-
-// Create the canvas2
-$canvas2 = imagecreatetruecolor( $img_width, $img_height + $wmhieght );  
-// Define the colours to use
-$black = imagecolorallocate( $canvas2, $blackr, $blackb, $blackg );  
-$white = imagecolorallocate( $canvas2, $whiter, $whiteb, $whiteg ); 
-// Create a rectangle and fill it white
-imagefilledrectangle( $canvas2, 0, 0, $img_width, $img_height + $wmhieght, $white );  
-$dest_x3=0;
-$dest_y3=0;
-if($thepp2 == ".png")
-{
-	$input_image=imagecreatefrompng( $input_image );
-}
-else
-{
-	$input_image=imagecreatefromjpeg( $input_image );
-}
-imagealphablending($canvas2, false);
-imagecopy($canvas2, $input_image, $dest_x3, $dest_y3, 0, 0, $img_width, $img_height);
-imagepng( $canvas2, $config['basedir']."/temporary/".$pid."_temp.png" );  
-ImageDestroy( $canvas2 );  
-$input_image2 = $config['basedir']."/temporary/".$pid."_temp.png"; 
-
-// Read in the text watermark image
-$watermark2 = imagecreatefrompng( $config['basedir']."/temporary/".$pid."_wm_temp.png" );  
-// Returns the width of the given image resource  
-$watermark_width2 = imagesx( $watermark2 );
-//Returns the height of the given image resource    
-$watermark_height2 = imagesy( $watermark2 );    
-$image2 = imagecreatetruecolor( $watermark_width2, $watermark_height2 );    
-$image2 = imagecreatefrompng( $input_image2 );
-// Find the size of the original image and read it into an array      
-$size = getimagesize( $input_image2 );  
-// Set the positions of the watermark on the image
-$dest_x = 0;    
-$dest_y = $img_height;    
-imagecopymerge($image2, $watermark2, $dest_x, $dest_y, 0, 0, $watermark_width2, $watermark_height2, 100);   
-// Save the watermarked image as watermarked.jpg 
-imagejpeg( $image2, $config['pdir']."/t/".$thepp );
-// Clear the memory of the tempory image     
-imagedestroy( $image2 );    
-imagedestroy( $watermark2 );    
-// Delete the text watermark image
-unlink( $config['basedir']."/temporary/".$pid."_wm_temp.png");  
-unlink( $config['basedir']."/temporary/".$pid."_temp.png"); 
+imagejpeg($image, $config['pdir']."/t/".$thepp);
+imagedestroy($image);
 }
 elseif($config['lwm'] == "1")
 {	
 	$watermark = $config['imagedir']."/watermark.png";												
 	$img_width=imagesx($img);
 	$img_height=imagesy($img);
-	$watermark=imagecreatefrompng($watermark);  
-	$watermark_width=imagesx($watermark);  
-	$watermark_height=imagesy($watermark);  
-	$image=imagecreatetruecolor($watermark_width, $watermark_height);  
-	imagealphablending($image, false);
-	$dest_x=$img_width-$watermark_width-5;
-	$dest_y=$img_height-$watermark_height-5;
-	imagecopy($img, $watermark, $dest_x, $dest_y, 0, 0, $watermark_width, $watermark_height);
-	imagesavealpha($img, true);
-	imagejpeg($img, $config['pdir']."/t/".$thepp, 90);
+	$watermark=imagecreatefrompng($watermark);
+	$watermark_width=imagesx($watermark);
+	$watermark_height=imagesy($watermark);
+	$image=imagecreatetruecolor($img_width, $img_height+$watermark_height);
+	$white = imagecolorallocate($image, $whiter, $whiteb, $whiteg);
+	imagecopy($image, $img, 0, 0, 0, 0, $img_width, $img_height);
+	$image_width=imagesx($image);
+	$image_height=imagesy($image);
+	imagefilledrectangle($image, 0, $image_height, $image_width, $image_height - $watermark_height, $white);
+	imagecopy($image, $watermark, $image_width-$watermark_width, $image_height-$watermark_height, 0, 0, $watermark_width, $watermark_height);
+	imagesavealpha($image, true);
+	imagejpeg($image, $config['pdir']."/t/".$thepp, 90);
 }								
 												}
 											}
@@ -583,10 +443,12 @@ elseif($config['lwm'] == "1")
 									if($uploadedimage != "")
 									{
 										$thepp = $pid;
+										$thepp3 = $pid;
 										if($theimageinfo[2] == 1)
 										{
 											$thepp .= ".gif";
 											$thepp2 = ".gif";
+											$thepp3 .= ".jpg";
 										}
 										elseif($theimageinfo[2] == 2)
 										{
@@ -616,7 +478,18 @@ elseif($config['lwm'] == "1")
 										{
 										imagick_gif_resize($myvideoimgnew, "700", "0", true, $config['pdir']."/t/l-".$thepp, $config['pdir']."/t/z-".$thepp);
 										imagick_gif_resize($myvideoimgnew, "460", "0", true, $config['pdir']."/t/".$thepp, $config['pdir']."/t/z-".$thepp);
-										imagick_gif_resize($myvideoimgnew, "215", "0", true, $config['pdir']."/t/s-".$thepp, $config['pdir']."/t/z-".$thepp);
+										do_resize_image($myvideoimgnew, "215", "0", true, $config['pdir']."/t/s-".$thepp);
+										$gifurl = $config['imagedir']."/gif.png";
+										$gificon = imagecreatefrompng($gifurl);
+										$photo = imagecreatefromgif($config['pdir']."/t/".$thepp);
+										imagejpeg($photo, $config['pdir']."/t/".$thepp3, 90);
+										$photo1 = imagecreatefromjpeg($config['pdir']."/t/".$thepp3);
+										$wx = imagesx($photo1)/2 - imagesx($gificon)/2;
+										$wy = imagesy($photo1)/2 - imagesy($gificon)/2;
+										imagecopy($photo1, $gificon, $wx, $wy, 0, 0, imagesx($gificon), imagesy($gificon));
+										imagegif($photo1, $config['pdir']."/t/".$thepp, 90);
+										unlink($config['pdir']."/t/z-".$thepp);
+										unlink($config['pdir']."/t/".$thepp3);
 										}
 											if(file_exists($config['pdir']."/".$thepp))
 											{
@@ -638,107 +511,49 @@ elseif($config['lwm'] == "1")
 												{
 												if($config['twm'] == "1")
 													{
-$watermark = $config['imagedir']."/watermark.jpg";												
+$watermark = $config['imagedir']."/watermark.png";
 $img_width=imagesx($img);
 $img_height=imagesy($img);
-$watermark=imagecreatefromjpeg($watermark);  
-$watermark_width=imagesx($watermark);  
-$watermark_height=imagesy($watermark);  
-$image=imagecreatetruecolor($watermark_width, $watermark_height);  
-imagealphablending($image, false);
-// Create the canvas
-$canvas = imagecreate( $img_width, $wmhieght );  
-// Define the colours to use
-$black = imagecolorallocate( $canvas, $blackr, $blackb, $blackg );  
-$white = imagecolorallocate( $canvas, $whiter, $whiteb, $whiteg ); 
-// Create a rectangle and fill it white
-imagefilledrectangle( $canvas, 0, 0, $img_width, $wmhieght, $white );  
-// The text to use 
-$wmtext = $config['domain'].$config[postfolder].$pid."/"; 
-// Set the path to the image to watermark
-$input_image = $config['pdir']."/t/l-".$thepp; 
-// Calculate the size of the text 
-// If php has been setup without ttf support this will not work.
-$box = imagettfbbox( $fsize, 0, $wmfont, $wmtext );  
-$x = 10;  
-$y = ($wmhieght - ($box[1] - $box[7])) / 2;  
-$y -= $box[7];  
-// Add the text to the image
-imageTTFText( $canvas, $fsize, 0, $x, $y, $black, $wmfont, $wmtext );  
-// Adding the logo watermark
+$watermark=imagecreatefrompng($watermark);
+$watermark_width=imagesx($watermark);
+$watermark_height=imagesy($watermark);
+$image=imagecreatetruecolor($img_width, $img_height+$watermark_height);
+imagecopy($image, $img, 0, 0, 0, 0, $img_width, $img_height);
+$image_height=imagesy($image);
+$canvas = imagecreatetruecolor($img_width, $watermark_height);
+$black = imagecolorallocate( $canvas, $blackr, $blackb, $blackg );
+$white = imagecolorallocate( $canvas, $whiter, $whiteb, $whiteg );
+imagefilledrectangle($canvas, 0, 0, $img_width, $watermark_height, $white);
+$wmtext = $config['domain'].$config[postfolder].$pid."/";
+$box = imagettfbbox($fsize, 0, $wmfont, $wmtext);
+$x = 10;
+$y = ($watermark_height - ($box[1] - $box[7])) / 2;
+$y -= $box[7];
+imageTTFText($canvas, $fsize, 0, $x, $y, $black, $wmfont, $wmtext);
+imagecopy($image, $canvas, 0, $image_height-$watermark_height, 0, 0, $img_width, $watermark_height);
 if($config['lwm'] == "1"){
-$dest_x2=$img_width-$watermark_width-5;
-$dest_y2=$wmhieght-$watermark_height-5;
-imagecopy($canvas, $watermark, $dest_x2, $dest_y2, 0, 0, $watermark_width, $watermark_height);
+imagecopy($image, $watermark, $img_width-$watermark_width, $image_height-$watermark_height, 0, 0, $watermark_width, $watermark_height);
 }
-// Make white transparent
-//imagecolortransparent ( $canvas, $white );  
-// Save the text image as temp.png
-imagepng( $canvas, $config['basedir']."/temporary/".$pid."_wm_temp.png" );  
-// Cleanup the tempory image canvas.png
-ImageDestroy( $canvas );  
-
-// Create the canvas2
-$canvas2 = imagecreatetruecolor( $img_width, $img_height + $wmhieght );  
-// Define the colours to use
-$black = imagecolorallocate( $canvas2, $blackr, $blackb, $blackg );  
-$white = imagecolorallocate( $canvas2, $whiter, $whiteb, $whiteg ); 
-// Create a rectangle and fill it white
-imagefilledrectangle( $canvas2, 0, 0, $img_width, $img_height + $wmhieght, $white );  
-$dest_x3=0;
-$dest_y3=0;
-if($thepp2 == ".png")
-{
-	$input_image=imagecreatefrompng( $input_image );
-}
-else
-{
-	$input_image=imagecreatefromjpeg( $input_image );
-}
-imagealphablending($canvas2, false);
-imagecopy($canvas2, $input_image, $dest_x3, $dest_y3, 0, 0, $img_width, $img_height);
-imagepng( $canvas2, $config['basedir']."/temporary/".$pid."_temp.png" );  
-ImageDestroy( $canvas2 );  
-$input_image2 = $config['basedir']."/temporary/".$pid."_temp.png"; 
-
-// Read in the text watermark image
-$watermark2 = imagecreatefrompng( $config['basedir']."/temporary/".$pid."_wm_temp.png" );  
-// Returns the width of the given image resource  
-$watermark_width2 = imagesx( $watermark2 );
-//Returns the height of the given image resource    
-$watermark_height2 = imagesy( $watermark2 );    
-$image2 = imagecreatetruecolor( $watermark_width2, $watermark_height2 );    
-$image2 = imagecreatefrompng( $input_image2 );
-// Find the size of the original image and read it into an array      
-$size = getimagesize( $input_image2 );  
-// Set the positions of the watermark on the image
-$dest_x = 0;    
-$dest_y = $img_height;    
-imagecopymerge($image2, $watermark2, $dest_x, $dest_y, 0, 0, $watermark_width2, $watermark_height2, 100);   
-// Save the watermarked image as watermarked.jpg 
-imagejpeg( $image2, $config['pdir']."/t/l-".$thepp );
-// Clear the memory of the tempory image     
-imagedestroy( $image2 );    
-imagedestroy( $watermark2 );    
-// Delete the text watermark image
-unlink( $config['basedir']."/temporary/".$pid."_wm_temp.png");  
-unlink( $config['basedir']."/temporary/".$pid."_temp.png"); 
+imagejpeg($image, $config['pdir']."/t/l-".$thepp);
+imagedestroy($image);
 }
 elseif($config['lwm'] == "1")
 {	
 	$watermark = $config['imagedir']."/watermark.png";												
 	$img_width=imagesx($img);
 	$img_height=imagesy($img);
-	$watermark=imagecreatefrompng($watermark);  
-	$watermark_width=imagesx($watermark);  
-	$watermark_height=imagesy($watermark);  
-	$image=imagecreatetruecolor($watermark_width, $watermark_height);  
-	imagealphablending($image, false);
-	$dest_x=$img_width-$watermark_width-5;
-	$dest_y=$img_height-$watermark_height-5;
-	imagecopy($img, $watermark, $dest_x, $dest_y, 0, 0, $watermark_width, $watermark_height);
-	imagesavealpha($img, true);
-	imagejpeg($img, $config['pdir']."/t/l-".$thepp, 90);
+	$watermark=imagecreatefrompng($watermark);
+	$watermark_width=imagesx($watermark);
+	$watermark_height=imagesy($watermark);
+	$image=imagecreatetruecolor($img_width, $img_height+$watermark_height);
+	$white = imagecolorallocate($image, $whiter, $whiteb, $whiteg);
+	imagecopy($image, $img, 0, 0, 0, 0, $img_width, $img_height);
+	$image_width=imagesx($image);
+	$image_height=imagesy($image);
+	imagefilledrectangle($image, 0, $image_height, $image_width, $image_height - $watermark_height, $white);
+	imagecopy($image, $watermark, $image_width-$watermark_width, $image_height-$watermark_height, 0, 0, $watermark_width, $watermark_height);
+	imagesavealpha($image, true);
+	imagejpeg($image, $config['pdir']."/t/l-".$thepp, 90);
 }
 												
 												if($thepp2 == ".png")
@@ -759,105 +574,49 @@ elseif($config['lwm'] == "1")
 
 												if($config['twm'] == "1")
 													{
-$watermark = $config['imagedir']."/watermark.jpg";												
+$watermark = $config['imagedir']."/watermark.png";
 $img_width=imagesx($img);
 $img_height=imagesy($img);
-$watermark=imagecreatefromjpeg($watermark);  
-$watermark_width=imagesx($watermark);  
-$watermark_height=imagesy($watermark);  
-$image=imagecreatetruecolor($watermark_width, $watermark_height);  
-imagealphablending($image, false);
-// Create the canvas
-$canvas = imagecreate( $img_width, $wmhieght );  
-// Define the colours to use
-$black = imagecolorallocate( $canvas, $blackr, $blackb, $blackg );  
-$white = imagecolorallocate( $canvas, $whiter, $whiteb, $whiteg ); 
-// Create a rectangle and fill it white
-imagefilledrectangle( $canvas, 0, 0, $img_width, $wmhieght, $white );  
-// Set the path to the image to watermark
-$input_image = $config['pdir']."/t/".$thepp; 
-// Calculate the size of the text 
-// If php has been setup without ttf support this will not work.
-$box = imagettfbbox( $fsize, 0, $wmfont, $wmtext );  
-$x = 10;  
-$y = ($wmhieght - ($box[1] - $box[7])) / 2;  
-$y -= $box[7];  
-// Add the text to the image
-imageTTFText( $canvas, $fsize, 0, $x, $y, $black, $wmfont, $wmtext );  
-// Adding the logo watermark
+$watermark=imagecreatefrompng($watermark);
+$watermark_width=imagesx($watermark);
+$watermark_height=imagesy($watermark);
+$image=imagecreatetruecolor($img_width, $img_height+$watermark_height);
+imagecopy($image, $img, 0, 0, 0, 0, $img_width, $img_height);
+$image_height=imagesy($image);
+$canvas = imagecreatetruecolor($img_width, $watermark_height);
+$black = imagecolorallocate( $canvas, $blackr, $blackb, $blackg );
+$white = imagecolorallocate( $canvas, $whiter, $whiteb, $whiteg );
+imagefilledrectangle($canvas, 0, 0, $img_width, $watermark_height, $white);
+$wmtext = $config['domain'].$config[postfolder].$pid."/";
+$box = imagettfbbox($fsize, 0, $wmfont, $wmtext);
+$x = 10;
+$y = ($watermark_height - ($box[1] - $box[7])) / 2;
+$y -= $box[7];
+imageTTFText($canvas, $fsize, 0, $x, $y, $black, $wmfont, $wmtext);
+imagecopy($image, $canvas, 0, $image_height-$watermark_height, 0, 0, $img_width, $watermark_height);
 if($config['lwm'] == "1"){
-$dest_x2=$img_width-$watermark_width-5;
-$dest_y2=$wmhieght-$watermark_height-5;
-imagecopy($canvas, $watermark, $dest_x2, $dest_y2, 0, 0, $watermark_width, $watermark_height);
+imagecopy($image, $watermark, $img_width-$watermark_width, $image_height-$watermark_height, 0, 0, $watermark_width, $watermark_height);
 }
-// Make white transparent
-//imagecolortransparent ( $canvas, $white );  
-// Save the text image as temp.png
-imagepng( $canvas, $config['basedir']."/temporary/".$pid."_wm_temp.png" );  
-// Cleanup the tempory image canvas.png
-ImageDestroy( $canvas );  
-
-// Create the canvas2
-$canvas2 = imagecreatetruecolor( $img_width, $img_height + $wmhieght );  
-// Define the colours to use
-$black = imagecolorallocate( $canvas2, $blackr, $blackb, $blackg );  
-$white = imagecolorallocate( $canvas2, $whiter, $whiteb, $whiteg ); 
-// Create a rectangle and fill it white
-imagefilledrectangle( $canvas2, 0, 0, $img_width, $img_height + $wmhieght, $white );  
-$dest_x3=0;
-$dest_y3=0;
-if($thepp2 == ".png")
-{
-	$input_image=imagecreatefrompng( $input_image );
-}
-else
-{
-	$input_image=imagecreatefromjpeg( $input_image );
-}
-imagealphablending($canvas2, false);
-imagecopy($canvas2, $input_image, $dest_x3, $dest_y3, 0, 0, $img_width, $img_height);
-imagepng( $canvas2, $config['basedir']."/temporary/".$pid."_temp.png" );  
-ImageDestroy( $canvas2 );  
-$input_image2 = $config['basedir']."/temporary/".$pid."_temp.png"; 
-
-// Read in the text watermark image
-$watermark2 = imagecreatefrompng( $config['basedir']."/temporary/".$pid."_wm_temp.png" );  
-// Returns the width of the given image resource  
-$watermark_width2 = imagesx( $watermark2 );
-//Returns the height of the given image resource    
-$watermark_height2 = imagesy( $watermark2 );    
-$image2 = imagecreatetruecolor( $watermark_width2, $watermark_height2 );    
-$image2 = imagecreatefrompng( $input_image2 );
-// Find the size of the original image and read it into an array      
-$size = getimagesize( $input_image2 );  
-// Set the positions of the watermark on the image
-$dest_x = 0;    
-$dest_y = $img_height;    
-imagecopymerge($image2, $watermark2, $dest_x, $dest_y, 0, 0, $watermark_width2, $watermark_height2, 100);   
-// Save the watermarked image as watermarked.jpg 
-imagejpeg( $image2, $config['pdir']."/t/".$thepp );
-// Clear the memory of the tempory image     
-imagedestroy( $image2 );    
-imagedestroy( $watermark2 );    
-// Delete the text watermark image
-unlink( $config['basedir']."/temporary/".$pid."_wm_temp.png");  
-unlink( $config['basedir']."/temporary/".$pid."_temp.png"); 
+imagejpeg($image, $config['pdir']."/t/".$thepp);
+imagedestroy($image);
 }
 elseif($config['lwm'] == "1")
 {	
 	$watermark = $config['imagedir']."/watermark.png";												
 	$img_width=imagesx($img);
 	$img_height=imagesy($img);
-	$watermark=imagecreatefrompng($watermark);  
-	$watermark_width=imagesx($watermark);  
-	$watermark_height=imagesy($watermark);  
-	$image=imagecreatetruecolor($watermark_width, $watermark_height);  
-	imagealphablending($image, false);
-	$dest_x=$img_width-$watermark_width-5;
-	$dest_y=$img_height-$watermark_height-5;
-	imagecopy($img, $watermark, $dest_x, $dest_y, 0, 0, $watermark_width, $watermark_height);
-	imagesavealpha($img, true);
-	imagejpeg($img, $config['pdir']."/t/".$thepp, 90);
+	$watermark=imagecreatefrompng($watermark);
+	$watermark_width=imagesx($watermark);
+	$watermark_height=imagesy($watermark);
+	$image=imagecreatetruecolor($img_width, $img_height+$watermark_height);
+	$white = imagecolorallocate($image, $whiter, $whiteb, $whiteg);
+	imagecopy($image, $img, 0, 0, 0, 0, $img_width, $img_height);
+	$image_width=imagesx($image);
+	$image_height=imagesy($image);
+	imagefilledrectangle($image, 0, $image_height, $image_width, $image_height - $watermark_height, $white);
+	imagecopy($image, $watermark, $image_width-$watermark_width, $image_height-$watermark_height, 0, 0, $watermark_width, $watermark_height);
+	imagesavealpha($image, true);
+	imagejpeg($image, $config['pdir']."/t/".$thepp, 90);
 }								
 												}
 											}
@@ -918,9 +677,7 @@ STemplate::assign('allchannels',$cats);
 $_SESSION['location'] = "/submit";
 
 //TEMPLATES BEGIN
-
 STemplate::setTplDir($config['mobiledir']."/themes");
-STemplate::assign('mobileurl',$mobileurl);
 STemplate::assign('menu',3);
 STemplate::assign('error',$error);
 STemplate::assign('message',$message);

@@ -1,20 +1,8 @@
 <?php
-/**************************************************************************************************
-| 9Gag Clone Script
-| http://www.best9gagclonescript.com
-| support@best9gagclonescript.com
-|
-|**************************************************************************************************
-|
-| By using this software you agree that you have read and acknowledged our End-User License 
-| 
-|
-| Copyright (c) best9gagclonescript.com. All rights reserved.
-|**************************************************************************************************/
 
 include("config.php");
 $mobileurl = $config['mobileurl'];
-include($config['maindir']."/include/config.php");
+include($config['basedir']."/include/config.php");
 STemplate::assign('mobileurl',$mobileurl);
 $mobile_per_page = $config[mobile_per_page];
 $config['items_per_page'] = "5";

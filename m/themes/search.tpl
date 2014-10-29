@@ -4,21 +4,40 @@
         {include file='lang.tpl'}
     </div>
 	<div id="header">
-       <div id="search_wrapper">
+		<div id="search_wrapper">
                     <form action="{$mobileurl}/search">
                         <input id="sitebar_search_header" type="text" class="search search_input" name="query" tabindex="1" placeholder="{$lang189}"/>
                     </form>
         </div>
-		<a href='{$mobileurl}/submit' class='submit'>submit</a>
     </div>
 
     <div id="content">
     
     	{section name=i loop=$posts}
-        <a href="{$mobileurl}{$postfolder}{$posts[i].PID}"> 
+        <a href="{$mobileurl}{$postfolder}{$posts[i].PID}">
             <h1>{$posts[i].story|stripslashes}</h1>
-            <img alt="{$posts[i].story|stripslashes}" src="{$purl}/t/{$posts[i].pic}" />
-        </a>
+		</a>
+	{if $posts[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
+        <a href="{$mobileurl}{$postfolder}{$posts[i].PID}"><img alt="{$posts[i].story|stripslashes}" src="{$baseurl}/images/nsfw.jpg" border="0" /></a>
+    {else}
+		{if $posts[i].pic ne ""}
+			<a href="{$mobileurl}{$postfolder}{$posts[i].PID}">
+				<img alt="{$posts[i].story|stripslashes}" src="{$purl}/t/{$posts[i].pic}" />
+			</a>
+		{else}
+			{if $posts[i].youtube_key != ""}
+			<center>
+            {insert name=return_youtube value=a assign=youtube youtube=$posts[i].youtube_key}{$youtube}
+            </center>
+            {elseif $posts[i].contents != ""}
+            <img src="{$imageurl}/s-text.png" alt="{$posts[i].story|stripslashes}" />
+			{else}
+			<a href="{$mobileurl}{$postfolder}{$posts[i].PID}">
+				<img alt="{$posts[i].story|stripslashes}" src="{$imageurl}/error.jpg" border="0" />
+			</a>
+			{/if}
+		{/if}
+	{/if}
         <div class='stats-container'>
             <div class='stats-tooltip-border'></div>
             <div class='stats-tooltip'></div>
@@ -42,7 +61,7 @@
 				{/if}
 				<li class='fblike'><fb:like href="{$baseurl}{$postfolder}{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}?ref=fb" send="false" layout="button_count" width="90px" show_faces="false" font="" label="Post"></fb:like></li>
                 <li class='view'>
-                    <a class="badge-facebook-comments-toggler" entryId="{$posts[i].PID}" data-url="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" href="javascript:void(0);"><fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{if SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"></fb:comments-count> {$lang143}</a>
+                    <a class="badge-facebook-comments-toggler" entryId="{$posts[i].PID}" data-url="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" href="javascript:void(0);"><fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"></fb:comments-count> {$lang143}</a>
                 </li>
             </ul>
         </div>
@@ -69,9 +88,15 @@
     <div id='nav'>
         <ul>
             <div class='tip-border'></div>
-            <li><a href="{$mobileurl}/">{$lang172}</a></li>
+            <li><a href="{$mobileurl}/hot">{$lang172}</a></li>
             <li><a href="{$mobileurl}/trending">{$lang173}</a></li>
             <li><a href="{$mobileurl}/vote">{$lang174}</a></li>
+			{if $smarty.session.USERID ne ""}
+			<li><a href="{$mobileurl}/submit" class='submit'>{$lang199}</a></li>
+			<li><a href={$mobileurl}/logout>{$lang198}</a></li>
+			{else}  
+			<li><a href="{$mobileurl}/login">{$lang197}</a></li>
+			{/if}
         </ul>
     </div>
     

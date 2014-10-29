@@ -3,16 +3,16 @@
 				<div class="columns ">
                 
 					<div class="side-col" id="page:left">
-    					<h3>Members</h3>
+    					<h3>Thành Viên</h3>
 						
                         <ul id="isoft" class="tabs">
     						<li >
-        						<a href="members_manage.php" id="isoft_group_1" name="group_1" title="Manage Members" class="tab-item-link ">
-                                    <span>
+        						<a href="members_manage.php" id="isoft_group_1" name="group_1" title="Quản Lý Thành Viên" class="tab-item-link ">
+        			<span>
                                         <span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Manage Members
-                                    </span>
+                                        Quản Lý Thành Viên
+                                </span>
         						</a>
                                 
                                 
@@ -34,7 +34,7 @@
                                 <div id="isoft_group_1_content" style="display:none;">
                                 	<div class="entry-edit">
                                         <div class="entry-edit-head">
-                                            <h4 class="icon-head head-edit-form fieldset-legend">Manage Members</h4>
+                                            <h4 class="icon-head head-edit-form fieldset-legend">Quản Lý Thành Viên</h4>
                                             <div class="form-buttons">
 
                                             </div>
@@ -45,12 +45,12 @@
         				<table cellspacing="0" class="actions">
         				<tr>
                     		<td class="pager">
-                            	Showing {if $total gt 0}{$beginning} - {$ending} of {/if}{$total} Members
+                            	Hiển thị {if $total gt 0}{$beginning} - {$ending} trên tổng số {/if}{$total} Thành Viên
                     		</td>
                 			<td class="export a-right"></td>
             				<td class="filter-actions a-right">
-                            	<button  id="id_ffba3971e132ae3d78c160244ea09b39" type="button" class="scalable " onclick="document.location.href='members_manage.php'" style=""><span>Reset Filter</span></button>
-            					<button  id="id_56a0b03bf0b3be131176f3243cc289ff" type="button" class="scalable task" onclick="document.main_form.submit();" style=""><span>Search</span></button>        
+                            	<button  id="id_ffba3971e132ae3d78c160244ea09b39" type="button" class="scalable " onclick="document.location.href='members_manage.php'" style=""><span>Reset Bộ Lọc</span></button>
+            					<button  id="id_56a0b03bf0b3be131176f3243cc289ff" type="button" class="scalable task" onclick="document.main_form.submit();" style=""><span>Tìm Kiếm</span></button>        
                             </td>
         				</tr>
     					</table>
@@ -68,22 +68,22 @@
 	    	    	        	<thead>
 	            	                <tr class="headings">
                                         <th ><span class="nobr"><a href="members_manage.php?page={$currentpage}&sortby=USERID&sorthow={if $sortby eq "USERID"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}" name="id" class="{if $sortby eq "USERID"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">ID</span></a></span></th>
-                                        <th ><span class="nobr"><a href="members_manage.php?page={$currentpage}&sortby=username&sorthow={if $sortby eq "username"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}" name="username" class="{if $sortby eq "username"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Username</span></a></span></th>
+                                        <th ><span class="nobr"><a href="members_manage.php?page={$currentpage}&sortby=username&sorthow={if $sortby eq "username"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}" name="username" class="{if $sortby eq "username"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Tên Đăng Nhập</span></a></span></th>
                                         <th ><span class="nobr"><a href="members_manage.php?page={$currentpage}&sortby=email&sorthow={if $sortby eq "email"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}" name="email" class="{if $sortby eq "email"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">E-Mail</span></a></span></th>
-                                        <th ><span class="nobr"><a href="members_manage.php?page={$currentpage}&sortby=verified&sorthow={if $sortby eq "verified"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}" name="verified" class="{if $sortby eq "verified"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Verified</span></a></span></th>
-                                        <th ><span class="nobr"><a href="members_manage.php?page={$currentpage}&sortby=addtime&sorthow={if $sortby eq "addtime"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}" name="addtime" class="{if $sortby eq "addtime"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Date Joined</span></a></span></th>
-                                        <th ><span class="nobr"><a href="members_manage.php?page={$currentpage}&sortby=status&sorthow={if $sortby eq "status"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}" name="status" class="{if $sortby eq "status"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Active</span></a></span></th>
-                                        <th  class=" no-link last"><span class="nobr">Action</span></th>
+                                        <th ><span class="nobr"><a href="members_manage.php?page={$currentpage}&sortby=verified&sorthow={if $sortby eq "verified"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}" name="verified" class="{if $sortby eq "verified"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Đã Xác Nhận</span></a></span></th>
+                                        <th ><span class="nobr"><a href="members_manage.php?page={$currentpage}&sortby=addtime&sorthow={if $sortby eq "addtime"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}" name="addtime" class="{if $sortby eq "addtime"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Ngày Tham Gia</span></a></span></th>
+                                        <th ><span class="nobr"><a href="members_manage.php?page={$currentpage}&sortby=status&sorthow={if $sortby eq "status"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}" name="status" class="{if $sortby eq "status"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Kích Hoạt</span></a></span></th>
+                                        <th  class=" no-link last"><span class="nobr">Hành Động</span></th>
 	                	            </tr>
 	            	            	<tr class="filter">
                                         <th >
                                             <div class="range">
                                                 <div class="range-line">
-                                                    <span class="label">From:</span> 
+                                                    <span class="label">Từ: </span> 
                                                     <input type="text" name="fromid" id="fromid" value="{$fromid}" class="input-text no-changes"/>
                                                 </div>
                                                 <div class="range-line">
-                                                    <span class="label">To : </span>
+                                                    <span class="label">Tới: </span>
                                                     <input type="text" name="toid" id="toid" value="{$toid}" class="input-text no-changes"/>
                                                 </div>
                                             </div>
@@ -110,7 +110,7 @@
                                             <input type="hidden" name="vsub" value="1" />
                                             <input type="hidden" name="vval" value="{$results[i].verified}" />
                                             </form>
-                                        	<a href="javascript: document.v{$results[i].USERID}.submit();">{if $results[i].verified eq "1"}Yes{else}No{/if}</a>
+                                        	<a href="javascript: document.v{$results[i].USERID}.submit();">{if $results[i].verified eq "1"}Có{else}Không{/if}</a>
                                         </td>
                                         <td class=" ">{$results[i].addtime|date_format:"%b %e, %Y"}</td>
                                         <td class=" ">
@@ -119,9 +119,9 @@
                                             <input type="hidden" name="asub" value="1" />
                                             <input type="hidden" name="aval" value="{$results[i].status}" />
                                             </form>
-                                        	<a href="javascript: document.a{$results[i].USERID}.submit();">{if $results[i].status eq "1"}Yes{else}No{/if}</a>
+                                        	<a href="javascript: document.a{$results[i].USERID}.submit();">{if $results[i].status eq "1"}Có{else}Không{/if}</a>
                                         </td>
-                                        <td class=" last"><a href="members_edit.php?USERID={$results[i].USERID}">Edit</a>&nbsp;|&nbsp;<a href="members_manage.php?page={$currentpage}&sortby={$sortby}&sorthow={$sorthow}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}&delete=1&USERID={$results[i].USERID}">Delete</a></td>
+                                        <td class=" last"><a href="members_edit.php?USERID={$results[i].USERID}">Sửa</a>&nbsp;|&nbsp;<a href="members_manage.php?page={$currentpage}&sortby={$sortby}&sorthow={$sorthow}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&username={$username}&email={$email}&verified={$verified}&familyfilter={$familyfilter}&featured={$featured}&status={$status}{/if}&delete=1&USERID={$results[i].USERID}">Xóa</a></td>
                                 	</tr>
                                     {/section}
                                     <tr>
@@ -164,17 +164,29 @@
                                 
                                 
     						</li>
+    						
+                            <li >
+                                <a href="members_create.php" id="isoft_group_2" name="group_2" title="Tạo Thành Viên" class="tab-item-link">
+                                	<span>
+                                    	<span class="changed" title=""></span>
+                                        <span class="error" title=""></span>
+                                        Tạo Thành Viên
+                                    </span>
+                                </a>
+                                <div id="isoft_group_2_content" style="display:none;"></div>
+                            </li>
+							
 							<li >
-        						<a href="members_newsletter.php" id="isoft_group_1" name="group_1" title="General Settings" class="tab-item-link ">
+        						<a href="members_newsletter.php" id="isoft_group_4" name="group_4" title="Gửi Thư" class="tab-item-link ">
                                     <span>
                                         <span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Newsletter
+                                        Gửi Thư
                                     </span>
         						</a>
-                                <div id="isoft_group_1_content" style="display:none;"></div>
+                                <div id="isoft_group_4_content" style="display:none;"></div>
     						</li>
-    
+                                
 						</ul>
                         
 						<script type="text/javascript">
@@ -192,7 +204,10 @@
                             </div>
 
                             <div class="content-header">
-                               <h3 class="icon-head head-products">Members - Manage Members</h3>
+                               <h3 class="icon-head head-products">Thành Viên - Quản Lý Thành Viên</h3>
+                               <p class="content-buttons form-buttons">
+                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable add" onclick="document.location.href='members_create.php'" style=""><span>Tạo Thành Viên</span></button>			
+                               </p>
                             </div>
                             
                             <form action="members_manage.php" method="post" id="main_form" name="main_form" enctype="multipart/form-data">

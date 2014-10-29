@@ -3,15 +3,15 @@
 				<div class="columns ">
                 
 					<div class="side-col" id="page:left">
-    					<h3>Settings</h3>
+    					<h3>Sitemap</h3>
 						
                         <ul id="isoft" class="tabs">
     						<li >
-        						<a href="sitemap.php" id="isoft_group_1" name="group_1" title="Settings" class="tab-item-link ">
+        						<a href="sitemap.php" id="isoft_group_1" name="group_1" title="Tạo Sitemap" class="tab-item-link ">
                                     <span>
                                         <span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Create Sitemap
+                                        Tạo Sitemap
                                     </span>
         						</a>
                                 
@@ -30,11 +30,11 @@
                                                 <tbody>
 
 													<tr class="hidden">
-                                                        <td class="label"><label for="name">Your sitemap URL </label></td>
+                                                        <td class="label"><label for="name">URL sitemap của bạn </label></td>
                                                         <td class="value">
                                                         	<input id="sitemap" name="sitemap" value="{$baseurl}/sitemap/sitemap.xml" class=" required-entry required-entry input-text" type="text"/>
                                                         </td>
-                                                        <td class="scope-label">[USE THIS URL TO ADD THE SITEMAP IN YOUR GOOGLE WEBMASTER ACCOUNT]</td>
+                                                        <td class="scope-label">[DÙNG URL NÀY ĐỂ THÊM SITEMAP VÀO GOOGLE WEBMASTER]</td>
                                                             <td><small></small></td>
                                                     </tr>
 

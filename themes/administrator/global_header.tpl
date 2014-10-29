@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title>Admin Panel - {$site_name}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -46,7 +46,7 @@
     			<a href="{$adminurl}/home.php"><img src="{$adminurl}/images/logo.png" alt="Logo" class="logo"/></a>
     			<div class="header-right">
                     <p class="super">
-                        Logged in as {$smarty.session.ADMINUSERNAME}<span class="separator">|</span>{$smarty.now|date_format:"%A, %B %e, %Y"}<span class="separator">|</span><a href="logout.php" class="link-logout">Log Out</a>
+                        Xin chào {$smarty.session.ADMINUSERNAME}<span class="separator">|</span>{$smarty.now|date_format:"%A, %B %e, %Y"}<span class="separator">|</span><a href="{$baseurl}" target="_blank">Xem Trang</a><span class="separator">|</span><a href="logout.php" class="link-logout">Đăng Xuất</a>
                     </p>
             	</div>
 			</div>
@@ -55,54 +55,55 @@
 
             <div class="nav-bar">
             	<ul id="nav">
-                	<li  class="  {if $mainmenu eq "" OR $mainmenu eq "1"}active{/if}  level0"> <a href="home.php" class="active"><span>Home</span></a></li>
-                    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "2"}active{/if} parent level0"> <a href="#" onclick="return false" class=""><span>Settings</span></a>
+                	<li  class="  {if $mainmenu eq "" OR $mainmenu eq "1"}active{/if}  level0"> <a href="home.php" class="active"><span>Trang Chủ</span></a></li>
+                    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "2"}active{/if} parent level0"> <a href="#" onclick="return false" class=""><span>Cài Đặt</span></a>
                     	<ul >
-                    		<li  class="   level1"> <a href="settings_general.php" class=""><span>General Settings</span></a></li>
-                    		<li  class="   level1"> <a href="settings_meta.php"   class=""><span>Meta Settings</span></a></li>
-                            <li  class="   last level1"> <a href="settings_static.php"   class=""><span>Static Pages</span></a></li>
+                    		<li  class="   level1"> <a href="settings_general.php" class=""><span>Cài Đặt Chung</span></a></li>
+                    		<li  class="   level1"> <a href="settings_meta.php" class=""><span>Cài Đặt Thẻ Meta</span></a></li>
+                            <li  class="   last level1"> <a href="settings_static.php" class=""><span>Trang Tĩnh</span></a></li>
                         </ul>
                     </li>
-                    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "4"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Gags</span></a>
+                    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "4"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Bài Đăng</span></a>
                     	<ul >
-                            <li  class="   level1"> <a href="stories_manage.php"   class=""><span>Manage Gags</span></a></li>
-                            <li  class="   level1"> <a href="stories_validate.php"   class=""><span>Validate Gags</span></a></li>
-                            <li  class="   last level1"> <a href="stories_reported.php"   class=""><span>Reported Gags</span></a></li>
+                            <li  class="   level1"> <a href="stories_manage.php" class=""><span>Quản Lý Bài Đăng</span></a></li>
+                            <li  class="   level1"> <a href="stories_validate.php" class=""><span>Xác Nhận Bài Đăng</span></a></li>
+                            <li  class="   last level1"> <a href="stories_reported.php" class=""><span>Báo Lỗi Bài Đăng</span></a></li>
                         </ul>
                     </li>
-					<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "6"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Channels</span></a>
+					<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "6"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Kênh</span></a>
                     	<ul >
-                            <li  class="   level1"> <a href="ch_manage.php"   class=""><span>Channels</span></a></li>
-                            <li  class="   last level1"> <a href="ch_create.php"   class=""><span>Create Channels</span></a></li>
+                            <li  class="   level1"> <a href="ch_manage.php" class=""><span>Quản Lý Kênh</span></a></li>
+                            <li  class="   last level1"> <a href="ch_create.php" class=""><span>Tạo Kênh</span></a></li>
                         </ul>
                     </li>
-                    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "7"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Members</span></a>
+                    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "7"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Thành Viên</span></a>
                     	<ul >
-						    <li  class="   level1">  <a href="members_manage.php"   class=""><span>Manage Members</span></a></li>
-                            <li  class="   last level1"> <a href="members_newsletter.php"   class=""><span>Newsletter</span></a></li>
+						    <li  class="   level1"> <a href="members_manage.php" class=""><span>Quản Lý Thành Viên</span></a></li>
+							<li  class="   level1"> <a href="members_create.php" class=""><span>Tạo Thành Viên</span></a></li>
+                            <li  class="   last level1"> <a href="members_newsletter.php" class=""><span>Gửi Thư</span></a></li>
                         </ul>
                     </li>
-                    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "11"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Advertisements</span></a>
+                    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "11"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Quảng Cáo</span></a>
                     	<ul >
-                            <li  class="   level1"> <a href="ads_manage.php"   class=""><span>Standard Ads</span></a></li>
-                            <li  class="   last level1"> <a href="ads_create.php"   class=""><span>Create Standard Ad</span></a></li>
+                            <li  class="   level1"> <a href="ads_manage.php" class=""><span>Quản Lý Quảng Cáo</span></a></li>
+                            <li  class="   last level1"> <a href="ads_create.php" class=""><span>Tạo Quảng Cáo</span></a></li>
                         </ul>
                     </li>
-                    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "5"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Bans</span></a>
+                    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "5"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Cấm IP</span></a>
                     	<ul >
-                            <li  class="   level1"> <a href="bans_ip.php"   class=""><span>IP Banning</span></a></li>
-                            <li  class="   last level1"> <a href="bans_ip_add.php"   class=""><span>Add IP</span></a></li>
+                            <li  class="   level1"> <a href="bans_ip.php" class=""><span>IP Bị Cấm</span></a></li>
+                            <li  class="   last level1"> <a href="bans_ip_add.php" class=""><span>Thêm IP</span></a></li>
                         </ul>
                     </li>
-					<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "12"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Administrators</span></a>
+					<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "12"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Quản Trị Viên</span></a>
                     	<ul >
-                            <li  class="   level1"> <a href="admins_manage.php"   class=""><span>Manage Administrators</span></a></li>
-                            <li  class="   last level1"> <a href="admins_create.php"   class=""><span>Create Administrator</span></a></li>
+                            <li  class="   level1"> <a href="admins_manage.php" class=""><span>Quản Lý Quản Trị Viên</span></a></li>
+                            <li  class="   last level1"> <a href="admins_create.php" class=""><span>Tạo Quản Trị Viên</span></a></li>
                         </ul>
                     </li>
-					<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "13"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>SiteMap</span></a>
+					<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="{if $mainmenu eq "13"}active{/if}   parent level0"> <a href="#"  onclick="return false" class=""><span>Sitemap</span></a>
                     	<ul >
-                            <li  class="   level1"> <a href="sitemap.php"   class=""><span>Create Sitemap</span></a></li>
+                            <li  class="   level1"> <a href="sitemap.php"   class=""><span>Tạo Sitemap</span></a></li>
                         </ul>
                     </li>
                 </ul>

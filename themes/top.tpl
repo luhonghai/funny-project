@@ -3,7 +3,7 @@
 <ul>
 {section name=f loop=$topgags}
         <a href="{$baseurl}{$postfolder}{$topgags[f].PID}/{if $SEO eq "1"}{$topgags[f].story|makeseo}.html{/if}">
-        <img src="{$purl}/t/s-{$topgags[f].pic}" alt="{$topgags[f].story|stripslashes}">
+        <img src="{$purl[f]}/t/s-{$topgags[f].pic}" alt="{$topgags[f].story|stripslashes}">
         <span class="title">{$topgags[f].story}</span>
         </a>
 {/section}
@@ -31,14 +31,7 @@
             {/if}
 			{/if}
         </div>
-        <div id="content" listPage="hot">            
-            <div id="use-tips">
-                <div id="view-info" class="list-tips">
-                    <div id="shortcut-event-label" style="display:none">{$lang171}</div>
-                    <span><b>{$lang169}</b>: {$lang170}</span>
-                    <a href="#keyboard" class="keyboard_link">{$lang168}</a>                    
-                </div>
-            </div>
+        <div id="content" listPage="hot">
             <div id="entries-content" class="list">
                 <ul id="entries-content-ul" class="col-1">
                     {section name=i loop=$posts}
@@ -84,7 +77,7 @@ var adloca=$('#moving-boxes').offset().top;
     var curloca=$(window).scrollTop();
     if(curloca>adloca){
         $('#moving-boxes').css('position','fixed');
-        $('#moving-boxes').css('top','55px');
+        $('#moving-boxes').css('top','50px');
         $('#moving-boxes').css('z-index','0');
     };
     if(curloca <= adloca){

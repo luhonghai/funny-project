@@ -3,15 +3,15 @@
 				<div class="columns ">
                 
 					<div class="side-col" id="page:left">
-    					<h3>Advertisements</h3>
+    					<h3>Quảng Cáo</h3>
 						
                         <ul id="isoft" class="tabs">
     						<li >
-        						<a href="ads_manage.php" id="isoft_group_1" name="group_1" title="Standard Ads" class="tab-item-link ">
+        						<a href="ads_manage.php" id="isoft_group_1" name="group_1" title="Quảng Cáo" class="tab-item-link ">
                                     <span>
                                         <span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Standard Ads
+                                        Quảng Cáo
                                     </span>
         						</a>
                                 
@@ -35,7 +35,7 @@
                                 <div id="isoft_group_1_content" style="display:none;">
                                 	<div class="entry-edit">
                                         <div class="entry-edit-head">
-                                            <h4 class="icon-head head-edit-form fieldset-legend">Edit Standard Ad</h4>
+                                            <h4 class="icon-head head-edit-form fieldset-legend">Sửa Quảng Cáo</h4>
                                             <div class="form-buttons">
 
                                             </div>
@@ -54,30 +54,30 @@
                                                             <td><small></small></td>
                                                     </tr>
                                                 	<tr class="hidden">
-                                                        <td class="label"><label for="name">Description </label></td>
+                                                        <td class="label"><label for="name">Mô tả </label></td>
                                                         <td class="value">
                                                         	<input id="details" name="details" value="{$ad.description|stripslashes}" class=" required-entry required-entry input-text" type="text"/>
                                                         </td>
-                                                        <td class="scope-label">[DESCRIPTION OF THE ADVERTISEMENT]</td>
+                                                        <td class="scope-label">[MÔ TẢ CỦA QUẢNG CÁO]</td>
                                                             <td><small></small></td>
                                                     </tr>
                                                 	<tr class="hidden">
-                                                        <td class="label"><label for="name">Code </label></td>
+                                                        <td class="label"><label for="name">Nội dung </label></td>
                                                         <td class="value">
                                                         	<textarea id="code" name="code" class=" textarea" type="textarea" >{$ad.code|stripslashes}</textarea>
                                                         </td>
-                                                        <td class="scope-label">[YOUR ADVERTISEMENT CODE]</td>
+                                                        <td class="scope-label">[NỘI DUNG CỦA QUẢNG CÁO]</td>
                                                             <td><small></small></td>
                                                     </tr>
                                                     <tr class="hidden">
-                                                        <td class="label"><label for="status">Active </label></td>
+                                                        <td class="label"><label for="status">Kích hoạt </label></td>
                                                         <td class="value">
                                                         	<select name="active" id="active">
-                                                            <option value="1" {if $ad.active eq 1}selected{/if}>Yes</option>
-                                                            <option value="0" {if $ad.active eq 0}selected{/if}>No</option>
+                                                            <option value="1" {if $ad.active eq 1}selected{/if}>Có</option>
+                                                            <option value="0" {if $ad.active eq 0}selected{/if}>Không</option>
                                                             </select>
                                                         </td>
-                                                        <td class="scope-label">[STATUS OF THE ADVERTISEMENT]</td>
+                                                        <td class="scope-label">[TÍNH TRẠNG CỦA QUẢNG CÁO]</td>
                                                         <td><small></small></td>
                                                     </tr>
                                                 </tbody>
@@ -115,11 +115,11 @@
     						</li>
                             
                             <li >
-                                <a href="ads_create.php" id="isoft_group_2" name="group_2" title="Create Standard Ad" class="tab-item-link">
+                                <a href="ads_create.php" id="isoft_group_2" name="group_2" title="Tạo Quảng Cáo" class="tab-item-link">
                                 	<span>
                                     	<span class="changed" title=""></span>
                                         <span class="error" title=""></span>
-                                        Create Standard Ad
+                                        Tạo Quảng Cáo
                                     </span>
                                 </a>
                                 <div id="isoft_group_2_content" style="display:none;"></div>
@@ -142,9 +142,9 @@
                             </div>
 
                             <div class="content-header">
-                               <h3 class="icon-head head-products">Advertisements - Edit Standard Ad</h3>
+                               <h3 class="icon-head head-products">Quảng Cáo - Sửa Quảng Cáo</h3>
                                <p class="content-buttons form-buttons">
-                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable save" onclick="document.main_form.submit();" style=""><span>Save Changes</span></button>			
+                                    <button  id="id_be616be1324d8ae4516f276d17d34b9c" type="button" class="scalable save" onclick="document.main_form.submit();" style=""><span>Lưu Thay Đổi</span></button>			
                                 </p>
                             </div>
                             
