@@ -1,8 +1,8 @@
 <?php
 $mobile = "1";
-$config['basedir']   = '/var/www/html';
-$config['mobiledir'] = '/var/www/html/m';
-$config['mobileurl'] = 'http://m.phongkhamhoixuan.com';
+$config['basedir']   = getenv("P_BASE_DIR");
+$config['mobiledir'] = getenv("P_MOBILE_DIR");
+$config['mobileurl'] = getenv("P_MOBILE_URL");
 
 function insert_get_advertisement($var)
 {

@@ -1,22 +1,30 @@
 ﻿<?php
 date_default_timezone_set('Asia/Ho_Chi_Minh');
-if(!headers_sent()) { session_start(); }
+if(!headers_sent()) { session_start();}
 $config = array();
 
 // Bắt đầu cấu hình
-$config['basedir']     =  '/Volumes/Data/OSX/luhonghai/Sites';   //Đường đẫn đến thư mục chứa mã nguồn
-$config['baseurl']     =  'http://dev.com';   //Liên kết đến thư mục chứa mã nguồn
-$config['domain']      =  'http://www.dev.com/';   //Domain của website
+$config['basedir']     =  getenv("P_BASE_DIR");   //Đường đẫn đến thư mục chứa mã nguồn
+$config['baseurl']     =  getenv("P_BASE_URL");   //Liên kết đến thư mục chứa mã nguồn
+$config['domain']      =  getenv("P_DOMAIN");   //Domain của website
 $DBTYPE     = 'mysqli';
-$DBHOST     = 'localhost:3306';   //Tên máy chủ cơ sở dữ liệu
-$DBUSER     = 'luhonghai';   //Tên đăng nhập cơ sở dữ liệu
-$DBPASSWORD = 'hurricane';   //Mật khẩu kết nối cơ sở dữ liệu
-$DBNAME     = 'trollvd';   //Tên cơ sở dữ liệu
+$DBHOST     = getenv("P_DB_HOST");   //Tên máy chủ cơ sở dữ liệu
+$DBUSER     = getenv("P_DB_USER");   //Tên đăng nhập cơ sở dữ liệu
+$DBPASSWORD = getenv("P_DB_PASSWORD");   //Mật khẩu kết nối cơ sở dữ liệu
+$DBNAME     = getenv("P_DB_NAME");   //Tên cơ sở dữ liệu
+
+
+$config['pdir'] = getenv("P_POST_DIR");
+$config['purl'] = getenv("P_POST_URL");
+$config['membersprofilepicdir']      =  getenv("P_AVATAR_DIR");
+$config['membersprofilepicurl']      =  getenv("P_AVATAR_URL");
+
+
 
 $config['email']='contact@trollvd.com'; //--Email nguoi nhan thong tin lien he
 $config['fields']['fullname']='Contact Support';
+
 //--Có thể thêm field mới tùy ý
-//include_once("settings.php");
 //Tuần
 $date1 = date('Y-m-d', strtotime('Last Monday', time()));
 $date2 = date('Y-m-d', strtotime('Sunday', time()));
@@ -30,16 +38,11 @@ $default_language = "vi"; //Bạn có thể chọn en
 
 $config['allowhtml']=false; //--Cho phép nhap ma HTML vao thong diep ko ?
 
-
-
 $config['adminurl']      =  $config['baseurl'].'/admin';
 $config['cssurl']      =  $config['baseurl'].'/css';
 $config['imagedir']      =  $config['basedir'].'/images';
 $config['imageurl']      =  $config['baseurl'].'/images';
-$config['membersprofilepicdir']      =  $config['imagedir'].'/avatar';
-$config['membersprofilepicurl']      =  $config['imageurl'].'/avatar';
-$config['pdir'] = $config['basedir'].'/pdata';
-$config['purl'] = $config['baseurl'].'/pdata';
+
 require_once($config['basedir'].'/smarty/libs/Smarty.class.php');
 require_once($config['basedir'].'/libraries/mysmarty.class.php');
 require_once($config['basedir'].'/libraries/SConfig.php');

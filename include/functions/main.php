@@ -1113,7 +1113,6 @@ function create_text_watermark($img,$pid,$thepp,$thepp2,$type)
     // Create a rectangle and fill it white
     imagefilledrectangle( $canvas, 0, 0, $img_width, $wmhieght, $white );
     // The text to use
-    //$wmtext = $config['domain'].$config['postfolder'].$pid."/";
     //magicvn just domain
     $wmtext = $config['domain'];
     // Set the path to the image to watermark
