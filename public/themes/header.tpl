@@ -27,41 +27,22 @@
 {/if}
 <meta property="fb:app_id" content="{$FACEBOOK_APP_ID}"/>
 
-<link href="{$baseurl}/css/main.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="{$baseurl}/css/style.css?v=0820" media="screen" rel="stylesheet" type="text/css" />
-<link href="{$baseurl}/css/additional.css" media="screen" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="{$baseurl}/css/profile.css?v=081622" type="text/css" />
-<link rel="stylesheet" href="{$baseurl}/css/top_overs.css" type="text/css" />
-<link href="{$baseurl}/slide/jquery.bxslider.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="{$baseurl}/css/app.css" media="screen" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <link rel="icon" href="{$baseurl}/favicon.ico" />
 <link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
-<script type="text/javascript" src="{$baseurl}/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="{$baseurl}/fancybox/lib/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="{$baseurl}/js/jquery.scrollTo-1.4.2-min.js"></script>
-<script type="text/javascript" src="{$baseurl}/js/jquery.min.js"></script>
-<script type="text/javascript" src="{$baseurl}/js/jquery.lazyload.pack.js"></script>
+
+
 {if $RSS eq "1"}
 <link rel="alternate" type="application/rss+xml" title="RSS - {$site_name}" href="{$baseurl}/rss.php" />
 {/if}
-
-
-<!--<script type="text/javascript" src="{$baseurl}/js/ipos.jq.js"></script>-->
-<script type="text/javascript" src="{$baseurl}/slide/jquery.bxslider.min.js"></script>
 <script type="text/javascript">
-	var ROOT_DOMAIN		=	'http://www.phongkhamhoixuan.com';
+	var BASE_URL		=	"{$baseurl}";
+    var AVATAR_URL      = "{$membersprofilepicurl}";
 	var APP_FACEBOOK 	= 	'287482141376893';
 </script>
+    <script type="text/javascript" src="{$baseurl}/js/dev.app.js"></script>
 {literal}
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-56177541-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
 {/literal}
 {literal}
 

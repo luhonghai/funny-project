@@ -3,44 +3,8 @@
 <div id="footer-container">
 <div id="footer-nav">
 <div id="footer-wrapper">
-	<ul class="legal">
-	<li id="copyright">website được thiết kế bởi trollvd.com</li>
-	</ul>
-	<ul class="footerLinks">
-		<li><a href="http://www.phongkhamhoixuan.com/search/label/code%20webs">code webs</a></li>
-		<li><a href="{$baseurl}/noi-quy-website.html">{$lang135}</a></li>
-		<li><a href="{$baseurl}/faq">{$lang202}</a></li>
-		<li><a href="https://www.facebook.com/DoiMat">Góp ý</a></l>
-		<li><a href="{$baseurl}/lien-he-quang-cao.html">Liên hệ quảng cáo</a></li>
-		<li style="color: rgb(255, 255, 255); font-size: 9px; outline: 1px solid rgb(255, 255, 255); background-color: rgb(255, 102, 0); padding: 1px 4px; margin: 8px;"><a style="color: rgb(255, 255, 255);" href="{$baseurl}/rss.php?t=hot">RSS</a></li>
-	</ul>
+
 </div>
-</div>
-<div id="footer-wrapper">
-	<ul class="menu">
-		<li class="menu_title">	<h3>Xã Stress</h3></li>
-		<li><a href="http://www.phongkhamhoixuan.com/search/label/hot%20girl">Lộ Hàng</a></i>
-		<li><a href="http://www.phongkhamhoixuan.com/search/label/hot%20girl">Hot girl</a></i>
-		<li><a href="http://www.phongkhamhoixuan.com/search/label/t%C3%ACnh%20d%E1%BB%A5c">Tình dục</a></i>
-		<li><a href="http://www.phongkhamhoixuan.com/search/label/t%C3%A2m%20s%E1%BB%B1">Tâm sự</a></i>
-	</ul>
-	<ul class="menu">
-		<li class="menu_title">	<h3>Kênh hay</h3></li>
-		<li><a href="http://www.phongkhamhoixuan.com/search/label/%E1%BA%A3nh%20troll">Ảnh troll</a></i>
-		<li><a href="http://www.phongkhamhoixuan.com/search/label/video">Video</a></i>
-		<li><a href="http://www.phongkhamhoixuan.com/search/label/th%E1%BB%A7%20thu%E1%BA%ADt">Thủ thuật</a></i>
-	</ul>
-	<ul class="menu">
-		<li class="menu_title">	<h3>Liên kết</h3></li>
-		<li><a target="_blank" title="haivl , ovui , code haivl , code chế comic , code chế ảnh , Facebook" href="http://www.phongkhamhoixuan.com">TrollVD</a></i>
-		<li><a target="_blank" title="haivl , ovui , code haivl , code chế comic , code chế ảnh , Twitter" href="http://www.phongkhamhoixuan.com">TrollVD</a></i>
-		<li><a target="_blank" title="haivl , ovui , code haivl , code chế comic , code chế ảnh , google" href="http://www.phongkhamhoixuan.com">TrollVD</a></i>
-                <li><a target="_blank" title="haivl , ovui , code haivl , code chế comic , code chế ảnh , Facebook" href="http://www.phongkhamhoixuan.com">TrollVD</a></i>
-	</ul>
-         <ul class="menu">
-		<li class="menu_title">	<h3>Phát Triển</h3></li>
-		<li><a href="https://www.facebook.com/facequockiencoltd">Quockiencoltd</a></i>		
-	</ul>
 </div>
 <div id="overlay-shadow" class="hide"></div>
 <div id="overlay-container" class="hide" >
@@ -113,8 +77,7 @@
     </div>
 </div>
 </div>
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-<script type="text/javascript" src="{$baseurl}/fancybox/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="//apis.google.com/js/plusone.js"></script>
 
 {if $viewpage eq "1"}
 {include file='js4.tpl'}
@@ -139,7 +102,7 @@ color:#000;display:none
 " href="javascript:void(0);" onclick="
 if($.browser.safari || $.browser.chrome){ bodyelem = $(body) } else{ bodyelem = $(html) }
 bodyelem.animate({scrollTop : 0},'slow');
-"id="backtotop" title="Trollvd.com"><center><img src="https://lh6.googleusercontent.com/-4wOubWQAMS8/Uzf9zcD92eI/AAAAAAAAA6o/i6btQ_f_asg/h120/gotop.png" /></center></a>
+"id="backtotop" title="Trollvd.com"><center><img src="{$baseurl}/images/gotop.png" /></center></a>
 {/literal}
 {if $ganalytics ne ""}
 {literal}

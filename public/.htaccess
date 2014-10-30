@@ -30,7 +30,6 @@ php_flag log_errors on
     RewriteRule ^fix/(.*) fix.php?pid=$1
     RewriteRule ^search$ search.php
     RewriteRule ^tag/(.*) tag.php?tag=$1
-    RewriteRule ^fast$ fast.php
     RewriteRule ^user/([^/.]+)?/likes?/?$ likes.php?uid=$1&%{QUERY_STRING}
     RewriteRule ^user/([^/.]+)?/messages$ messages.php?uid=$1&%{QUERY_STRING}
     RewriteRule ^user/(.*)?$ user.php?uid=$1&%{QUERY_STRING}

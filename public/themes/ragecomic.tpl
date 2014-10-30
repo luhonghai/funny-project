@@ -1,6 +1,6 @@
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
 <script src="{$baseurl}/comic/jQuery.cssTransform.Patch.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/jquery-ui.min.js" type="text/javascript"></script>
-<link href="{$baseurl}/comic/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css" />
 <script src="{$baseurl}/comic/cp_depends.js" type="text/javascript"></script>
 <script src="{$baseurl}/comic/excanvas.js" type="text/javascript"></script>
 <script src="{$baseurl}/comic/CanvasWidget.js" type="text/javascript"></script>
@@ -16,10 +16,11 @@
 <script src="{$baseurl}/comic/base64.js" type="text/javascript"></script>
 <script src="{$baseurl}/comic/canvas2image.js" type="text/javascript"></script>
 <script src="{$baseurl}/comic/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
-<link href="{$baseurl}/comic/jquery.mCustomScrollbar.css" media="screen" rel="stylesheet" type="text/css" />
 <script src="{$baseurl}/comic/rage.min.js" type="text/javascript"></script>
-<link href="{$baseurl}/comic/style.min.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="{$baseurl}/comic/colorpicker.css" media="screen" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+
+<link href="{$baseurl}/css/comic/comic.css" media="screen" rel="stylesheet" type="text/css" />
 
 <div class="box infoBox rageBuilderContainer">
     <div id="blank_content">
@@ -105,8 +106,8 @@
         </div>
     </div>
 	<div style="margin:5px auto;width:800px;">
-		<div class="fb-like" data-href="http://www.phongkhamhoixuan.com/comic/" data-width="500" data-show-faces="false" data-send="false"></div>
-		<div class="fb-comments" data-href="http://www.phongkhamhoixuan.com/comic/" data-width="800"></div>
+		<div class="fb-like" data-href="{$baseurl}" data-width="500" data-show-faces="false" data-send="false"></div>
+		<div class="fb-comments" data-href="{$baseurl}/comic/" data-width="800"></div>
 	</div>
 </div>
 {literal}
@@ -114,10 +115,10 @@
 
         $(document).ready(function () {
             RageComic.initialize({
-                packRoot: "http://www.phongkhamhoixuan.com/comic/",
+                packRoot: BASE_URL + "/comic/",
                 siteUrl: "",
-                builderUrl: "http://www.phongkhamhoixuan.com/comic",
-                cdnRoot: "http://www.phongkhamhoixuan.com/comic/cdn/"
+                builderUrl: BASE_URL + "/comic",
+                cdnRoot: BASE_URL + "/comic/cdn/"
             });
         });
         window.onbeforeunload = confirmExit;

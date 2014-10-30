@@ -105,7 +105,7 @@
 
                 <div class="field">
                     <label><h4>{$lang70}</h4><input type="text" class="text tipped" name="website" value="{$p.website|stripslashes}" maxlength="200"/></label>
-                    <p class="info">{$lang71}. link có dạng <b>http://www.phongkhamhoixuan.com</b></p>
+                    <p class="info">{$lang71}. link có dạng <b>{$baseurl}</b></p>
                 </div>
 				<div class="field checkbox">
                     <h4>Liên kết Facebook</h4>

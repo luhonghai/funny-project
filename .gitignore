@@ -8,9 +8,8 @@ public/pdata/*
 .DS_Store
 error_log
 
-public/js/app.js
-public/js/app.js.gz
-public/js/dev.js
+public/js/*.js
+public/js/*.gz
 
 public/css/*
 
@@ -18,4 +17,6 @@ public/css/*
 .sass-cache/*
 .sass-cache/
 .sass-cache/*
+
+Gemfile.lock
 

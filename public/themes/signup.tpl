@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta content="width=device-width; initial-scale=1.0;" name="viewport" />
 <link rel="stylesheet" href="{$baseurl}/css/connect.css" media="screen,projection" type="text/css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 
 <body id="page-signup">
@@ -14,7 +14,7 @@
 <div class="signup-wrapper">
     <a class="signup-login-btn" href="{$baseurl}/login">{$lang10} {$lang11}</a>
     <div class="header">
-        	<center><a href="http://www.phongkhamhoixuan.com"><img src="http:/www.phongkhamhoixuan.com/images/logo-large.png" /></center>
+        	<center><a href="{$baseurl}"><img src="{$baseurl}/images/logo-large.png" /></center>
     	<a href="{$baseurl}"><h1>{$site_name}</h1></a>
     </div>
     <div class="content">

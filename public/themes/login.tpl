@@ -12,7 +12,7 @@
     <div class="signup-wrapper">
         <a class="signup-login-btn" href="{$baseurl}/signup">{$lang23} {$site_name}? {$lang24}</a>
         <div class="header">
-        	<center><a href="http://www.phongkhamhoixuan.com"><img src="http://www.phongkhamhoixuan.com/images/logo-large.png" /></center>
+        	<center><a href="{$baseurl}"><img src="{$baseurl}/images/logo-large.png" /></center>
         </div>
         <div class="content">
             <div class="description">

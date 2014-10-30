@@ -1,14 +1,11 @@
 ﻿<?php
-/**************************************************************************************************
-RSS by Hero
-|**************************************************************************************************/
-
-
-$head ='<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title><![CDATA[ Ồ Vui - Vui hết cỡ]]></title><link><![CDATA[ http://www.phongkhamhoixuan.com/ ]]></link><description><![CDATA[ rss - http://www.phongkhamhoixuan.com ]]></description><ttl>10</ttl><copyright> - Vui cùng my fancy -</copyright><generator>- vui cùng my fancy -</generator><docs>http://www.phongkhamhoixuan.com</docs><image><title>cùng my fancy - Vui hết cỡ - Chia sẻ hình ảnh, video vui và còn nhiều nữa</title><url>http://www.phongkhamhoixuan.com/images/images.png</url><link>http://www.phongkhamhoixuan.com</link><width>86</width><height>33</height></image>';
-echo trim($head);
-
 include("include/config.php");
 include("include/functions/utils.php");
+
+$head ='<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title><![CDATA[ Ồ Vui - Vui hết cỡ]]></title><link><![CDATA[ '.$config['baseurl'].' ]]></link><description><![CDATA[ rss - '.$config['baseurl'].' ]]></description><ttl>10</ttl><copyright> - Vui cùng trollvd -</copyright><generator>- vui cùng trollvd -</generator><docs>'.$config['baseurl'].'</docs><image><title>cùng Trollvd - Vui hết cỡ - Chia sẻ hình ảnh, video vui và còn nhiều nữa</title><url>'.$config['baseurl'].'/images/images.png</url><link>'.$config['baseurl'].'</link><width>86</width><height>33</height></image>';
+echo trim($head);
+
+
 
 $type = $_REQUEST['t'];
 if ($type=="vote"){
@@ -23,7 +20,6 @@ if ($type=="vote"){
         $sql="SELECT * FROM posts A WHERE   A.active='1' ORDER BY A.time_added desc limit 40";
 }
 
-//$sql="SELECT * from posts A, members B where A.active='1' AND A.USERID=B.USERID AND A.phase='0' order by A.PID desc limit $config[maximum_results]";
 $executequery = $conn->CacheExecute(20,$sql);
 $r = $executequery->getrows();
 
