@@ -24,7 +24,6 @@ comic_js = [
     "javascripts/comic/CanvasWidget.js",
     "javascripts/comic/CanvasPainter.js",
     "javascripts/comic/jquery.batchImageLoad.js",
-    "javascripts/comic/interface.js",
     "javascripts/comic/jquery.autogrow.js",
     "javascripts/comic/jquery.blockUI.min.js",
     "javascripts/comic/colorpicker.js",

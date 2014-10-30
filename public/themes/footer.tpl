@@ -102,8 +102,9 @@ color:#000;display:none
 " href="javascript:void(0);" onclick="
 if($.browser.safari || $.browser.chrome){ bodyelem = $(body) } else{ bodyelem = $(html) }
 bodyelem.animate({scrollTop : 0},'slow');
-"id="backtotop" title="Trollvd.com"><center><img src="{$baseurl}/images/gotop.png" /></center></a>
+"id="backtotop" title="Trollvd.com"><center><img src="{/literal}{$baseurl}{literal}/images/gotop.png" /></center></a>s
 {/literal}
+
 {if $ganalytics ne ""}
 {literal}
 {/if}
@@ -143,7 +144,6 @@ bodyelem.animate({scrollTop : 0},'slow');
     </script>
 {/literal}
 {if !in_array($menu,array(5,11,15))}
-<script type="text/javascript" src="{$baseurl}/js/trollvd.js?v=0820"></script>
 {/if}
 </div>
 </body>

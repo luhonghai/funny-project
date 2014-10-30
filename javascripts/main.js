@@ -4,7 +4,6 @@ var avataurl = AVATAR_URL;
 $("#tabs ul li:first").addClass("active");
 $("#tabs ul li a:first").addClass("active");
 $.getJSON(baseurl+"/topusers?t=tuan&ajax=1", function(data) {
-    console.log(data);
     for (var i=0;i<data.length;i++){
         if (i==5)
         {

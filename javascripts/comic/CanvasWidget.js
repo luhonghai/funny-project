@@ -1,3 +1,45 @@
+/**
+ *	Copyright (c) 2005, 2006 Rafael Robayna
+ *
+ *	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ *	The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *
+ *	CanvasWidget is a base class that handles all mouse event listening for a canvas element, 
+ *	implements a widget event listener than you can use to trigger events remotely on widget 
+ *	state changes and encapsulates a few useful helper functions.
+ *
+ *  To create widget using CanvasWidget all you need to do is the following:
+ *
+ *	var YourWidget = CanvasWidget.extend({
+ *		widget_value_1: null,
+ *		constructor: function(canvasName, position) {
+ *			this.inherit(canvasName, position);
+ *		},
+ *		checkWidgetMouseEvent: function(e) {
+ *			var mousePos = this.getCanvasMousePos(e);
+ *			//interpret the mouse position 
+ *			this.drawWidget();
+ *		},
+ *		drawWidget: function() { 
+ *			//your canvas drawing code
+ *		}
+ *	});
+ *
+ *	//initialize an instance of your widget
+ *	var yourWidget = new YourWidget("canvas_name", {x: canvasPosX, y: canvasPosY});
+ *
+ *	//initialize an instance of your widget
+ *  yourWidget.addWidgetListener(function () {
+ *		//assign your widget value to something else
+ *		something = this.widget_value_1;
+ *	});
+ *
+ *
+ **/
 var CanvasWidget = Base.extend({
 	canvas: null,
 	context: null,

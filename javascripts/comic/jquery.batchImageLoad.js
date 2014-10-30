@@ -1,3 +1,10 @@
+/**
+ *  Plugin which is applied on a list of img objects and calls
+ *  the specified callback function, only when all of them are loaded (or errored).
+ *  @author:  H. Yankov (hristo.yankov at gmail dot com)
+ *  @version: 1.0.0 (Feb/22/2010)
+ *	http://yankov.us
+ */
 
 (function($) {
 $.fn.batchImageLoad = function(options) {

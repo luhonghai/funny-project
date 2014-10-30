@@ -1,4 +1,8 @@
-
+/*
+	Base, version 1.0.1
+	Copyright 2006, Dean Edwards
+	License: http://creativecommons.org/licenses/LGPL/2.1/
+*/
 function Base() {
 };
 Base.version = "1.0.1";

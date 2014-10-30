@@ -1,22 +1,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
-<script src="{$baseurl}/comic/jQuery.cssTransform.Patch.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/cp_depends.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/excanvas.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/CanvasWidget.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/CanvasPainter.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/jquery.batchImageLoad.js" type="text/javascript"></script>
 <script src="{$baseurl}/comic/interface.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/jquery.autogrow.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/jquery.blockUI.min.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/colorpicker.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/jquery.repeatedclick.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/jquery.imgDrop.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/jquery.getimagedata.min.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/base64.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/canvas2image.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
-<script src="{$baseurl}/comic/rage.min.js" type="text/javascript"></script>
+<script src="{$baseurl}/js/comic.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
 
