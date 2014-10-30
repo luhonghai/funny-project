@@ -7,3 +7,11 @@ pdata/
 pdata/*
 .DS_Store
 error_log
+
+js/app.js
+js/app.js.gz
+js/dev.js
+
+css/app.css
+css/app.css.gz
+css/dev.css
