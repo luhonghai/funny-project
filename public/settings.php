@@ -275,4 +275,3 @@ STemplate::display('settings.tpl');
 STemplate::display('footer.tpl');
 //TEMPLATES END
 ?>
-<script src="/shoutcloud/ShoutCloud.js"></script> 

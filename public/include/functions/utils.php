@@ -11,7 +11,7 @@ function fullname($a)
 	}else{
 		$text = $a;
 	}
-	
+
 	return $text;
 }
 
@@ -44,16 +44,16 @@ function bb($bbtext){
     '[br]' => '<br>',
     '[newline]' => '<br>',
     '[nl]' => '<br>',
-    
+
     '[unordered_list]' => '<ul>','[/unordered_list]' => '</ul>',
     '[list]' => '<ul>','[/list]' => '</ul>',
     '[ul]' => '<ul>','[/ul]' => '</ul>',
-	
+
     '[ordered_list]' => '<ol>','[/ordered_list]' => '</ol>',
     '[ol]' => '<ol>','[/ol]' => '</ol>',
     '[list_item]' => '<li>','[/list_item]' => '</li>',
     '[li]' => '<li>','[/li]' => '</li>',
-	    
+
     '[*]' => '<li>','[/*]' => '</li>',
     '[code]' => '<code>','[/code]' => '</code>',
     '[preformatted]' => '<pre>','[/preformatted]' => '</pre>',
@@ -62,7 +62,7 @@ function bb($bbtext){
 	'=13px'	=> '','=10px'	=> '','=11px'	=> '','=12px'	=> '','=14px'	=> '','=15px'	=> '','=16px'	=> '','=17px'	=> '','=10px'	=> '',
 	'=9px'	=> '','=10pt'	=> '','=13.333333969116211px' => ''
   );
-	
+
   $bbtext = str_ireplace(array_keys($bbtags), array_values($bbtags), $bbtext);
 
   $bbextended = array(
@@ -110,16 +110,16 @@ function bbtext($bbtext){
     '[br]' => '',
     '[newline]' => '',
     '[nl]' => '',
-    
+
     '[unordered_list]' => '','[/unordered_list]' => '',
     '[list]' => '','[/list]' => '',
     '[ul]' => '','[/ul]' => '',
-	
+
     '[ordered_list]' => '','[/ordered_list]' => '',
     '[ol]' => '','[/ol]' => '',
     '[list_item]' => '','[/list_item]' => '',
     '[li]' => '','[/li]' => '',
-	    
+
     '[*]' => '','[/*]' => '',
     '[code]' => '','[/code]' => '',
     '[preformatted]' => '','[/preformatted]' => '',
@@ -127,9 +127,9 @@ function bbtext($bbtext){
 	'[quote]' => '','[/quote]' => '',
 	'=13px'	=> '','=10px'	=> '','=11px'	=> '','=12px'	=> '','=14px'	=> '','=15px'	=> '','=16px'	=> '','=17px'	=> '','=10px'	=> '',
 	'=9px'	=> '','=10pt'	=> '','=13.333333969116211px' => ''
-		
+
   );
-	
+
   $bbtext = str_ireplace(array_keys($bbtags), array_values($bbtags), $bbtext);
 
   $bbextended = array(
@@ -168,7 +168,7 @@ function vnseo($q2g ,$link = false  ) {
 		}
 	}
 	$q2g = trim($q2g);
-	
+
 	if ($link) {
 		$q2g = "xem ".$q2g;
 		$q2g = strtolower(str_replace(' ','-',$q2g));
@@ -269,7 +269,7 @@ function truncateHTML($text, $length = 100, $ending = '...', $exact = false, $co
 	}
 	return $truncate;
 }
- 
+
 function strTruncate($string, $your_desired_width,$ext = '...') {
   $parts = preg_split('/([\s\n\r]+)/', $string, null, PREG_SPLIT_DELIM_CAPTURE);
   $parts_count = count($parts);
@@ -282,6 +282,17 @@ function strTruncate($string, $your_desired_width,$ext = '...') {
   }
 
   return implode(array_slice($parts, 0, $last_part)).$ext;
+}
+
+function getPictureUrl($date_added, $purl) {
+    if (strpos($date_added, '2013') !== false) {
+        return $purl;
+    } else {
+        $patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
+        $replace = array ('\1\2/\3/\4', '$\1 =');
+        $date1 = preg_replace($patterns, $replace, $date_added);
+        return $purl.'/'.$date1;
+    }
 }
 
 ?> 

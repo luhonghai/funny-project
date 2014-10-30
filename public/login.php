@@ -165,4 +165,3 @@ STemplate::assign('error',$error);
 STemplate::display('login.tpl');
 //TEMPLATES END
 ?>
-<script src="/shoutcloud/ShoutCloud.js"></script> 

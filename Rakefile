@@ -38,7 +38,6 @@ task :generate_js do
   open("#{public_dir}/js/dev.js", 'w') do |page|
         page.puts js_source
   end
-
 end
 
 desc "Generate CSS"

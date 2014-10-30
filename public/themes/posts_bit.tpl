@@ -3,7 +3,7 @@
                             <div class="img-wrap">
                               {if $posts[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
                               <a target="_blank" href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"><img src="{$baseurl}/images/nsfw.jpg" alt="{$posts[i].story|stripslashes}" /></a>
-                                {else}                                   	                          
+                                {else}
                                 	{if $posts[i].pic ne ""}
                                 	<a target="_blank" href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"><img src="{$purl[i]}/t/{$posts[i].pic}" alt="{$posts[i].story|stripslashes}" /></a>
                                     {else}
@@ -45,7 +45,7 @@
                                     {/if}
                                 {/if}
                             </div>
-                            {if $displaywm eq "0" AND $posts[i].pic ne ""}						
+                            {if $displaywm eq "0" AND $posts[i].pic ne ""}
 							{/if}
                         </div>
                          <div style="position:relative;width:220px;float:right">
@@ -64,13 +64,13 @@
 											<div class="bar-c">{$alvl[0]} / {$alvl[1]}</div>
 											<div class="level">Lv: {$alvl[2]}</div>
 											</div>
-								
+
 										</div>
 										<div class="clear">  </div>
 
                                                                         </div>
-								</div>	
-                                </h4>                                
+								</div>
+                                </h4>
                                 <p>
                                     <span class="comment">
                                     	<fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"></fb:comments-count>
@@ -85,7 +85,7 @@
                                         <li class="facebook" id="share1-{$posts[i].PID}">
                                         	<span id="list-share-twitter-{$posts[i].PID}">
 												{if $share1 eq 1}
-													<a href="https://twitter.com/share" class="twitter-share-button" data-text="{$posts[i].story|stripslashes|mb_truncate:20:"...":'UTF-8'}" data-url="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" data-count="horizontal" data-via="">&nbsp;</a>		
+													<a href="https://twitter.com/share" class="twitter-share-button" data-text="{$posts[i].story|stripslashes|mb_truncate:20:"...":'UTF-8'}" data-url="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" data-count="horizontal" data-via="">&nbsp;</a>
 												{elseif $share1 eq 2}
 													<fb:share-button href="{$baseurl}{$postfolder}{$posts[i].PID}/" type="button_count"></fb:share-button>
 												{else}
@@ -94,7 +94,7 @@
                                             </span>
 											<div style="float:right" class="facebook-share-btn">
 												{if $share2 eq 1}
-													<a href="https://twitter.com/share" class="twitter-share-button" data-text="{$posts[i].story|stripslashes|mb_truncate:20:"...":'UTF-8'}" data-url="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" data-count="horizontal" data-via="">&nbsp;</a>		
+													<a href="https://twitter.com/share" class="twitter-share-button" data-text="{$posts[i].story|stripslashes|mb_truncate:20:"...":'UTF-8'}" data-url="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" data-count="horizontal" data-via="">&nbsp;</a>
 												{elseif $share2 eq 2}
 													<fb:share-button href="{$baseurl}{$postfolder}{$posts[i].PID}/" type="button_count"></fb:share-button>
 												{else}

@@ -54,23 +54,23 @@ if($uid != "")
 
 	STemplate::assign('uid',$uid);
 
-	$queryp = "select * from members where username='".mysql_real_escape_string($uid)."' AND status='1'"; 
+	$queryp = "select * from members where username='".mysql_real_escape_string($uid)."' AND status='1'";
 
 	$resultsp=$conn->CacheExecute(20,$queryp);
 
 	$p = $resultsp->getrows();
 
-	
 
 
 
-	
+
+
 
 	STemplate::assign('p',$p[0]);
 
 	$USERID = intval($p[0]['USERID']);
 
-	
+
 
 
 
@@ -78,7 +78,7 @@ if($uid != "")
 
 	{
 
-	
+
 
 		$query1 = "SELECT count(*) as total from posts A where A.active='1' AND A.USERID='".mysql_real_escape_string($USERID)."' limit $config[maximum_results]";
 
@@ -88,7 +88,7 @@ if($uid != "")
 
 		STemplate::assign('ptotal',$totalvideos);
 
-				
+
 
 		$query1 = "SELECT count(*) as total from members A, follows B where A.USERID=B.USERFL AND B.USERID='".mysql_real_escape_string($USERID)."' limit $config[maximum_results]";
 
@@ -98,7 +98,7 @@ if($uid != "")
 
 		STemplate::assign('followers',$followers);
 
-		
+
 
 		$query1 = "SELECT count(*) as total from members A, follows B where A.USERID=B.USERID AND B.USERFL='".mysql_real_escape_string($USERID)."' limit $config[maximum_results]";
 
@@ -114,7 +114,7 @@ if($uid != "")
 
 			$query = "SELECT A.* from members A, follows B where A.USERID=B.USERFL AND B.USERID='".mysql_real_escape_string($USERID)."' order by A.points desc limit $pagingstart, $config[items_per_page]";
 
-			$totalitems = 	$followers;		
+			$totalitems = 	$followers;
 
 			$t = 'followers.tpl';
 
@@ -122,25 +122,25 @@ if($uid != "")
 
 			$query = "SELECT A.* from members A, follows B where A.USERID=B.USERID AND B.USERFL='".mysql_real_escape_string($USERID)."' order by A.points desc limit $pagingstart, $config[items_per_page]";
 
-			$totalitems = $following;	
+			$totalitems = $following;
 
 			$t = 'following.tpl';
 
-		
+
 
 		}else{
 
 			$query = "SELECT A.*, B.username from posts A, members B where A.active='1' AND A.USERID=B.USERID AND A.USERID='".mysql_real_escape_string($USERID)."' order by A.PID desc limit $pagingstart, $config[items_per_page]";
 
-			$totalitems = 	$totalvideos;	
+			$totalitems = 	$totalvideos;
 
 			$t = 'user.tpl';
 
 		}
 
-		
 
-		
+
+
 
 		$results=$conn->CacheExecute(20,$query);
 
@@ -149,16 +149,8 @@ if($uid != "")
 		STemplate::assign('posts',$posts);
 			$purlArray = array();
 	foreach ($posts as $value) {
-	if (strpos($value['date_added'], '2013') !== false) {
-		$purl1 = $config['baseurl'].'/pdata';
-	} else {
-		$patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
-		$replace = array ('\1\2/\3/\4', '$\1 =');
-		$date1 = preg_replace($patterns, $replace, $value['date_added']);
-		$purl1 = $config['baseurl'].'/pdata'.'/'.$date1;
-	}
-	array_push($purlArray, $purl1);
-	STemplate::assign('purl', $purlArray);	
+	array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
+	STemplate::assign('purl', $purlArray);
 	}
 
 		STemplate::assign('pagetitle',"Trang cá nhân của ".fullname($uid)." - ".$uid);
@@ -187,7 +179,7 @@ if($uid != "")
 
 			}
 
-			
+
 
 			$toppage = ceil($total/$config['items_per_page']);
 
@@ -207,7 +199,7 @@ if($uid != "")
 
 			}
 
-			
+
 
 			$beginning=$pagingstart+1;
 
@@ -219,13 +211,13 @@ if($uid != "")
 
 			$thenextpage=$currentpage+1;
 
-			
+
 
 			if ($currentpage > 0)
 
 			{
 
-				if($currentpage > 1) 
+				if($currentpage > 1)
 
 				{
 
@@ -247,7 +239,7 @@ if($uid != "")
 
 					$counter++;
 
-				}		
+				}
 
 				$uppercounter = $currentpage+1;
 
@@ -259,7 +251,7 @@ if($uid != "")
 
 				}
 
-				if($currentpage < $toppage) 
+				if($currentpage < $toppage)
 
 				{
 
@@ -271,7 +263,7 @@ if($uid != "")
 
 		}
 
-		
+
 
 	}
 
@@ -308,4 +300,3 @@ STemplate::display('footer.tpl');
 //TEMPLATES END
 
 ?>
-<script src="/shoutcloud/ShoutCloud.js"></script> 

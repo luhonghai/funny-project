@@ -40,16 +40,7 @@ if($PID > 0)
 	$query = $conn->execute("select * from posts where PID='".mysql_real_escape_string($PID)."' limit 1");
 	$story = $query->getrows();
 	Stemplate::assign('story', $story[0]);
-	if (strpos($story[0]['date_added'], '2013') !== false) {
-			$purl1 = $config['baseurl'].'/pdata';
-							
-		} else {
-			$patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
-			$replace = array ('\1\2/\3/\4', '$\1 =');
-			$date1 = preg_replace($patterns, $replace, $story[0]['date_added']);
-			$purl1 = $config['baseurl'].'/pdata'.'/'.$date1;
-		}
-		STemplate::assign('purl', $purl1);
+	STemplate::assign('purl', getPictureUrl($story[0]['date_added'], $config['purl']));
 }
 
 $mainmenu = "4";

@@ -35,12 +35,9 @@
 <link href="{$baseurl}/slide/jquery.bxslider.css" media="screen" rel="stylesheet" type="text/css" />
 <link rel="icon" href="{$baseurl}/favicon.ico" />
 <link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
-    <!--<script type="text/javascript" src="{$baseurl}/js/ipos.main.js"></script>-->
 <script type="text/javascript" src="{$baseurl}/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="{$baseurl}/fancybox/lib/jquery-1.9.1.min.js"></script>
-<!--<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>-->
 <script type="text/javascript" src="{$baseurl}/js/jquery.scrollTo-1.4.2-min.js"></script>
-<!--<script type="text/javascript" src="{$baseurl}/js/mootools-yui-compressed.js"></script>-->
 <script type="text/javascript" src="{$baseurl}/js/jquery.min.js"></script>
 <script type="text/javascript" src="{$baseurl}/js/jquery.lazyload.pack.js"></script>
 {if $RSS eq "1"}
