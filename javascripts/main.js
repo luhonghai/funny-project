@@ -31,7 +31,7 @@ $("#tabs ul li").click(function () {
             {
                 break;
             }
-            user = data[i];
+            var user = data[i];
             if(user.profilepicture == ''){
                 user.profilepicture = 'noprofilepicture.jpg'
             }
