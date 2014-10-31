@@ -117,13 +117,33 @@ task :watch do
   system "compass watch"
 end
 
-desc "Deploy Javascript & Css to AWS"
-task :deploy do
-    Rake::Task[:generate].execute
+def aws_upload_dir(s3,dir, bucket_name, public_dir)
+    Dir.glob("#{public_dir}/#{dir}/**/*.(png|gif|json)") do |file|
+       key = file[public_dir.length + 1, file.length]
+       if !File.directory?(file)
+            puts "Uploading file #{file} to bucket #{bucket_name}."
+            s3.buckets[bucket_name].objects[key].write(:file => file,
+                                                    :acl => :public_read)
+       end
+    end
+end
+
+task :deploy_assets do
+    puts "Upload images"
     s3 = AWS::S3.new
     aws_upload_list.each { |f|
         file_name = f[:name]
         puts "Prepare file #{file_name} for upload"
         aws_upload(s3, file_name, bucket_name, "#{public_dir}/#{file_name}", f[:content_type], f[:content_encoding])
     }
+    aws_upload_dir(s3, "images", bucket_name, public_dir)
+    aws_upload_dir(s3, "comic", bucket_name, public_dir)
+end
+
+desc "Deploy Javascript & CSS to AWS"
+task :deploy do
+    Rake::Task[:generate].execute
+    s3 = AWS::S3.new
+    Rake::Task[:deploy_assets].execute
+
 end
