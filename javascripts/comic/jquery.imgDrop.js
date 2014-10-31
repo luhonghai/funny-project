@@ -1,16 +1,3 @@
-/**
- * Copyleft 2010 Stefan Natchev
- * All Rights Reversed
- * github.com/snatchev
- *
- * A simple plugin to handle dropping image files onto the browser.
- *  
- * Unfortunately, at the moment jQuery Draggable/Droppable
- * do not support dropping files from outside of the browser.
- *
- */
-
-//css hack to make dragging work
 jQuery(function() {
   jQuery('head').append('<style type="text/css">[draggable=true] {-webkit-user-drag: element; -webkit-user-select: none; -moz-user-select: none;}</style>');
 });

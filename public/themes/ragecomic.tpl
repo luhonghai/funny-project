@@ -1,11 +1,10 @@
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
-<script src="{$baseurl}/comic/interface.js" type="text/javascript"></script>
-<script src="{$baseurl}/js/comic.js" type="text/javascript"></script>
+<script src="//assets.trollvd.com/js/comic.js.gz" type="text/javascript"></script>
 
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
 
-<link href="{$baseurl}/css/comic/comic.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="//assets.trollvd.com/css/comic/comic.css.gz" media="screen" rel="stylesheet" type="text/css" />
 
 <div class="box infoBox rageBuilderContainer">
     <div id="blank_content">

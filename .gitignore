@@ -13,6 +13,8 @@ public/js/*.gz
 
 public/css/*.css
 public/css/comic/*.css
+public/css/*.gz
+public/css/comic/*.gz
 
 .sass-cache/
 .sass-cache/*
@@ -21,3 +23,4 @@ public/css/comic/*.css
 
 Gemfile.lock
 
+.elasticbeanstalk/

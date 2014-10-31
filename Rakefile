@@ -4,11 +4,36 @@ require "coffee-script"
 require 'uglifier'
 require 'zlib'
 require 'stringio'
+require 'rubygems'
+require 'aws-sdk'
 
 ENV['TZ'] = 'Asia/Ho_Chi_Minh'
 
+bucket_name     = "assets.trollvd.com"
 public_dir      = "public"    # compiled site directory
-source_dir      = "source"    # source file directory
+
+aws_upload_list = [
+    {
+        name: "js/app.js.gz",
+        content_type: "text/javascript",
+        content_encoding: "gzip"
+    },
+    {
+        name: "js/comic.js.gz",
+        content_type: "text/javascript",
+        content_encoding: "gzip"
+    },
+    {
+        name: "css/app.css.gz",
+        content_type: "text/css",
+        content_encoding: "gzip"
+    },
+    {
+        name: "css/comic/comic.css.gz",
+        content_type: "text/css",
+        content_encoding: "gzip"
+    }
+]
 
 app_js = [
     "javascripts/imagesloaded.pkgd.min.js",
@@ -18,6 +43,7 @@ app_js = [
 ]
 
 comic_js = [
+    "javascripts/comic/interface.js",
     "javascripts/comic/jQuery.cssTransform.Patch.js",
     "javascripts/comic/cp_depends.js",
     "javascripts/comic/excanvas.js",
@@ -36,15 +62,16 @@ comic_js = [
     "javascripts/comic/rage.min.js",
 ]
 
-def gzip(fin, fout)
-    Zlib::GzipWriter.open(fout) do |gz|
-     File.open(fin,'rb') do |fp|
-       while chunk = fp.read(16 * 1024) do
-         gz.write chunk
-       end
-     end
-     gz.close
-    end
+def gzip(fin)
+    system "gzip -k -f -9 #{fin}"
+end
+
+def aws_upload(s3, key, bucket_name, filename, content_type, content_encoding)
+    s3.buckets[bucket_name].objects[key].write(:file => filename,
+                                        :acl => :public_read,
+                                        :content_type => content_type,
+                                        :content_encoding => content_encoding)
+    puts "Uploading file #{filename} to bucket #{bucket_name}."
 end
 
 def generate_js_files(name, files, destDir)
@@ -58,10 +85,8 @@ def generate_js_files(name, files, destDir)
   open("#{destDir}/js/#{name}.js", 'w') do |page|
       page.puts Uglifier.compile(File.read("#{destDir}/js/dev.#{name}.js"))
   end
-  puts "Write #{destDir}/js/#{name}.js.gz"
-  open("#{destDir}/js/#{name}.js.gz", 'w') do |page|
-      page.puts gzip("#{destDir}/js/#{name}.js", "#{destDir}/js/#{name}.js.gz")
-  end
+  puts "Gzip to #{destDir}/js/#{name}.js.gz"
+  gzip("#{destDir}/js/#{name}.js")
 end
 
 desc "Generate Javascript"
@@ -74,6 +99,10 @@ desc "Generate CSS"
 task :generate_css do
   puts "Compile CSS"
   system "compass compile"
+  puts "Gzip to #{public_dir}/css/app.css.gz"
+  gzip("#{public_dir}/css/app.css")
+  puts "Gzip to #{public_dir}/css/comic/comic.css.gz"
+  gzip("#{public_dir}/css/comic/comic.css")
 end
 
 desc "Generate CSS & javascript"
@@ -85,5 +114,16 @@ end
 
 desc "Watch the css & javascript and regenerate when it changes"
 task :watch do
-  compassPid = Process.spawn("compass watch")
+  system "compass watch"
+end
+
+desc "Deploy Javascript & Css to AWS"
+task :deploy do
+    Rake::Task[:generate].execute
+    s3 = AWS::S3.new
+    aws_upload_list.each { |f|
+        file_name = f[:name]
+        puts "Prepare file #{file_name} for upload"
+        aws_upload(s3, file_name, bucket_name, "#{public_dir}/#{file_name}", f[:content_type], f[:content_encoding])
+    }
 end

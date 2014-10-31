@@ -1,27 +1,3 @@
-// Copyright 2006 Google Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// TODO: Patterns
-// TODO: Radial gradient
-// TODO: Clipping paths
-// TODO: Coordsize
-// TODO: Painting mode
-// TODO: Optimize
-// TODO: canvas width/height sets content size in moz, border size in ie
-// TODO: Painting outside the canvas should not be allowed
-
-// only add this code if we do not already have a canvas implementation
 if (!window.CanvasRenderingContext2D) {
 
 (function () {

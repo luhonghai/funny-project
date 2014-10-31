@@ -27,7 +27,7 @@
 {/if}
 <meta property="fb:app_id" content="{$FACEBOOK_APP_ID}"/>
 
-<link href="{$baseurl}/css/app.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="//assets.trollvd.com/css/app.css.gz" media="screen" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <link rel="icon" href="{$baseurl}/favicon.ico" />
 <link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
@@ -41,7 +41,7 @@
     var AVATAR_URL      = "{$membersprofilepicurl}";
 	var APP_FACEBOOK 	= 	'287482141376893';
 </script>
-    <script type="text/javascript" src="{$baseurl}/js/dev.app.js"></script>
+    <script type="text/javascript" src="//assets.trollvd.com/js/app.js.gz"></script>
 {literal}
 {/literal}
 {literal}

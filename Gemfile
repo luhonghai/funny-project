@@ -12,4 +12,5 @@ group :development do
   gem 'yui-compressor'
   gem 'uglifier'
   gem 'cssminify'
+  gem 'aws-sdk'
 end
