@@ -99,10 +99,10 @@
 
         $(document).ready(function () {
             RageComic.initialize({
-                packRoot: BASE_URL + "/comic/",
+                packRoot: "http://assets.trollvd.com" + "/comic/",
                 siteUrl: "",
                 builderUrl: BASE_URL + "/comic",
-                cdnRoot: BASE_URL + "/comic/cdn/"
+                cdnRoot: "http://assets.trollvd.com" + "/comic/cdn/"
             });
         });
         window.onbeforeunload = confirmExit;
