@@ -1,6 +1,5 @@
 require "rubygems"
 require "bundler/setup"
-require "coffee-script"
 require 'uglifier'
 require 'zlib'
 require 'stringio'
@@ -118,7 +117,7 @@ task :watch do
 end
 
 def aws_upload_dir(s3,dir, bucket_name, public_dir)
-    Dir.glob("#{public_dir}/#{dir}/**/*.(png|gif|json)") do |file|
+    Dir.glob("#{public_dir}/#{dir}/**/*.(?:png|jpeg|jpg|gif|bmp|json)") do |file|
        key = file[public_dir.length + 1, file.length]
        if !File.directory?(file)
             puts "Uploading file #{file} to bucket #{bucket_name}."

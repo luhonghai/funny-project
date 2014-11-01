@@ -8,7 +8,6 @@ group :development do
   gem 'rake'
   gem 'compass'
   gem 'sass-globbing'
-  gem 'coffee-rails'
   gem 'yui-compressor'
   gem 'uglifier'
   gem 'cssminify'
