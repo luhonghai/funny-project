@@ -2,4 +2,5 @@
     RewriteEngine On
     RewriteBase /fun
     RewriteRule ^update$ update.php
+
 </IfModule>
