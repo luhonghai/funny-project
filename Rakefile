@@ -145,5 +145,4 @@ task :deploy do
     Rake::Task[:generate].execute
     s3 = AWS::S3.new
     Rake::Task[:deploy_assets].execute
-
 end
