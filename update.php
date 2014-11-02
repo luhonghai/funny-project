@@ -52,14 +52,15 @@ if (strcasecmp($gEvent, 'push') == 0) {
         $keyname =$dt->format('Y-m-d').'/'.$dt->format('H:i:s').'.log';
 
         // Instantiate the client.
-        $s3 = S3Client::factory();
+        $s3 = S3Client::factory(array('key' => getenv("AWS_ACCESS_KEY_ID"),
+                                'secret' => getenv("AWS_SECRET_ACCESS_KEY"),
+                                'region' => getenv("AWS_REGION")));
 
         // Upload data.
         $s3->putObject(array(
             'Bucket' => $bucket,
             'Key'    => $keyname,
-            'Body'   => $logs,
-            'Region' => getenv("AWS_REGION")
+            'Body'   => $logs
         ));
     } else {
         echo 'Not valid branch';
