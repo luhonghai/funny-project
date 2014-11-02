@@ -7,7 +7,6 @@ public/pdata/
 public/pdata/*
 .DS_Store
 error_log
-
 public/js/*.js
 public/js/*.gz
 public/css/*.css
