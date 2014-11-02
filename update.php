@@ -28,6 +28,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
         $logs = "";
         $command =
             'id 2>&1;'.
+            'php composer.phar install 2>&1;'.
             'export AWS_ACCESS_KEY_ID="'.getenv("AWS_ACCESS_KEY_ID").'" 2>&1;'.
             'export AWS_SECRET_ACCESS_KEY="'.getenv("AWS_SECRET_ACCESS_KEY").'" 2>&1;'.
             'export LANG="en_GB.UTF-8" 2>&1;'.
