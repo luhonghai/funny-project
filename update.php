@@ -6,7 +6,7 @@
  * Time: 08:59
  */
 require 'vendor/autoload.php';
-
+use Aws\S3\S3Client;
 function parseRequestHeaders() {
     $headers = array();
     foreach($_SERVER as $key => $value) {
@@ -46,7 +46,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
         }
         pclose($handle);
 
-        use Aws\S3\S3Client;
+
         $bucket = 'logs.trollvd.com';
         $now = time();
         $keyname = date_format($now,'Y-m-d').'/'.date_format($now,'H:i:s').'.log';
