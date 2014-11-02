@@ -20,6 +20,5 @@ public/css/comic/*.gz
 .sass-cache/*
 .sass-cache/
 .sass-cache/*
-
 Gemfile.lock
 .elasticbeanstalk/
