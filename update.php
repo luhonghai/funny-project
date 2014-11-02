@@ -49,7 +49,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
 
         $bucket = 'logs.trollvd.com';
         $dt = new DateTime();
-        $keyname =$dt->format('Y-m-d').'/'.$dt->format('H:i:s').'.txt';
+        $keyname =$dt->format('Y-m-d').'/'.$dt->format('H:i:s').'.log';
 
         // Instantiate the client.
         $s3 = S3Client::factory(array('key' => getenv("AWS_ACCESS_KEY_ID"),
@@ -60,7 +60,10 @@ if (strcasecmp($gEvent, 'push') == 0) {
         $s3->putObject(array(
             'Bucket' => $bucket,
             'Key'    => $keyname,
-            'Body'   => $logs
+            array(
+                'body' => $logs,
+                'contentType' => 'text/plain'
+            )
         ));
     } else {
         echo 'Not valid branch';
