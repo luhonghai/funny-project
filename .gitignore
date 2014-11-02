@@ -10,7 +10,6 @@ error_log
 
 public/js/*.js
 public/js/*.gz
-
 public/css/*.css
 public/css/comic/*.css
 public/css/*.gz
