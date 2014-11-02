@@ -34,7 +34,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
             'cd '.getenv("P_BASE_DIR").';'.
             'git reset HEAD --hard;'.
             'git pull origin master 2>&1;'.
-           // 'rake deploy 2>&1;'.
+            'rake deploy 2>&1;'.
             'git aws.push 2>&1';
         $handle = popen($command, 'r');
         while ($line = fread($handle, 100)){
