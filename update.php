@@ -21,13 +21,13 @@ $headers = parseRequestHeaders();
 $gEvent = $headers['X-Github-Event'];
 if (strcasecmp($gEvent, 'push') == 0) {
     echo 'Detect push event.';
-    echo 'getenv("AWS_ACCESS_KEY_ID")='.getenv("AWS_ACCESS_KEY_ID");
+    echo 'Use AWS_ACCESS_KEY_ID='.getenv("AWS_ACCESS_KEY_ID");
     $data = json_decode(file_get_contents('php://input'),true);
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
         $command =
             'id 2>&1;'.
-            'export AWS_ACCESS_KEY_ID'.getenv("AWS_ACCESS_KEY_ID").' 2>&1;'.
-            'export AWS_SECRET_ACCESS_KEY'.getenv("AWS_SECRET_ACCESS_KEY").' 2>&1;'.
+            'export AWS_ACCESS_KEY_ID='.getenv("AWS_ACCESS_KEY_ID").' 2>&1;'.
+            'export AWS_SECRET_ACCESS_KEY='.getenv("AWS_SECRET_ACCESS_KEY").' 2>&1;'.
             'export LANG="en_GB.UTF-8" 2>&1;'.
             'export LANGUAGE=en_GB:en 2>&1;'.
             'ls 2>&1;'.
