@@ -26,9 +26,10 @@ if (strcasecmp($gEvent, 'push') == 0) {
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
         $command =
             'id 2>&1;'.
-            'export AWS_ACCESS_KEY_ID='.getenv("AWS_ACCESS_KEY_ID").' 2>&1;'.
-            'export AWS_SECRET_ACCESS_KEY='.getenv("AWS_SECRET_ACCESS_KEY").' 2>&1;'.
+            'export AWS_ACCESS_KEY_ID="'.getenv("AWS_ACCESS_KEY_ID").'" 2>&1;'.
+            'export AWS_SECRET_ACCESS_KEY="'.getenv("AWS_SECRET_ACCESS_KEY").'" 2>&1;'.
             'export LANG="en_GB.UTF-8" 2>&1;'.
+            'export AWS_REGION="'.getenv("AWS_REGION").'" 2>$1'.
             'export LANGUAGE=en_GB:en 2>&1;'.
             'ls 2>&1;'.
             'cd '.getenv("P_BASE_DIR").';'.
