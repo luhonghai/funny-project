@@ -21,6 +21,7 @@ $headers = parseRequestHeaders();
 $gEvent = $headers['X-Github-Event'];
 if (strcasecmp($gEvent, 'push') == 0) {
     echo 'Detect push event.';
+    echo 'getenv("AWS_ACCESS_KEY_ID")='.getenv("AWS_ACCESS_KEY_ID");
     $data = json_decode(file_get_contents('php://input'),true);
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
         $command =
