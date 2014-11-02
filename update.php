@@ -28,6 +28,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
         $logs = "";
         $command =
             'id 2>&1;'.
+            'export COMPOSER_HOME="'.getenv("P_BASE_DIR").'";'.
             'php composer.phar install 2>&1;'.
             'export AWS_ACCESS_KEY_ID="'.getenv("AWS_ACCESS_KEY_ID").'" 2>&1;'.
             'export AWS_SECRET_ACCESS_KEY="'.getenv("AWS_SECRET_ACCESS_KEY").'" 2>&1;'.
@@ -46,10 +47,9 @@ if (strcasecmp($gEvent, 'push') == 0) {
         }
         pclose($handle);
 
-
         $bucket = 'logs.trollvd.com';
-        $now = time();
-        $keyname = date_format($now,'Y-m-d').'/'.date_format($now,'H:i:s').'.log';
+        $dt = new DateTime();
+        $keyname =$dt->format('Y-m-d').'/'.$dt->format('H:i:s').'.log';
 
         // Instantiate the client.
         $s3 = S3Client::factory();
@@ -58,7 +58,8 @@ if (strcasecmp($gEvent, 'push') == 0) {
         $s3->putObject(array(
             'Bucket' => $bucket,
             'Key'    => $keyname,
-            'Body'   => $logs
+            'Body'   => $logs,
+            'Region' => getenv("AWS_REGION")
         ));
     } else {
         echo 'Not valid branch';
