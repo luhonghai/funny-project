@@ -135,8 +135,8 @@ task :deploy_assets do
         puts "Prepare file #{file_name} for upload"
         aws_upload(s3, file_name, bucket_name, "#{public_dir}/#{file_name}", f[:content_type], f[:content_encoding])
     }
-    aws_upload_dir(s3, "images", bucket_name, public_dir)
-    aws_upload_dir(s3, "comic", bucket_name, public_dir)
+    #aws_upload_dir(s3, "images", bucket_name, public_dir)
+    #aws_upload_dir(s3, "comic", bucket_name, public_dir)
 end
 
 desc "Deploy Javascript & CSS to AWS"
