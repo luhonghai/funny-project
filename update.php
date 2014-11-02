@@ -5,6 +5,8 @@
  * Date: 14/10/2014
  * Time: 08:59
  */
+require 'vendor/autoload.php';
+
 function parseRequestHeaders() {
     $headers = array();
     foreach($_SERVER as $key => $value) {
@@ -23,6 +25,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
     echo 'Detect push event.';
     $data = json_decode(file_get_contents('php://input'),true);
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
+        $logs = "";
         $command =
             'id 2>&1;'.
             'export AWS_ACCESS_KEY_ID="'.getenv("AWS_ACCESS_KEY_ID").'" 2>&1;'.
@@ -38,8 +41,24 @@ if (strcasecmp($gEvent, 'push') == 0) {
         $handle = popen($command, 'r');
         while ($line = fread($handle, 100)){
             echo $line;
+            $logs .= $line.'\n';
         }
         pclose($handle);
+
+        use Aws\S3\S3Client;
+        $bucket = 'logs.trollvd.com';
+        $now = time();
+        $keyname = date('yyyy-MM-dd', $now).'/'.date('HH-mm-ss', $now).'.log';
+
+        // Instantiate the client.
+        $s3 = S3Client::factory();
+
+        // Upload data.
+        $s3->putObject(array(
+            'Bucket' => $bucket,
+            'Key'    => $keyname,
+            'Body'   => $logs
+        ));
     } else {
         echo 'Not valid branch';
     }
