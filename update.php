@@ -43,7 +43,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
         $handle = popen($command, 'r');
         while ($line = fread($handle, 100)){
             echo $line;
-            $logs .= $line.'\n';
+            $logs .= $line;
         }
         pclose($handle);
 
