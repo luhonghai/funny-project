@@ -48,7 +48,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
         use Aws\S3\S3Client;
         $bucket = 'logs.trollvd.com';
         $now = time();
-        $keyname = date('yyyy-MM-dd', $now).'/'.date('HH-mm-ss', $now).'.log';
+        $keyname = date_format($now,'Y-m-d').'/'.date_format($now,'H:i:s').'.log';
 
         // Instantiate the client.
         $s3 = S3Client::factory();
