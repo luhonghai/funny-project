@@ -82,7 +82,8 @@ def generate_js_files(name, files, destDir)
     }
   end
   open("#{destDir}/js/#{name}.js", 'w') do |page|
-      page.puts Uglifier.compile(File.read("#{destDir}/js/dev.#{name}.js"))
+      page.puts Uglifier.compile(File.read("#{destDir}/js/dev.#{name}.js", :external_encoding => 'utf-8',
+                                                                             :internal_encoding => 'utf-8'))
   end
   puts "Gzip to #{destDir}/js/#{name}.js.gz"
   gzip("#{destDir}/js/#{name}.js")
