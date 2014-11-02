@@ -21,7 +21,6 @@ $headers = parseRequestHeaders();
 $gEvent = $headers['X-Github-Event'];
 if (strcasecmp($gEvent, 'push') == 0) {
     echo 'Detect push event.';
-    echo 'Use AWS_ACCESS_KEY_ID='.getenv("AWS_ACCESS_KEY_ID");
     $data = json_decode(file_get_contents('php://input'),true);
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
         $command =
@@ -35,7 +34,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
             'cd '.getenv("P_BASE_DIR").';'.
             'git reset HEAD --hard;'.
             'git pull origin master 2>&1;'.
-            'rake deploy 2>&1;'.
+            'rake deploy &;'.
             'git aws.push 2>&1';
         $handle = popen($command, 'r');
         while ($line = fread($handle, 100)){
