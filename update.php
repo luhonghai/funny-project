@@ -65,8 +65,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
         $s3->putObject(array(
             'Bucket' => $bucket,
             'Key'    => $keyname,
-            'body' => $logs,
-            'contentType' => 'text/plain'
+            'Body' => $logs
         ));
     } else {
         echo 'Not valid branch';
