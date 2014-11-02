@@ -30,7 +30,6 @@ if (strcasecmp($gEvent, 'push') == 0) {
             'export LANG="en_GB.UTF-8" 2>&1;'.
             'export AWS_REGION="'.getenv("AWS_REGION").'" 2>$1'.
             'export LANGUAGE=en_GB:en 2>&1;'.
-            'ls 2>&1;'.
             'cd '.getenv("P_BASE_DIR").';'.
             'git reset HEAD --hard;'.
             'git pull origin master 2>&1;'.
