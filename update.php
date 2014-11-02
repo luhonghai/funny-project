@@ -49,7 +49,7 @@ if (strcasecmp($gEvent, 'push') == 0) {
 
         $bucket = 'logs.trollvd.com';
         $dt = new DateTime();
-        $keyname =$dt->format('Y-m-d').'/'.$dt->format('H:i:s').'.log';
+        $keyname =$dt->format('Y-m-d').'/'.$dt->format('H:i:s').'.txt';
 
         // Instantiate the client.
         $s3 = S3Client::factory(array('key' => getenv("AWS_ACCESS_KEY_ID"),
