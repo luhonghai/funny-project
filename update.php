@@ -25,7 +25,6 @@ if (strcasecmp($gEvent, 'push') == 0) {
     echo 'Detect push event.';
     $data = json_decode(file_get_contents('php://input'),true);
     if (isset($data['ref']) && strcasecmp($data['ref'], 'refs/heads/master') == 0) {
-
         $logs = "";
         try {
             $command =

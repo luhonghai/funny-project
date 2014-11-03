@@ -78,7 +78,8 @@ def generate_js_files(name, files, destDir)
   puts "Write #{destDir}/js/dev.#{name}.js"
   open("#{destDir}/js/dev.#{name}.js", 'w') do |page|
     files.each { |jsfile|
-        page.puts File.read(jsfile)
+        page.puts File.read(jsfile, :external_encoding => 'utf-8',
+                            :internal_encoding => 'utf-8')
     }
   end
   open("#{destDir}/js/#{name}.js", 'w') do |page|
