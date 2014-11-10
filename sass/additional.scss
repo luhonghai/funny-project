@@ -332,12 +332,12 @@ span.comment {
 
 /* Footer new */
 #footer-container{
-	background-color:#A8B2CE;
-	border-top:5px solid #3B5998;
-	height:160px;
-	position:relative;
-	z-index:10;
-	margin-bottom: -30px;
+//	background-color:#A8B2CE;
+//	border-top:5px solid #3B5998;
+//	height:160px;
+//	position:relative;
+//	z-index:10;
+//	margin-bottom: -30px;
 }
 #footer-wrapper{
 	margin: 0 auto;
@@ -679,4 +679,8 @@ span.comment {
 .friendsintro .btn-ol:hover {
     color: #333333;
     background-color: #CCCCCC;
+}
+
+.feature-bar {
+  display: none !important;
 }
