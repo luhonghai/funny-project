@@ -85,66 +85,9 @@
 {include file='js5.tpl'}
 {/if}
 {literal}
-<a style="width:55px;height:46px; position:fixed; bottom:0; {/literal}{if $smarty.session.language eq "ar"}left{else}right{/if}{literal}:20px; background:#eeeeee;-webkit-border-top-left-radius: 5px;
--webkit-border-top-right-radius: 5px;
--moz-border-radius-topleft: 5px;
--moz-border-radius-topright: 5px;
-border-top-left-radius: 5px;
-border-top-right-radius: 5px;
--webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
--moz-box-shadow:    0px 0px 2px rgba(0, 0, 0, 0.4);
-box-shadow:         0px 0px 2px rgba(0, 0, 0, 0.4);
-padding:12px 6px 0 6px;
-font-size:14px;
-font-weight:bold;
-border: 1px #FFF solid;
-color:#000;display:none
-" href="javascript:void(0);" onclick="
-if($.browser.safari || $.browser.chrome){ bodyelem = $(body) } else{ bodyelem = $(html) }
-bodyelem.animate({scrollTop : 0},'slow');
-"id="backtotop" title="Trollvd.com"><center><img src="{/literal}{$baseurl}{literal}/images/gotop.png" /></center></a>s
+<a href="javascript:void(0);" id="backtotop" title="Trollvd.com"><center><img src="{/literal}{$baseurl}{literal}/images/gotop.png" /></center></a>
 {/literal}
 
-{if $ganalytics ne ""}
-{literal}
-{/if}
-	<script>
-		var viewpage = 1;
-    </script>
-{/literal}
-{else}
-{literal}
-	<script>
-		var viewpage = 0;
-    </script>
-{/literal}
-{/if}
-{literal}
-
-	<script>
-		$('.search-button').click(function () {
-			$('#header_searchbar').toggle('slow')
-		});
-		$("#backtotop").hide();
-		$(function () {
-					$(window).scroll(function () {
-				if ($(this).scrollTop() > 100) {
-					$('#backtotop').fadeIn()
-				} else {
-					$('#backtotop').fadeOut()
-				}
-			});
-			$('#backtotop').click(function () {
-				$('body,html').animate({
-					scrollTop: 0
-				}, 800);
-				return false
-			});
-		});
-    </script>
-{/literal}
-{if !in_array($menu,array(5,11,15))}
-{/if}
 </div>
 </body>
 </html>

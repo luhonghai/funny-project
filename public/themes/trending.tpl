@@ -44,64 +44,7 @@
                 </ul>
             </div>
             <div id="lastPostsLoader"></div>                
-			{if $AUTOSCROLL eq "1"}
-			<div id="load_image" style="background:url(images/load.gif) center no-repeat; width:%100; height:50px;"> </div>
-			{literal}
-                <script type="text/javascript">
-				var ajaxstart=1;
-				$(document).ready(function(){
-					var tpage = 2;
-					function lastAddedLiveFunc()
-					{
-						$('div#lastPostsLoader').html('');
-						$.get("{/literal}{$baseurl}{literal}/trendingjson.php?page="+tpage, function(data){
-							if (data != "") {
-								$(".col-1").append(data);
-								$('#load_image').css('display','none');
-								ajaxstart=1;
-							}else{
-							ajaxstart=2;
-							}
-							$('div#lastPostsLoader').empty();
-						});
-					};
-					$(window).scroll(function(){
-					if (document.documentElement.scrollTop)
-					{ var  curloc = document.documentElement.scrollTop; }
-					else
-					{ var curloc=$(window).scrollTop(); }
-					if  ((curloc+document.documentElement.clientHeight+1)>=($(document).height()) && ajaxstart==1 ) {
-					 lastAddedLiveFunc();
-					 $('#load_image').css('display','block');
-					 ajaxstart=0;	
-					 tpage = tpage+1;
-					};
-					if(curloc>$(window).height()){$('#backtotop').slideDown();}else{$('#backtotop').slideUp();};
-					});
-					});
-				</script>
-			{/literal}
-			{else}
- 			{literal}
-                <script type="text/javascript">
-				$(document).ready(function(){
-					$(window).scroll(function(){
-					if (document.documentElement.scrollTop)
-					{ var  curloc = document.documentElement.scrollTop; }
-					else
-					{ var curloc=$(window).scrollTop(); }
-					var wintop = $(window).scrollTop(), docheight = $(document).height(), winheight = $(window).height();
-					var  scrolltrigger = 0.95;
-				 
-					if  ((wintop/(docheight-winheight)) > scrolltrigger) {
-					 lastAddedLiveFunc();
-					 tpage = tpage+1;
-					};
-					if(curloc>$(window).height()){$('#backtotop').slideDown();}else{$('#backtotop').slideUp();};
-					});
-					});
-				</script>
-			{/literal}
+
             <div id="paging-buttons" class="paging-buttons">
             	{if $tpp ne ""}
                 <a href="{$baseurl}/trending?page={$tpp}" class="previous">&laquo; {$lang166}</a>
@@ -113,8 +56,7 @@
                 {else}
                 <a href="#" onclick="return false;" class="older disabled">{$lang167} &raquo;</a>
                 {/if}
-            </div>	
-			{/if}	
+            </div>
         </div>
         {literal}
         <script type="text/javascript">
@@ -163,22 +105,4 @@
     </div>
 </div>
 {include file='right.tpl'}
-{literal}
-<script type="text/javascript">
-var adloca=$('#moving-boxes').offset().top; 
- $(window).scroll(function () { 
-    var curloca=$(window).scrollTop();
-    if(curloca>adloca){
-        $('#moving-boxes').css('position','fixed');
-        $('#moving-boxes').css('top','50px');
-        $('#moving-boxes').css('z-index','0');
-    };
-    if(curloca <= adloca){
-        $('#moving-boxes').css('position','static');
-        $('#moving-boxes').css('top','!important');
-        $('#moving-boxes').css('z-index','!important');
-    };
-    });
-</script> 
-{/literal}   
 <div id="footer" class="">

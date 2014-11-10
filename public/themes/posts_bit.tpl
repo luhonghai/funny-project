@@ -87,11 +87,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="tags">
-                                	<span>
-                                		{$posts[i].tags|tagsexplode}
-                                	</span>
-                                </div>
+
                                 {if $fixenabled eq "1"}<a class="fix" href="{$baseurl}/fix/{$posts[i].PID}">{$lang142}</a>{/if}
                             </div>
                         </div>

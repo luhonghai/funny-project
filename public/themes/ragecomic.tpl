@@ -101,7 +101,10 @@
         </div>
     </div>
 	<div style="margin:5px auto;width:800px;">
-		<div class="fb-like" data-href="{$baseurl}" data-width="500" data-show-faces="false" data-send="false"></div>
+        <div class="likeonfb">
+            <h4>{$lang287}</h4>
+            <div class="fb-like" data-href="http://www.facebook.com/{$FACEBOOK_PROFILE}" data-send="false" data-width="600" data-show-faces="false" data-font="arial"></div>
+        </div>
 		<div class="fb-comments" data-href="{$baseurl}/comic/" data-width="800"></div>
 	</div>
 </div>

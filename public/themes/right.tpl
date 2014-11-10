@@ -20,34 +20,6 @@
           <div class="current">
           </div>
         </div>
-
-                  <!-- 
-		  <span id="slogo">                 
-              <center> <a href="{$baseurl}/topusers"><img alt="Top Overs" src="{$baseurl}/images/xephang.png" width="300" height="60" /> </center>     
-               <div class="top-10">
-                                          <center> <h3> <a href="{$baseurl}/topusers"><label for="slogo">Bảng Xếp Hạng</label></h3></center> 
-			{section name=i loop=$top}
-			<ul class="widget-content">
-			<li class="widget-content">
-			<a target="_blank" href="{$baseurl}/user/{$top[i].USERID|stripslashes}">
-			<img src="{$membersprofilepicurl}/{if $top[i].profilepicture eq ""}noprofilepicture.jpg{else}{$top[i].profilepicture}{/if}?{$smarty.now}" style="width:40px;height:40px;">
-			</a>
-				<ul>
-				<li>
-					<a target="_blank" href="{$baseurl}/user/{$top[i].USERID}"><strong>{$top[i].username|stripslashes|truncate:10:"...":true}</strong></a>
-				</li>
-				<li>
-					Số bài: <strong>{$top[i].posts}</strong>
-				</li>
-				<li>
-					{$lang286}: <strong>{$top[i].points}</strong>
-				</li>
-				</ul>
-			</li>
-			</ul>
-			{/section}
-			<div class="clearfix"></div>
-		</div>-->
 				<div class="social-block">
             <h3>{$lang153}</h3>
             <div class="facebook-like">

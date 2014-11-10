@@ -29,7 +29,7 @@
                                 <h4>
                                     <a href="{$baseurl}/user/{$posts[i].USERID|stripslashes}">{$posts[i].username|stripslashes}</a>
                                     <p>{insert name=get_time_to_days_ago time=$posts[i].time_added}</p>
-                                </h4>                                
+                                </h4>
                                 <p>
                                     <span class="comment">
                                     <fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"></fb:comments-count>
@@ -81,11 +81,6 @@
                                             <div class="fb-like" data-href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}?ref=fb" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
                                         </li>
                                     </ul>
-                                </div>
-                                <div class="tags">
-                                	<span>
-                                		{$posts[i].tags|tagsexplode}
-                                	</span>
                                 </div>
                                 {if $fixenabled eq "1"}<a class="fix" href="{$baseurl}/fix/{$posts[i].PID}">{$lang142}</a>{/if}
                             </div>

@@ -66,25 +66,7 @@
                 {/section}			
 			</div>
             <div id="lastPostsLoader"></div>                
-			{literal}
-			<script type="text/javascript">
-			$(document).ready(function(){
-			$(window).scroll(function(){
-			if (document.documentElement.scrollTop)
-			{ var  curloc = document.documentElement.scrollTop; }
-			else
-			{ var curloc=$(window).scrollTop(); }
-			var wintop = $(window).scrollTop(), docheight = $(document).height(), winheight = $(window).height();
-			var  scrolltrigger = 0.95;
-			if  ((wintop/(docheight-winheight)) > scrolltrigger) {
-			lastAddedLiveFunc();
-			tpage = tpage+1;
-			};
-			if(curloc>$(window).height()){$('#backtotop').slideDown();}else{$('#backtotop').slideUp();};
-			});
-			});
-			</script>
-			{/literal}
+
             <div id="paging-buttons" class="paging-buttons">
             	{if $tpp ne ""}
                 <a href="{$baseurl}/channels/{$cname2}/?page={$tpp}" class="previous">&laquo; {$lang166}</a>
@@ -101,22 +83,4 @@
     </div>
 </div>
 {include file='right.tpl'}
-{literal}
-<script type="text/javascript">
-var adloca=$('#moving-boxes').offset().top;
-$(window).scroll(function(){
-    var curloca=$(window).scrollTop();
-    if(curloca>adloca){
-        $('#moving-boxes').css('position','fixed');
-        $('#moving-boxes').css('top','50px');
-        $('#moving-boxes').css('z-index','0');
-    };
-    if(curloca <= adloca){
-        $('#moving-boxes').css('position','static');
-        $('#moving-boxes').css('top','!important');
-        $('#moving-boxes').css('z-index','!important');
-    };
-});
-</script>
-{/literal}
 <div id="footer" class="">
