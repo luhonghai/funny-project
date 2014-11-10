@@ -52,17 +52,39 @@
     {else}
         <script type="text/javascript" src="{$asseturl}/js/app.js.gz"></script>
     {/if}
+    {literal}
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        {/literal}
+        ga('create', '{$ganalytics}', 'auto');
+        ga('require', 'displayfeatures');
+        ga('require', 'linkid', 'linkid.js');
+        {if $smarty.session.USERID ne ""}
+        ga('set', '&uid', '{$smarty.session.USERID|stripslashes}');
+        {else}
+        ga('set', '&uid', 'guest');
+        {/if}
+        ga('send', 'pageview');
+    </script>
 </head>
 <body id="page-landing" class="main-body ">
 {if $enable_fc eq "1"}
     <div id="fb-root"></div>
+    {literal}
     <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
+            {/literal}
             js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&appId={$FACEBOOK_APP_ID}&version=v2.0";
+            {literal}
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
+{/literal}
 {/if}
 <div id="tmp-img" style="display:none"></div>
 <div id="header">
