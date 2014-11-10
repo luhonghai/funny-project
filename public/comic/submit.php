@@ -13,7 +13,7 @@
 |**************************************************************************************************/
 
 include("../include/config.php");
-include("../include/function/import.php");
+include("../include/functions/import.php");
 
 $SID = $_SESSION['USERID'];
 if ($SID != "" && $SID >= 0 && is_numeric($SID))

@@ -6,8 +6,10 @@ $config = array();
 // Bắt đầu cấu hình
 $config['basedir']     =  getenv("P_BASE_DIR");   //Đường đẫn đến thư mục chứa mã nguồn
 $config['baseurl']     =  getenv("P_BASE_URL");   //Liên kết đến thư mục chứa mã nguồn
+$config['asseturl']    =  getenv("P_ASSET_URL");
+$config['penv']        =  getenv("P_ENV");
 $config['domain']      =  getenv("P_DOMAIN");   //Domain của website
-$DBTYPE     = 'mysqli';
+$DBTYPE     = 'mysql';
 $DBHOST     = getenv("P_DB_HOST");   //Tên máy chủ cơ sở dữ liệu
 $DBUSER     = getenv("P_DB_USER");   //Tên đăng nhập cơ sở dữ liệu
 $DBPASSWORD = getenv("P_DB_PASSWORD");   //Mật khẩu kết nối cơ sở dữ liệu
@@ -67,7 +69,6 @@ function strip_mq_gpc($arg)
 
 $conn = &ADONewConnection($DBTYPE);
 $conn->PConnect($DBHOST, $DBUSER, $DBPASSWORD, $DBNAME);
-$conn->SetCharSet('utf8');
 @mysql_query("SET NAMES 'UTF8'");
 $sql = "SELECT * from config";
 $rsc = $conn->Execute($sql);
@@ -90,12 +91,14 @@ if($config['mobilemode'] == "1" && $config['m_url'] != "")
         }
     }
 }
+STemplate::assign('penv',       $config['penv']);
 STemplate::assign('baseurl',       $config['baseurl']);
 STemplate::assign('basedir',       $config['basedir']);
 STemplate::assign('adminurl',       $config['adminurl']);
 STemplate::assign('cssurl',       $config['cssurl']);
 STemplate::assign('imagedir',        $config['imagedir']);
 STemplate::assign('imageurl',        $config['imageurl']);
+STemplate::assign('asseturl',   $config['asseturl']);
 STemplate::assign('membersprofilepicdir',        $config['membersprofilepicdir']);
 STemplate::assign('membersprofilepicurl',        $config['membersprofilepicurl']);
 STemplate::assign('pdir', $config['pdir']);

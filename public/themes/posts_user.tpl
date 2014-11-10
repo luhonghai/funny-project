@@ -76,26 +76,9 @@
                                 </ul>
                                 <div class="sharing-box ">
                                     <hr class="arrow" />
-                                    <ul class="sharing ">
+                                    <ul class="sharing">
                                         <li class="facebook" id="share1-{$posts[i].PID}">
-                                        	<span id="list-share-twitter-{$posts[i].PID}">
-												{if $share1 eq 1}
-													<a href="https://twitter.com/share" class="twitter-share-button" data-text="{$posts[i].story|stripslashes|mb_truncate:20:"...":'UTF-8'}" data-url="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" data-count="horizontal" data-via="">&nbsp;</a>		
-												{elseif $share1 eq 2}
-													<fb:share-button href="{$baseurl}{$postfolder}{$posts[i].PID}/" type="button_count"></fb:share-button>
-												{else}
-													<iframe src="//www.facebook.com/plugins/like.php?href={$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}?ref=fb&amp;width=80&amp;height=20&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false&amp;appId={$FACEBOOK_APP_ID}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:20px;" allowTransparency="true"></iframe>
-												{/if}
-                                            </span>
-											<div style="float:right" class="facebook-share-btn">
-												{if $share2 eq 1}
-													<a href="https://twitter.com/share" class="twitter-share-button" data-text="{$posts[i].story|stripslashes|mb_truncate:20:"...":'UTF-8'}" data-url="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" data-count="horizontal" data-via="">&nbsp;</a>		
-												{elseif $share2 eq 2}
-													<fb:share-button href="{$baseurl}{$postfolder}{$posts[i].PID}/" type="button_count"></fb:share-button>
-												{else}
-													<iframe src="//www.facebook.com/plugins/like.php?href={$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}?ref=fb&amp;width=80&amp;height=20&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false&amp;appId={$FACEBOOK_APP_ID}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:20px;" allowTransparency="true"></iframe>
-												{/if}
-											</div>
+                                            <div class="fb-like" data-href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}?ref=fb" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
                                         </li>
                                     </ul>
                                 </div>

@@ -51,15 +51,8 @@
 				<div class="social-block">
             <h3>{$lang153}</h3>
             <div class="facebook-like">
-				<div class="fb-like" data-href="http://www.facebook.com/{$FACEBOOK_PROFILE}" data-send="false" data-width="290" data-show-faces="true"></div>
+                <div class="fb-like-box" data-href="http://www.facebook.com/{$FACEBOOK_PROFILE}" data-width="290" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
 			</div>
-            <div class="twitter-follow">
-            	<a href="http://twitter.com/{$twitter}" class="twitter-follow-button">{$lang149} @{$twitter}</a>
-            </div>            
-            <div class="google-plus">
-            	<p>{$lang150}</p>
-            	<g:plusone size="medium" href="{$baseurl}"></g:plusone>
-            </div>
         </div>
 		
         <div id="moving-boxes">

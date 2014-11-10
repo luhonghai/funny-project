@@ -1,7 +1,7 @@
 <?php
 
-include("include/configcm.php");
-include("include/function/import.php");
+include("include/config.php");
+include("include/functions/import.php");
 
 $uid = intval(cleanit($_REQUEST['uid']));
 $art = cleanit($_REQUEST['art']);

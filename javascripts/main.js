@@ -51,3 +51,25 @@ function formatMoney(n, c, d, t){
         j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
+
+
+
+$(document).ready(function(){
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 20) {
+                $('#nav').css("position","fixed").css("top","0").css("box-shadow","0 2px 4px #333");
+            }
+            else{
+                $('#nav').css("position","relative").css("box-shadow","none");
+            }
+        });
+    });
+});
+
+$('.searchButton').click(function(){
+    $('#header_searchbar').toggle('slow');
+});
+
+function rmt(l) { var img = new Image(); img.src = l; document.getElementById('tmp-img').appendChild(img); }
+function myWindow(location, address, gaCategory, gaAction, entryLink) { var w = 640; var h = 460; var sTop = window.screen.height/2-(h/2); var sLeft = window.screen.width/2-(w/2); var sharer = window.open(address, "Share on Facebook", "status=1,height="+h+",width="+w+",top="+sTop+",left="+sLeft+",resizable=0"); }

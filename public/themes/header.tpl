@@ -27,7 +27,12 @@
 {/if}
 <meta property="fb:app_id" content="{$FACEBOOK_APP_ID}"/>
 
-<link href="//assets.trollvd.com/css/app.css.gz" media="screen" rel="stylesheet" type="text/css" />
+    {if $penv eq "dev"}
+        <link href="{$asseturl}/css/app.css" media="screen" rel="stylesheet" type="text/css" />
+    {else}
+        <link href="{$asseturl}/css/app.css.gz" media="screen" rel="stylesheet" type="text/css" />
+    {/if}
+
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <link rel="icon" href="{$baseurl}/favicon.ico" />
 <link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
@@ -39,50 +44,27 @@
 <script type="text/javascript">
 	var BASE_URL		=	"{$baseurl}";
     var AVATAR_URL      = "{$membersprofilepicurl}";
-	var APP_FACEBOOK 	= 	'287482141376893';
+    var ASSET_URL       = "{$asseturl}";
+	var APP_FACEBOOK 	= 	"{$FACEBOOK_APP_ID}";
 </script>
-    <script type="text/javascript" src="//assets.trollvd.com/js/app.js.gz"></script>
-{literal}
-{/literal}
-{literal}
-
-
-{/literal}
+    {if $penv eq "dev"}
+        <script type="text/javascript" src="{$asseturl}/js/dev.app.js"></script>
+    {else}
+        <script type="text/javascript" src="{$asseturl}/js/app.js.gz"></script>
+    {/if}
 </head>
 <body id="page-landing" class="main-body ">
-<div id="fb-root"></div>
 {if $enable_fc eq "1"}
-{if $smarty.session.language eq "vi"}
-{literal}
-<script src="http://connect.facebook.net/vi_VN/all.js"></script>
-<script>
-  FB.init({appId: '{/literal}{$FACEBOOK_APP_ID}{literal}', status: true,
-           cookie: true, xfbml: true});
-  FB.Event.subscribe('auth.login', function(response) {
-    window.location.reload();
-  });	  
-</script>
-{/literal}
-{else}
-{literal}
-<script src="http://connect.facebook.net/en_US/all.js"></script>
-<script>
-  FB.init({appId: '{/literal}{$FACEBOOK_APP_ID}{literal}', status: true,
-           cookie: true, xfbml: true});
-  FB.Event.subscribe('auth.login', function(response) {
-    window.location.reload();
-  });
-</script>
-{/literal}
-{/if}
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&appId={$FACEBOOK_APP_ID}&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 {/if}
 <div id="tmp-img" style="display:none"></div>
-{literal}
-<script type="text/javascript"> 
-function rmt(l) { var img = new Image(); img.src = l; document.getElementById('tmp-img').appendChild(img); } 
-function myWindow(location, address, gaCategory, gaAction, entryLink) { var w = 640; var h = 460; var sTop = window.screen.height/2-(h/2); var sLeft = window.screen.width/2-(w/2); var sharer = window.open(address, "Share on Facebook", "status=1,height="+h+",width="+w+",top="+sTop+",left="+sLeft+",resizable=0"); }
-</script>
-{/literal}
 <div id="header">
 	<div class="wauto">
 <a href="{$baseurl}" class="logo"> </a>
@@ -117,36 +99,6 @@ function myWindow(location, address, gaCategory, gaAction, entryLink) { var w = 
 </ul>
     </div>
 </div>
-{literal}
-<script type="text/javascript" >
-    $(document).ready(function(){
-
-
-        $(function () {
-
-            $(window).scroll(function () {
-
-                if ($(this).scrollTop() > 20) {
-
-                    $('#nav').css("position","fixed").css("top","0").css("box-shadow","0 2px 4px #333");
-
-                }
-
-                else{
-
-                    $('#nav').css("position","relative").css("box-shadow","none");
-
-                }
-
-            });
-
-        });
-
-    });
-
-</script>
-{/literal}
-
 <div id="nav">
 <div id="menuBar">
 <div class="trollvd">
@@ -168,13 +120,6 @@ function myWindow(location, address, gaCategory, gaAction, entryLink) { var w = 
 		<div class="clear"></div>
 	</div>
 </div>
-{literal}
-<script type="text/javascript">
-$('.searchButton').click(function(){
-    $('#header_searchbar').toggle('slow');
-    });
-</script>
-{/literal}              
 <div id="container">
 {if $viewpage eq "1"}
 {include file='js1.tpl'}

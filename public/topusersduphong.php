@@ -13,7 +13,7 @@
 |**************************************************************************************************/
 
 include("include/config.php");
-include("include/function/import.php");
+include("include/functions/import.php");
 $thebaseurl = $config['baseurl'];
 
 $page = intval($_REQUEST['page']);

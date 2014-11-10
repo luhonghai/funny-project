@@ -1,10 +1,21 @@
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
-<script src="//assets.trollvd.com/js/comic.js.gz" type="text/javascript"></script>
+{if $penv eq "dev"}
+    <script src="{$asseturl}/js/dev.comic.js" type="text/javascript"></script>
+{else}
+    <script src="{$asseturl}/js/comic.js.gz" type="text/javascript"></script>
+{/if}
+
 
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
 
-<link href="//assets.trollvd.com/css/comic/comic.css.gz" media="screen" rel="stylesheet" type="text/css" />
+{if $penv eq "dev"}
+    <link href="{$asseturl}/css/comic/comic.css" media="screen" rel="stylesheet" type="text/css" />
+{else}
+    <link href="{$asseturl}/css/comic/comic.css.gz" media="screen" rel="stylesheet" type="text/css" />
+{/if}
+
+
 
 <div class="box infoBox rageBuilderContainer">
     <div id="blank_content">
@@ -30,7 +41,7 @@
         <div id='exportContainer' title='Kiểm tra lại nào'>
             <div>
                 <div style='float: left'>
-                    <img alt="" src="{$baseurl}/comic/packs/neutral/images/Thoughtful.png" style="width: 66px;" /></div>
+                    <img alt="" src="{$asseturl}/comic/packs/neutral/images/Thoughtful.png" style="width: 66px;" /></div>
                 <div>
                     Bạn đã xong thật chưa? Nếu xác nhận bạn sẽ không thể tiếp tục sửa ảnh này. Sau đó
                     bạn có thể đăng lên trollvd.com hoặc lưu ảnh về máy.
@@ -48,20 +59,20 @@
                 <div id="toolsController" class="controllerSubset">
                     <strong style='padding-right: 5px'>Công cụ:</strong> <span title='Chèn chữ' id='addTextCtrl'
                         class='menuIcon'>
-                        <img src="{$baseurl}/comic/cdn/img/ragecomic/text_dropcaps.png" />
+                        <img src="{$asseturl}/comic/cdn/img/ragecomic/text_dropcaps.png" />
                     </span><span title='Chèn ảnh từ URL' id='importImage' class='menuIcon'>
-                        <img src="{$baseurl}/comic/cdn/img/ragecomic/photo_add.png" />
+                        <img src="{$asseturl}/comic/cdn/img/ragecomic/photo_add.png" />
                     </span>
                 </div>
                 <div id="brushController" class="controllerSubset">
                     <strong style='padding-right: 5px'>Bút vẽ:</strong> <span title='Chọn màu bút' id="customWidget"
                         class='menuIcon'>
-                        <img src="{$baseurl}/comic/cdn/img/ragecomic/color_wheel.png" />
+                        <img src="{$asseturl}/comic/cdn/img/ragecomic/color_wheel.png" />
                     </span><span title='Chọn kích thước bút' id="brushSize" class='menuIcon'>
-                        <img src="{$baseurl}/comic/cdn/img/ragecomic/paintbrush.png" />
+                        <img src="{$asseturl}/comic/cdn/img/ragecomic/paintbrush.png" />
                     </span><span title="Undo thao tác bút vẽ hoặc 'Dính vào khung' cuối cùng" id="undoBrush"
                         class='menuIcon'>
-                        <img src="{$baseurl}/comic/cdn/img/ragecomic/arrow_undo.png" />
+                        <img src="{$asseturl}/comic/cdn/img/ragecomic/arrow_undo.png" />
                     </span>
                     <div id="brushSizeSlider">
                     </div>
@@ -69,14 +80,14 @@
                 <div id="panelController" class="controllerSubset" style="float: right">
                     <strong style='padding-right: 5px'>Khung:</strong> <span title='Thêm dòng' id='addFrameCtrl'
                         class='menuIcon'>
-                        <img alt="" src="{$baseurl}/comic/cdn/img/ragecomic/add.png" />
+                        <img alt="" src="{$asseturl}/comic/cdn/img/ragecomic/add.png" />
                     </span><span title='Xóa dòng cuối' id='removeFrameCtrl' class='menuIcon'>
-                        <img alt="" src="{$baseurl}/comic/cdn/img/ragecomic/delete.png" />
+                        <img alt="" src="{$asseturl}/comic/cdn/img/ragecomic/delete.png" />
                     </span>
                 </div>
                 <div id="canvasControllerDiv" class="controllerSubset">
                     <span title='Hoàn thành' id='exportCanvas' class='menuIcon'>
-                        <img alt="" src="{$baseurl}/comic/cdn/img/ragecomic/disk.png" /></span>
+                        <img alt="" src="{$asseturl}/comic/cdn/img/ragecomic/disk.png" /></span>
                 </div>
                 <div style="clear: both">
                 </div>
@@ -84,7 +95,7 @@
             <div id='drawingCanvasContainer'>
                 <canvas id="drawingCanvasInterface"></canvas>
                 <canvas id="drawingCanvas"></canvas>
-                <img id="watermark" src="{$baseurl}/comic/cdn/img/ragecomic/watermark.png"
+                <img id="watermark" src="{$asseturl}/comic/cdn/img/ragecomic/watermark.png"
                      style="display: none;" />
             </div>
         </div>
@@ -99,10 +110,10 @@
 
         $(document).ready(function () {
             RageComic.initialize({
-                packRoot: "http://assets.trollvd.com" + "/comic/",
+                packRoot: ASSET_URL + "/comic/",
                 siteUrl: "",
                 builderUrl: BASE_URL + "/comic",
-                cdnRoot: "http://assets.trollvd.com" + "/comic/cdn/"
+                cdnRoot: ASSET_URL + "/comic/cdn/"
             });
         });
         window.onbeforeunload = confirmExit;
