@@ -47,6 +47,22 @@ function formatMoney(n, c, d, t) {
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
 
+function sendinvitation(email,csrf){
+    jQuery.ajax({
+        type:'POST',
+        url: baseurl + '/sendinvitation.php',
+        data:'email='+email+'&csrf='+csrf,
+        success:function(e){
+            if(e !=""){alert(e);}else{
+                $('#request-invite-loading').css('display','none');
+                $('#request-invite-block').css('display','none');
+                $('#signup-desc').css('display','none');
+                $('#signup-desc-done').css('display','block');
+            }
+        }
+    });
+}
+
 
 $(document).ready(function () {
     /**
@@ -73,6 +89,23 @@ $(document).ready(function () {
             $pass.show();
             $username.show();
         })
+    }
+
+    /**
+     *  Signup section
+     */
+    var $noFacebookAccount = $('#no-facebook-account');
+    var $getEmailInvitation = $('#get-email-invitation');
+    if ($noFacebookAccount.length && $getEmailInvitation.length) {
+        $noFacebookAccount.click(function () {
+            $('.message').css('display', 'none');
+            $('#request-invite-block').css('display', 'block');
+
+        });
+        $getEmailInvitation.click(function () {
+            sendinvitation($('#signup-request-email').val(), $('#CSRFToken').val());
+            $('#request-invite-loading').css('display', 'block');
+        });
     }
 
 

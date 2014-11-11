@@ -5,8 +5,24 @@
 <link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta content="width=device-width; initial-scale=1.0;" name="viewport" />
-<link rel="stylesheet" href="{$baseurl}/css/connect.css" media="screen,projection" type="text/css" />
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var BASE_URL		=	"{$baseurl}";
+        var AVATAR_URL      = "{$membersprofilepicurl}";
+        var ASSET_URL       = "{$asseturl}";
+        var APP_FACEBOOK 	= 	"{$FACEBOOK_APP_ID}";
+        {if $smarty.session.USERID ne ""}
+        var CURRENT_USER_ID = "{$smarty.session.USERID|stripslashes}";
+        {else}
+        var CURRENT_USER_ID = "guest";
+        {/if}
+        var GA_ID = "{$ganalytics}";
+    </script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    {if $penv eq "dev"}
+        <link href="{$asseturl}/css/connect.css" media="screen,projection" rel="stylesheet" type="text/css" />
+    {else}
+        <link href="{$asseturl}/css/connect.css.gz" media="screen,projection" rel="stylesheet" type="text/css" />
+    {/if}
 </head>
 
 <body id="page-signup">
@@ -59,33 +75,12 @@
 </div>
 
 <div id="fb-root"></div>
-{literal}
-<script type="text/javascript">
-$('#no-facebook-account').click(function(){
-	$('.message').css('display','none');
-	$('#request-invite-block').css('display','block');
-	
-	});
-$('#get-email-invitation').click(function(){
-sendinvitation($('#signup-request-email').val(),$('#CSRFToken').val());
-$('#request-invite-loading').css('display','block');	
-});
-function sendinvitation(email,csrf){
-	jQuery.ajax({
-		type:'POST',
-		url:' {/literal}{$baseurl}{literal}'+ '/sendinvitation.php',
-		data:'email='+email+'&csrf='+csrf,
-		success:function(e){
-		if(e !=""){alert(e);}else{
-			$('#request-invite-loading').css('display','none');
-			$('#request-invite-block').css('display','none');
-		$('#signup-desc').css('display','none');
-			$('#signup-desc-done').css('display','block');	
-			}
-		}
-		});
-}
-</script>
-{/literal}
+
+{if $penv eq "dev"}
+    <script type="text/javascript" src="{$asseturl}/js/dev.app.js"></script>
+{else}
+    <script type="text/javascript" src="{$asseturl}/js/app.js.gz"></script>
+{/if}
+
 </body>
 </html>
