@@ -34,7 +34,7 @@ $config['membersprofilepicurl']      =  getenv("P_IMAGE_URL")."/".$AWS_IMG_AVATA
 
 
 
-$config['email']='contact@trollvd.com'; //--Email nguoi nhan thong tin lien he
+$config['email']='trollvdvn@gmail.com'; //--Email nguoi nhan thong tin lien he
 $config['fields']['fullname']='Contact Support';
 
 //--Có thể thêm field mới tùy ý
@@ -52,9 +52,9 @@ $default_language = "vi"; //Bạn có thể chọn en
 $config['allowhtml']=false; //--Cho phép nhap ma HTML vao thong diep ko ?
 
 $config['adminurl']      =  $config['baseurl'].'/admin';
-$config['cssurl']      =  $config['baseurl'].'/css';
+$config['cssurl']      =  $config['asseturl'].'/css';
 $config['imagedir']      =  $config['basedir'].'/images';
-$config['imageurl']      =  $config['baseurl'].'/images';
+$config['imageurl']      =  $config['asseturl'].'/images';
 
 require_once($config['basedir'].'/smarty/libs/Smarty.class.php');
 require_once($config['basedir'].'/libraries/mysmarty.class.php');
@@ -64,7 +64,6 @@ require_once($config['basedir'].'/libraries/adodb/adodb.inc.php');
 
 require_once($config['basedir'].'/libraries/phpmailer/class.phpmailer.php');
 require_once($config['basedir'].'/libraries/SEmail.php');
-
 
 function strip_mq_gpc($arg)
 {
@@ -348,11 +347,6 @@ function smiley($text) {
     , '<3'=>$s2.'fb_heart.png'.$sm
     , ':3'=>$s2.'fb_curlylips.png'.$sm
     , ':-j'=>$s2.'78.gif'.$sm
-        //To add a new emo just uncomment the next line:
-        // , 'TEXT SYMBOL HERE'=>$s2.'NAME.gif'.$sm
-        // Tip: NAME = the name of the image to replace the text. Enter the name without extension
-
-
     );
     return str_replace(array_keys($array), array_values($array), stripslashes($text));
 }

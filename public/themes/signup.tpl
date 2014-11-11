@@ -30,7 +30,7 @@
 <div class="signup-wrapper">
     <a class="signup-login-btn" href="{$baseurl}/login">{$lang10} {$lang11}</a>
     <div class="header">
-        	<center><a href="{$baseurl}"><img src="{$baseurl}/images/logo-large.png" /></center>
+        	<center><a href="{$baseurl}"><img src="{$asseturl}/images/logo-large.png" /></center>
     	<a href="{$baseurl}"><h1>{$site_name}</h1></a>
     </div>
     <div class="content">

@@ -15,7 +15,7 @@
 		<a class="wrap" href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" class="jump_stop">
 		<div class="avatar">
 			{if $posts[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-				<img  class="ovui" src="{$baseurl}/images/nsfw.jpg" alt="{$posts[i].story|stripslashes}" />
+				<img  class="ovui" src="{$asseturl}/images/nsfw.jpg" alt="{$posts[i].story|stripslashes}" />
 			{else}
 				{if $posts[i].type == 1}
 					<div>
@@ -71,9 +71,9 @@
       nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
       itemSelector : '.item',     // selector for all items you'll retrieve
       loading: {
-          finishedMsg: 'Đả tải hết.',
+          finishedMsg: 'Đã tải hết.',
 		  msgText: '', 
-          img: '{/literal}{$imageurl}{literal}/loading.gif'
+          img: '{/literal}{$asseturl}/images{literal}/loading.gif'
         }
       },
       // trigger Masonry as a callback

@@ -32,40 +32,7 @@
                         <input class="file" type="file" name="coverphoto"  />
                         <p class="info">{$lang54}. Kích thước chuẩn 995x260px</p>      
                     </div>
-                </div>         
-                <!--
-                <div class="field colors">
-                    <h4>{$lang56}</h4>
-                    <div class="wrap">
-                        <div class="profile">                        
-                            <a id="color_display1" class="color-picker" href="#" style="background-color:#;"><img class="mask" src="{$baseurl}/images/color-mask.png"/></a>                        
-                            <input id="color_picker1" type="text" class="text color" style="color:#993366;" name="profile_color" maxlength="6" value="{$p.color1|stripslashes}" />
-                        </div>
-                        <div class="links">
-                            <a id="color_display2" class="color-picker" href="#" style="background-color:#;"><img class="mask" src="{$baseurl}/images/color-mask.png"/></a>
-                            <input id="color_picker2" type="text" class="text color" style="color:#993366;" name="link_color" maxlength="6" value="{$p.color2|stripslashes}" />
-                        </div>
-                    </div>
-                    {literal}
-                    <script type="text/javascript">
-                    $('#color_display1').click(function(){
-                    $('#color_picker1').trigger('focus');
-                    });
-                    $('#color_display2').click(function(){
-                    $('#color_picker2').trigger('focus');
-                    });
-                    $('#color_picker1').change(function(){
-                    $('#color_display1').css('background-color',"#"+$('#color_picker1').val());
-                    });
-                    $('#color_picker2').change(function(){
-                    $('#color_display2').css('background-color',"#"+$('#color_picker2').val());
-                    });        
-                    </script>
-                    {/literal}
-                    <p class="info">Màu nền</p>
-                    <p class="info last">Màu nổi bật</p>
                 </div>
-				-->
                 <hr/>
 
                 <div class="field">
