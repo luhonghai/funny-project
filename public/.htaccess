@@ -41,4 +41,5 @@ php_value display_errors 0
     RewriteRule ^lien-he-quang-cao.html blog.php?id=6
     RewriteRule ^cach-vao-facebook-khi-bi-chan-moi-nhat-nam-2014.html blog.php?id=4
     RewriteRule ^info$ phpinfo.php
+    RewriteRule ^tests3$ tests3.php
 </IfModule>
