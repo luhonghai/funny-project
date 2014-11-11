@@ -47,7 +47,7 @@
     var ASSET_URL       = "{$asseturl}";
 	var APP_FACEBOOK 	= 	"{$FACEBOOK_APP_ID}";
     {if $smarty.session.USERID ne ""}
-    var CURRENT_USER_ID = "{$smarty.session.USERID|stripslashes}";
+    var CURRENT_USER_ID = "{$smarty.session.USERNAME|stripslashes}";
     {else}
     var CURRENT_USER_ID = "guest";
     {/if}

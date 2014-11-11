@@ -23,3 +23,5 @@ Gemfile.lock
 
 vendor/
 composer.lock
+
+sitemap.xml

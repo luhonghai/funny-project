@@ -222,7 +222,7 @@ function generateCode($length)
 
 function smiley($text) {
 
-    $s2 = "<img src='".$config['baseurl']."/images/emo/"; //Path to images folder
+    $s2 = "<img src='".$config['asseturl']."/images/emo/"; //Path to images folder
     $sm = "' />"; // Extension of the images (All images must be the same extension)
     $array = array(
         ':))'=>$s2.'21.gif'.$sm
