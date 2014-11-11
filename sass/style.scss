@@ -1558,10 +1558,6 @@ span.original-badge {
   max-width: 460px
 }
 
-#entries-content ul li a {
-  position: relative
-}
-
 #entries-content.grid ul li a img {
   max-width: 220px
 }
@@ -1787,7 +1783,7 @@ span.original-badge {
 }
 
 #entries-content.list ul .info h5, #entries-content.list ul .info p span.seperator {
-  margin: 0 5px
+  //margin: 0 5px
 }
 
 #entries-content.list ul .info p span.comment, #entries-content.list ul .info p span.loved, #entries-content.list ul .info p span.viewed, .post-info-pad span.comment, .post-info-pad span.loved, .post-info-pad span.viewed {
@@ -6926,4 +6922,8 @@ a.email-button {
   font-weight: bolder;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+.new-sharing-box {
+  min-height: 20px;
 }

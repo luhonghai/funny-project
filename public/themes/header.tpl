@@ -23,7 +23,7 @@
 {elseif $p.youtube_key != ""}
 <meta property="og:image" content="http://img.youtube.com/vi/{$p.youtube_key}/0.jpg" />
 {else}
-<meta property="og:image" content="{$baseurl}/images/image.png" />
+<meta property="og:image" content="{$asseturl}/images/image.png" />
 {/if}
 <meta property="fb:app_id" content="{$FACEBOOK_APP_ID}"/>
 

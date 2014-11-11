@@ -28,6 +28,11 @@ aws_upload_list = [
         content_encoding: "gzip"
     },
     {
+        name: "css/connect.css.gz",
+        content_type: "text/css",
+        content_encoding: "gzip"
+    },
+    {
         name: "css/comic/comic.css.gz",
         content_type: "text/css",
         content_encoding: "gzip"
@@ -102,6 +107,8 @@ task :generate_css do
   system "compass compile"
   puts "Gzip to #{public_dir}/css/app.css.gz"
   gzip("#{public_dir}/css/app.css")
+  puts "Gzip to #{public_dir}/css/connect.css.gz"
+  gzip("#{public_dir}/css/connect.css")
   puts "Gzip to #{public_dir}/css/comic/comic.css.gz"
   gzip("#{public_dir}/css/comic/comic.css")
 end

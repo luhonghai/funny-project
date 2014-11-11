@@ -31,7 +31,7 @@
 			</div>
 			<div class="action">
             	<input type="hidden" id="jlog" name="jlog" value="1" />
-				<input id="setup-submit" type="submit" class="submit-button" value="{$lang3}"></input>
+				<input id="setup-submit" type="submit" class="submit-button" value="{$lang3}"/>
 			</div>			
 		</form>
 	</div>

@@ -1,6 +1,6 @@
 var baseurl = BASE_URL;
 var avataurl = AVATAR_URL;
-
+var asseturl = ASSET_URL;
 
 function rmt(l) {
     var img = new Image();
@@ -49,6 +49,32 @@ function formatMoney(n, c, d, t) {
 
 
 $(document).ready(function () {
+    /**
+     * Login section
+     */
+
+    var $recoverToLogin = $("#recover-to-login");
+    var $loginToRecover = $("#login-to-recover");
+    var $email = $("#login-email-block");
+    var $pass = $("#login-password-block");
+    var $username = $("#login-username-block");
+    if ($recoverToLogin.length && $loginToRecover.length
+        && $email.length && $pass.length && $username.length) {
+        $email.hide();
+        $pass.show();
+        $username.show();
+        $loginToRecover.click(function() {
+            $email.show();
+            $pass.hide();
+            $username.hide();
+        });
+        $recoverToLogin.click(function() {
+            $email.hide();
+            $pass.show();
+            $username.show();
+        })
+    }
+
 
     $(function () {
         $(window).scroll(function () {
@@ -60,6 +86,7 @@ $(document).ready(function () {
             }
         });
     });
+
     var $tabMenu = $("#tabs");
     if (typeof $tabMenu != 'undefined' && $tabMenu != null && $tabMenu.length) {
         $("#tabs ul li:first").addClass("active");
@@ -69,11 +96,31 @@ $(document).ready(function () {
                 if (i == 5) {
                     break;
                 }
-                user = data[i];
+                var user = data[i];
                 if (user.profilepicture == '') {
                     user.profilepicture = 'noprofilepicture.jpg'
                 }
-                $("#tabs div.current").append('<div class="over"><div class="over_info" id="avatar"><a href="/user/' + user.username + '"><img id="avatar" alt="Avatar" src="' + avataurl + user.profilepicture + '" /></a></div><div class="over_info" id="information"><p><strong><a href="/user/' + user.username + '">' + user.fullname + '</a></strong></p><p>Số bài:&nbsp' + formatMoney(user.TOTAL, 0) + ' - Điểm:&nbsp' + formatMoney(user.LIKES, 0) + '</p><p>Tổng lượt xem:&nbsp' + formatMoney(user.VIEWS, 0) + '</p></div><div id="rank"><img id="rank" alt="rank" src="' + baseurl + '/images/' + (i + 1) + '.png" /></div><div class="clear"></div></div>');
+                var tmpHtml = ['<div class="over"><div class="over_info" id="avatar"><a href="/user/',
+                                    user.username ,
+                                    '"><img id="avatar" alt="Avatar" src="',
+                                    avataurl,
+                                    '/',
+                                    user.profilepicture,
+                                    '" /></a></div><div class="over_info" id="information"><p><strong><a href="/user/',
+                                    user.username ,
+                                    '">',
+                                    user.fullname ,
+                                    '</a></strong></p><p>Số bài:&nbsp',
+                                    formatMoney(user.TOTAL, 0) ,
+                                    ' - Điểm:&nbsp' ,
+                                    formatMoney(user.LIKES, 0) ,
+                                    '</p><p>Tổng lượt xem:&nbsp' ,
+                                    formatMoney(user.VIEWS, 0) ,
+                                    '</p></div><div id="rank"><img id="rank" alt="rank" src="' ,
+                                    asseturl ,
+                                    '/images/' + (i + 1) ,
+                                    '.png" /></div><div class="clear"></div></div>'];
+                $("#tabs div.current").append(tmpHtml.join(''));
             }
         });
         $("#tabs ul li").click(function () {
@@ -94,7 +141,27 @@ $(document).ready(function () {
                     if (user.profilepicture == '') {
                         user.profilepicture = 'noprofilepicture.jpg'
                     }
-                    $("#tabs div.current").append('<div class="over"><div class="over_info" id="avatar"><a href="user/' + user.username + '"><img id="avatar" alt="Avatar" src="' + avataurl + user.profilepicture + '" /></a></div><div class="over_info" id="information"><p><strong><a href="user/' + user.username + '">' + user.fullname + '</a></strong></p><p>Số bài:&nbsp' + formatMoney(user.TOTAL, 0) + ' - Điểm:&nbsp' + formatMoney(user.LIKES, 0) + '</p><p>Tổng lượt xem:&nbsp' + formatMoney(user.VIEWS, 0) + '</p></div><div id="rank"><img id="rank" alt="rank" src="' + baseurl + '/images/' + (i + 1) + '.png" /></div><div class="clear"></div></div>');
+                    var tmpHtml = ['<div class="over"><div class="over_info" id="avatar"><a href="/user/',
+                        user.username ,
+                        '"><img id="avatar" alt="Avatar" src="',
+                        avataurl,
+                        '/',
+                        user.profilepicture,
+                        '" /></a></div><div class="over_info" id="information"><p><strong><a href="/user/',
+                        user.username ,
+                        '">',
+                        user.fullname ,
+                        '</a></strong></p><p>Số bài:&nbsp',
+                        formatMoney(user.TOTAL, 0) ,
+                        ' - Điểm:&nbsp' ,
+                        formatMoney(user.LIKES, 0) ,
+                        '</p><p>Tổng lượt xem:&nbsp' ,
+                        formatMoney(user.VIEWS, 0) ,
+                        '</p></div><div id="rank"><img id="rank" alt="rank" src="' ,
+                        asseturl ,
+                        '/images/' + (i + 1) ,
+                        '.png" /></div><div class="clear"></div></div>'];
+                    $("#tabs div.current").append(tmpHtml.join(''));
                 }
             });
         });
@@ -319,6 +386,143 @@ $(document).ready(function () {
 
         });
     }
+
+
+    /**
+     *  Gag link auto scroll
+     */
+    if ($('.gag-link').length &&  $('.b9gcs-stop').length) {
+        $(document).keydown(function (e) {
+            if (e.keyCode == 39 || e.keyCode == 75) {
+                var a = new Array();
+                var b = new Array();
+                var c = new Array();
+                var i = 0;
+                $('.gag-link').each(function () {
+                    a[i] = $(this).attr('id');
+                    b[i] = $(this).offset().top;
+                    c[i] = $(this).height();
+                    i++;
+                });
+                var curloc = $(window).scrollTop();
+                var j = 0;
+                var k = 0;
+                for (; j < a.length;) {
+                    if (b[j] + c[j] - 39 > curloc && curloc >= b[j] - 39) {
+                        var k = j;
+                        break;
+                    }
+                    j++;
+                }
+                if (k == a.length - 1) {
+                    $('#go-next').click();
+                }
+                $.scrollTo(b[k + 1] - 38);
+            }
+
+            if (e.keyCode == 37 || e.keyCode == 74) {
+                var a = new Array();
+                var b = new Array();
+                var c = new Array();
+                var i = 0;
+                $('.gag-link').each(function () {
+                    a[i] = $(this).attr('id');
+                    b[i] = $(this).offset().top;
+                    c[i] = $(this).height();
+                    i++;
+                });
+                var curloc = $(window).scrollTop();
+                var j = 0;
+                var k = 0;
+                for (; j < a.length;) {
+                    if (b[j] + c[j] - 39 > curloc && curloc >= b[j] - 39) {
+                        var k = j;
+                        break;
+                    }
+                    j++;
+                }
+                $.scrollTo(b[k - 1] - 38);
+            }
+
+            if (e.keyCode == 76) {
+                var a = new Array();
+                var b = new Array();
+                var i = 0;
+                $('.gag-link').each(function () {
+                    a[i] = $(this).attr('gagId');
+                    b[i] = $(this).offset().top;
+                    i++;
+                });
+                var curloc = $(window).scrollTop();
+                var j = 0;
+                for (; j < a.length;) {
+                    if (b[j] > curloc) {
+                        break;
+                    }
+                    j++;
+                }
+                $.scrollTo('.gag-link:eq(' + (j) + ')');
+                $('#post_love_' + a[j]).trigger('click');
+            }
+
+            if (e.keyCode == 72) {
+                var a = new Array();
+                var b = new Array();
+                var i = 0;
+                $('.gag-link').each(function () {
+                    a[i] = $(this).attr('gagId');
+                    b[i] = $(this).offset().top;
+                    i++;
+                });
+                var curloc = $(window).scrollTop();
+                var j = 0;
+                for (; j < a.length;) {
+                    if (b[j] > curloc) {
+                        break;
+                    }
+                    j++;
+                }
+                $.scrollTo('.gag-link:eq(' + (j) + ')');
+                $('#vote-down-btn-' + a[j]).trigger('click');
+            }
+        });
+
+        $(window).scroll(function () {
+            var a = new Array();
+            var b = new Array();
+            var c = new Array();
+            var i = 0;
+            $('.gag-link').each(function () {
+                a[i] = $(this).attr('gagId');
+                b[i] = $(this).offset().top;
+                c[i] = $(this).height();
+                i++;
+            });
+            var curloc = $(window).scrollTop();
+            var j = 0;
+            var k = 0;
+            for (; j < a.length;) {
+                if (b[j] + c[j] > curloc && curloc > b[j]) {
+                    var k = j;
+                    break;
+                }
+                j++;
+            }
+            var winh = $(window).height();
+            var ach = $('#action-' + a[0]).height() + 35;
+            if ((curloc > (b[k] + c[k] - ach)) || curloc < b[0]) {
+                $('.b9gcs-stop').css('position', 'static');
+                $('.b9gcs-stop').css('top', '!important');
+            }
+            else {
+                if ((k == 0 && curloc >= b[k]) || k >= 1) {
+                    $('#action-' + a[k]).css('position', 'fixed');
+                    $('#action-' + a[k]).css('top', '55px');
+                }
+            }
+        });
+    }
+
 
 });
 

@@ -322,6 +322,30 @@ a:hover {
 
 }
 
+#header ul li.fixed-btn {
+  margin-top: 7px!important;
+}
+
+#header ul li.fixed-btn a {
+  color: #ffffff !important;
+}
+
+#header ul li s.login {
+
+  background: url(../images/face-icons.png) no-repeat;
+
+  width: 21px;
+
+  height: 15px;
+
+  display: inline-block;
+
+  margin-right: 4px;
+
+  margin-top: -1px
+
+}
+
 #header ul li:hover s.upload {
 
   opacity: .6

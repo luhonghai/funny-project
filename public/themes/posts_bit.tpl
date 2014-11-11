@@ -54,16 +54,12 @@
 								<div class="userinfo">
 									{insert name=get_user_likes assign=userlikes USERID=$posts[i].USERID}
 									{insert name=get_member_profilepicture assign=profilepicture value=var USERID=$posts[i].USERID url=$membersprofilepicurl}
-                                                                                  <p>{insert name=get_time_to_days_ago time=$posts[i].time_added}</p>									<div>
+                                    <div>
 										<a href="{$baseurl}/user/{$posts[i].username|stripslashes}"><img src="{$membersprofilepicurl}/{$profilepicture}?{$smarty.now}" alt="{$p.username|stripslashes}"></a>
 										<div class="uinfo">
 											<a href="{$baseurl}/user/{$posts[i].username|stripslashes}">{$posts[i].username|fullname}</a>
 											{insert name=get_user_level assign=alvl value=var POINT=$userlikes}
-											<div class="user-bar">
-											<div class="bar-blue" style="width:{$alvl[3]}%;"></div>
-											<div class="bar-c">{$alvl[0]} / {$alvl[1]}</div>
-											<div class="level">Lv: {$alvl[2]}</div>
-											</div>
+                                            <p>Đăng {insert name=get_time_to_days_ago time=$posts[i].time_added}</p>
 
 										</div>
 										<div class="clear">  </div>
@@ -71,21 +67,8 @@
                                                                         </div>
 								</div>
                                 </h4>
-                                <p>
-                                    <span class="comment">
-                                    	<fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"></fb:comments-count>
-                                    </span>
-                                    {insert name=get_fav_count value=var assign=fcount PID=$posts[i].PID}
-                                    <span id="love_count_{$posts[i].PID}" class="loved" votes="{$posts[i].favclicks}" score="0">{$posts[i].favclicks}</span>
-									<span class="viewed">{$posts[i].postviewed}</span>
-                                </p>
-                                <div class="sharing-box ">
-                                    <hr class="arrow" />
-                                    <ul class="sharing ">
-                                        <li class="facebook" id="share1-{$posts[i].PID}">
-                                            <div class="fb-like" data-href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}?ref=fb" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-                                        </li>
-                                    </ul>
+                                <div class="new-sharing-box">
+                                    <div class="fb-like" data-href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}?ref=fb" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
                                 </div>
 
                                 {if $fixenabled eq "1"}<a class="fix" href="{$baseurl}/fix/{$posts[i].PID}">{$lang142}</a>{/if}

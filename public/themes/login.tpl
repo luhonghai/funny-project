@@ -5,14 +5,18 @@
 <link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta content="width=device-width; initial-scale=1.0;" name="viewport" />
-<link rel="stylesheet" href="{$baseurl}/css/connect.css" media="screen,projection" type="text/css" />
+    {if $penv eq "dev"}
+        <link href="{$asseturl}/css/connect.css" media="screen,projection" rel="stylesheet" type="text/css" />
+    {else}
+        <link href="{$asseturl}/css/connect.css.gz" media="screen,projection" rel="stylesheet" type="text/css" />
+    {/if}
 </head>
 
 <body id="page-signup">
     <div class="signup-wrapper">
         <a class="signup-login-btn" href="{$baseurl}/signup">{$lang23} {$site_name}? {$lang24}</a>
         <div class="header">
-        	<center><a href="{$baseurl}"><img src="{$baseurl}/images/logo-large.png" /></center>
+        	<center><a href="{$baseurl}"><img src="{$asseturl}/images/logo-large.png" /></center>
         </div>
         <div class="content">
             <div class="description">
@@ -20,9 +24,6 @@
 				<h3></h3>
                 <div class="spcl-button-wrap">
                 	<a class="spcl-button facebook badge-facebook-connect" label="LoginFormFacebookButton" next="" <a class="spcl-button facebook badge-facebook-connect" label="LoginFormFacebookButton" next="" href="https://www.facebook.com/dialog/permissions.request?app_id={$FACEBOOK_APP_ID}&display=page&next={$baseurl}/&response_type=code&fbconnect=1&perms=email,user_birthday,user_about_me">{$lang25}</a><br>
-					{if $TC eq "1"}
-					<a class="spcl-button twitter" label="LoginFormTwitterButton" next="" href="{$baseurl}/twitter_signin.php">{$lang256}</a>
-					{/if}
                 </div>
                 <p class="message"> </p>
             </div>
@@ -57,6 +58,12 @@
         </div>
     </div>
     <div id="fb-root"></div>
-    <script type="text/javascript" src="{$baseurl}/js/connect.js"></script>
+
+    {if $penv eq "dev"}
+        <script type="text/javascript" src="{$asseturl}/js/dev.app.js"></script>
+    {else}
+        <script type="text/javascript" src="{$asseturl}/js/app.js.gz"></script>
+    {/if}
+
 </body>
 </html>
