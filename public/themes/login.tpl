@@ -5,6 +5,18 @@
 <link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta content="width=device-width; initial-scale=1.0;" name="viewport" />
+    <script type="text/javascript">
+        var BASE_URL		=	"{$baseurl}";
+        var AVATAR_URL      = "{$membersprofilepicurl}";
+        var ASSET_URL       = "{$asseturl}";
+        var APP_FACEBOOK 	= 	"{$FACEBOOK_APP_ID}";
+        {if $smarty.session.USERID ne ""}
+        var CURRENT_USER_ID = "{$smarty.session.USERID|stripslashes}";
+        {else}
+        var CURRENT_USER_ID = "guest";
+        {/if}
+        var GA_ID = "{$ganalytics}";
+    </script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     {if $penv eq "dev"}
         <link href="{$asseturl}/css/connect.css" media="screen,projection" rel="stylesheet" type="text/css" />
