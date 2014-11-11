@@ -5,6 +5,7 @@
 <link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta content="width=device-width; initial-scale=1.0;" name="viewport" />
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     {if $penv eq "dev"}
         <link href="{$asseturl}/css/connect.css" media="screen,projection" rel="stylesheet" type="text/css" />
     {else}
