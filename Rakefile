@@ -147,6 +147,11 @@ task :deploy_assets do
     #aws_upload_dir(s3, "comic", bucket_name, public_dir)
 end
 
+task :deploy_pictures do
+    s3 = AWS::S3.new
+    aws_upload_dir(s3, "pictures", "images.trollvd.com", public_dir)
+end
+
 desc "Deploy Javascript & CSS to AWS"
 task :deploy do
     Rake::Task[:generate].execute

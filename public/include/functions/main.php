@@ -1,12 +1,13 @@
 <?php
 
+
 function tagsexplode($tags)
 {
 	global $config;
 	$words = explode(",",$tags);
 	if ($tags != '')
 	{
-		echo "<img src='".$config['imageurl']."/tags.png' title='T? kh�a' /> : ";
+		echo "<img src='".$config['imageurl']."/tags.png' title='Từ khóa' /> : ";
 		foreach($words as $key=>$values)
 		{
 			$values = trim($values);

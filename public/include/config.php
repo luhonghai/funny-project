@@ -1,4 +1,7 @@
 ﻿<?php
+require '../vendor/autoload.php';
+use Aws\S3\S3Client;
+
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 if(!headers_sent()) { session_start();}
 $config = array();
@@ -9,6 +12,14 @@ $config['baseurl']     =  getenv("P_BASE_URL");   //Liên kết đến thư mụ
 $config['asseturl']    =  getenv("P_ASSET_URL");
 $config['penv']        =  getenv("P_ENV");
 $config['domain']      =  getenv("P_DOMAIN");   //Domain của website
+
+$AWS_IMG_AVATAR = getenv("P_AVATAR_URL");
+$AWS_IMG_PIC    = getenv("P_POST_URL");
+
+function allowAWS() {
+    return strcasecmp(getenv("P_ENV"), 'LIVE') == 0;
+}
+
 $DBTYPE     = 'mysql';
 $DBHOST     = getenv("P_DB_HOST");   //Tên máy chủ cơ sở dữ liệu
 $DBUSER     = getenv("P_DB_USER");   //Tên đăng nhập cơ sở dữ liệu
@@ -17,9 +28,9 @@ $DBNAME     = getenv("P_DB_NAME");   //Tên cơ sở dữ liệu
 
 
 $config['pdir'] = getenv("P_POST_DIR");
-$config['purl'] = getenv("P_POST_URL");
+$config['purl'] = getenv("P_IMAGE_URL")."/".$AWS_IMG_PIC;
 $config['membersprofilepicdir']      =  getenv("P_AVATAR_DIR");
-$config['membersprofilepicurl']      =  getenv("P_AVATAR_URL");
+$config['membersprofilepicurl']      =  getenv("P_IMAGE_URL")."/".$AWS_IMG_AVATAR;
 
 
 
@@ -218,6 +229,23 @@ function generateCode($length)
         $code .= $chars[mt_rand(0,$clen)];
     }
     return $code;
+}
+
+function aws_upload_file($key, $bucket, $file) {
+    $s3 = S3Client::factory(array('key' => getenv("AWS_ACCESS_KEY_ID"),
+        'secret' => getenv("AWS_SECRET_ACCESS_KEY"),
+        'region' => getenv("AWS_REGION")));
+    // Upload data.
+    $s3->putObject(array(
+        'Bucket' => $bucket,
+        'Key'    => $key,
+        'SourceFile'   => $file,
+        'ACL'    => 'public-read'
+    ));
+}
+
+function aws_upload_images($key, $file) {
+    aws_upload_file($key, getenv("AWS_IMG_BUCKET"), $file);
 }
 
 function smiley($text) {
@@ -421,7 +449,10 @@ if($config['enable_fc'] == "1")
                     $img = file_get_contents('https://graph.facebook.com/'.$fid.'/picture?width=160&height=160');
                     $file = $config['membersprofilepicdir'].'/'.$userid.'.jpg';
                     file_put_contents($file, $img);
-
+                    if (allowAWS()) {
+                        aws_upload_images(getenv("P_AVATAR_URL").'/'.$userid.'.jpg', $file);
+                        unlink($file);
+                    }
                     if($userid != "" && is_numeric($userid) && $userid > 0)
                     {
                         $query="SELECT USERID,email,username,verified, filter from members WHERE USERID='".mysql_real_escape_string($userid)."'";
@@ -458,29 +489,6 @@ if($config['enable_fc'] == "1")
         }
     }
 
-    /*
-    function getCurrentPageUrl()
-    {
-         static $pageURL = '';
-         if(empty($pageURL)){
-              $pageURL = 'http';
-              if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')$pageURL .= 's';
-              $pageURL .= '://';
-              if($_SERVER['SERVER_PORT'] != '80')$pageURL .= $_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI'];
-              else $pageURL .= $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-         }
-         return $pageURL;
-    }
-    if($_SESSION['USERNAME'] == "" && $_SESSION['FB'] == "1")
-    {
-        $url = getCurrentPageUrl();
-        $myurl = $config['baseurl']."/connect.php";
-        $cssurl = $config['baseurl']."/css/connect.css";
-        if(($url != $myurl) && ($url != $cssurl))
-        {
-            header("Location:$config[baseurl]/connect.php");exit;
-        }
-    }*/
 }
 if($lskip != "1")
 {
