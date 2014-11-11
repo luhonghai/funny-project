@@ -55,7 +55,7 @@
                             </a>
                             <p>
                                 <span class="comment">
-                                    <fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{$posts[i].story|makeseo}.html"></fb:comments-count>
+                                    <fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts.story|makeseo}.html{/if}"></fb:comments-count>
                                 </span>
                                 <span id="love_count_{$posts[i].PID}" class="loved" votes="{$posts[i].favclicks}" score="0">{$posts[i].favclicks}</span>
 								<span class="viewed">{$posts[i].postviewed}</span>

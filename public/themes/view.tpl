@@ -278,24 +278,24 @@
 </div>
 <div class="facebook-btn"><fb:like href="{$baseurl}{$postfolder}{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}?ref=fb" send="false" layout="button_count" width="90px" show_faces="false" font="" label="Post"></fb:like>&nbsp; &nbsp;&nbsp; &nbsp; &nbsp</a></div>                
 <div class="facebook-share-btn"><fb:share-button href="{$baseurl}{$postfolder}{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}?fb=share" type="button_count"></fb:share-button></div>
-<div class="google-btn"><g:plusone size="medium" href="{$baseurl}/{$postfolder}{$p.PID}/{$p.story|makeseo}.html"></g:plusone> </div>
+<div class="google-btn"><g:plusone size="medium" href="{$baseurl}/{$postfolder}{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}"></g:plusone> </div>
                 	{if $prev != ""}
 
-                	<a id="prev_post" class="prev-post" href="{$baseurl}{$postfolder}{$prev}/{$prevstory|makeseo}.html" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Previous', 1]);"></a>
+                	<a id="prev_post" class="prev-post" href="{$baseurl}{$postfolder}{$prev}/{if $SEO eq "1"}{$prevstory|makeseo}.html{/if}"></a>
 
                     {else}
 
-                    <a id="prev_post" class="prev-post" href="{$baseurl}/random" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Previous', 1]);"></a>
+                    <a id="prev_post" class="prev-post" href="{$baseurl}/random"></a>
 
                     {/if}
 
                     {if $next ne ""}
 
-                	<a id="next_post" class="next-post" href="{$baseurl}{$postfolder}{$next}/{$nextstory|makeseo}.html" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Next', 1]);"></a>
+                	<a id="next_post" class="next-post" href="{$baseurl}{$postfolder}{$next}/{if $SEO eq "1"}{$nextstory|makeseo}.html{/if}"></a>
 
                     {else}
 
-                    <a id="next_post" class="next-post" href="{$baseurl}/random" onclick="_gaq.push(['_trackEvent', 'View-Post', 'Clicked', 'Next', 1]);"></a>
+                    <a id="next_post" class="next-post" href="{$baseurl}/random"></a>
 
                     {/if}
 
@@ -386,7 +386,7 @@
                    	{section name=i loop=$r}                  
                         <ul id="grid-col-{if $smarty.section.i.iteration GT 3}2{else}1{/if}" class="col-{if $smarty.section.i.iteration GT 3}{math equation="x - 3" x=$smarty.section.i.iteration}{else}{$smarty.section.i.iteration}{/if}">
                             <li class=" ">
-                                <a href="{$baseurl}{$postfolder}{$r[i].PID}/{$r[i].story|makeseo}.html" class="jump_stop">
+                                <a href="{$baseurl}{$postfolder}{$r[i].PID}/{if $SEO eq "1"}{$r[i].story|makeseo}.html{/if}" class="jump_stop">
                                     <div style="" class="thimage">
 									{if $r[i].type == 0}	      
 									{if $r[i].pic ne ""}	
@@ -428,7 +428,7 @@
 	<ol>
 	{section name=i loop=$popular}
 	<li class="badge-buzz-post-batch badge-buzz-post-batch-{if $smarty.section.i.iteration GT "15"}5{elseif $smarty.section.i.iteration GT "12"}4{elseif $smarty.section.i.iteration GT "9"}3{elseif $smarty.section.i.iteration GT "6"}2{elseif $smarty.section.i.iteration GT "3"}1{else}0{/if}" {if $smarty.section.i.iteration GT "3"}style="display:none;"{/if} >
-	<a class="wrap" href="{$baseurl}{$postfolder}{$popular[i].PID}/{if $SEO eq "1"}{$popular[i].story|makeseo}.html{/if}"  onclick="GAG.GA.track('RelatedContent', 'Clicked-Post-Sidebar', 'Position-1', 1);GAG.Track.event('clicked', 'psb.p', '0', '5665836');">
+	<a class="wrap" href="{$baseurl}{$postfolder}{$popular[i].PID}/{if $SEO eq "1"}{$popular[i].story|makeseo}.html{/if}" >
         <div class="mask">
             {if $popular[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
 				<img src="{$asseturl}/images/nsfw_thumb.jpg" alt="{$popular[i].story|stripslashes}" />
@@ -466,7 +466,7 @@
 	<h3>{$lang276}</h3>
 	<ol>
 	{section name=i loop=$r}
-	<a class="wrap" href="{$baseurl}{$postfolder}{$r[i].PID}/{if $SEO eq "1"}{$r[i].story|makeseo}.html{/if}"  onclick="GAG.GA.track('RelatedContent', 'Clicked-Post-Sidebar', 'Position-1', 1)"  >
+	<a class="wrap" href="{$baseurl}{$postfolder}{$r[i].PID}/{if $SEO eq "1"}{$r[i].story|makeseo}.html{/if}" >
 		<li>
            {if $r[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
 				<img src="{$asseturl}/images/nsfw_thumb.jpg" alt="{$r[i].story|stripslashes}" />
@@ -530,7 +530,7 @@
 
 	{section name=i loop=$vr}
 
-	<a class="wrap" href="{$baseurl}{$postfolder}{$vr[i].PID}/{if $SEO eq "1"}{$vr[i].story|makeseo}.html{/if}"  onclick="GAG.GA.track('RelatedContent', 'Clicked-Post-Sidebar', 'Position-1', 1)"  >
+	<a class="wrap" href="{$baseurl}{$postfolder}{$vr[i].PID}/{if $SEO eq "1"}{$vr[i].story|makeseo}.html{/if}" >
 
 		<li>
 

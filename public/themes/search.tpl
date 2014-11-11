@@ -9,7 +9,7 @@
             	{section name=i loop=$posts}
                 <ul id="grid-col-1" class="col-{if $smarty.section.i.iteration GT 9}{math equation="x - 9" x=$smarty.section.i.iteration}{elseif $smarty.section.i.iteration GT 6}{math equation="x - 6" x=$smarty.section.i.iteration}{elseif $smarty.section.i.iteration GT 3}{math equation="x - 3" x=$smarty.section.i.iteration}{else}{$smarty.section.i.iteration}{/if}">
                    <li class=" ">
-                        <a href="{$baseurl}{$postfolder}{$posts[i].PID}/{$posts[i].story|makeseo}.html" class="jump_stop">
+                        <a href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts.story|makeseo}.html{/if}" class="jump_stop">
                             <div style="" class="thimage">
                                 {if $posts[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
 									<img src="{$asseturl}/images/nsfw_thumb.jpg" alt="{$posts[i].story|stripslashes}" />
@@ -29,7 +29,7 @@
                             </div>
                         </a>
 						<p>
-                            <span class="comment"><fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{$posts[i].story|makeseo}.html"></fb:comments-count></span>
+                            <span class="comment"><fb:comments-count href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts.story|makeseo}.html{/if}"></fb:comments-count></span>
                             <span id="love_count_{$posts[i].PID}" class="loved" votes="{$posts[i].favclicks}" score="0">{$posts[i].favclicks}</span>
 							<span class="viewed">{$posts[i].postviewed}</span>
                         </p>

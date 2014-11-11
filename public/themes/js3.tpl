@@ -5,11 +5,11 @@
                 <h3>{$lang266}<span id="post-share-dismiss-counter"></span></h3>
                 <h4>{$lang267}</h4>
                 <div class="facebook-share">
-                	<a href="javascript:myWindow('Facebook Share', 'http://www.facebook.com/sharer/sharer.php?u={$baseurl}{$postfolder}{$p.PID}/{$p.story|makeseo}.html', 'Facebook-Share-After-User-Post', 'Clicked');"></a>					
+                	<a href="javascript:myWindow('Facebook Share', 'http://www.facebook.com/sharer/sharer.php?u={$baseurl}{$postfolder}{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}', 'Facebook-Share-After-User-Post', 'Clicked');"></a>
                 </div>
                 <div class="field">
                 	<p>{$lang268}:</p>
-                	<input id="post-share-entry-url" type="text" class="text" value="{$baseurl}{$postfolder}{$p.PID}/{$p.story|makeseo}.html" placeholder="/{$p.story|makeseo}.html" />
+                	<input id="post-share-entry-url" type="text" class="text" value="{$baseurl}{$postfolder}{$p.PID}/{if $SEO eq "1"}{$p.story|makeseo}.html{/if}" placeholder="" />
                 </div>
             </form>
         </div>                
