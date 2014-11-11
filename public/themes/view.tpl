@@ -469,7 +469,7 @@
 	<a class="wrap" href="{$baseurl}{$postfolder}{$r[i].PID}/{if $SEO eq "1"}{$r[i].story|makeseo}.html{/if}"  onclick="GAG.GA.track('RelatedContent', 'Clicked-Post-Sidebar', 'Position-1', 1)"  >
 		<li>
            {if $r[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-				<img src="{$baseurl}/images/nsfw_thumb.jpg" alt="{$r[i].story|stripslashes}" />
+				<img src="{$asseturl}/images/nsfw_thumb.jpg" alt="{$r[i].story|stripslashes}" />
 			{else}
 
 				{if $r[i].pic ne ""}

@@ -117,7 +117,6 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
         else
         {
             $dir = date('Y/m/d');
-            $config['pdir'] = $config['basedir'].'/pdata'.'/'.date('Y/m/d');
             if (!file_exists($config['pdir'].'/t')) {
                 mkdir($config['pdir'].'/t', 0777, true);
             }

@@ -7,6 +7,9 @@ public/pdata/
 public/pdata/*
 public/pictures/
 public/pictures/*
+pictures.zip
+avatar.zip
+
 .DS_Store
 error_log
 public/js/*.js

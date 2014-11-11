@@ -285,14 +285,15 @@ function strTruncate($string, $your_desired_width,$ext = '...') {
 }
 
 function getPictureUrl($date_added, $purl) {
-    if (strpos($date_added, '2013') !== false) {
-        return $purl;
-    } else {
-        $patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
-        $replace = array ('\1\2/\3/\4', '$\1 =');
-        $date1 = preg_replace($patterns, $replace, $date_added);
-        return $purl.'/'.$date1;
-    }
+//    if (strpos($date_added, '2013') !== false) {
+//        return $purl;
+//    } else {
+//        $patterns = array ('/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/','/^\s*{(\w+)}\s*=/');
+//        $replace = array ('\1\2/\3/\4', '$\1 =');
+//        $date1 = preg_replace($patterns, $replace, $date_added);
+//        return $purl.'/'.$date1;
+//    }
+    return $purl;
 }
 
 ?> 
