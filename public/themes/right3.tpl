@@ -34,7 +34,7 @@
           </ul>
           <span id="slogo">
             <a href="{$baseurl}/top"><label for="slogo">Bảng Xếp Hạng</label></a>
-            <img alt="Top Overs" src="{$asseturl}/images/top-logo.png" width="21" height="21" />
+            <img alt="Top Overs" src="{$asseturl}/images/top-logo.png?v={$asset_version}" width="21" height="21" />
           </span>
           <div class="current">
           </div>

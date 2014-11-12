@@ -15,7 +15,7 @@
 		<a class="wrap" href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}" class="jump_stop">
 		<div class="avatar">
 			{if $posts[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-				<img  class="ovui" src="{$asseturl}/images/nsfw.jpg" alt="{$posts[i].story|stripslashes}" />
+				<img  class="ovui" src="{$asseturl}/images/nsfw.jpg?v={$asset_version}" alt="{$posts[i].story|stripslashes}" />
 			{else}
 				{if $posts[i].type == 1}
 					<div>
@@ -23,7 +23,7 @@
 					</div>
 				{else}		
 					{if $posts[i].pic ne ""}
-						<img src="{$purl[i]}/t/{$posts[i].folder}{$posts[i].pic}"/>
+						<img src="{$purl}/t/{$posts[i].pic}" alt="{$posts[i].story|stripslashes}" />
 						<div style="background-color: #FFFFFF;height: 15px;margin-top: -15px;position: absolute;width: 228px;"></div>			
 					{else}
 						{if $posts[i].youtube_key != ""}
@@ -73,7 +73,7 @@
       loading: {
           finishedMsg: 'Đã tải hết.',
 		  msgText: '', 
-          img: '{/literal}{$asseturl}/images{literal}/loading.gif'
+          img: '{/literal}{$asseturl}/images{literal}/loading.gif?v={/literal}{$asset_version}{literal}'
         }
       },
       // trigger Masonry as a callback

@@ -215,12 +215,6 @@ STemplate::assign('ending',$ending);
 STemplate::assign('pagelinks',$pagelinks);
 STemplate::assign('total',$total+0);
 STemplate::assign('results',$results);
-$purlArray = array();
-foreach ($results as $value) {
-
-    array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-    STemplate::assign('purl', $purlArray);
-}
 Stemplate::assign('error',$error);
 STemplate::display("administrator/stories_manage.tpl");
 STemplate::display("administrator/global_footer.tpl");

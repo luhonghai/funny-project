@@ -5,17 +5,17 @@
                                 	<a target="_blank" href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"><img src="{$asseturl}/images/nsfw.jpg" alt="{$posts[i].story|stripslashes}" /></a>
                                 {else}
                                 	{if $posts[i].pic ne ""}
-                                	<a target="_blank" href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"><img src="{$purl[i]}/t/{$posts[i].pic}" alt="{$posts[i].story|stripslashes}" /></a>
+                                	<a target="_blank" href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"><img src="{$purl}/t/{$posts[i].pic}" alt="{$posts[i].story|stripslashes}" /></a>
                                     {else}
                                         {if $posts[i].youtube_key != ""}
                                         <center>
 										<a target="_blank" href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}">
 										<img style="max-width:460px" src="http://img.youtube.com/vi/{$posts[i].youtube_key}/0.jpg" alt="{$posts[i].story|stripslashes}" />
-										<img style="position:relative;top:-200px;" src="{$asseturl}/images/play.png"/></a>
+										<img style="position:relative;top:-200px;" src="{$asseturl}/images/play.png?v={$asset_version}"/></a>
                                         </center>
                                         {elseif $posts[i].contents != ""}{$posts[i].contents|strip_mq_gpc}
 										{else}
-										<a target="_blank" href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"><img src="{$asseturl}/images/error.jpg" alt="{$lang264}" /></a>
+										<a target="_blank" href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts[i].story|makeseo}.html{/if}"><img src="{$asseturl}/images/error.jpg?v={$asset_version}" alt="{$lang264}" /></a>
 										{/if}
                                     {/if}
                                 {/if}

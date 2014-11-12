@@ -26,7 +26,7 @@
     
 			<h1>{$p.story|stripslashes}</h1>
 	{if $p.nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-        <img alt="{$posts[i].story|stripslashes}" src="{$baseurl}/images/nsfw.jpg" border="0" />
+        <img alt="{$posts[i].story|stripslashes}" src="{$asseturl}/images/nsfw.jpg" border="0" />
     {else}
 		{if $p.pic ne ""}
 			<img alt="{$p.story|stripslashes}" src="{$purl}/t/l-{$p.pic}" />
@@ -37,7 +37,7 @@
                  </center>
             {elseif $p.contents != ""}{$p.contents|strip_mq_gpc}
 			{else}
-				<img alt="{$p.story|stripslashes}" src="{$imageurl}/error.jpg" border="0" />
+				<img alt="{$p.story|stripslashes}" src="{$asseturl}/images/error.jpg" border="0" />
             {/if}
         {/if}
 	{/if}	

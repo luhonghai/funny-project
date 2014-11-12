@@ -135,6 +135,12 @@ def aws_upload_dir(s3,dir, bucket_name, public_dir)
     end
 end
 
+task :deploy_images do
+    s3 = AWS::S3.new
+    aws_upload_dir(s3, "images", bucket_name, public_dir)
+    aws_upload_dir(s3, "comic", bucket_name, public_dir)
+end
+
 task :deploy_assets do
     puts "Upload images"
     s3 = AWS::S3.new
@@ -143,8 +149,6 @@ task :deploy_assets do
         puts "Prepare file #{file_name} for upload"
         aws_upload(s3, file_name, bucket_name, "#{public_dir}/#{file_name}", f[:content_type], f[:content_encoding])
     }
-    #aws_upload_dir(s3, "images", bucket_name, public_dir)
-    #aws_upload_dir(s3, "comic", bucket_name, public_dir)
 end
 
 task :deploy_avatars do

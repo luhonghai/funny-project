@@ -162,15 +162,9 @@ STemplate::assign('tab', "Chủ đề ".$tab);
 
 //TEMPLATES BEGIN
 STemplate::assign('pagetitle', $tag.' | Tin tức hình ảnh video clip '.$tag );
-STemplate::assign('description',$tag.' - Xem những hình ảnh video mới nhất về '.$tag.'. Chủ đề đang được xem nhiều trên xứ nghệ');
+STemplate::assign('description',$tag.' - Xem những hình ảnh video mới nhất về '.$tag.'. Chủ đề đang được xem nhiều ở Việt Nam');
 STemplate::assign('posts',$posts);
-$purlArray = array();
-	foreach ($posts as $value) {
-	    array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-	    STemplate::assign('purl', $purlArray);
-	}
 STemplate::display('header.tpl');
 STemplate::display($templateselect);
 STemplate::display('footer.tpl');
 //TEMPLATES END
-?>

@@ -40,7 +40,6 @@ if($PID > 0)
 	$query = $conn->execute("select * from posts where PID='".mysql_real_escape_string($PID)."' limit 1");
 	$story = $query->getrows();
 	Stemplate::assign('story', $story[0]);
-	STemplate::assign('purl', getPictureUrl($story[0]['date_added'], $config['purl']));
 }
 
 $mainmenu = "4";

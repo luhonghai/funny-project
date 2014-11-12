@@ -198,7 +198,7 @@
                                                                 {elseif $story.contents != ""}
 								{$story.contents|strip_mq_gpc}
                                                                 {else}
-                                                                <img src="{$imageurl}/error.jpg" alt="Không tìm thấy dữ liệu"/>
+                                                                <img src="{$asseturl}/images/error.jpg?v={$asset_version}" alt="Không tìm thấy dữ liệu"/>
                                                                 {/if}
                                                             {/if}
                                                             </center>

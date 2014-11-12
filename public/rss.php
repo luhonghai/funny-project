@@ -28,7 +28,7 @@ for ($i = 0; $i < $config['items_per_page']; $i++) {
 	if ($r[$i]['youtube_key'] != ""){
 		$item.= '<description><![CDATA[<img src="http://img.youtube.com/vi/'.$r[$i]['youtube_key'].'/0.jpg"/><br>'.$r[$i]['story'].' Lượt xem:'.$r[$i]['postviewed'].' Điểm:'.$r[$i]['favclicks'].']]></description>';;
 	}else{
-		$item.= '<description><![CDATA[<img src="'.$config['purl'].'/t/'.$r[$i]['folder'].$r[$i]['pic'].'"/><br>'.$r[$i]['story'].' Lượt xem:'.$r[$i]['postviewed'].' Điểm:'.$r[$i]['favclicks'].']]></description>';;
+		$item.= '<description><![CDATA[<img src="'.$config['purl'].'/t/'.$r[$i]['pic'].'"/><br>'.$r[$i]['story'].' Lượt xem:'.$r[$i]['postviewed'].' Điểm:'.$r[$i]['favclicks'].']]></description>';;
 	}
 	$item.= '<pubDate>'.date("Y-m-d H:i:s",$r[$i]['time_added']).'</pubDate></item>';
     echo trim($item);

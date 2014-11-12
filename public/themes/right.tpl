@@ -15,7 +15,7 @@
           </ul>
           <span id="slogo">
             <a href="{$baseurl}/topusers"><label for="slogo">Bảng Xếp Hạng</label></a>
-            <img alt="Top Overs" src="{$asseturl}/images/top-logo.png" width="21" height="21" />
+            <img alt="Top Overs" src="{$asseturl}/images/top-logo.png?v={$asset_version}" width="21" height="21" />
           </span>
           <div class="current">
           </div>
@@ -44,17 +44,17 @@
 	<a class="wrap" href="{$baseurl}{$postfolder}{$r[i].PID}/{if $SEO eq "1"}{$r[i].story|makeseo}.html{/if}" >
 		<li>
             {if $r[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-				<img src="{$asseturl}/images/nsfw_thumb.jpg" alt="{$r[i].story|stripslashes}" />
+				<img src="{$asseturl}/images/nsfw_thumb.jpg?v={$asset_version}" alt="{$r[i].story|stripslashes}" />
 			{else}
 				{if $r[i].pic ne ""}
-					<img src="{$purl[i]}/t/s-{$r[i].pic}" alt="{$r[i].story|stripslashes}" />
+					<img src="{$purl}/t/s-{$r[i].pic}" alt="{$r[i].story|stripslashes}" />
 				{else}
 					{if $r[i].youtube_key != ""}
 						<img src="http://img.youtube.com/vi/{$r[i].youtube_key}/0.jpg" alt="{$r[i].story|stripslashes}" />
                                      	{elseif $r[i].contents != ""}
-						<img src="{$asseturl}/images/s-text.png" alt="{$r[i].story|stripslashes}" />
+						<img src="{$asseturl}/images/s-text.png?v={$asset_version}" alt="{$r[i].story|stripslashes}" />
 					{else}
-						<img src="{$asseturl}/images/s-error.jpg" alt="Không tìm thấy dữ liệu" />
+						<img src="{$asseturl}/images/s-error.jpg?v={$asset_version}" alt="Không tìm thấy dữ liệu" />
 					{/if}
 				{/if}
 			{/if}

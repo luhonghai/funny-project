@@ -29,7 +29,7 @@
             <h1>{$posts[i].story|stripslashes}</h1>
 		</a>
 	{if $posts[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-        <a href="{$mobileurl}{$postfolder}{$posts[i].PID}"><img alt="{$posts[i].story|stripslashes}" src="{$baseurl}/images/nsfw.jpg" border="0" /></a>
+        <a href="{$mobileurl}{$postfolder}{$posts[i].PID}"><img alt="{$posts[i].story|stripslashes}" src="{$asseturl}/images/nsfw.jpg" border="0" /></a>
     {else}
 		{if $posts[i].pic ne ""}
 			<a href="{$mobileurl}{$postfolder}{$posts[i].PID}">
@@ -43,7 +43,7 @@
             {elseif $posts[i].contents != ""}{$posts[i].contents|strip_mq_gpc}
 			{else}
 			<a href="{$mobileurl}{$postfolder}{$posts[i].PID}">
-				<img alt="{$posts[i].story|stripslashes}" src="{$imageurl}/error.jpg" border="0" />
+				<img alt="{$posts[i].story|stripslashes}" src="{$asseturl}/images/error.jpg" border="0" />
 			</a>
             {/if}
         {/if}

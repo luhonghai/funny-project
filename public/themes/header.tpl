@@ -23,20 +23,19 @@
 {elseif $p.youtube_key != ""}
 <meta property="og:image" content="http://img.youtube.com/vi/{$p.youtube_key}/0.jpg" />
 {else}
-<meta property="og:image" content="{$asseturl}/images/image.png" />
+<meta property="og:image" content="{$asseturl}/images/image.png?v={$asset_version}" />
 {/if}
 <meta property="fb:app_id" content="{$FACEBOOK_APP_ID}"/>
 
     {if $penv eq "dev"}
-        <link href="{$asseturl}/css/app.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="{$asseturl}/css/app.css?v={$asset_version}" media="screen" rel="stylesheet" type="text/css" />
     {else}
-        <link href="{$asseturl}/css/app.css.gz" media="screen" rel="stylesheet" type="text/css" />
+        <link href="{$asseturl}/css/app.css.gz?v={$asset_version}" media="screen" rel="stylesheet" type="text/css" />
     {/if}
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<link rel="icon" href="{$baseurl}/favicon.ico" />
-<link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
-
+<link rel="icon" href="{$asseturl}/images/favicon/favicon.png" />
+<link rel="shortcut icon" id="dynamic-favicon" href="{$asseturl}/images/favicon/favicon.png" />
 
 {if $RSS eq "1"}
 <link rel="alternate" type="application/rss+xml" title="RSS - {$site_name}" href="{$baseurl}/rss.php" />
@@ -52,11 +51,12 @@
     var CURRENT_USER_ID = "guest";
     {/if}
     var GA_ID = "{$ganalytics}";
+    var ASSET_VERSION  = "{$asset_version}";
 </script>
     {if $penv eq "dev"}
-        <script type="text/javascript" src="{$asseturl}/js/dev.app.js"></script>
+        <script type="text/javascript" src="{$asseturl}/js/dev.app.js?v={$asset_version}"></script>
     {else}
-        <script type="text/javascript" src="{$asseturl}/js/app.js.gz"></script>
+        <script type="text/javascript" src="{$asseturl}/js/app.js.gz?v={$asset_version}"></script>
     {/if}
 </head>
 <body id="page-landing" class="main-body ">

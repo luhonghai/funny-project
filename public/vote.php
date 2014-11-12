@@ -78,11 +78,6 @@ if($SID > 0 || $voteforvisitor == 1)
             $executequeryr = $conn->execute($queryr);
             $r =  $executequeryr->getarray();
             STemplate::assign('r',$r);
-            $purlArray = array();
-            foreach ($r as $value) {
-                array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-                STemplate::assign('purlR', $purlArray);
-            }
         }
 
         $beginning=$pagingstart+1;
@@ -120,12 +115,6 @@ if($SID > 0 || $voteforvisitor == 1)
     $eurl = base64_encode("/vote?page=".$currentpage);
     STemplate::assign('eurl',$eurl);
     STemplate::assign('posts',$posts);
-    $purlArray = array();
-    foreach ($posts as $value) {
-        array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-        STemplate::assign('purl', $purlArray);
-    }
-
     if ($_SESSION['viewtype'] == "list")
     {
         $templateselect = "vote.tpl";

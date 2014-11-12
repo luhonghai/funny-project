@@ -1,17 +1,25 @@
 ﻿<?php
-require '../vendor/autoload.php';
-use Aws\S3\S3Client;
-
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 if(!headers_sent()) { session_start();}
 $config = array();
 
+$config['asset_version'] = "2";
+
+
+
 // Bắt đầu cấu hình
+$config['rootdir']     =  getenv("P_ROOT_DIR");
 $config['basedir']     =  getenv("P_BASE_DIR");   //Đường đẫn đến thư mục chứa mã nguồn
 $config['baseurl']     =  getenv("P_BASE_URL");   //Liên kết đến thư mục chứa mã nguồn
 $config['asseturl']    =  getenv("P_ASSET_URL");
 $config['penv']        =  getenv("P_ENV");
 $config['domain']      =  getenv("P_DOMAIN");   //Domain của website
+
+$GLOBALS['asset_version'] = $config['asset_version'];
+$GLOBALS['asseturl'] = $config['asseturl'];
+
+require $config['rootdir'].'/vendor/autoload.php';
+use Aws\S3\S3Client;
 
 $AWS_IMG_AVATAR = getenv("P_AVATAR_URL");
 $AWS_IMG_PIC    = getenv("P_POST_URL");
@@ -101,6 +109,7 @@ if($config['mobilemode'] == "1" && $config['m_url'] != "")
         }
     }
 }
+STemplate::assign('asset_version',       $config['asset_version']);
 STemplate::assign('penv',       $config['penv']);
 STemplate::assign('baseurl',       $config['baseurl']);
 STemplate::assign('basedir',       $config['basedir']);
@@ -249,8 +258,8 @@ function aws_upload_images($key, $file) {
 
 function smiley($text) {
 
-    $s2 = "<img src='".$config['asseturl']."/images/emo/"; //Path to images folder
-    $sm = "' />"; // Extension of the images (All images must be the same extension)
+    $s2 = "<img src='".$GLOBALS['asseturl']."/images/emo/"; //Path to images folder
+    $sm = "?v=".$GLOBALS['asset_version']."' />"; // Extension of the images (All images must be the same extension)
     $array = array(
         ':))'=>$s2.'21.gif'.$sm
     , ':-SS'=>$s2.'42.gif'.$sm

@@ -94,13 +94,6 @@ if ($totalvideos > 0)
         $executequeryr = $conn->execute($queryr);
         $r =  $executequeryr->getarray();
         STemplate::assign('r',$r);
-
-        $purlArray = array();
-        foreach ($r as $value) {
-
-            array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-            STemplate::assign('purlR', $purlArray);
-        }
     }
 
     $beginning=$pagingstart+1;
@@ -165,11 +158,6 @@ $templateselect = "top.tpl";
 STemplate::assign('period',$period);
 STemplate::assign('menu',5);
 STemplate::assign('posts',$posts);
-$purlArray = array();
-foreach ($posts as $value) {
-    array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-    STemplate::assign('purl', $purlArray);
-}
 STemplate::assign('topgags',$topgags);
 STemplate::display('header.tpl');
 STemplate::display($templateselect);

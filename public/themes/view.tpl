@@ -38,7 +38,7 @@
 
                     <div class="content">
 
-                        <img src="{$asseturl}/images/nsfw.jpg" alt="NSFW" />
+                        <img src="{$asseturl}/images/nsfw.jpg?v={$asset_version}" alt="NSFW" />
 
                     </div>
 
@@ -118,7 +118,7 @@
 
                     <div class="content">
 
-                        <img src="{$asseturl}/images/nsfw.jpg" alt="NSFW" />
+                        <img src="{$asseturl}/images/nsfw.jpg?v={$asset_version}" alt="NSFW" />
 
                     </div>
 
@@ -311,7 +311,7 @@
 
                         {if $p.pic ne ""}
 
-                        <a href="{$baseurl}/random"><img src="{$purlD}/t/l-{$p.pic}" alt="{$p.story|stripslashes}"/></a>
+                        <a href="{$baseurl}/random"><img src="{$purl}/t/l-{$p.pic}" alt="{$p.story|stripslashes}"/></a>
 
                         {else}
 
@@ -345,7 +345,7 @@
 
 							{else}
 
-							<a href="{$baseurl}/random"><img src="{$asseturl}/images/l-error.jpg" alt="Không tìm thấy dữ liệu"/></a>
+							<a href="{$baseurl}/random"><img src="{$asseturl}/images/l-error.jpg?v={$asset_version}" alt="Không tìm thấy dữ liệu"/></a>
 
                             {/if}
 
@@ -391,16 +391,16 @@
 									{if $r[i].type == 0}	      
 									{if $r[i].pic ne ""}	
                                         {if $r[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-											<img src="{$asseturl}/images/nsfw_thumb.jpg" alt="{$r[i].story|stripslashes}" />
+											<img src="{$asseturl}/images/nsfw_thumb.jpg?v={$asset_version}" alt="{$r[i].story|stripslashes}" />
  	      									{else}																					                                 <img src="{$purl[i]}/t/{$r[i].folder}s-{$r[i].pic}" alt="{$r[i].story|stripslashes}" />{/if}											{else}
 												{if $r[i].youtube_key != ""}
 													<img src="http://img.youtube.com/vi/{$r[i].youtube_key}/hqdefault.jpg" alt="{$r[i].story|stripslashes}" />
-							                                                 <img class="videoPlay" src="{$asseturl}/images/button_play_s.png">
+							                                                 <img class="videoPlay" src="{$asseturl}/images/button_play_s.png?v={$asset_version}">
 					{elseif $r[i].contents != ""}
-													<img src="{$asseturl}/images/s-text.png" alt="{$r[i].story|stripslashes}" />
+													<img src="{$asseturl}/images/s-text.png?v={$asset_version}" alt="{$r[i].story|stripslashes}" />
 												{else}
 
-													<img src="{$asseturl}/images/s-error.jpg" alt="Không tìm thấy dữ liệu" />
+													<img src="{$asseturl}/images/s-error.jpg?v={$asset_version}" alt="Không tìm thấy dữ liệu" />
 												{/if}
 											{/if}
 										{/if}                                   </div>
@@ -431,7 +431,7 @@
 	<a class="wrap" href="{$baseurl}{$postfolder}{$popular[i].PID}/{if $SEO eq "1"}{$popular[i].story|makeseo}.html{/if}" >
         <div class="mask">
             {if $popular[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-				<img src="{$asseturl}/images/nsfw_thumb.jpg" alt="{$popular[i].story|stripslashes}" />
+				<img src="{$asseturl}/images/nsfw_thumb.jpg?v={$asset_version}" alt="{$popular[i].story|stripslashes}" />
 			{else}
 				{if $popular[i].pic ne ""}
 				<img src="{$purlPo[i]}/t/s-{$popular[i].pic}" alt="{$popular[i].story|stripslashes}" />
@@ -439,9 +439,9 @@
 					{if $popular[i].youtube_key != ""}
 						<img src="http://img.youtube.com/vi/{$popular[i].youtube_key}/hqdefault.jpg" alt="{$popular[i].story|stripslashes}" />
 					{elseif $popular[i].contents != ""}
-						<img src="{$asseturl}/images/s-text.png" alt="{$popular[i].story|stripslashes}" />
+						<img src="{$asseturl}/images/s-text.png?v={$asset_version}" alt="{$popular[i].story|stripslashes}" />
 					{else}
-						<img src="{$asseturl}/images/s-error.jpg" alt="Không tìm thấy dữ liệu" />
+						<img src="{$asseturl}/images/s-error.jpg?v={$asset_version}" alt="Không tìm thấy dữ liệu" />
 					{/if}
 				{/if}
 			{/if}
@@ -469,7 +469,7 @@
 	<a class="wrap" href="{$baseurl}{$postfolder}{$r[i].PID}/{if $SEO eq "1"}{$r[i].story|makeseo}.html{/if}" >
 		<li>
            {if $r[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-				<img src="{$asseturl}/images/nsfw_thumb.jpg" alt="{$r[i].story|stripslashes}" />
+				<img src="{$asseturl}/images/nsfw_thumb.jpg?v={$asset_version}" alt="{$r[i].story|stripslashes}" />
 			{else}
 
 				{if $r[i].pic ne ""}
@@ -486,11 +486,11 @@
 
 				{elseif $r[i].contents != ""}
 
-						<img src="{$asseturl}/images/s-text.png" alt="{$r[i].story|stripslashes}" />
+						<img src="{$asseturl}/images/s-text.png?v={$asset_version}" alt="{$r[i].story|stripslashes}" />
 
 					{else}
 
-						<img src="{$asseturl}/images/s-error.jpg" alt="Không tìm thấy dữ liệu" />
+						<img src="{$asseturl}/images/s-error.jpg?v={$asset_version}" alt="Không tìm thấy dữ liệu" />
 
 					{/if}
 
@@ -536,13 +536,13 @@
 
             {if $vr[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
 
-				<img src="{$asseturl}/images/nsfw_thumb.jpg" alt="{$vr[i].story|stripslashes}" />
+				<img src="{$asseturl}/images/nsfw_thumb.jpg?v={$asset_version}" alt="{$vr[i].story|stripslashes}" />
 
 			{else}
 
 				{if $vr[i].pic ne ""}
 
-					<img src="{$purlVr[i]}/t/s-{$vr[i].pic}" alt="{$vr[i].story|stripslashes}" />
+					<img src="{$purl}/t/s-{$vr[i].pic}" alt="{$vr[i].story|stripslashes}" />
 
 				{else}
 
@@ -552,7 +552,7 @@
 
 					{else}
 
-						<img src="{$asseturl}/images/s-error.jpg" alt="Không tìm thấy dữ liệu" />
+						<img src="{$asseturl}/images/s-error.jpg?v={$asset_version}" alt="Không tìm thấy dữ liệu" />
 
 					{/if}
 

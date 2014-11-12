@@ -23,13 +23,13 @@
 	{elseif $p.youtube_key != ""}
 	<meta property="og:image" content="http://img.youtube.com/vi/{$p.youtube_key}/0.jpg" />
 	{else}
-	<meta property="og:image" content="{$baseurl}/images/image.png" />
+	<meta property="og:image" content="{$asseturl}/images/image.png" />
 	{/if}
 	<meta property="fb:app_id" content="{$FACEBOOK_APP_ID}"/>
 	
 	<link href="{$mobileurl}/css/style.css" media="screen" rel="stylesheet" type="text/css" />
-        <link rel="icon" href="$mobileurl}/favicon.ico" />
-        <link rel="shortcut icon" href="$mobileurl}/favicon.ico" />
+    <link rel="icon" href="{$asseturl}/images/favicon/favicon.png" />
+    <link rel="shortcut icon" id="dynamic-favicon" href="{$asseturl}/images/favicon/favicon.png" />
 	<link rel="apple-touch-icon-precomposed" href="{$mobileurl}/images/gagviet.png" />
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="{$mobileurl}/js/mobile.js" type="text/javascript"></script>

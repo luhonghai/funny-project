@@ -2,7 +2,7 @@
 <html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="{$lang254}" dir="LTR">
 <head>
 <title>{$pagetitle|stripslashes}</title>
-<link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
+<link rel="shortcut icon" href="{$asseturl}/images/favicon/favicon.png" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta content="width=device-width; initial-scale=1.0;" name="viewport" />
 <link rel="stylesheet" href="{$baseurl}/css/connect.css" media="screen,projection" type="text/css" />

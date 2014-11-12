@@ -12,7 +12,7 @@
                         <a href="{$baseurl}{$postfolder}{$posts[i].PID}/{if $SEO eq "1"}{$posts.story|makeseo}.html{/if}" class="jump_stop">
                             <div style="" class="thimage">
                                 {if $posts[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-									<img src="{$asseturl}/images/nsfw_thumb.jpg" alt="{$posts[i].story|stripslashes}" />
+									<img src="{$asseturl}/images/nsfw_thumb.jpg?v={$asset_version}" alt="{$posts[i].story|stripslashes}" />
 								{else}
 									{if $posts[i].pic ne ""}
 										<img src="{$purl}/t/s-{$posts[i].pic}" alt="{$posts[i].story|stripslashes}" />
@@ -20,9 +20,9 @@
 										{if $posts[i].youtube_key != ""}
 											<img src="http://img.youtube.com/vi/{$posts[i].youtube_key}/0.jpg" alt="{$posts[i].story|stripslashes}" style="max-width:215px" />
 										{elseif $posts[i].contents != ""}
-											<img src="{$asseturl}/images/s-text.png" alt="{$posts[i].story|stripslashes}" />
+											<img src="{$asseturl}/images/s-text.png?v={$asset_version}" alt="{$posts[i].story|stripslashes}" />
 										{else}
-											<img src="{$asseturl}/images/s-error.jpg" alt="Không tìm thấy dữ liệu" />
+											<img src="{$asseturl}/images/s-error.jpg?v={$asset_version}" alt="Không tìm thấy dữ liệu" />
 										{/if}
 									{/if}
 								{/if}

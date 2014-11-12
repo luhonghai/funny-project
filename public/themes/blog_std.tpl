@@ -8,7 +8,7 @@
                     {include file="posts_bit_blog.tpl"}
                 {/if}
             </div>
-            <div class="loading"><img src="{$asseturl}/images/loading.gif"/> Đang tải...</div>
+            <div class="loading"><img src="{$asseturl}/images/loading.gif?v={$asset_version}"/> Đang tải...</div>
             <div class="buttonNext" pageUrl="{$baseurl}/{if $blogtype == 0}chemgio{/if}{if $blogtype == 1}tamsu{/if}{if $blogtype == 2}tinhot{/if}/" page="{$tnp}">Nữa đi, đừng dừng lại...</div>
         </div>
         <div class="col-md-4">

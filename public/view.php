@@ -43,7 +43,6 @@ if ($error == "")
         $cname = $c[0]['cname'];
         STemplate::assign('cname',$cname);
         STemplate::assign('p',$parray[0]);
-        STemplate::assign('purlD', getPictureUrl($parray[0]['date_added'], $config['purl']));
         $active = intval($parray[0]['active']);
         $videourl = trim($parray[0]['url']);
         $USERID = $parray[0]['USERID'];
@@ -113,24 +112,12 @@ if ($error == "")
                 $executequeryr = $conn->execute($queryr);
                 $r =  $executequeryr->getarray();
                 STemplate::assign('r',$r);
-                $purlArray = array();
-                foreach ($r as $value) {
-
-                    array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-                    STemplate::assign('purl', $purlArray);
-                }
             }
 
             $queryvr = "SELECT A.*, B.username FROM posts A, members B WHERE A.USERID=B.USERID AND A.PID!='".mysql_real_escape_string($pid)."' AND A.active='1' AND A.phase='0' ORDER BY rand() desc limit 1";
             $executequeryvr = $conn->execute($queryvr);
             $vr =  $executequeryvr->getarray();
             STemplate::assign('vr',$vr);
-            $purlArray = array();
-            foreach ($vr as $value) {
-
-                array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-                STemplate::assign('purlVr', $purlArray);
-            }
 
             if ( $config['populargags'] > 0){
 
@@ -147,11 +134,6 @@ if ($error == "")
                     $executequerypopular2 = $conn->execute($querypopular2);
                     $popular =  $executequerypopular2->getarray();
                     STemplate::assign('popular',$popular);
-                    $purlArray = array();
-                    foreach ($popular as $value) {
-                        array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-                        STemplate::assign('purlPo', $purlArray);
-                    }
                     $pcount = count($popular);
                     $boxindexmax = ceil($pcount/3)-1;
                     STemplate::assign('boxindexmax',$boxindexmax);

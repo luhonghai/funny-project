@@ -18,7 +18,7 @@
             <h1>{$posts[i].story|stripslashes}</h1>
 		</a>
 	{if $posts[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
-        <a href="{$mobileurl}{$postfolder}{$posts[i].PID}"><img alt="{$posts[i].story|stripslashes}" src="{$baseurl}/images/nsfw.jpg" border="0" /></a>
+        <a href="{$mobileurl}{$postfolder}{$posts[i].PID}"><img alt="{$posts[i].story|stripslashes}" src="{$asseturl}/images/nsfw.jpg" border="0" /></a>
     {else}
 		{if $posts[i].pic ne ""}
 			<a href="{$mobileurl}{$postfolder}{$posts[i].PID}">
@@ -30,10 +30,10 @@
             {insert name=return_youtube value=a assign=youtube youtube=$posts[i].youtube_key}{$youtube}
             </center>
             {elseif $posts[i].contents != ""}
-            <img src="{$imageurl}/s-text.png" alt="{$posts[i].story|stripslashes}" />
+            <img src="{$asseturl}/images/s-text.png" alt="{$posts[i].story|stripslashes}" />
 			{else}
 			<a href="{$mobileurl}{$postfolder}{$posts[i].PID}">
-				<img alt="{$posts[i].story|stripslashes}" src="{$imageurl}/error.jpg" border="0" />
+				<img alt="{$posts[i].story|stripslashes}" src="{$asseturl}/images/error.jpg" border="0" />
 			</a>
 			{/if}
 		{/if}

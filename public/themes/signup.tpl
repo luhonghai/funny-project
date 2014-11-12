@@ -2,7 +2,7 @@
 <html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="{$lang254}" dir="LTR">
 <head>
 <title>{$pagetitle|stripslashes}</title>
-<link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
+<link rel="shortcut icon" href="{$asseturl}/images/favicon/favicon.png" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta content="width=device-width; initial-scale=1.0;" name="viewport" />
     <script type="text/javascript">
@@ -16,12 +16,13 @@
         var CURRENT_USER_ID = "guest";
         {/if}
         var GA_ID = "{$ganalytics}";
+        var ASSET_VERSION = "{$asset_version}";
     </script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     {if $penv eq "dev"}
-        <link href="{$asseturl}/css/connect.css" media="screen,projection" rel="stylesheet" type="text/css" />
+        <link href="{$asseturl}/css/connect.css?v={$asset_version}" media="screen,projection" rel="stylesheet" type="text/css" />
     {else}
-        <link href="{$asseturl}/css/connect.css.gz" media="screen,projection" rel="stylesheet" type="text/css" />
+        <link href="{$asseturl}/css/connect.css.gz?v={$asset_version}" media="screen,projection" rel="stylesheet" type="text/css" />
     {/if}
 </head>
 
@@ -30,7 +31,7 @@
 <div class="signup-wrapper">
     <a class="signup-login-btn" href="{$baseurl}/login">{$lang10} {$lang11}</a>
     <div class="header">
-        	<center><a href="{$baseurl}"><img src="{$asseturl}/images/logo-large.png" /></center>
+        	<center><a href="{$baseurl}"><img src="{$asseturl}/images/logo-large.png?v={$asset_version}" /></center>
     	<a href="{$baseurl}"><h1>{$site_name}</h1></a>
     </div>
     <div class="content">
@@ -77,9 +78,9 @@
 <div id="fb-root"></div>
 
 {if $penv eq "dev"}
-    <script type="text/javascript" src="{$asseturl}/js/dev.app.js"></script>
+    <script type="text/javascript" src="{$asseturl}/js/dev.app.js?v={$asset_version}"></script>
 {else}
-    <script type="text/javascript" src="{$asseturl}/js/app.js.gz"></script>
+    <script type="text/javascript" src="{$asseturl}/js/app.js.gz?v={$asset_version}"></script>
 {/if}
 
 </body>

@@ -88,11 +88,6 @@ if($SID > 0 || $voteforvisitor == 1)
     $eurl = base64_encode("/tvote");
     STemplate::assign('eurl',$eurl);
     STemplate::assign('posts',$posts);
-    $purlArray = array();
-    foreach ($posts as $value) {
-        array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-        STemplate::assign('purl', $purlArray);
-    }
     $templateselect = "tvote.tpl";
 }
 else

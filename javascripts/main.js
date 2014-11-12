@@ -2,6 +2,26 @@ var baseurl = BASE_URL;
 var avataurl = AVATAR_URL;
 var asseturl = ASSET_URL;
 
+function isIE() {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+    return (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./));
+}
+
+document.head = document.head || document.getElementsByTagName('head')[0];
+
+function changeFavicon(src) {
+    var link = document.createElement('link'),
+        oldLink = document.getElementById('dynamic-favicon');
+    link.id = 'dynamic-favicon';
+    link.rel = 'shortcut icon';
+    link.href = src;
+    if (oldLink) {
+        document.head.removeChild(oldLink);
+    }
+    document.head.appendChild(link);
+}
+
 function rmt(l) {
     var img = new Image();
     img.src = l;
@@ -15,12 +35,12 @@ function myWindow(location, address, gaCategory, gaAction, entryLink) {
     var sharer = window.open(address, "Share on Facebook", "status=1,height=" + h + ",width=" + w + ",top=" + sTop + ",left=" + sLeft + ",resizable=0");
 }
 
-function likedeg(p,l,u){
+function likedeg(p, l, u) {
     jQuery.ajax({
-        type:'POST',
-        url: baseurl+ '/likedeg.php',
-        data:'l='+l+'&pid='+p+'&u='+u,
-        success:function(e){
+        type: 'POST',
+        url: baseurl + '/likedeg.php',
+        data: 'l=' + l + '&pid=' + p + '&u=' + u,
+        success: function (e) {
             $('#love_count').html(e);
         }
     });
@@ -47,17 +67,19 @@ function formatMoney(n, c, d, t) {
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
 
-function sendinvitation(email,csrf){
+function sendinvitation(email, csrf) {
     jQuery.ajax({
-        type:'POST',
+        type: 'POST',
         url: baseurl + '/sendinvitation.php',
-        data:'email='+email+'&csrf='+csrf,
-        success:function(e){
-            if(e !=""){alert(e);}else{
-                $('#request-invite-loading').css('display','none');
-                $('#request-invite-block').css('display','none');
-                $('#signup-desc').css('display','none');
-                $('#signup-desc-done').css('display','block');
+        data: 'email=' + email + '&csrf=' + csrf,
+        success: function (e) {
+            if (e != "") {
+                alert(e);
+            } else {
+                $('#request-invite-loading').css('display', 'none');
+                $('#request-invite-block').css('display', 'none');
+                $('#signup-desc').css('display', 'none');
+                $('#signup-desc-done').css('display', 'block');
             }
         }
     });
@@ -79,12 +101,12 @@ $(document).ready(function () {
         $email.hide();
         $pass.show();
         $username.show();
-        $loginToRecover.click(function() {
+        $loginToRecover.click(function () {
             $email.show();
             $pass.hide();
             $username.hide();
         });
-        $recoverToLogin.click(function() {
+        $recoverToLogin.click(function () {
             $email.hide();
             $pass.show();
             $username.show();
@@ -134,25 +156,25 @@ $(document).ready(function () {
                     user.profilepicture = 'noprofilepicture.jpg'
                 }
                 var tmpHtml = ['<div class="over"><div class="over_info" id="avatar"><a href="/user/',
-                                    user.username ,
-                                    '"><img id="avatar" alt="Avatar" src="',
-                                    avataurl,
-                                    '/',
-                                    user.profilepicture,
-                                    '" /></a></div><div class="over_info" id="information"><p><strong><a href="/user/',
-                                    user.username ,
-                                    '">',
-                                    user.fullname ,
-                                    '</a></strong></p><p>Số bài:&nbsp',
-                                    formatMoney(user.TOTAL, 0) ,
-                                    ' - Điểm:&nbsp' ,
-                                    formatMoney(user.LIKES, 0) ,
-                                    '</p><p>Tổng lượt xem:&nbsp' ,
-                                    formatMoney(user.VIEWS, 0) ,
-                                    '</p></div><div id="rank"><img id="rank" alt="rank" src="' ,
-                                    asseturl ,
-                                    '/images/' + (i + 1) ,
-                                    '.png" /></div><div class="clear"></div></div>'];
+                    user.username,
+                    '"><img id="avatar" alt="Avatar" src="',
+                    avataurl,
+                    '/',
+                    user.profilepicture,
+                    '" /></a></div><div class="over_info" id="information"><p><strong><a href="/user/',
+                    user.username,
+                    '">',
+                    user.fullname,
+                    '</a></strong></p><p>Số bài:&nbsp',
+                    formatMoney(user.TOTAL, 0),
+                    ' - Điểm:&nbsp',
+                    formatMoney(user.LIKES, 0),
+                    '</p><p>Tổng lượt xem:&nbsp',
+                    formatMoney(user.VIEWS, 0),
+                    '</p></div><div id="rank"><img id="rank" alt="rank" src="',
+                    asseturl,
+                    '/images/' + (i + 1),
+                    '.png" /></div><div class="clear"></div></div>'];
                 $("#tabs div.current").append(tmpHtml.join(''));
             }
         });
@@ -175,24 +197,24 @@ $(document).ready(function () {
                         user.profilepicture = 'noprofilepicture.jpg'
                     }
                     var tmpHtml = ['<div class="over"><div class="over_info" id="avatar"><a href="/user/',
-                        user.username ,
+                        user.username,
                         '"><img id="avatar" alt="Avatar" src="',
                         avataurl,
                         '/',
                         user.profilepicture,
                         '" /></a></div><div class="over_info" id="information"><p><strong><a href="/user/',
-                        user.username ,
+                        user.username,
                         '">',
-                        user.fullname ,
+                        user.fullname,
                         '</a></strong></p><p>Số bài:&nbsp',
-                        formatMoney(user.TOTAL, 0) ,
-                        ' - Điểm:&nbsp' ,
-                        formatMoney(user.LIKES, 0) ,
-                        '</p><p>Tổng lượt xem:&nbsp' ,
-                        formatMoney(user.VIEWS, 0) ,
-                        '</p></div><div id="rank"><img id="rank" alt="rank" src="' ,
-                        asseturl ,
-                        '/images/' + (i + 1) ,
+                        formatMoney(user.TOTAL, 0),
+                        ' - Điểm:&nbsp',
+                        formatMoney(user.LIKES, 0),
+                        '</p><p>Tổng lượt xem:&nbsp',
+                        formatMoney(user.VIEWS, 0),
+                        '</p></div><div id="rank"><img id="rank" alt="rank" src="',
+                        asseturl,
+                        '/images/' + (i + 1),
                         '.png" /></div><div class="clear"></div></div>'];
                     $("#tabs div.current").append(tmpHtml.join(''));
                 }
@@ -424,7 +446,7 @@ $(document).ready(function () {
     /**
      *  Gag link auto scroll
      */
-    if ($('.gag-link').length &&  $('.b9gcs-stop').length) {
+    if ($('.gag-link').length && $('.b9gcs-stop').length) {
         $(document).keydown(function (e) {
             if (e.keyCode == 39 || e.keyCode == 75) {
                 var a = new Array();
@@ -556,7 +578,48 @@ $(document).ready(function () {
         });
     }
 
+    /**
+     *  Fun favicon
+     */
 
+    var current_fav = 18;
+    var beep_fav = 0;
+    var last_fav_update = Date.now();
+
+    function update_fav() {
+        var current_fav_update = Date.now();
+        if ((current_fav_update - last_fav_update ) > 15000 && current_fav == 18) {
+            beep_fav = 0;
+            current_fav = 0;
+            last_fav_update = Date.now();
+        }
+
+        if (current_fav == 16) {
+            if (beep_fav > 6) {
+                beep_fav = 0;
+                current_fav = 18;
+                changeFavicon(asseturl + "/images/favicon/favicon.png");
+                setTimeout(update_fav, 100);
+                return;
+            } else {
+                if (beep_fav % 2 == 0) {
+                    changeFavicon(asseturl + "/images/favicon/favicon.png");
+                } else {
+                    changeFavicon(asseturl + "/images/favicon/faviconb.png");
+                }
+                beep_fav++;
+                setTimeout(update_fav, 500);
+                return;
+            }
+        }
+        if (current_fav < 16) {
+            changeFavicon(asseturl + "/images/favicon/favicon" + current_fav + ".png")
+            current_fav++;
+        }
+        setTimeout(update_fav, 100);
+    }
+
+    update_fav();
 });
 
 

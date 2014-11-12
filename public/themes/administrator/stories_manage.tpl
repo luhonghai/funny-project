@@ -101,16 +101,16 @@
                                         <td class=" a-right ">
                                         <center>
                                         {$results[i].PID}{if $results[i].pic ne ""}<br />
-											<img src="{$purl[i]}/t/s-{$results[i].pic}" />
+											<img src="{$purl}/t/s-{$results[i].pic}" />
 										{elseif $results[i].youtube_key != ""}
 											<br />
 											<img src="http://img.youtube.com/vi/{$results[i].youtube_key}/0.jpg" style="max-width:215px" />
 										{elseif $results[i].contents != ""}
 											<br />
-											<img src="{$imageurl}/s-text.png" />
+											<img src="{$asseturl}/images/s-text.png?v={$asset_version}" />
 										{else}
 											<br />
-											<img src="{$imageurl}/s-error.jpg" />
+											<img src="{$asseturl}/images/s-error.jpg?v={$asset_version}" />
 										{/if}
                                         </center>
                                         </td>

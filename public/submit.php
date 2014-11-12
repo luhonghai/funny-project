@@ -293,6 +293,21 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID)) {
                                                     }
                                                 }
                                             }
+
+                                            if (allowAWS()) {
+                                                aws_upload_images($AWS_IMG_PIC."/t/l-".$thepp, $config['pdir']."/t/l-".$thepp);
+                                                unlink($config['pdir']."/t/l-".$thepp);
+
+                                                aws_upload_images($AWS_IMG_PIC."/t/".$thepp, $config['pdir']."/t/".$thepp);
+                                                unlink($config['pdir']."/t/".$thepp);
+
+                                                aws_upload_images($AWS_IMG_PIC."/t/s-".$thepp, $config['pdir']."/t/s-".$thepp);
+                                                unlink($config['pdir']."/t/s-".$thepp);
+
+                                                aws_upload_images($AWS_IMG_PIC."/".$thepp, $config['pdir']."/".$thepp);
+                                                unlink($config['pdir']."/".$thepp);
+                                            }
+
                                             $queryupdateposts = "SELECT * FROM members WHERE USERID='" . mysql_real_escape_string($SID) . "'";
                                             $executequeryupdateposts = $conn->execute($queryupdateposts);
                                             $userposts = $executequeryupdateposts->fields['posts'];
@@ -463,18 +478,28 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID)) {
                                                     }
 
                                                     if ($wskip != "1") {
-
                                                         if ($config['twm'] == "1") {
                                                             create_text_watermark($img, $pid, $thepp, $thepp2, 1);
                                                             create_text_watermark($img2, $pid, $thepp, $thepp2, 0);
-
-
                                                         } elseif ($config['lwm'] == "1") {
-
                                                             create_logo_watermark($img, $thepp, 1, $watermarkPos);
                                                             create_logo_watermark($img2, $thepp, 0, $watermarkPos);
                                                         }
                                                     }
+                                                }
+
+                                                if (allowAWS()) {
+                                                    aws_upload_images($AWS_IMG_PIC."/t/l-".$thepp, $config['pdir']."/t/l-".$thepp);
+                                                    unlink($config['pdir']."/t/l-".$thepp);
+
+                                                    aws_upload_images($AWS_IMG_PIC."/t/".$thepp, $config['pdir']."/t/".$thepp);
+                                                    unlink($config['pdir']."/t/".$thepp);
+
+                                                    aws_upload_images($AWS_IMG_PIC."/t/s-".$thepp, $config['pdir']."/t/s-".$thepp);
+                                                    unlink($config['pdir']."/t/s-".$thepp);
+
+                                                    aws_upload_images($AWS_IMG_PIC."/".$thepp, $config['pdir']."/".$thepp);
+                                                    unlink($config['pdir']."/".$thepp);
                                                 }
 
                                                 $queryupdateposts = "SELECT * FROM members WHERE USERID='" . mysql_real_escape_string($SID) . "'";

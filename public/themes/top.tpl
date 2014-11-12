@@ -3,7 +3,7 @@
 <ul>
 {section name=f loop=$topgags}
         <a href="{$baseurl}{$postfolder}{$topgags[f].PID}/{if $SEO eq "1"}{$topgags[f].story|makeseo}.html{/if}">
-        <img src="{$purl[f]}/t/s-{$topgags[f].pic}" alt="{$topgags[f].story|stripslashes}">
+        <img src="{$purl}/t/s-{$topgags[f].pic}" alt="{$topgags[f].story|stripslashes}">
         <span class="title">{$topgags[f].story}</span>
         </a>
 {/section}

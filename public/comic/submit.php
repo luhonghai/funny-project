@@ -212,27 +212,34 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
                             }
                         }
 
-                        //do_resize_thumb($config['pdir']."/t/".$folder.$thepp, "200", "200", true, $config['pdir']."/t/".$folder."s-".$thepp);
+                        if (allowAWS()) {
+                            aws_upload_images($AWS_IMG_PIC."/t/l-".$thepp, $config['pdir']."/t/l-".$thepp);
+                            unlink($config['pdir']."/t/l-".$thepp);
+
+                            aws_upload_images($AWS_IMG_PIC."/t/".$thepp, $config['pdir']."/t/".$thepp);
+                            unlink($config['pdir']."/t/".$thepp);
+
+                            aws_upload_images($AWS_IMG_PIC."/t/s-".$thepp, $config['pdir']."/t/s-".$thepp);
+                            unlink($config['pdir']."/t/s-".$thepp);
+
+                            aws_upload_images($AWS_IMG_PIC."/".$thepp, $config['pdir']."/".$thepp);
+                            unlink($config['pdir']."/".$thepp);
+                        }
 
                         $query = "UPDATE posts SET pic='$thepp', active='$active' WHERE PID='".mysql_real_escape_string($pid)."'";
                         $conn->CacheExecute(20,$query);
                         unlink($uploadedimage);
-                        /*
-                        $query = "UPDATE folders SET con_count=con_count+1";
-                        $executequery=$conn->CacheExecute(20,$query);
-                        */
-                        unlink($config['pdir']."/".$thepp);
+
 
                         $points_gag = $config['points_gag'];
                         if($points_gag > 0)
                         {
                             $query = "UPDATE members SET points=points+$points_gag WHERE USERID='".mysql_real_escape_string($SID)."'";
                             $executequery=$conn->CacheExecute(20,$query);
-
                         }
 
 
-                        echo $config[baseurl]."/post/".$pid;exit;
+                        echo $config['baseurl']."/post/".$pid;exit;
                     }
                 }
             }
@@ -241,7 +248,7 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 }
 else
 {
-    echo $config[baseurl]."/login";exit;
+    echo $config['baseurl']."/login";exit;
 }
 
 ?>

@@ -85,11 +85,6 @@ if ($totalvideos > 0)
 $eurl = base64_encode("/ttrending");
 STemplate::assign('eurl',$eurl);
 STemplate::assign('posts',$posts);
-$purlArray = array();
-	foreach ($posts as $value) {
-	array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-	STemplate::assign('purl', $purlArray);	
-	}
 $templateselect = "ttrending.tpl";
 
 //TEMPLATES BEGIN

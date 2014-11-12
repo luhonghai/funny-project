@@ -96,11 +96,6 @@ $queryr = "SELECT A.*, B.username FROM posts A, members B WHERE A.USERID=B.USERI
 $executequeryr = $conn->execute($queryr);
 $r =  $executequeryr->getarray();
 STemplate::assign('r',$r);
-	$purlArray = array();
-	foreach ($r as $value) {
-        array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-        STemplate::assign('purlR', $purlArray);
-	}
 }
 
 
@@ -159,11 +154,6 @@ $_SESSION['location'] = "/channels/".$cname2."/?page=".$currentpage;
 //TEMPLATES BEGIN
 STemplate::assign('menu',5);
 STemplate::assign('posts',$posts);
-$purlArray = array();
-	foreach ($posts as $value) {
-	    array_push($purlArray, getPictureUrl($value['date_added'], $config['purl']));
-	    STemplate::assign('purl', $purlArray);
-	}
 STemplate::assign('topgags',$topgags);
 STemplate::display('header.tpl');
 STemplate::display($templateselect);

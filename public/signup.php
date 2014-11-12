@@ -12,4 +12,3 @@ STemplate::assign('error',$error);
 //TEMPLATES BEGIN
 STemplate::display('signup.tpl');
 //TEMPLATES END
-?>
