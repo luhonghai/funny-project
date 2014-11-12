@@ -95,7 +95,7 @@
             <div id='drawingCanvasContainer'>
                 <canvas id="drawingCanvasInterface"></canvas>
                 <canvas id="drawingCanvas"></canvas>
-                <img id="watermark" src="{$asseturl}/comic/cdn/img/ragecomic/watermark.png?v={$asset_version}"
+                <img id="watermark" src="{$asseturl}/comic/cdn/img/ragecomic/watermark.png"
                      style="display: none;" />
             </div>
         </div>

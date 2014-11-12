@@ -11,6 +11,7 @@ ENV['TZ'] = 'Asia/Ho_Chi_Minh'
 bucket_name     = "assets.trollvd.com"
 public_dir      = "public"    # compiled site directory
 
+
 aws_upload_list = [
     {
         name: "js/app.js.gz",
@@ -71,10 +72,12 @@ def gzip(fin)
 end
 
 def aws_upload(s3, key, bucket_name, filename, content_type, content_encoding)
+    three_year_in_second = 3 * 365 * 24 * 60 * 60;
     s3.buckets[bucket_name].objects[key].write(:file => filename,
                                         :acl => :public_read,
                                         :content_type => content_type,
-                                        :content_encoding => content_encoding)
+                                        :content_encoding => content_encoding,
+                                        :cache_control => "max-age=#{three_year_in_second}")
     puts "Uploading file #{filename} to bucket #{bucket_name}."
 end
 
@@ -126,11 +129,12 @@ task :watch do
 end
 
 def aws_upload_dir(s3,dir, bucket_name, public_dir)
+    three_year_in_second = 3 * 365 * 24 * 60 * 60;
     Dir.glob("#{public_dir}/#{dir}/**/*.{png,jpeg,jpg,gif,bmp,json}") do |file|
        key = file[public_dir.length + 1, file.length]
        if !File.directory?(file)
             puts "Uploading file #{file} to bucket #{bucket_name}."
-            s3.buckets[bucket_name].objects[key].write(:file => file, :acl => :public_read)
+            s3.buckets[bucket_name].objects[key].write(:file => file, :acl => :public_read, :cache_control => "max-age=#{three_year_in_second}")
        end
     end
 end

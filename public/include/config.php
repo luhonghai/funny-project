@@ -248,7 +248,8 @@ function aws_upload_file($key, $bucket, $file) {
         'Bucket' => $bucket,
         'Key'    => $key,
         'SourceFile'   => $file,
-        'ACL'    => 'public-read'
+        'ACL'    => 'public-read',
+        'CacheControl' => 'max-age='.(3 * 365 * 24 * 60 * 60)
     ));
 }
 
