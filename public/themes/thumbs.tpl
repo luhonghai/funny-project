@@ -42,7 +42,7 @@
 										<img src="{$asseturl}/images/nsfw_thumb.jpg?v={$asset_version}" alt="{$posts[i].story|stripslashes}" />
 									{else}
 										{if $posts[i].pic ne ""}
-											<img src="{$purl[i]}/t/s-{$posts[i].pic}" alt="{$posts[i].story|stripslashes}" />
+											<img src="{$purl}/t/s-{$posts[i].pic}" alt="{$posts[i].story|stripslashes}" />
 										{elseif $posts[i].youtube_key != ""}
 											<img src="http://img.youtube.com/vi/{$posts[i].youtube_key}/0.jpg" alt="{$posts[i].story|stripslashes}" style="max-width:215px" />
 										{elseif $posts[i].contents != ""}

@@ -392,7 +392,7 @@
 									{if $r[i].pic ne ""}	
                                         {if $r[i].nsfw eq "1" AND $smarty.session.FILTER ne "0"}
 											<img src="{$asseturl}/images/nsfw_thumb.jpg?v={$asset_version}" alt="{$r[i].story|stripslashes}" />
- 	      									{else}																					                                 <img src="{$purl[i]}/t/{$r[i].folder}s-{$r[i].pic}" alt="{$r[i].story|stripslashes}" />{/if}											{else}
+ 	      									{else}																					                                 <img src="{$purl}/t/{$r[i].folder}s-{$r[i].pic}" alt="{$r[i].story|stripslashes}" />{/if}											{else}
 												{if $r[i].youtube_key != ""}
 													<img src="http://img.youtube.com/vi/{$r[i].youtube_key}/hqdefault.jpg" alt="{$r[i].story|stripslashes}" />
 							                                                 <img class="videoPlay" src="{$asseturl}/images/button_play_s.png?v={$asset_version}">
@@ -434,7 +434,7 @@
 				<img src="{$asseturl}/images/nsfw_thumb.jpg?v={$asset_version}" alt="{$popular[i].story|stripslashes}" />
 			{else}
 				{if $popular[i].pic ne ""}
-				<img src="{$purlPo[i]}/t/s-{$popular[i].pic}" alt="{$popular[i].story|stripslashes}" />
+				<img src="{$pur}/t/s-{$popular[i].pic}" alt="{$popular[i].story|stripslashes}" />
 				{else}
 					{if $popular[i].youtube_key != ""}
 						<img src="http://img.youtube.com/vi/{$popular[i].youtube_key}/hqdefault.jpg" alt="{$popular[i].story|stripslashes}" />
@@ -474,7 +474,7 @@
 
 				{if $r[i].pic ne ""}
 
-					<img src="{$purl[i]}/t/s-{$r[i].pic}" alt="{$r[i].story|stripslashes}" />
+					<img src="{$purl}/t/s-{$r[i].pic}" alt="{$r[i].story|stripslashes}" />
 
 				{else}
 
