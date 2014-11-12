@@ -3,7 +3,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 if(!headers_sent()) { session_start();}
 $config = array();
 
-$config['asset_version'] = "2";
+$config['asset_version'] = "3";
 
 
 
