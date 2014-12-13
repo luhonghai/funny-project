@@ -63,7 +63,7 @@
         $posts = $count_post['posts'];
     }
 
-    $sql_count_category = "SELECT COUNT(DISTINCT category_id) as cats from POST WHERE user_id='".$member_id."'";
+    $sql_count_category = "SELECT count(DISTINCT category_id) as cats from Post WHERE user_id='".$member_id."'";
     $result_count_cats = mysqli_query($con, $sql_count_category);
     if($count_cats = mysqli_fetch_array($result_count_cats)){
         $cats = $count_cats['cats'];
