@@ -253,7 +253,8 @@ $result = mysqli_query($con, $sql_select_profile);
             alert("Upload Failed");
         }
         function abortHandler(event){
-            alert("Upload Aborted");
+            //alert("Upload Aborted");
+            console.log("Upload Aborted");
         }
 
         function submit(){
