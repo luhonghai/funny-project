@@ -237,7 +237,8 @@
             alert("Upload Failed");
         }
         function abortHandler(event){
-            alert("Upload Aborted");
+            //alert("Upload Aborted");
+            console.log("Upload Aborted");
         }
 
         function submit(){
