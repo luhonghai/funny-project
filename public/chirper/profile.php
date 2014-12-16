@@ -241,7 +241,7 @@ $result = mysqli_query($con, $sql_select_profile);
         function progressHandler(event){
             var percent = (event.loaded / event.total) * 100;
             jQuery("#perImage").css("display","block");
-            jQuery("#perImage").text(percent + " %");
+            jQuery("#perImage").text(Math.round(percent) + " %");
             console.log(Math.round(percent));
         }
         function completeHandler(event){
