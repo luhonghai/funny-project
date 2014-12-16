@@ -439,11 +439,13 @@
                             <div class="field_text" style="padding-top: 10px;">
                                 <label for="subject" class="label_title">Image:</label>
                                 <input type="file" name="subject" id="txtImage" value="" class="inputtext input_middle"/>
+                                <div id="perImage" style="margin-top: 5px;margin-left: -36px;font-size: 10px;display:none;">0%</div>
                             </div>
 
                             <div class="field_text" style="padding-top: 10px;">
                                 <label for="subject" class="label_title">Music:</label>
                                 <input type="file" name="subject" id="txtMusic" value="" class="inputtext input_middle"/>
+                                <div id="perMusic" style="margin-top: 5px;margin-left: -36px;font-size: 10px;display:none;">0%</div>
                             </div>
 
                             <div class="field_text">

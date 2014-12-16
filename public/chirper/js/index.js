@@ -64,6 +64,8 @@ jQuery(document).ready(function() {
 
     function progressHandler(event){
         var percent = (event.loaded / event.total) * 100;
+        jQuery("#perImage").css("display","block");
+        jQuery("#perImage").text(percent + " %");
         console.log(Math.round(percent));
     }
     function completeHandler(event){
@@ -106,6 +108,8 @@ jQuery(document).ready(function() {
 
     function progressMusic(event){
         var percent = (event.loaded / event.total) * 100;
+        jQuery("#perMusic").css("display","block");
+        jQuery("#perMusic").text(percent + " %");
         console.log(Math.round(percent));
     }
     function completeMusic(event){

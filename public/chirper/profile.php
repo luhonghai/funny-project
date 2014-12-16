@@ -186,6 +186,7 @@ $result = mysqli_query($con, $sql_select_profile);
                                                     <div class="field_text" style="padding-top: 10px;">
                                                         <label for="subject" class="label_title" style="width:78px;">Profile Image:</label>
                                                         <input type="file" name="subject" id="txtImage" value="" class="inputtext input_middle"/>
+                                                        <div id="perImage" style="margin-top: -15px;float :right;font-size: 10px;display:none;">0%</div>
                                                     </div>
 
 
@@ -239,6 +240,8 @@ $result = mysqli_query($con, $sql_select_profile);
         }
         function progressHandler(event){
             var percent = (event.loaded / event.total) * 100;
+            jQuery("#perImage").css("display","block");
+            jQuery("#perImage").text(percent + " %");
             console.log(Math.round(percent));
         }
         function completeHandler(event){
